@@ -1,0 +1,34 @@
+{
+  "info" : 
+  {
+    "name" : "Jspresso HR Sample Application - Extension",
+
+    "summary" : "",
+    "description" : "",
+    
+    "homepage" : "http://www.jspresso.orh",
+
+    "license" : "",
+    "authors" : 
+    [
+      {
+        "name" : "",
+        "email" : ""
+      }
+    ],
+
+    "version" : "3.5-SNAPSHOT",
+    "qooxdoo-versions": ["0.8.2","1.1","1.2","1.3"]
+  },
+  
+  "provides" : 
+  {
+    "namespace"   : "org.jspresso.hrsample.ext",
+    "encoding"    : "utf-8",
+    "class"       : "js",
+    "resource"    : "resources",
+    "translation" : "translations",
+    "type"        : "application"
+  }
+}
+

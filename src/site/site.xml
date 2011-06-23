@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="Maven">
+  <bannerLeft>
+    <name>Jspresso HR Sample Application - Extension</name>
+    <src>images/logo.jpg</src>
+    <href>http://www.jspresso.orh</href>
+  </bannerLeft>
+  <body>
+    <links>
+      <item
+        name="Jspresso.com"
+        href="http://www.jspresso.orh" />
+    </links>
+
+    <menu name="Jspresso HR Sample Application - Extension">
+      <item
+        name="Introduction"
+        href="index.html" />
+    </menu>
+    <menu name="Beans Doc">
+      <item
+        name="Application beans"
+        href="beandocs/index.html" />
+    </menu>
+    <menu ref="parent" />
+    <menu ref="modules"/>
+    <menu ref="reports" />
+  </body>
+</project>

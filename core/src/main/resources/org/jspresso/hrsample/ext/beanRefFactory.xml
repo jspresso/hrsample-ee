@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+  xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
+  default-lazy-init="true">
+
+  <bean
+    id="hrsample-ext-model-context"
+    class="org.springframework.context.support.ClassPathXmlApplicationContext"
+    lazy-init="true">
+    <constructor-arg>
+      <list>
+        <value>org/jspresso/framework/application/commons.xml</value>
+        <value>org/jspresso/framework/tools/mock.xml</value>
+        <value>org/jspresso/hrsample/ext/model/dsl-model.xml</value>
+        <value>org/jspresso/hrsample/ext/model/model.xml</value>
+      </list>
+    </constructor-arg>
+  </bean>
+
+  <bean
+    id="hrsample-ext-viewtester-context"
+    class="org.springframework.context.support.ClassPathXmlApplicationContext"
+    lazy-init="true">
+    <constructor-arg>
+      <list>
+        <value>org/jspresso/framework/application/commons.xml</value>
+        <value>org/jspresso/framework/tools/mock.xml</value>
+        <value>org/jspresso/framework/application/frontend/commons-frontend.xml</value>
+        <value>org/jspresso/framework/application/frontend/swing/commons-swing.xml</value>
+        <value>org/jspresso/hrsample/ext/model/dsl-model.xml</value>
+        <value>org/jspresso/hrsample/ext/model/model.xml</value>
+        <value>org/jspresso/hrsample/ext/view/dsl-view.xml</value>
+        <value>org/jspresso/hrsample/ext/view/view.xml</value>
+      </list>
+    </constructor-arg>
+  </bean>
+
+  <bean
+    id="hrsample-ext-backend-context"
+    class="org.springframework.context.support.ClassPathXmlApplicationContext"
+    lazy-init="true">
+    <constructor-arg>
+      <list>
+        <value>org/jspresso/framework/application/commons.xml</value>
+        <value>org/jspresso/framework/application/backend/persistence/hibernate/commons-hibernate.xml</value>
+        <value>org/jspresso/hrsample/ext/model/dsl-model.xml</value>
+        <value>org/jspresso/hrsample/ext/model/model.xml</value>
+        <value>org/jspresso/hrsample/ext/backend/dsl-backend.xml</value>
+        <value>org/jspresso/hrsample/ext/backend/backend.xml</value>
+        <value>org/jspresso/hrsample/ext/core-config.xml</value>
+      </list>
+    </constructor-arg>
+  </bean>
+
+  <bean
+    id="hrsample-ext-swing-context"
+    class="org.springframework.context.support.ClassPathXmlApplicationContext"
+    lazy-init="true">
+    <constructor-arg>
+      <list>
+        <value>org/jspresso/framework/application/commons.xml</value>
+        <value>org/jspresso/framework/application/backend/persistence/hibernate/commons-hibernate.xml</value>
+        <value>org/jspresso/framework/application/frontend/commons-frontend.xml</value>
+        <value>org/jspresso/framework/application/frontend/swing/commons-swing.xml</value>
+        <value>org/jspresso/hrsample/ext/model/dsl-model.xml</value>
+        <value>org/jspresso/hrsample/ext/model/model.xml</value>
+        <value>org/jspresso/hrsample/ext/backend/dsl-backend.xml</value>
+        <value>org/jspresso/hrsample/ext/backend/backend.xml</value>
+        <value>org/jspresso/hrsample/ext/view/dsl-view.xml</value>
+        <value>org/jspresso/hrsample/ext/view/view.xml</value>
+        <value>org/jspresso/hrsample/ext/frontend/dsl-frontend.xml</value>
+        <value>org/jspresso/hrsample/ext/frontend/frontend.xml</value>
+        <value>org/jspresso/hrsample/ext/core-config.xml</value>
+      </list>
+    </constructor-arg>
+  </bean>
+
+  <bean
+    id="hrsample-ext-remote-context"
+    class="org.springframework.context.support.ClassPathXmlApplicationContext"
+    lazy-init="true">
+    <constructor-arg>
+      <list>
+        <value>org/jspresso/framework/application/commons.xml</value>
+        <value>org/jspresso/framework/application/backend/persistence/hibernate/commons-hibernate.xml</value>
+        <value>org/jspresso/framework/application/frontend/commons-frontend.xml</value>
+        <value>org/jspresso/framework/application/frontend/remote/commons-remote.xml</value>
+        <value>org/jspresso/hrsample/ext/model/dsl-model.xml</value>
+        <value>org/jspresso/hrsample/ext/model/model.xml</value>
+        <value>org/jspresso/hrsample/ext/backend/dsl-backend.xml</value>
+        <value>org/jspresso/hrsample/ext/backend/dsl-backend.xml</value>
+        <value>org/jspresso/hrsample/ext/backend/backend.xml</value>
+        <value>org/jspresso/hrsample/ext/view/dsl-view.xml</value>
+        <value>org/jspresso/hrsample/ext/view/view.xml</value>
+        <value>org/jspresso/hrsample/ext/frontend/dsl-frontend.xml</value>
+        <value>org/jspresso/hrsample/ext/frontend/frontend.xml</value>
+        <value>org/jspresso/hrsample/ext/config.xml</value>
+      </list>
+    </constructor-arg>
+  </bean>
+
+</beans>
+
