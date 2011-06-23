@@ -1,18 +1,18 @@
 package org.jspresso.hrsample.ext.development;
 
-import org.jspresso.framework.application.startup.development.AbstractTestDataPersister;
 import org.springframework.beans.factory.BeanFactory;
 
 /**
  * Persists some test data for the application.
  */
-public class TestDataPersister extends AbstractTestDataPersister {
+public class TestDataPersister extends
+    org.jspresso.hrsample.development.TestDataPersister {
 
   /**
    * Constructs a new <code>TestDataPersister</code> instance.
    * 
    * @param beanFactory
-   *            the spring bean factory to use.
+   *          the spring bean factory to use.
    */
   public TestDataPersister(BeanFactory beanFactory) {
     super(beanFactory);
@@ -23,11 +23,6 @@ public class TestDataPersister extends AbstractTestDataPersister {
    */
   @Override
   public void persistTestData() {
-    
-    // Create some entities...
-    // MyEntity myEntity = createEntityInstance(MyEntity.class);
-    
-    // ...and save them.
-    //saveOrUpdate(myEntity);
+    super.persistTestData();
   }
 }

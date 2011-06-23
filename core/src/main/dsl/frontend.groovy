@@ -15,6 +15,21 @@ controller 'hrsample-ext.name',
     icon:'icon.png',
     context:'hrsample-ext',
     language:'en',
+    startup:'startupHrsampleAction',
     workspaces:[
-      /*Reference your workspaces here.*/
+      'organization.workspace',
+      'employees.workspace',
+      'masterdata.workspace'
     ]
+
+spec('remote') {
+  bean ('remotePeerRegistryBase', class:'org.jspresso.framework.util.remote.registry.BasicRemotePeerRegistry', custom:[automationEnabled:true])
+}
+
+spec('remote-recording') {
+  bean('remoteFrontController',
+      class:'org.jspresso.framework.application.testing.RecordingRemoteController',
+      parent:'abstractFrontController', custom:[
+        captureDirectory:'/tmp/commands'
+      ])
+}

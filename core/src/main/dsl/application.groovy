@@ -2,7 +2,10 @@ import org.jspresso.contrib.sjs.domain.Domain;
 import org.jspresso.contrib.sjs.front.Front;
 import org.jspresso.contrib.sjs.common.ManageModule;
 
-def domainBuilder = new Domain()
+ManageModule libraries = new ManageModule()
+libraries.importModuleAsResource('hrsample')
+
+def domainBuilder = new Domain(libraries)
 
 domainBuilder.Domain(projectName:'hrsample-ext', mute:true) {
   namespace('org.jspresso.hrsample.ext') {
@@ -37,3 +40,10 @@ domainBuilder.writeDomainFile(project.properties['outputDir'],project.properties
 frontendBuilder.writeOutputFile('backend',project.properties['outputDir'],project.properties['backOutputFileName'])
 frontendBuilder.writeOutputFile('view',project.properties['outputDir'],project.properties['viewOutputFileName'])
 frontendBuilder.writeOutputFile('frontend',project.properties['outputDir'],project.properties['frontOutputFileName'])
+
+frontendBuilder.writeOutputFile('remote',project.properties['outputDir'],'remote-'+project.properties['frontOutputFileName'])
+frontendBuilder.writeOutputFile('remote-recording',project.properties['outputDir'],'remote-recording-'+project.properties['frontOutputFileName'])
+
+//Export as module
+ManageModule manageModule = new ManageModule()
+manageModule.exportModule('hrsample-ext',domainBuilder,frontendBuilder,project.properties['outputDir'])

@@ -27,5 +27,11 @@
       <groupId>org.jspresso.framework</groupId>
       <artifactId>jspresso-app-launch-remote</artifactId>
     </dependency>
+    
+    <!-- For load and integration tests -->
+    <dependency>
+      <groupId>org.jspresso.framework</groupId>
+      <artifactId>jspresso-ext-remote-testing</artifactId>
+    </dependency>
   </dependencies>
 </project>

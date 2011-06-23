@@ -13,6 +13,10 @@
       <list>
         <value>org/jspresso/framework/application/commons.xml</value>
         <value>org/jspresso/framework/tools/mock.xml</value>
+        
+        <value>org/jspresso/hrsample/model/dsl-model.xml</value>
+        <value>org/jspresso/hrsample/model/model.xml</value>
+
         <value>org/jspresso/hrsample/ext/model/dsl-model.xml</value>
         <value>org/jspresso/hrsample/ext/model/model.xml</value>
       </list>
@@ -29,6 +33,12 @@
         <value>org/jspresso/framework/tools/mock.xml</value>
         <value>org/jspresso/framework/application/frontend/commons-frontend.xml</value>
         <value>org/jspresso/framework/application/frontend/swing/commons-swing.xml</value>
+
+        <value>org/jspresso/hrsample/model/dsl-model.xml</value>
+        <value>org/jspresso/hrsample/model/model.xml</value>
+        <value>org/jspresso/hrsample/view/dsl-view.xml</value>
+        <value>org/jspresso/hrsample/view/view.xml</value>
+
         <value>org/jspresso/hrsample/ext/model/dsl-model.xml</value>
         <value>org/jspresso/hrsample/ext/model/model.xml</value>
         <value>org/jspresso/hrsample/ext/view/dsl-view.xml</value>
@@ -45,10 +55,17 @@
       <list>
         <value>org/jspresso/framework/application/commons.xml</value>
         <value>org/jspresso/framework/application/backend/persistence/hibernate/commons-hibernate.xml</value>
+
+        <value>org/jspresso/hrsample/model/dsl-model.xml</value>
+        <value>org/jspresso/hrsample/model/model.xml</value>
+        <value>org/jspresso/hrsample/backend/dsl-backend.xml</value>
+        <value>org/jspresso/hrsample/backend/backend.xml</value>
+
         <value>org/jspresso/hrsample/ext/model/dsl-model.xml</value>
         <value>org/jspresso/hrsample/ext/model/model.xml</value>
         <value>org/jspresso/hrsample/ext/backend/dsl-backend.xml</value>
         <value>org/jspresso/hrsample/ext/backend/backend.xml</value>
+
         <value>org/jspresso/hrsample/ext/core-config.xml</value>
       </list>
     </constructor-arg>
@@ -64,6 +81,16 @@
         <value>org/jspresso/framework/application/backend/persistence/hibernate/commons-hibernate.xml</value>
         <value>org/jspresso/framework/application/frontend/commons-frontend.xml</value>
         <value>org/jspresso/framework/application/frontend/swing/commons-swing.xml</value>
+
+        <value>org/jspresso/hrsample/model/dsl-model.xml</value>
+        <value>org/jspresso/hrsample/model/model.xml</value>
+        <value>org/jspresso/hrsample/backend/dsl-backend.xml</value>
+        <value>org/jspresso/hrsample/backend/backend.xml</value>
+        <value>org/jspresso/hrsample/view/dsl-view.xml</value>
+        <value>org/jspresso/hrsample/view/view.xml</value>
+        <value>org/jspresso/hrsample/frontend/dsl-frontend.xml</value>
+        <value>org/jspresso/hrsample/frontend/frontend.xml</value>
+
         <value>org/jspresso/hrsample/ext/model/dsl-model.xml</value>
         <value>org/jspresso/hrsample/ext/model/model.xml</value>
         <value>org/jspresso/hrsample/ext/backend/dsl-backend.xml</value>
@@ -72,6 +99,7 @@
         <value>org/jspresso/hrsample/ext/view/view.xml</value>
         <value>org/jspresso/hrsample/ext/frontend/dsl-frontend.xml</value>
         <value>org/jspresso/hrsample/ext/frontend/frontend.xml</value>
+
         <value>org/jspresso/hrsample/ext/core-config.xml</value>
       </list>
     </constructor-arg>
@@ -87,19 +115,65 @@
         <value>org/jspresso/framework/application/backend/persistence/hibernate/commons-hibernate.xml</value>
         <value>org/jspresso/framework/application/frontend/commons-frontend.xml</value>
         <value>org/jspresso/framework/application/frontend/remote/commons-remote.xml</value>
+
+        <value>org/jspresso/hrsample/model/dsl-model.xml</value>
+        <value>org/jspresso/hrsample/model/model.xml</value>
+        <value>org/jspresso/hrsample/backend/dsl-backend.xml</value>
+        <value>org/jspresso/hrsample/backend/backend.xml</value>
+        <value>org/jspresso/hrsample/view/dsl-view.xml</value>
+        <value>org/jspresso/hrsample/view/view.xml</value>
+        <value>org/jspresso/hrsample/frontend/dsl-frontend.xml</value>
+        <value>org/jspresso/hrsample/frontend/frontend.xml</value>
+
         <value>org/jspresso/hrsample/ext/model/dsl-model.xml</value>
         <value>org/jspresso/hrsample/ext/model/model.xml</value>
         <value>org/jspresso/hrsample/ext/backend/dsl-backend.xml</value>
+        <value>org/jspresso/hrsample/ext/backend/backend.xml</value>
+        <value>org/jspresso/hrsample/ext/view/dsl-view.xml</value>
+        <value>org/jspresso/hrsample/ext/view/view.xml</value>
+        <value>org/jspresso/hrsample/ext/frontend/dsl-frontend.xml</value>
+        <value>org/jspresso/hrsample/ext/spec/remote-dsl-frontend.xml</value>
+        <value>org/jspresso/hrsample/ext/frontend/frontend.xml</value>
+
+        <value>org/jspresso/hrsample/ext/config.xml</value>
+      </list>
+    </constructor-arg>
+  </bean>
+
+  <bean
+    id="hrsample-ext-remote-recording-context"
+    class="org.springframework.context.support.ClassPathXmlApplicationContext"
+    lazy-init="true">
+    <constructor-arg>
+      <list>
+        <value>org/jspresso/framework/application/commons.xml</value>
+        <value>org/jspresso/framework/application/backend/persistence/hibernate/commons-hibernate.xml</value>
+        <value>org/jspresso/framework/application/frontend/commons-frontend.xml</value>
+        <value>org/jspresso/framework/application/frontend/remote/commons-remote.xml</value>
+
+        <value>org/jspresso/hrsample/model/dsl-model.xml</value>
+        <value>org/jspresso/hrsample/model/model.xml</value>
+        <value>org/jspresso/hrsample/backend/dsl-backend.xml</value>
+        <value>org/jspresso/hrsample/backend/backend.xml</value>
+        <value>org/jspresso/hrsample/view/dsl-view.xml</value>
+        <value>org/jspresso/hrsample/view/view.xml</value>
+        <value>org/jspresso/hrsample/frontend/dsl-frontend.xml</value>
+        <value>org/jspresso/hrsample/frontend/frontend.xml</value>
+
+        <value>org/jspresso/hrsample/ext/model/dsl-model.xml</value>
+        <value>org/jspresso/hrsample/ext/model/model.xml</value>
         <value>org/jspresso/hrsample/ext/backend/dsl-backend.xml</value>
         <value>org/jspresso/hrsample/ext/backend/backend.xml</value>
         <value>org/jspresso/hrsample/ext/view/dsl-view.xml</value>
         <value>org/jspresso/hrsample/ext/view/view.xml</value>
         <value>org/jspresso/hrsample/ext/frontend/dsl-frontend.xml</value>
         <value>org/jspresso/hrsample/ext/frontend/frontend.xml</value>
+
+        <value>org/jspresso/hrsample/ext/spec/remote-recording-dsl-frontend.xml</value>
+
         <value>org/jspresso/hrsample/ext/config.xml</value>
       </list>
     </constructor-arg>
   </bean>
-
 </beans>
 

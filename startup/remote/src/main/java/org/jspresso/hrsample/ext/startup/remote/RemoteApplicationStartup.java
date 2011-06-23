@@ -15,6 +15,7 @@ public class RemoteApplicationStartup extends RemoteStartup {
   @Override
   protected String getApplicationContextKey() {
     return "hrsample-ext-remote-context";
+    // return "hrsample-ext-remote-recording-context";
   }
 
   /**

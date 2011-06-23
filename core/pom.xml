@@ -38,6 +38,19 @@
       <groupId>org.jspresso.framework</groupId>
       <artifactId>jspresso-ext-remote-application</artifactId>
     </dependency>
+    
+    <!-- For load and integration tests -->
+    <dependency>
+      <groupId>org.jspresso.framework</groupId>
+      <artifactId>jspresso-ext-remote-testing</artifactId>
+      <optional>true</optional>
+    </dependency>
+
+    <!-- HRSample dependencies -->
+    <dependency>
+      <groupId>org.jspresso.hrsample</groupId>
+      <artifactId>hrsample-core</artifactId>
+    </dependency>
   </dependencies>
   <profiles>
     <profile>
@@ -194,6 +207,9 @@
               <goal>xdoclet</goal>
             </goals>
             <configuration>
+              <!--
+              <sourceArtifacts>org.jspresso.hrsample:hrsample-core</sourceArtifacts>
+              -->
               <configs>
                 <config>
                   <components>
@@ -206,7 +222,7 @@
                       </params>
                     </component>
                   </components>
-                  <includes>**/model/**/*.java</includes>
+                  <includes>**/model/**.java</includes>
                 </config>
               </configs>
             </configuration>

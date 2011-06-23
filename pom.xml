@@ -124,6 +124,13 @@
         <artifactId>hrsample-ext-webservices</artifactId>
         <version>${project.version}</version>
       </dependency>
+      
+      <!-- HRSample dependencies -->
+      <dependency>
+        <groupId>org.jspresso.hrsample</groupId>
+        <artifactId>hrsample-core</artifactId>
+        <version>${project.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <build>
