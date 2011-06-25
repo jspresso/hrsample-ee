@@ -1,7 +1,5 @@
 package org.jspresso.hrsample.ext.webservices;
 
-import java.util.Locale;
-
 import org.jspresso.framework.application.startup.AbstractBackendStartup;
 
 /**
