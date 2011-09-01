@@ -24,7 +24,9 @@ controller 'hrsample-ext.name',
 
 spec('remote') {
   bean ('remotePeerRegistryBase', class:'org.jspresso.framework.util.remote.registry.BasicRemotePeerRegistry', custom:[automationEnabled:true])
+  bean ('remoteFrontController', class:'org.jspresso.hrsample.ext.frontend.remote.CustomRemoteController', parent:'abstractFrontController')
 }
+
 
 spec('remote-recording') {
   bean('remoteFrontController',

@@ -10,6 +10,32 @@
   <bean id="remoteViewFactory" abstract="true" parent="viewFactoryBase"
     class="org.jspresso.framework.view.remote.EnhancedRemoteViewFactory" />
 
+  <bean id="loginModelDescriptor" class="org.jspresso.framework.model.descriptor.basic.BasicComponentDescriptor">
+    <constructor-arg value="org.jspresso.hrsample.ext.security.CaptchaUsernamePasswordHandler" />
+    <property name="propertyDescriptors">
+      <list>
+        <bean class="org.jspresso.framework.model.descriptor.basic.BasicStringPropertyDescriptor">
+          <property name="name" value="username" />
+          <property name="maxLength" value="64" />
+        </bean>
+        <bean class="org.jspresso.framework.model.descriptor.basic.BasicPasswordPropertyDescriptor">
+          <property name="name" value="password" />
+          <property name="maxLength" value="64" />
+        </bean>
+        <bean class="org.jspresso.framework.model.descriptor.basic.BasicImageUrlPropertyDescriptor">
+          <property name="name" value="captchaImageUrl" />
+        </bean>
+        <bean class="org.jspresso.framework.model.descriptor.basic.BasicStringPropertyDescriptor">
+          <property name="name" value="captchaChallenge" />
+          <property name="maxLength" value="64" />
+        </bean>
+        <bean class="org.jspresso.framework.model.descriptor.basic.BasicBooleanPropertyDescriptor">
+          <property name="name" value="rememberMe" />
+        </bean>
+      </list>
+    </property>
+  </bean>
+
   <!--
     The workspaces and modules
   -->
