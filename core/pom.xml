@@ -217,9 +217,10 @@
                       </params>
                     </component>
                   </components>
-                  <includes>**/model/**.java</includes>
+                  <includes>**/model/**/**.java</includes>
                 </config>
               </configs>
+              <!--<sourceArtifacts>org.jspresso.hrsample:hrsample-core</sourceArtifacts>-->
             </configuration>
           </execution>
         </executions>
