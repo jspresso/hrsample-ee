@@ -1,4 +1,4 @@
-#Thu Jun 23 17:52:23 CEST 2011
+#Thu Sep 29 12:24:02 CEST 2011
 eclipse.preferences.version=1
 encoding//src/main/dsl=UTF-8
 encoding//src/main/java=UTF-8
@@ -6,3 +6,4 @@ encoding//src/main/resources=UTF-8
 encoding//target/generated-resources/dsl=UTF-8
 encoding//target/generated-resources/jasperreports=UTF-8
 encoding//target/generated-resources/xdoclet=UTF-8
+encoding/<project>=UTF-8
