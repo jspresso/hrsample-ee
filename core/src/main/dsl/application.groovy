@@ -7,9 +7,9 @@ libraries.importModuleAsResource('hrsample')
 
 def domainBuilder = new Domain(libraries)
 
-domainBuilder.Domain(projectName:'hrsample-ext', mute:true) {
+domainBuilder.Domain(projectName:'hrsample-ext', mute:true, includeDirectory:project.properties['srcDir']) {
   namespace('org.jspresso.hrsample.ext') {
-    include(project.properties['srcDir']+'/model.groovy')
+    include('model.groovy')
   }
 }
 if(!domainBuilder.isOK()) {
@@ -21,13 +21,13 @@ def frontendBuilder = new Front(domainBuilder.getReferenceDomain())
 frontendBuilder.Front(){
   namespace('org.jspresso.hrsample.ext'){
     view {
-      include(project.properties['srcDir']+'/view.groovy')
+      include('view.groovy')
     }
     frontend {
-      include(project.properties['srcDir']+'/frontend.groovy')
+      include('frontend.groovy')
     }
     backend {
-      include(project.properties['srcDir']+'/backend.groovy')
+      include('backend.groovy')
     }
   }
 }
