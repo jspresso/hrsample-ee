@@ -18,29 +18,12 @@
  */
 package org.jspresso.hrsample.ext.webservices;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.jspresso.framework.application.backend.persistence.hibernate.HibernateBackendController;
 import org.jspresso.framework.application.backend.session.EMergeMode;
 import org.jspresso.framework.model.persistence.hibernate.criterion.EnhancedDetachedCriteria;
-import org.jspresso.hrsample.model.ContactInfo;
 import org.jspresso.hrsample.model.Employee;
-import org.jspresso.hrsample.model.Event;
 
 /**
  * A sample employee web service.
@@ -48,20 +31,16 @@ import org.jspresso.hrsample.model.Event;
  * @version $LastChangedRevision$
  * @author Vincent Vandenschrick
  */
-@Path("/employees")
-public class EmployeeRestService extends AbstractService {
+public class EmployeeRestService extends AbstractService implements
+    IEmployeeRestService {
 
   /**
-   * Retrieves an employee by its name.
-   * 
-   * @param name
-   *          the name of the employee to retrieve.
-   * @return the employee simplified DTO.
+   * Actual web service implementation.
+   * <p>
+   * {@inheritDoc}
    */
-  @GET
-  @Path("/employee/{name}")
-  @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-  public EmployeeDto getEmployee(@PathParam("name") String name) {
+  @Override
+  public EmployeeDto getEmployee(String name) {
     DetachedCriteria crit = EnhancedDetachedCriteria.forClass(Employee.class);
     crit.add(Restrictions.eq("name", name));
     Employee e = ((HibernateBackendController) getBackendController())
@@ -72,134 +51,4 @@ public class EmployeeRestService extends AbstractService {
     return null;
   }
 
-  // //////////////////////////////////////////////////
-  // Data transfer objects used for JAXB marshaling //
-  // //////////////////////////////////////////////////
-
-  /**
-   * Employee DTO.
-   */
-  @XmlRootElement(name = "employee")
-  @XmlAccessorType(XmlAccessType.FIELD)
-  public static class EmployeeDto {
-
-    /**
-     * <code>name</code>.
-     */
-    public String         name;
-    /**
-     * <code>firstName</code>.
-     */
-    public String         firstName;
-    /**
-     * <code>age</code>.
-     */
-    public Integer        age;
-    /**
-     * <code>address</code>.
-     */
-    public AddressDto     address;
-
-    /**
-     * <code>events</code>.
-     */
-    @XmlElementWrapper
-    @XmlElement(name = "event")
-    public List<EventDto> events;
-
-    /**
-     * Default required constructor.
-     */
-    public EmployeeDto() {
-      // Empty constructor.
-    }
-
-    /**
-     * Constructs a new <code>EmployeeDto</code> instance.
-     * 
-     * @param employee
-     *          the employee to create the DTO for.
-     */
-    public EmployeeDto(Employee employee) {
-      this.name = employee.getName();
-      this.firstName = employee.getFirstName();
-      this.age = employee.getAge();
-      this.address = new AddressDto(employee.getContact());
-      this.events = new ArrayList<EventDto>();
-      for (Event evt : employee.getEvents()) {
-        this.events.add(new EventDto(evt));
-      }
-    }
-  }
-
-  /**
-   * Address DTO.
-   */
-  @XmlRootElement(name = "address")
-  @XmlAccessorType(XmlAccessType.FIELD)
-  public static class AddressDto {
-
-    /**
-     * <code>address</code>.
-     */
-    public String address;
-    /**
-     * <code>zip</code>.
-     */
-    public String zip;
-    /**
-     * <code>city</code>.
-     */
-    public String city;
-
-    /**
-     * Default required constructor.
-     */
-    public AddressDto() {
-      // Empty constructor.
-    }
-
-    /**
-     * Constructs a new <code>AddressDto</code> instance.
-     * 
-     * @param contact
-     *          the contact to create the DTO for.
-     */
-    public AddressDto(ContactInfo contact) {
-      this.address = contact.getAddress();
-      this.zip = contact.getCity().getZip();
-      this.city = contact.getCity().getName();
-    }
-  }
-
-  /**
-   * Event DTO.
-   */
-  @XmlRootElement(name = "event")
-  @XmlAccessorType(XmlAccessType.FIELD)
-  public static class EventDto {
-
-    /**
-     * <code>text</code>.
-     */
-    @XmlAttribute
-    public String text;
-
-    /**
-     * Default required constructor.
-     */
-    public EventDto() {
-      // Empty constructor.
-    }
-
-    /**
-     * Constructs a new <code>EventDto</code> instance.
-     * 
-     * @param event
-     *          the event to create the DTO for.
-     */
-    public EventDto(Event event) {
-      this.text = event.getText();
-    }
-  }
 }
