@@ -3,6 +3,7 @@ import org.jspresso.contrib.sjs.front.Front;
 import org.jspresso.contrib.sjs.common.ManageModule;
 
 ManageModule libraries = new ManageModule()
+libraries.importModuleAsResource('jspresso-extensions')
 libraries.importModuleAsResource('hrsample')
 
 def domainBuilder = new Domain(libraries)

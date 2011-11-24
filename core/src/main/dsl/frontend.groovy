@@ -10,7 +10,13 @@ bean 'viewFactoryBase', parent:'abstractViewFactory',
     custom: [
       defaultActionMapRenderingOptions:'LABEL_ICON'
     ]
-
+    
+workspace('tools.workspace', icon:'tools.png') { 
+  filterModule ('furniture.module', 
+    moduleView:'Furniture.view',
+    component:'Furniture')
+}
+ 
 controller 'hrsample-ext.name',
     icon:'icon.png',
     context:'hrsample-ext',
@@ -19,7 +25,8 @@ controller 'hrsample-ext.name',
     workspaces:[
       'organization.workspace',
       'employees.workspace',
-      'masterdata.workspace'
+      'masterdata.workspace', 
+      'tools.workspace'
     ]
 
 spec('remote') {

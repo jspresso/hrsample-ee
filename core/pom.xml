@@ -51,6 +51,12 @@
       <groupId>org.jspresso.hrsample</groupId>
       <artifactId>hrsample-core</artifactId>
     </dependency>
+    
+    <!-- Jspresso-extensions dependencies -->
+    <dependency>
+      <groupId>org.jspresso.contrib</groupId>
+      <artifactId>jspresso-extensions-core</artifactId>
+    </dependency>   
   </dependencies>
   <profiles>
     <profile>
