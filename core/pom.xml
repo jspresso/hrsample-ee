@@ -208,9 +208,6 @@
               <goal>xdoclet</goal>
             </goals>
             <configuration>
-              <!--
-              <sourceArtifacts>org.jspresso.hrsample:hrsample-core</sourceArtifacts>
-              -->
               <configs>
                 <config>
                   <components>
@@ -223,10 +220,10 @@
                       </params>
                     </component>
                   </components>
-                  <includes>**/model/**/**.java</includes>
+                  <includes>**/ext/model/**/**.java,**/model/Traceable.java</includes>
                 </config>
               </configs>
-              <!--<sourceArtifacts>org.jspresso.hrsample:hrsample-core</sourceArtifacts>-->
+              <sourceArtifacts>org.jspresso.hrsample:hrsample-core</sourceArtifacts>
             </configuration>
           </execution>
         </executions>
