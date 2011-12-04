@@ -5,4 +5,8 @@ Entity('Furniture',
   icon:'furniture.png') {
   
   string_128 'name'
+  
+  decimal 'price'
+  percent 'discount' 
+
 }
