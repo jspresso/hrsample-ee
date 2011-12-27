@@ -20,6 +20,7 @@ package org.jspresso.hrsample.ext.frontend.remote;
 
 import org.jspresso.framework.application.frontend.controller.remote.DefaultRemoteController;
 import org.jspresso.framework.security.UsernamePasswordHandler;
+import org.jspresso.framework.util.resources.server.ResourceProviderServlet;
 import org.jspresso.hrsample.ext.security.CaptchaUsernamePasswordHandler;
 
 /**
@@ -37,7 +38,8 @@ public class CustomRemoteController extends DefaultRemoteController {
   @Override
   protected UsernamePasswordHandler createUsernamePasswordHandler() {
     CaptchaUsernamePasswordHandler cuph = new CaptchaUsernamePasswordHandler();
-    cuph.setCaptchaImageUrl("http://www.jspresso.org/files/logo.png");
+    cuph.setCaptchaImageUrl(ResourceProviderServlet
+        .computeLocalResourceDownloadUrl("classpath:org/jspresso/hrsample/ext/images/jspresso.png"));
     return cuph;
   }
 
