@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beansProjectDescription>
 	<version>1</version>
-	<pluginVersion><![CDATA[2.7.2.201109122348-RELEASE]]></pluginVersion>
+	<pluginVersion><![CDATA[2.8.1.201111220115-RELEASE]]></pluginVersion>
 	<configSuffixes>
 		<configSuffix><![CDATA[xml]]></configSuffix>
 	</configSuffixes>
@@ -34,18 +34,17 @@
 				<config>src/main/resources/org/jspresso/hrsample/ext/model/model.xml</config>
 				<config>target/generated-resources/dsl/org/jspresso/hrsample/ext/model/dsl-model.xml</config>
 				<config>/hrsample-core/src/main/resources/org/jspresso/hrsample/frontend/frontend.xml</config>
-				<config>/hrsample-core/target/generated-resources/dsl/org/jspresso/hrsample/frontend/dsl-frontend.xml</config>
 				<config>/hrsample-core/src/main/resources/org/jspresso/hrsample/view/view.xml</config>
-				<config>/hrsample-core/target/generated-resources/dsl/org/jspresso/hrsample/view/dsl-view.xml</config>
 				<config>/hrsample-core/src/main/resources/org/jspresso/hrsample/backend/backend.xml</config>
 				<config>/hrsample-core/src/main/resources/org/jspresso/hrsample/model/model.xml</config>
-				<config>/hrsample-core/target/generated-resources/dsl/org/jspresso/hrsample/model/dsl-model.xml</config>
 				<config>/jspresso-app-template-core/src/main/resources/org/jspresso/framework/application/frontend/commons-frontend.xml</config>
 				<config>/jspresso-app-template-core/src/main/resources/org/jspresso/framework/application/backend/persistence/hibernate/commons-hibernate.xml</config>
 				<config>/jspresso-app-template-core/src/main/resources/org/jspresso/framework/application/commons.xml</config>
 				<config>target/generated-resources/dsl/org/jspresso/hrsample/ext/spec/remote-recording-dsl-frontend.xml</config>
 				<config>/jspresso-app-template-core/src/main/resources/org/jspresso/framework/application/mock-config.xml</config>
 			</configs>
+			<profiles>
+			</profiles>
 		</configSet>
 	</configSets>
 </beansProjectDescription>
