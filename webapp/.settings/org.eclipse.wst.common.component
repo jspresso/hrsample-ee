@@ -68,6 +68,9 @@
         <dependent-module archiveName="jspresso-security-3.5-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jspresso-security/jspresso-security">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="jspresso-ext-security-3.5-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jspresso-ext-security/jspresso-ext-security">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="jspresso-app-template-remote-3.5-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jspresso-app-template-remote/jspresso-app-template-remote">
             <dependency-type>uses</dependency-type>
         </dependent-module>
