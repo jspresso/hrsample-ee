@@ -18,7 +18,7 @@
  */
 package org.jspresso.hrsample.ext.frontend.remote;
 
-import org.jspresso.framework.application.frontend.controller.remote.DefaultRemoteController;
+import org.jspresso.framework.application.frontend.controller.remote.EnhancedRemoteController;
 import org.jspresso.framework.security.UsernamePasswordHandler;
 import org.jspresso.framework.util.resources.server.ResourceProviderServlet;
 import org.jspresso.hrsample.ext.security.CaptchaUsernamePasswordHandler;
@@ -30,7 +30,7 @@ import org.jspresso.hrsample.ext.security.CaptchaUsernamePasswordHandler;
  * @version $LastChangedRevision$
  * @author Vincent Vandenschrick
  */
-public class CustomRemoteController extends DefaultRemoteController {
+public class CustomRemoteController extends EnhancedRemoteController {
 
   /**
    * {@inheritDoc}

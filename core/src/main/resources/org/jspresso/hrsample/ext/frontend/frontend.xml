@@ -10,10 +10,6 @@
   <bean id="remoteViewFactory" abstract="true" parent="viewFactoryBase"
     class="org.jspresso.framework.view.remote.EnhancedRemoteViewFactory" />
 
-  <!-- Installs the enhanced remote controller in order to support Jspresso extensions -->
-  <bean id="remoteFrontController" abstract="true" parent="abstractFrontController"
-    class="org.jspresso.framework.application.frontend.controller.remote.EnhancedRemoteController" />
-
   <bean id="loginModelDescriptor" class="org.jspresso.framework.model.descriptor.basic.BasicComponentDescriptor">
     <constructor-arg value="org.jspresso.hrsample.ext.security.CaptchaUsernamePasswordHandler" />
     <property name="propertyDescriptors">
