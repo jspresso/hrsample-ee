@@ -30,10 +30,6 @@
     </dependency>
     <dependency>
       <groupId>org.jspresso.hrsample</groupId>
-      <artifactId>hrsample-ext-startup-qooxdoo-server</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.jspresso.hrsample</groupId>
       <artifactId>hrsample-ext-startup-qooxdoo-client</artifactId>
       <classifier>web-resources</classifier>
       <type>zip</type>
