@@ -83,9 +83,6 @@
         <dependent-module archiveName="jspresso-ext-remote-testing-3.5-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jspresso-ext-remote-testing/jspresso-ext-remote-testing">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="hrsample-ext-startup-qooxdoo-server-3.5-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/hrsample-ext-startup-qooxdoo-server/hrsample-ext-startup-qooxdoo-server">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <dependent-module archiveName="hrsample-ext-webservices-3.5-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/hrsample-ext-webservices/hrsample-ext-webservices">
             <dependency-type>uses</dependency-type>
         </dependent-module>
