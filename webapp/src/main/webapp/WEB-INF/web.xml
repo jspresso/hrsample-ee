@@ -163,7 +163,20 @@
    <servlet-name>RESTEasy JSAPI</servlet-name>
    <url-pattern>/rest-js</url-pattern>
   </servlet-mapping>
-
   <!-- End Resteasy -->
 
+  <!-- SSO support -->
+  <filter>
+    <filter-name>SsoHttpFilter</filter-name>
+    <filter-class>org.jspresso.framework.security.sso.SsoHttpFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>SsoHttpFilter</filter-name>
+    <url-pattern>/flex/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>SsoHttpFilter</filter-name>
+    <url-pattern>/qooxdoo/*</url-pattern>
+  </filter-mapping>
+  <!-- SSO support -->
 </web-app>
