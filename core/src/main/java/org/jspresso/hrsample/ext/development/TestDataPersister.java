@@ -27,7 +27,7 @@ public class TestDataPersister extends
   @Override
   public void persistTestData() {
     super.persistTestData();
-    
+
     try {
       createFurniture("Blue desk - 2012", 99.95, 0.1);
       createFurniture("Main blue desk - 2012", 69.95, 0.15);
@@ -37,14 +37,13 @@ public class TestDataPersister extends
       // startup fail.
     }
   }
-  
-  
+
   private Furniture createFurniture(String name, double price, double discount) {
     Furniture furniture = createEntityInstance(Furniture.class);
     furniture.setName(name);
     furniture.setCreateTimestamp(new Date());
-    furniture.setPrice(price);
-    furniture.setDiscount(discount);
+    furniture.setPrice(new Double(price));
+    furniture.setDiscount(new Double(discount));
     saveOrUpdate(furniture);
     return furniture;
   }
