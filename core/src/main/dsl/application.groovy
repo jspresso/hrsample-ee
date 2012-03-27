@@ -45,6 +45,8 @@ frontendBuilder.writeOutputFile('frontend',project.properties['outputDir'],proje
 frontendBuilder.writeOutputFile('remote',project.properties['outputDir'],'remote-'+project.properties['frontOutputFileName'])
 frontendBuilder.writeOutputFile('remote-recording',project.properties['outputDir'],'remote-recording-'+project.properties['frontOutputFileName'])
 
+frontendBuilder.writeOutputFile('swing',project.properties['outputDir'],'swing-'+project.properties['frontOutputFileName'])
+
 //Export as module
 ManageModule manageModule = new ManageModule()
 manageModule.exportModule('hrsample-ext',domainBuilder,frontendBuilder,project.properties['outputDir'])

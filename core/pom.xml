@@ -37,6 +37,12 @@
     <dependency>
       <groupId>org.jspresso.framework</groupId>
       <artifactId>jspresso-ext-remote-application</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.jspresso.framework</groupId>
+      <artifactId>jspresso-swing-application</artifactId>
+      <optional>true</optional>
     </dependency>
     
     <!-- For load and integration tests -->
@@ -220,10 +226,10 @@
                       </params>
                     </component>
                   </components>
-                  <includes>**/ext/model/**/**.java,**/model/Traceable.java</includes>
+                  <includes>**/ext/model/**/**.java,**/model/Traceable.java,**/model/i18n/*.java</includes>
                 </config>
               </configs>
-              <sourceArtifacts>org.jspresso.hrsample:hrsample-core</sourceArtifacts>
+              <sourceArtifacts>org.jspresso.hrsample:hrsample-core,org.jspresso.contrib:jspresso-extensions-core</sourceArtifacts>
             </configuration>
           </execution>
         </executions>

@@ -13,7 +13,8 @@ bean 'viewFactoryBase', parent:'abstractViewFactory',
     
 workspace('tools.workspace', icon:'tools.png') { 
   filterModule ('furniture.module', 
-    moduleView:'Furniture.view',
+    moduleView:'Furniture.module.view',
+    detailView:'Furniture.detail.view',
     component:'Furniture')
 }
  
@@ -32,6 +33,11 @@ controller 'hrsample-ext.name',
 spec('remote') {
   bean ('remotePeerRegistryBase', class:'org.jspresso.framework.util.remote.registry.BasicRemotePeerRegistry', custom:[automationEnabled:true])
   bean ('remoteFrontController', class:'org.jspresso.hrsample.ext.frontend.remote.CustomRemoteController', parent:'abstractFrontController')
+  bean ('remoteViewFactory', class:'org.jspresso.framework.view.remote.EnhancedRemoteViewFactory', parent:'viewFactoryBase')
+}
+
+spec('swing') {
+  bean ('swingFrontController', class:'org.jspresso.hrsample.ext.frontend.swing.CustomSwingController', parent:'abstractFrontController')
 }
 
 

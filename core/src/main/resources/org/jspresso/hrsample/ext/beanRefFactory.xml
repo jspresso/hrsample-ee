@@ -120,6 +120,7 @@
         <value>org/jspresso/hrsample/ext/view/dsl-view.xml</value>
         <value>org/jspresso/hrsample/ext/view/view.xml</value>
         <value>org/jspresso/hrsample/ext/frontend/dsl-frontend.xml</value>
+        <value>org/jspresso/hrsample/ext/spec/swing-dsl-frontend.xml</value>
         <value>org/jspresso/hrsample/ext/frontend/frontend.xml</value>
 
         <value>org/jspresso/hrsample/ext/core-config.xml</value>
