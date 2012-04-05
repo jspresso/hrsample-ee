@@ -18,6 +18,8 @@
  */
 package org.jspresso.hrsample.ext.security;
 
+import org.jspresso.framework.application.backend.BackendControllerHolder;
+import org.jspresso.framework.application.backend.IBackendController;
 import org.jspresso.framework.security.UsernamePasswordHandler;
 
 /**
@@ -68,6 +70,15 @@ public class CaptchaUsernamePasswordHandler extends UsernamePasswordHandler {
    */
   public void setCaptchaChallenge(String captchaChallenge) {
     this.captchaChallenge = captchaChallenge;
+  }
+
+  public String getRegister() {
+    IBackendController bc = BackendControllerHolder
+        .getCurrentBackendController();
+    if (bc == null) {
+      return "...";
+    }
+    return bc.getTranslation("register", bc.getLocale());
   }
 
 }

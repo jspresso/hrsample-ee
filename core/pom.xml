@@ -269,6 +269,8 @@
                   <arg value="${generator.dest}" />
                   <arg value="-includePackages" />
                   <arg value="org.jspresso.hrsample.ext.model" />
+                  <arg value="-excludePatterns" />
+                  <arg value=".*\.loginModelDescriptor" />
                 </java>
               </tasks>
             </configuration>
