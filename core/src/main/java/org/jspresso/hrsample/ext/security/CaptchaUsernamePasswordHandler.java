@@ -72,13 +72,32 @@ public class CaptchaUsernamePasswordHandler extends UsernamePasswordHandler {
     this.captchaChallenge = captchaChallenge;
   }
 
+  /**
+   * Gets the registration link text.
+   * 
+   * @return the registration link text.
+   */
   public String getRegister() {
     IBackendController bc = BackendControllerHolder
         .getCurrentBackendController();
     if (bc == null) {
       return "...";
     }
-    return bc.getTranslation("register", bc.getLocale());
+    return bc.getTranslation("registerLink", bc.getLocale());
+  }
+
+  /**
+   * Gets the help link text.
+   * 
+   * @return the help link text.
+   */
+  public String getHelp() {
+    IBackendController bc = BackendControllerHolder
+        .getCurrentBackendController();
+    if (bc == null) {
+      return "...";
+    }
+    return bc.getTranslation("helpLink", bc.getLocale());
   }
 
 }
