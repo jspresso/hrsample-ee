@@ -270,7 +270,7 @@
                   <arg value="-includePackages" />
                   <arg value="org.jspresso.hrsample.ext.model" />
                   <arg value="-excludePatterns" />
-                  <arg value=".*\.loginModelDescriptor" />
+                  <arg value="org\.jspresso\.framework\..*" />
                 </java>
               </tasks>
             </configuration>

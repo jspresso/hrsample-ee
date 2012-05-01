@@ -1,13 +1,13 @@
 // Implement your domain here using the SJS DSL.
 
-Component('loginModelDescriptor') {
+Component('org.jspresso.hrsample.ext.security.CaptchaUsernamePasswordHandler') {
   string_64 'username'
   password 'password', maxLength:64
   imageUrl 'captchaImageUrl'
   string_64 'captchaChallenge'
   bool 'rememberMe'
-  string_64 'register' 
-  string_64 'help' 
+  string_64 'register', readOnly:true
+  string_64 'help', readOnly:true
 }
 
 Component('Registration') {

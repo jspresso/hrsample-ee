@@ -1,6 +1,6 @@
 // Implement your views here using the SJS DSL.
 
-form('loginViewDescriptor', parent:'loginViewDescriptorBase', model:'loginModelDescriptor', columnCount:2) {
+form('loginViewDescriptor', parent:'loginViewDescriptorBase', model:'org.jspresso.hrsample.ext.security.CaptchaUsernamePasswordHandler', columnCount:2) {
   fields {
     propertyView name:'username', width:2
     propertyView name:'password', width:2
