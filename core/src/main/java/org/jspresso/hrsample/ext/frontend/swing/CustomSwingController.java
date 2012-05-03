@@ -20,7 +20,7 @@ package org.jspresso.hrsample.ext.frontend.swing;
 
 import org.jspresso.framework.application.frontend.controller.swing.DefaultSwingController;
 import org.jspresso.framework.security.UsernamePasswordHandler;
-import org.jspresso.hrsample.ext.security.CaptchaUsernamePasswordHandler;
+import org.jspresso.hrsample.ext.model.security.CaptchaUsernamePasswordHandler;
 
 /**
  * A custom remote controller used to override the login process in order to

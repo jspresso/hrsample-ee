@@ -21,7 +21,7 @@ package org.jspresso.hrsample.ext.frontend.remote;
 import org.jspresso.framework.application.frontend.controller.remote.EnhancedRemoteController;
 import org.jspresso.framework.security.UsernamePasswordHandler;
 import org.jspresso.framework.util.resources.server.ResourceProviderServlet;
-import org.jspresso.hrsample.ext.security.CaptchaUsernamePasswordHandler;
+import org.jspresso.hrsample.ext.model.security.CaptchaUsernamePasswordHandler;
 
 /**
  * A custom remote controller used to override the login process in order to
