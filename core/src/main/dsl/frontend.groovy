@@ -19,18 +19,19 @@ workspace('tools.workspace', icon:'tools.png') {
     component:'Furniture')
 }
  
-controller 'hrsample-ext.name',
+controller ('hrsample-ext.name',
     icon:'icon.png',
     context:'hrsample-ext',
     language:'en',
     startup:'startupHrsampleAction',
+    onModuleEnter:'usageModuleEnterFrontAction',
     workspaces:[
       'organization.workspace',
       'employees.workspace',
       'masterdata.workspace', 
       'tools.workspace', 
       'usage.workspace'
-    ]
+    ])
 
 spec('remote') {
   bean ('remotePeerRegistryBase', class:'org.jspresso.framework.util.remote.registry.BasicRemotePeerRegistry', custom:[automationEnabled:true])

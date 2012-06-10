@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beansProjectDescription>
 	<version>1</version>
-	<pluginVersion><![CDATA[2.9.1.201203220057-RELEASE]]></pluginVersion>
+	<pluginVersion><![CDATA[3.0.0.201204271138-CI-B7]]></pluginVersion>
 	<configSuffixes>
 		<configSuffix><![CDATA[xml]]></configSuffix>
 	</configSuffixes>
@@ -27,10 +27,6 @@
 		<config>external:/M2_REPO/org/jspresso/contrib/jspresso-extensions-core/1.0-SNAPSHOT/jspresso-extensions-core-1.0-SNAPSHOT.jar!/org/jspresso/contrib/backend/dsl-backend.xml</config>
 		<config>external:/M2_REPO/org/jspresso/contrib/jspresso-extensions-core/1.0-SNAPSHOT/jspresso-extensions-core-1.0-SNAPSHOT.jar!/org/jspresso/contrib/model/model.xml</config>
 		<config>external:/M2_REPO/org/jspresso/contrib/jspresso-extensions-core/1.0-SNAPSHOT/jspresso-extensions-core-1.0-SNAPSHOT.jar!/org/jspresso/contrib/model/dsl-model.xml</config>
-		<config>external:/M2_REPO/org/jspresso/framework/jspresso-app-template-core/3.5-SNAPSHOT/jspresso-app-template-core-3.5-SNAPSHOT.jar!/org/jspresso/framework/application/frontend/commons-frontend.xml</config>
-		<config>external:/M2_REPO/org/jspresso/framework/jspresso-app-template-core/3.5-SNAPSHOT/jspresso-app-template-core-3.5-SNAPSHOT.jar!/org/jspresso/framework/application/backend/persistence/hibernate/commons-hibernate.xml</config>
-		<config>external:/M2_REPO/org/jspresso/framework/jspresso-app-template-core/3.5-SNAPSHOT/jspresso-app-template-core-3.5-SNAPSHOT.jar!/org/jspresso/framework/application/commons.xml</config>
-		<config>external:/M2_REPO/org/jspresso/framework/jspresso-app-template-core/3.5-SNAPSHOT/jspresso-app-template-core-3.5-SNAPSHOT.jar!/org/jspresso/framework/application/mock-config.xml</config>
 	</configs>
 	<configSets>
 		<configSet>
@@ -58,10 +54,10 @@
 				<config>external:/M2_REPO/org/jspresso/contrib/jspresso-extensions-core/1.0-SNAPSHOT/jspresso-extensions-core-1.0-SNAPSHOT.jar!/org/jspresso/contrib/backend/dsl-backend.xml</config>
 				<config>external:/M2_REPO/org/jspresso/contrib/jspresso-extensions-core/1.0-SNAPSHOT/jspresso-extensions-core-1.0-SNAPSHOT.jar!/org/jspresso/contrib/model/model.xml</config>
 				<config>external:/M2_REPO/org/jspresso/contrib/jspresso-extensions-core/1.0-SNAPSHOT/jspresso-extensions-core-1.0-SNAPSHOT.jar!/org/jspresso/contrib/model/dsl-model.xml</config>
-				<config>external:/M2_REPO/org/jspresso/framework/jspresso-app-template-core/3.5-SNAPSHOT/jspresso-app-template-core-3.5-SNAPSHOT.jar!/org/jspresso/framework/application/frontend/commons-frontend.xml</config>
-				<config>external:/M2_REPO/org/jspresso/framework/jspresso-app-template-core/3.5-SNAPSHOT/jspresso-app-template-core-3.5-SNAPSHOT.jar!/org/jspresso/framework/application/backend/persistence/hibernate/commons-hibernate.xml</config>
-				<config>external:/M2_REPO/org/jspresso/framework/jspresso-app-template-core/3.5-SNAPSHOT/jspresso-app-template-core-3.5-SNAPSHOT.jar!/org/jspresso/framework/application/commons.xml</config>
-				<config>external:/M2_REPO/org/jspresso/framework/jspresso-app-template-core/3.5-SNAPSHOT/jspresso-app-template-core-3.5-SNAPSHOT.jar!/org/jspresso/framework/application/mock-config.xml</config>
+				<config>/jspresso-app-template-core/src/main/resources/org/jspresso/framework/application/frontend/commons-frontend.xml</config>
+				<config>/jspresso-app-template-core/src/main/resources/org/jspresso/framework/application/backend/persistence/hibernate/commons-hibernate.xml</config>
+				<config>/jspresso-app-template-core/src/main/resources/org/jspresso/framework/application/commons.xml</config>
+				<config>/jspresso-app-template-core/src/main/resources/org/jspresso/framework/application/mock-config.xml</config>
 			</configs>
 			<profiles>
 			</profiles>

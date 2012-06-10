@@ -21,6 +21,8 @@ namespace('usage') {
     
     reference 'historyPeriod', ref:'MUModule'
     set 'historyDetails', ref:'MUItem'
+    
+    set 'allWorkspaces', ref:'MUWorkspace'
   }
   
   Component('MUWorkspace', icon:'workspace.png') {

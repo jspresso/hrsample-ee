@@ -6,7 +6,7 @@ border('MUStat.module.view', borderType:'TITLED', i18nNameKey:'MU.application.us
     form (model:'MUStat', columnCount:2) {
       fields {
         propertyView name:'period'
-        referencePropertyView name:'workspace', lovAction:'lovFindFrontAction'
+        referencePropertyView name:'workspace', lovAction:'chooseWorkspaceFrontAction'
       }
     }
   }
@@ -25,7 +25,7 @@ border('MUStat.module.view', borderType:'TITLED', i18nNameKey:'MU.application.us
                 north {
                   form {
                     fields {
-                      propertyView name:'usersCount', readOnly:true
+                      propertyView name:'usersCount', readOnly:true, action:'exportApplicationUsgeFrontAction'
                     }
                   }
                 }
@@ -44,7 +44,7 @@ border('MUStat.module.view', borderType:'TITLED', i18nNameKey:'MU.application.us
                 north {
                   form {
                     fields {
-                      propertyView name:'accessCount', readOnly:true
+                      propertyView name:'accessCount', readOnly:true, action:'exportApplicationUsgeFrontAction'
                     }
                   }
                 }
@@ -71,7 +71,7 @@ border('MUStat.module.view', borderType:'TITLED', i18nNameKey:'MU.application.us
           }
           center {
             cartesianChart (model:'MUStat-historyDetails', label:'label', borderType:'NONE', legend:false) {
-             lineSeries (valueField:'count')
+               lineSeries (valueField:'count')
             }
           }
         }
@@ -79,3 +79,16 @@ border('MUStat.module.view', borderType:'TITLED', i18nNameKey:'MU.application.us
     }
   }
 }
+
+action ('exportApplicationUsgeFrontAction', 
+  class:'org.jspresso.framework.application.frontend.action.FrontendAction')
+
+action('chooseWorkspaceFrontAction',  
+  class:'org.jspresso.hrsample.ext.frontend.ChooseWorkspaceFrontAction') {
+  next ( 
+    parent:'chooseComponentAction',
+    custom:[componentDescriptor_ref:'MUWorkspace',
+            collectionViewDescriptor_ref:'MUWorkspace.table'])
+}
+table ('MUWorkspace.table', columns:['workspaceId', 'label'])
+
