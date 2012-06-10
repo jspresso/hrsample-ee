@@ -36,8 +36,42 @@ public class TestDataPersister extends
       // In no way the test data persister should make the application
       // startup fail.
     }
+    
+    try {
+      // furniture.module
+      createModuleUsages("furniture.module", "Tom", 365, 1800);
+      createModuleUsages("furniture.module", "Bob", 365, 120);
+      createModuleUsages("furniture.module", "Alice", 240, 120);
+      
+      
+    } catch (Throwable ex) {
+      // In no way the test data persister should make the application
+      // startup fail.
+    }
   }
 
+  /**
+   * create a set of Module usage for module <i>moduleId</i> 
+   * from <i>daysAgo</i> to now, using a random method 
+   * to set a total of <i>accessCount</i> access
+   * 
+   * @param moduleId 
+   * @param daysAgo
+   * @param accessCount
+   */
+  private void createModuleUsages(String moduleId, String accessBy, int daysAgo, double accessCount) {
+    
+    
+    
+  }
+
+  /**
+   * create a new Furniture
+   * @param name
+   * @param price
+   * @param discount
+   * @return
+   */
   private Furniture createFurniture(String name, double price, double discount) {
     Furniture furniture = createEntityInstance(Furniture.class);
     furniture.setName(name);

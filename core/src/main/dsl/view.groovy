@@ -1,4 +1,5 @@
 // Implement your views here using the SJS DSL.
+include 'viewUsage.groovy'
 
 form('loginViewDescriptor', parent:'loginViewDescriptorBase', model:'CaptchaUsernamePasswordHandler', columnCount:2) {
   fields {
@@ -11,6 +12,8 @@ form('loginViewDescriptor', parent:'loginViewDescriptorBase', model:'CaptchaUser
     propertyView name:'help', readOnly:true, action:'helpFrontAction'
   }
 }
+
+
 
 form('Registration.form', fields:['name', 'firstName']) {
   actionMap {
@@ -49,11 +52,9 @@ table ('Furniture.module.view', parent:'decoratedView') {
 
 tabs('Furniture.detail.view', actionMap:'beanModuleActionMap') {
   views {
-    form (model:'Furniture')
-    table(parent:'ITranslatable-translations.table')
+    form  model:'Furniture'
+    table parent:'ITranslatable-translations.table'
   }
 }
-
-
 
 

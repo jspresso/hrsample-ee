@@ -5,6 +5,7 @@
  */
 
 // Describe your workspaces and modules here.
+include 'frontendUsage.groovy'
 
 bean 'viewFactoryBase', parent:'abstractViewFactory',
     custom: [
@@ -14,7 +15,7 @@ bean 'viewFactoryBase', parent:'abstractViewFactory',
 workspace('tools.workspace', icon:'tools.png') { 
   filterModule ('furniture.module', 
     moduleView:'Furniture.module.view',
-    detailView:'Furniture.detail.view',
+    detailView:'Furniture.detail.view', 
     component:'Furniture')
 }
  
@@ -27,7 +28,8 @@ controller 'hrsample-ext.name',
       'organization.workspace',
       'employees.workspace',
       'masterdata.workspace', 
-      'tools.workspace'
+      'tools.workspace', 
+      'usage.workspace'
     ]
 
 spec('remote') {

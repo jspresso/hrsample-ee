@@ -1,4 +1,5 @@
 // Implement your domain here using the SJS DSL.
+include 'modelUsage.groovy'
 
 namespace('security') {
   Component('CaptchaUsernamePasswordHandler') {
