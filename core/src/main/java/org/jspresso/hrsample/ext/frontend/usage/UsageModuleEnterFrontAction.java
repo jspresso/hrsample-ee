@@ -33,7 +33,7 @@ public class UsageModuleEnterFrontAction<E, F, G> extends FrontendAction<E, F, G
       @Override
       protected void doInTransactionWithoutResult(TransactionStatus status) {
         ModuleUsage mu = newModuleUsage(actionHandler, context);
-        bc.getHibernateSession().saveOrUpdate(mu);
+        bc.registerForUpdate(mu);
       }
       
     });
@@ -51,6 +51,7 @@ public class UsageModuleEnterFrontAction<E, F, G> extends FrontendAction<E, F, G
   public ModuleUsage newModuleUsage(IActionHandler actionHandler, Map<String, Object> context) {
     ModuleUsage mu = getBackendController(context).getEntityFactory().createEntityInstance(ModuleUsage.class);
     mu.setAccessDate(new Date());
+    mu.setAccessBy(getBackendController(context).getApplicationSession().getPrincipal().getName());
     mu.setModuleId(getCurrentModule(context).getName());
     
     Logger logger = Logger.getLogger(getClass().getName());

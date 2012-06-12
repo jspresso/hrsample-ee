@@ -1,8 +1,10 @@
 package org.jspresso.hrsample.ext.development;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import org.jspresso.hrsample.ext.model.Furniture;
+import org.jspresso.hrsample.ext.model.usage.ModuleUsage;
 import org.springframework.beans.factory.BeanFactory;
 
 /**
@@ -39,15 +41,38 @@ public class TestDataPersister extends
     
     try {
       // furniture.module
-      createModuleUsages("furniture.module", "Tom", 365, 1800);
-      createModuleUsages("furniture.module", "Bob", 365, 120);
-      createModuleUsages("furniture.module", "Alice", 240, 120);
-      
-      
+      createModuleUsages("furniture.module", "Tom", 365, 18);
+      createModuleUsages("furniture.module", "Bob", 365, 10);
+      createModuleUsages("furniture.module", "Alice", 240, 12);
     } catch (Throwable ex) {
       // In no way the test data persister should make the application
       // startup fail.
     }
+    
+//    try {
+//      // organization.workspace
+//      createModuleUsages("organization.workspace", "Tom", 365, 200);
+//      createModuleUsages("organization.workspace", "Bob", 365, 250);
+//      
+//      // employees.workspace
+//      createModuleUsages("employees.workspace", "Tom", 365, 150);
+//      createModuleUsages("employees.workspace", "Bob", 365, 38);
+//      createModuleUsages("employees.workspace", "Alice", 238, 45);
+//      
+//      // masterdata.workspace
+//      createModuleUsages("masterdata.workspace", "Tom", 365, 43);
+//      createModuleUsages("masterdata.workspace", "Bob", 365, 20);
+//      createModuleUsages("masterdata.workspace", "Alice", 238, 25);
+//      
+//      // masterdata.geography.module
+//      createModuleUsages("masterdata.geography.module", "Tom", 365, 56);
+//      createModuleUsages("masterdata.geography.module", "Bob", 365, 98);
+//      createModuleUsages("masterdata.geography.module", "Alice", 238, 15);
+//      
+//    } catch (Throwable ex) {
+//      // In no way the test data persister should make the application
+//      // startup fail.
+//    }
   }
 
   /**
@@ -59,10 +84,20 @@ public class TestDataPersister extends
    * @param daysAgo
    * @param accessCount
    */
-  private void createModuleUsages(String moduleId, String accessBy, int daysAgo, double accessCount) {
-    
-    
-    
+  private void createModuleUsages(String moduleId, String accessBy, int daysAgo, int accessCount) {
+     
+    for (int i=0; i<accessCount; i++) {
+      Calendar cal = Calendar.getInstance();
+      cal.add(Calendar.DAY_OF_YEAR, new Double(Math.random()*daysAgo).intValue());
+      
+      ModuleUsage mu = createEntityInstance(ModuleUsage.class);
+      mu.setModuleId(moduleId);
+      mu.setAccessBy(accessBy);
+      mu.setAccessDate(cal.getTime());
+      saveOrUpdate(mu);
+
+    }
+
   }
 
   /**

@@ -25,12 +25,16 @@ namespace('usage') {
     set 'allWorkspaces', ref:'MUWorkspace'
   }
   
-  Component('MUWorkspace', icon:'workspace.png') {
+  Component('MUWorkspace', 
+      toString:'label', autoComplete:'label', rendered:['label'], queryable:['label'], 
+      icon:'workspace.png') {
     integer 'workspaceId'
     string 'label'
   }
   
-  Component('MUModule', icon:'module.png') {
+  Component('MUModule', 
+      toString:'label', autoComplete:'label', rendered:['label'], queryable:['label'], 
+      icon:'module.png') {
     integer 'workspaceId'
     string 'label'
   }

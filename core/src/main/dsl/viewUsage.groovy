@@ -6,7 +6,7 @@ border('MUStat.module.view', borderType:'TITLED', i18nNameKey:'MU.application.us
     form (model:'MUStat', columnCount:2) {
       fields {
         propertyView name:'period'
-        referencePropertyView name:'workspace', lovAction:'chooseWorkspaceFrontAction'
+        referencePropertyView name:'workspace', lovAction:'lovAction'
       }
     }
   }
@@ -20,7 +20,7 @@ border('MUStat.module.view', borderType:'TITLED', i18nNameKey:'MU.application.us
         evenGrid (drivingDimension:'ROW', drivingCellCount:2) {
           cells {
             cell {
-              // polar chart for users count
+              // bar series chart for users count per module
               border {
                 north {
                   form {
@@ -30,9 +30,8 @@ border('MUStat.module.view', borderType:'TITLED', i18nNameKey:'MU.application.us
                   }
                 }
                 center {
-                  polarChart (model:'MUStat-usersPerModule', label:'label', borderType:'NONE', preferredHeight:300, preferredWidth:300 ) {
-
-                    pieSeries (valueField:'count')
+                  cartesianChart (model:'MUStat-usersPerModule', label:'label', borderType:'NONE', legend:false) {
+                    barSeries (valueField:'count')
                   }
                 }
               }
@@ -83,12 +82,25 @@ border('MUStat.module.view', borderType:'TITLED', i18nNameKey:'MU.application.us
 action ('exportApplicationUsgeFrontAction', 
   class:'org.jspresso.framework.application.frontend.action.FrontendAction')
 
+/*
+1/ org.jspresso.framework.application.frontend.action.lov.ChooseComponentAction
+2/ org.jspresso.contrib.frontend.ChooseElementAction  (Author Maxime Hamm, mais j'ai pas retrouvé la javadoc ;-)
+3/ La plus stylée : tu surcharges org.jspresso.framework.application.backend.action.persistence.hibernate.QueryEntitiesAction 
+   et tu l'injectes comme 'queryEntitiesBackAction'. Dans ta sous classe, il te suffit de tester si ce que tu cherches est du 
+   type de ton composant et de retourner ta liste. Du coup, tu peux m^me faire marcher les filtres, etc... 
+*/
+
 action('chooseWorkspaceFrontAction',  
   class:'org.jspresso.hrsample.ext.frontend.ChooseWorkspaceFrontAction') {
   next ( 
     parent:'chooseComponentAction',
     custom:[componentDescriptor_ref:'MUWorkspace',
+            okAction_ref:'chooseWorkspaceFrontOkAction', cancelAction_ref:'cancelDialogFrontAction',
             collectionViewDescriptor_ref:'MUWorkspace.table'])
 }
-table ('MUWorkspace.table', columns:['workspaceId', 'label'])
+action ('chooseWorkspaceFrontOkAction', parent:'okDialogFrontAction') {
+  next (class:'org.jspresso.hrsample.ext.frontend.ChooseWorkspaceFrontOkAction')
+}  
+  
+table ('MUWorkspace.table', columns:['label'])
 
