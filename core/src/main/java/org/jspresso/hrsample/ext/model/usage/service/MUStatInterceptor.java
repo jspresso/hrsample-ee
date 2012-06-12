@@ -33,7 +33,7 @@ public class MUStatInterceptor extends EmptyLifecycleInterceptor<MUStat> {
     stat.addToAccessPerModule(getItem("Copil", 59, entityFactory));
     
     // history
-    stat.setHistoryPeriod(getModule("Météos", entityFactory));
+    stat.setHistoryModule(getModule("Météos", entityFactory));
     stat.addToHistoryDetails(getItem("Lun", 13, entityFactory));
     stat.addToHistoryDetails(getItem("Mar", 19, entityFactory));
     stat.addToHistoryDetails(getItem("Mer", 8, entityFactory));

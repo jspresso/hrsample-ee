@@ -64,7 +64,7 @@ border('MUStat.module.view', borderType:'TITLED', i18nNameKey:'MU.application.us
           north {
             form () {
               fields {
-                referencePropertyView name:'historyPeriod', lovAction:'lovFindFrontAction'
+                referencePropertyView name:'historyModule', lovAction:'lovAction'
               }
             }
           }

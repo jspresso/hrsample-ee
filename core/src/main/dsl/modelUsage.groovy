@@ -7,8 +7,10 @@ namespace('usage') {
     string_64 'accessBy' 
   }
 
-  Component('MUStat', icon:'view_tree.png',
-    interceptors:['MUStatInterceptor']) {
+  Component('MUStat', 
+    extension:'MUStatExtension',
+    interceptors:['MUStatInterceptor'], 
+    icon:'view_tree.png') {
     
     enumeration 'period', enumName:'PERIOD', values:['DAY', 'WEEK', 'MONTH'] 
     reference 'workspace', ref:'MUWorkspace'
@@ -19,17 +21,21 @@ namespace('usage') {
     integer 'accessCount'
     set 'accessPerModule', ref:'MUItem'
     
-    reference 'historyPeriod', ref:'MUModule'
+    reference 'historyModule', ref:'MUModule'
     set 'historyDetails', ref:'MUItem'
     
     set 'allWorkspaces', ref:'MUWorkspace'
+    set 'allModules', ref:'MUModule', computed:true
   }
   
   Component('MUWorkspace', 
       toString:'label', autoComplete:'label', rendered:['label'], queryable:['label'], 
       icon:'workspace.png') {
+      
     integer 'workspaceId'
     string 'label'
+    
+    set 'modules', ref:'MUModule'
   }
   
   Component('MUModule', 
