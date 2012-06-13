@@ -5,43 +5,53 @@ namespace('usage') {
     string_64 'moduleId' 
     date_time 'accessDate'
     string_64 'accessBy' 
-  }
+  } 
 
-  Component('MUStat', 
+  Component('MUStat',
     extension:'MUStatExtension',
-    interceptors:['MUStatInterceptor'], 
+    processor:'MUStatProcessors',
+    services:['MUStatService':'MUStatServiceDelegate'],
+    interceptors:['MUStatInterceptor'],
     icon:'view_tree.png') {
     
     enumeration 'period', enumName:'PERIOD', values:['DAY', 'WEEK', 'MONTH'] 
-    reference 'workspace', ref:'MUWorkspace'
+    reference 'workspace', ref:'MUWorkspace', processors:['WorkspaceProcessor']
     
     integer 'usersCount'
-    set 'usersPerModule', ref:'MUItem'
+    list 'usersPerModule', ref:'MUItem'
     
     integer 'accessCount'
-    set 'accessPerModule', ref:'MUItem'
+    list 'accessPerModule', ref:'MUItem'
     
     reference 'historyModule', ref:'MUModule'
-    set 'historyDetails', ref:'MUItem'
+    list 'historyDetails', ref:'MUItem'
     
-    set 'allWorkspaces', ref:'MUWorkspace'
-    set 'allModules', ref:'MUModule', computed:true
+    list 'allWorkspaces', ref:'MUWorkspace'
+    list 'allModules', ref:'MUModule', computed:true
+  }
+   
+  Interface('MUModuleInterface', 
+      extension:'MUModuleInterfaceExtension',
+      services:['org.jspresso.framework.model.component.IComponent' : null]) { 
+    list 'modules', ref:'MUModule'
+    list 'allModules', ref:'MUModule', computed:true
   }
   
   Component('MUWorkspace', 
+      extend:['MUModuleInterface'],
       toString:'label', autoComplete:'label', rendered:['label'], queryable:['label'], 
       icon:'workspace.png') {
       
-    integer 'workspaceId'
+    string 'workspaceId'
     string 'label'
-    
-    set 'modules', ref:'MUModule'
   }
   
   Component('MUModule', 
+      extend:['MUModuleInterface'],
       toString:'label', autoComplete:'label', rendered:['label'], queryable:['label'], 
       icon:'module.png') {
-    integer 'workspaceId'
+      
+    string 'moduleId'
     string 'label'
   }
   

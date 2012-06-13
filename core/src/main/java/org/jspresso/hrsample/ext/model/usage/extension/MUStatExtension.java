@@ -1,10 +1,11 @@
 package org.jspresso.hrsample.ext.model.usage.extension;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.jspresso.framework.model.component.AbstractComponentExtension;
 import org.jspresso.hrsample.ext.model.usage.MUModule;
+import org.jspresso.hrsample.ext.model.usage.MUModuleInterface;
 import org.jspresso.hrsample.ext.model.usage.MUStat;
 import org.jspresso.hrsample.ext.model.usage.MUWorkspace;
 
@@ -16,7 +17,7 @@ public class MUStatExtension extends AbstractComponentExtension<MUStat> {
 	public MUStatExtension(MUStat component) {
 		super(component);
 
-		//registerNotificationForwarding(component, MUStat.FIELD, MUStat.COMPUTED_FIELD);
+		registerNotificationForwarding(component, MUStat.WORKSPACE, MUStat.ALL_MODULES);
 	}
 
   /**
@@ -24,16 +25,25 @@ public class MUStatExtension extends AbstractComponentExtension<MUStat> {
    * 
    * @return
    */
-  public Set<MUModule> getAllModules() {
-    if (getComponent().getWorkspace() != null) {
-      return getComponent().getWorkspace().getModules();
+  public List<MUModule> getAllModules() {
+    if (getComponent().getWorkspace() != null
+        && getComponent().getWorkspace().getLabel()!=null) { //WORKAROUND !!
+      return getComponent().getWorkspace().getAllModules();
     }
     else {
-      HashSet<MUModule> modules = new HashSet<MUModule>();
+      ArrayList<MUModule> modules = new ArrayList<MUModule>();
       for (MUWorkspace w : getComponent().getAllWorkspaces()) {
-        modules.addAll(w.getModules());
+        for (MUModule m : w.getModules()) {
+          fillModules(m, modules);
+        }
       }
       return modules;
+    }
+  }
+  private void fillModules(MUModule masterModule, ArrayList<MUModule> allModules) {
+    allModules.add(masterModule);
+    for (MUModule m : masterModule.getModules()) {
+      fillModules(m, allModules);
     }
   }
   
