@@ -39,7 +39,7 @@ action('englishFrontAction', parent:'changeRegistrationLanguageFrontAction',
 action('frenchFrontAction', parent:'changeRegistrationLanguageFrontAction',
     custom:['targetLanguage':'fr'], icon:'classpath:org/jspresso/contrib/images/i18n/fr.png')
 
-table ('Furniture.module.view', parent:'decoratedView') {
+table ('Furniture.module.view', parent:'filterableBeanCollectionModuleView') {
   actionMap (parents:[
     'filterableBeanCollectionModuleActionMap'
   ]) {

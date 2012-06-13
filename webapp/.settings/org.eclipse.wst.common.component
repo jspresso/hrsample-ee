@@ -26,9 +26,6 @@
         <dependent-module archiveName="jspresso-app-launch-core-3.5-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jspresso-app-launch-core/jspresso-app-launch-core">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="jspresso-application-3.5-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jspresso-application/jspresso-application">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <dependent-module archiveName="jspresso-util-3.5-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jspresso-util/jspresso-util">
             <dependency-type>uses</dependency-type>
         </dependent-module>
@@ -87,6 +84,9 @@
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="jspresso-ext-resteasy-3.5-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jspresso-ext-resteasy/jspresso-ext-resteasy">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jspresso-application-3.5-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jspresso-application/jspresso-application">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="jspresso-qooxdoo-server-3.5-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jspresso-qooxdoo-server/jspresso-qooxdoo-server">
