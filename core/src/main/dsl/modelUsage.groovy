@@ -11,10 +11,9 @@ namespace('usage') {
     extension:'MUStatExtension',
     processor:'MUStatProcessors',
     serviceBeans:['MUStatService':'MUStatServiceBean'], 
-    interceptors:['MUStatInterceptor'],
     icon:'view_tree.png') {
     
-    enumeration 'period', enumName:'PERIOD', values:['DAY', 'WEEK', 'MONTH'], processors:['PeriodProcessor'] 
+    enumeration 'period', enumName:'PERIOD', values:['DAY', 'WEEK', 'MONTH', 'YEAR'], processors:['PeriodProcessor'] 
     reference 'workspace', ref:'MUWorkspace', processors:['WorkspaceProcessor']
     
     integer 'usersCount'

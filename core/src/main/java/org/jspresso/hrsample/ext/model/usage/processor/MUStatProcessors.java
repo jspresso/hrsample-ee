@@ -17,8 +17,14 @@ public class MUStatProcessors {
     
     @Override
     public void postprocessSetter(MUStat stat, MUWorkspace oldWorkpace, MUWorkspace newWorkspace) {
-      MUModule m = newWorkspace.getModules().size()>0 ? newWorkspace.getModules().get(0) : null;
-      stat.setHistoryModule(m);
+      if (newWorkspace !=null) {
+        MUModule m = newWorkspace.getModules().size()>0 ? newWorkspace.getModules().get(0) : null;
+        stat.setHistoryModule(m);
+      }
+      else {
+        MUModule m = stat.getAllModules().get(0);
+        stat.setHistoryModule(m);
+      }
       stat.refresh();
     }
 

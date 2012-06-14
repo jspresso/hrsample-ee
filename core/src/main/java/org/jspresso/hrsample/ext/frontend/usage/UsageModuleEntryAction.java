@@ -39,6 +39,9 @@ public class UsageModuleEntryAction<E, F, G> extends FrontendAction<E, F, G> {
       stat.setHistoryModule(stat.getAllModules().get(0));
     }
     
+    // init period (this will refresh other fields)
+    stat.setPeriod(MUStat.PERIOD_WEEK);
+    
     // mock other datas
     //TODO Remove this !
     //mockDatas(stat, getBackendController(context).getEntityFactory());

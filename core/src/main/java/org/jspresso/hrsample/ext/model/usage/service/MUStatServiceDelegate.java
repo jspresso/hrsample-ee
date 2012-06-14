@@ -29,11 +29,17 @@ public class MUStatServiceDelegate implements IComponentService {
       "  FROM MODULE_USAGE " + 
       " WHERE ACCESS_DATE > ?";
   
-  private static final String SQL_COUNT_PER_MODULES = 
+  private static final String SQL_COUNT_USERS_PER_MODULES = 
+      "SELECT MODULE_ID, COUNT(DISTINCT ACCESS_BY) " + 
+      "FROM MODULE_USAGE " + 
+      "WHERE ACCESS_DATE > ? " + 
+      "GROUP BY MODULE_ID";
+  
+  private static final String SQL_COUNT_ACCESS_PER_MODULES = 
       "SELECT MODULE_ID, COUNT(*) " + 
       "  FROM MODULE_USAGE " + 
       " WHERE ACCESS_DATE > ?" + 
-      " GROUP BY MODULE_ID";
+      " GROUP BY MODULE_ID";  
   
   /**
    * Configures the datasource .
@@ -67,9 +73,20 @@ public class MUStatServiceDelegate implements IComponentService {
           }
         });
     
-    // 
+    // users per modules
     final ArrayList<MUItem> items = new ArrayList<MUItem>();
-    jdbcTemplate.query(SQL_COUNT_PER_MODULES, restrictionsValues, 
+    jdbcTemplate.query(SQL_COUNT_USERS_PER_MODULES, restrictionsValues, 
+        new RowCallbackHandler() {
+          @Override
+          public void processRow(ResultSet rs) throws SQLException {
+            items.add(getItem(muStat, rs.getString(1), rs.getInt(2)));;
+          }
+        });
+    muStat.setUsersPerModule(items);
+    
+    // access per modules
+    items.clear();
+    jdbcTemplate.query(SQL_COUNT_ACCESS_PER_MODULES, restrictionsValues, 
         new RowCallbackHandler() {
           @Override
           public void processRow(ResultSet rs) throws SQLException {
@@ -100,6 +117,9 @@ public class MUStatServiceDelegate implements IComponentService {
     }
     else if (MUStat.PERIOD_MONTH.equals(muStat.getPeriod())) {
       delta = -30;
+    }
+    else {
+      delta = -365;
     }
     
     Calendar cal = Calendar.getInstance();
