@@ -13,5 +13,5 @@ workspace('usage.workspace',
 action('usageModuleEntryFrontAction',
   class:'org.jspresso.hrsample.ext.frontend.usage.UsageModuleEntryAction')  
 
-action('usageModuleEnterFrontAction',
-  class:'org.jspresso.hrsample.ext.frontend.usage.UsageModuleEnterFrontAction')
+action('anyModuleEnterFrontAction',
+  class:'org.jspresso.hrsample.ext.frontend.usage.AnyModuleEnterFrontAction')

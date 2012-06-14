@@ -41,7 +41,7 @@ public class UsageModuleEntryAction<E, F, G> extends FrontendAction<E, F, G> {
     
     // mock other datas
     //TODO Remove this !
-    mockDatas(stat, getBackendController(context).getEntityFactory());
+    //mockDatas(stat, getBackendController(context).getEntityFactory());
 
     // init module
     BeanModule statisticsModule = (BeanModule)getModule(context);
@@ -94,33 +94,38 @@ public class UsageModuleEntryAction<E, F, G> extends FrontendAction<E, F, G> {
    * @param stat
    * @param entityFactory
    */
+  private boolean mockLoaded = false;
   public void mockDatas(MUStat stat, IEntityFactory entityFactory) {
+    if (mockLoaded) {
+      return;
+    }
 
     // users count
-    for (MUModule m : stat.getAllModules()) {
-      int rand = new Random().nextInt(150);
-      stat.addToUsersPerModule(getItem(m.getLabel(), rand, entityFactory));
-    }
-    stat.setUsersCount(new Random().nextInt(40));
+//    for (MUModule m : stat.getAllModules()) {
+//      int rand = new Random().nextInt(150);
+//      stat.addToUsersPerModule(getItem(m.getLabel(), rand, entityFactory));
+//    }
+//    stat.setUsersCount(new Random().nextInt(40));
 
     // users count
-    int accessCount = 0;
-    for (MUModule m : stat.getAllModules()) {
-      int rand = new Random().nextInt(40);
-      stat.addToAccessPerModule(getItem(m.getLabel(), rand, entityFactory));
-      accessCount += rand;
-    }
-    stat.setAccessCount(accessCount);
+//    int accessCount = 0;
+//    for (MUModule m : stat.getAllModules()) {
+//      int rand = new Random().nextInt(40);
+//      stat.addToAccessPerModule(getItem(m.getLabel(), rand, entityFactory));
+//      accessCount += rand;
+//    }
+//    stat.setAccessCount(accessCount);
 
     // history
-    stat.addToHistoryDetails(getItem("Lun", 13, entityFactory));
-    stat.addToHistoryDetails(getItem("Mar", 19, entityFactory));
-    stat.addToHistoryDetails(getItem("Mer", 8, entityFactory));
-    stat.addToHistoryDetails(getItem("Jeu", 23, entityFactory));
-    stat.addToHistoryDetails(getItem("Ven", 35, entityFactory));
-    stat.addToHistoryDetails(getItem("Sam", 2, entityFactory));
-    stat.addToHistoryDetails(getItem("Dim", 1, entityFactory));
+//    stat.addToHistoryDetails(getItem("Lun", 13, entityFactory));
+//    stat.addToHistoryDetails(getItem("Mar", 19, entityFactory));
+//    stat.addToHistoryDetails(getItem("Mer", 8, entityFactory));
+//    stat.addToHistoryDetails(getItem("Jeu", 23, entityFactory));
+//    stat.addToHistoryDetails(getItem("Ven", 35, entityFactory));
+//    stat.addToHistoryDetails(getItem("Sam", 2, entityFactory));
+//    stat.addToHistoryDetails(getItem("Dim", 1, entityFactory));
 
+    mockLoaded = true;
   }
 
   /**

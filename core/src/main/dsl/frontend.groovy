@@ -24,7 +24,7 @@ controller ('hrsample-ext.name',
     context:'hrsample-ext',
     language:'en',
     startup:'startupHrsampleAction',
-    onModuleEnter:'usageModuleEnterFrontAction',
+    onModuleEnter:'anyModuleEnterFrontAction',
     workspaces:[
       'organization.workspace',
       'employees.workspace',

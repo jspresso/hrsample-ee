@@ -22,7 +22,7 @@ import org.springframework.transaction.support.TransactionCallbackWithoutResult;
  * @param <F>
  * @param <G>
  */
-public class UsageModuleEnterFrontAction<E, F, G> extends FrontendAction<E, F, G> {
+public class AnyModuleEnterFrontAction<E, F, G> extends FrontendAction<E, F, G> {
   
   @Override
   public boolean execute(final IActionHandler actionHandler, final Map<String, Object> context) {

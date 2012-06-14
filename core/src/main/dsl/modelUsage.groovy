@@ -10,11 +10,11 @@ namespace('usage') {
   Component('MUStat',
     extension:'MUStatExtension',
     processor:'MUStatProcessors',
-    services:['MUStatService':'MUStatServiceDelegate'],
+    serviceBeans:['MUStatService':'MUStatServiceBean'], 
     interceptors:['MUStatInterceptor'],
     icon:'view_tree.png') {
     
-    enumeration 'period', enumName:'PERIOD', values:['DAY', 'WEEK', 'MONTH'] 
+    enumeration 'period', enumName:'PERIOD', values:['DAY', 'WEEK', 'MONTH'], processors:['PeriodProcessor'] 
     reference 'workspace', ref:'MUWorkspace', processors:['WorkspaceProcessor']
     
     integer 'usersCount'
@@ -60,3 +60,5 @@ namespace('usage') {
     integer 'count'
   }
 }
+
+

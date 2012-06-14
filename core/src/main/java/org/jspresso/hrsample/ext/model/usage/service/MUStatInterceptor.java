@@ -16,6 +16,7 @@ public class MUStatInterceptor extends EmptyLifecycleInterceptor<MUStat> {
       UserPrincipal principal, IEntityLifecycleHandler entityLifecycleHandler) {
     
     stat.setPeriod(MUStat.PERIOD_WEEK);
+    stat.refresh();
   
     return super.onCreate(stat, entityFactory, principal, entityLifecycleHandler);
   }
