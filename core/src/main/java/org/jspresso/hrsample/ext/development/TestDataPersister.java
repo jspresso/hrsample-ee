@@ -2,6 +2,7 @@ package org.jspresso.hrsample.ext.development;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 
 import org.jspresso.hrsample.ext.model.Furniture;
 import org.jspresso.hrsample.ext.model.usage.ModuleUsage;
@@ -41,9 +42,9 @@ public class TestDataPersister extends
     
     try {
       // furniture.module
-      createModuleUsages("furniture.module", "Tom", 365, 18);
-      createModuleUsages("furniture.module", "Bob", 365, 10);
-      createModuleUsages("furniture.module", "Alice", 240, 12);
+      createModuleUsages("furniture.module", "Tom", 365, 45, 60);
+      createModuleUsages("furniture.module", "Bob", 230, 20, 10);
+      createModuleUsages("furniture.module", "Alice", 30, 1, 30);
     } catch (Throwable ex) {
       // In no way the test data persister should make the application
       // startup fail.
@@ -84,11 +85,11 @@ public class TestDataPersister extends
    * @param daysAgo
    * @param accessCount
    */
-  private void createModuleUsages(String moduleId, String accessBy, int daysAgo, int accessCount) {
+  private void createModuleUsages(String moduleId, String accessBy, int fromDaysAgo, int toDaysAgo, int accessCount) {
      
     for (int i=0; i<accessCount; i++) {
       Calendar cal = Calendar.getInstance();
-      cal.add(Calendar.DAY_OF_YEAR, new Double(Math.random()*daysAgo).intValue());
+      cal.add(Calendar.DAY_OF_YEAR, - new Random().nextInt(fromDaysAgo-toDaysAgo) - toDaysAgo);
       
       ModuleUsage mu = createEntityInstance(ModuleUsage.class);
       mu.setModuleId(moduleId);

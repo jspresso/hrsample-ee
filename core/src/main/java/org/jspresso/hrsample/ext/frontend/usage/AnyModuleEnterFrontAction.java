@@ -27,16 +27,19 @@ public class AnyModuleEnterFrontAction<E, F, G> extends FrontendAction<E, F, G> 
   @Override
   public boolean execute(final IActionHandler actionHandler, final Map<String, Object> context) {
     
-    final HibernateBackendController bc = (HibernateBackendController) getBackendController(context);
-    bc.getTransactionTemplate().execute(new TransactionCallbackWithoutResult() {
+    if (getCurrentModule(context).getProjectedViewDescriptor() !=null) { // i.e any module except "nodeModule"
+    
+      final HibernateBackendController bc = (HibernateBackendController) getBackendController(context);
+      bc.getTransactionTemplate().execute(new TransactionCallbackWithoutResult() {
 
-      @Override
-      protected void doInTransactionWithoutResult(TransactionStatus status) {
-        ModuleUsage mu = newModuleUsage(actionHandler, context);
-        bc.registerForUpdate(mu);
-      }
-      
-    });
+        @Override
+        protected void doInTransactionWithoutResult(TransactionStatus status) {
+          ModuleUsage mu = newModuleUsage(actionHandler, context);
+          bc.registerForUpdate(mu);
+        }
+
+      });
+    }
     
     return super.execute(actionHandler, context);
   }

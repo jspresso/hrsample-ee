@@ -10,6 +10,10 @@ workspace('usage.workspace',
   
 }
   
+//action('usageWorkspaceEntryFrontAction',
+//  class:'org.jspresso.framework.application.frontend.action.module.ModuleSelectionAction',
+//  custom:[workspaceName:'usage.workspace', moduleName:'usage.module'])
+  
 action('usageModuleEntryFrontAction',
   class:'org.jspresso.hrsample.ext.frontend.usage.UsageModuleEntryAction')  
 

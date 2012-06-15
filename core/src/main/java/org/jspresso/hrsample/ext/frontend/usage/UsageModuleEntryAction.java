@@ -23,33 +23,37 @@ public class UsageModuleEntryAction<E, F, G> extends FrontendAction<E, F, G> {
   @Override
   public boolean execute(IActionHandler actionHandler, Map<String, Object> context) {
 
-    // prepare workspaces 
-    IFrontendController<E, F, G> controller = getFrontendController(context);
-    ArrayList<MUWorkspace> workspaces = new ArrayList<MUWorkspace>();
-    for (String workspaceName : controller.getWorkspaceNames()) {
-      Workspace w = controller.getWorkspace(workspaceName);
-      MUWorkspace mw = createMUWorkspace(w, getBackendController(context).getEntityFactory());
-      workspaces.add(mw);
-    }
-
-    // create stat
-    MUStat stat = getBackendController(context).getEntityFactory().createComponentInstance(MUStat.class);
-    stat.setAllWorkspaces(workspaces); 
-    if (stat.getAllModules().isEmpty()) {
-      stat.setHistoryModule(stat.getAllModules().get(0));
-    }
-    
-    // init period (this will refresh other fields)
-    stat.setPeriod(MUStat.PERIOD_WEEK);
-    
-    // mock other datas
-    //TODO Remove this !
-    //mockDatas(stat, getBackendController(context).getEntityFactory());
-
-    // init module
     BeanModule statisticsModule = (BeanModule)getModule(context);
-    statisticsModule.setModuleObject(stat);
+    MUStat stat = (MUStat) statisticsModule.getModuleObject();
+    if (stat != null) {
+      
+      // just refresh model
+      stat.refresh();
+    }
+    else {
+      // prepare workspaces 
+      IFrontendController<E, F, G> controller = getFrontendController(context);
+      ArrayList<MUWorkspace> workspaces = new ArrayList<MUWorkspace>();
+      for (String workspaceName : controller.getWorkspaceNames()) {
+        Workspace w = controller.getWorkspace(workspaceName);
+        MUWorkspace mw = createMUWorkspace(w, getBackendController(context).getEntityFactory());
+        workspaces.add(mw);
+      }
 
+      // create stat
+      stat = getBackendController(context).getEntityFactory().createComponentInstance(MUStat.class);
+      stat.setAllWorkspaces(workspaces); 
+      if (stat.getAllModules().isEmpty()) {
+        stat.setHistoryModule(stat.getAllModules().get(0));
+      }
+
+      // init period (this will refresh other fields)
+      stat.setPeriod(MUStat.PERIOD_WEEK);
+
+      // init module
+      statisticsModule.setModuleObject(stat);
+    }
+    
     return super.execute(actionHandler, context);
   }
 
