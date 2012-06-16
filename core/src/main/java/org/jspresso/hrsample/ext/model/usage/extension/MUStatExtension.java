@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.jspresso.framework.model.component.AbstractComponentExtension;
 import org.jspresso.hrsample.ext.model.usage.MUModule;
-import org.jspresso.hrsample.ext.model.usage.MUModuleInterface;
 import org.jspresso.hrsample.ext.model.usage.MUStat;
 import org.jspresso.hrsample.ext.model.usage.MUWorkspace;
 

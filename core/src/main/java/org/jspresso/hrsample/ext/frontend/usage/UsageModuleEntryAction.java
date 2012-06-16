@@ -3,7 +3,6 @@ package org.jspresso.hrsample.ext.frontend.usage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import org.jspresso.framework.action.IActionHandler;
 import org.jspresso.framework.application.frontend.IFrontendController;
@@ -17,6 +16,7 @@ import org.jspresso.hrsample.ext.model.usage.MUModule;
 import org.jspresso.hrsample.ext.model.usage.MUModuleInterface;
 import org.jspresso.hrsample.ext.model.usage.MUStat;
 import org.jspresso.hrsample.ext.model.usage.MUWorkspace;
+import org.jspresso.hrsample.ext.model.usage.service.MUEvent.EMUEvent;
 
 public class UsageModuleEntryAction<E, F, G> extends FrontendAction<E, F, G> {
 
@@ -28,7 +28,7 @@ public class UsageModuleEntryAction<E, F, G> extends FrontendAction<E, F, G> {
     if (stat != null) {
       
       // just refresh model
-      stat.refresh();
+      stat.refresh(EMUEvent.INIT);
     }
     else {
       // prepare workspaces 

@@ -42,38 +42,36 @@ public class TestDataPersister extends
     
     try {
       // furniture.module
-      createModuleUsages("furniture.module", "Tom", 365, 45, 60);
+      createModuleUsages("furniture.module", "Tom", 365, 45, 30);
       createModuleUsages("furniture.module", "Bob", 230, 20, 10);
-      createModuleUsages("furniture.module", "Alice", 30, 1, 30);
+      createModuleUsages("furniture.module", "Alice", 30, 0, 20);
+      
+      // organization.workspace
+      createModuleUsages("organization.workspace", "Tom", 365, 3, 10);
+      createModuleUsages("organization.workspace", "Bob", 365, 0, 15);
+      createModuleUsages("organization.workspace", "Alice", 2, 0, 20);
+
+      // employees.workspace
+      createModuleUsages("employees.workspace", "Tom", 365, 0, 15);
+      createModuleUsages("employees.workspace", "Bob", 2, 0, 20);
+      createModuleUsages("employees.workspace", "Alice", 120, 60, 15);
+
+      // masterdata.workspace
+      createModuleUsages("masterdata.workspace", "Tom", 30, 3, 16);
+      createModuleUsages("masterdata.workspace", "Bob", 40, 8, 10);
+      createModuleUsages("masterdata.workspace", "Alice", 2, 0, 10);
+
+      // masterdata.geography.module
+      createModuleUsages("masterdata.geography.module", "Tom", 365, 0, 20);
+      createModuleUsages("masterdata.geography.module", "Bob", 365, 0, 30);
+      createModuleUsages("masterdata.geography.module", "Alice", 1, 0, 15);
+      
     } catch (Throwable ex) {
       // In no way the test data persister should make the application
       // startup fail.
     }
     
-//    try {
-//      // organization.workspace
-//      createModuleUsages("organization.workspace", "Tom", 365, 200);
-//      createModuleUsages("organization.workspace", "Bob", 365, 250);
-//      
-//      // employees.workspace
-//      createModuleUsages("employees.workspace", "Tom", 365, 150);
-//      createModuleUsages("employees.workspace", "Bob", 365, 38);
-//      createModuleUsages("employees.workspace", "Alice", 238, 45);
-//      
-//      // masterdata.workspace
-//      createModuleUsages("masterdata.workspace", "Tom", 365, 43);
-//      createModuleUsages("masterdata.workspace", "Bob", 365, 20);
-//      createModuleUsages("masterdata.workspace", "Alice", 238, 25);
-//      
-//      // masterdata.geography.module
-//      createModuleUsages("masterdata.geography.module", "Tom", 365, 56);
-//      createModuleUsages("masterdata.geography.module", "Bob", 365, 98);
-//      createModuleUsages("masterdata.geography.module", "Alice", 238, 15);
-//      
-//    } catch (Throwable ex) {
-//      // In no way the test data persister should make the application
-//      // startup fail.
-//    }
+
   }
 
   /**

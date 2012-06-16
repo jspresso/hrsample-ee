@@ -3,11 +3,11 @@ package org.jspresso.hrsample.ext.model.usage.service;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.StringTokenizer;
 
 import javax.sql.DataSource;
 
@@ -17,6 +17,7 @@ import org.jspresso.framework.model.entity.IEntityFactory;
 import org.jspresso.hrsample.ext.model.usage.MUItem;
 import org.jspresso.hrsample.ext.model.usage.MUModule;
 import org.jspresso.hrsample.ext.model.usage.MUStat;
+import org.jspresso.hrsample.ext.model.usage.service.MUEvent.EMUEvent;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
 
@@ -47,18 +48,29 @@ public class MUStatServiceDelegate implements IComponentService {
       " GROUP BY MODULE_ID \n" +
       " ORDER BY MODULE_ID";  
   
-  //(select DISTINCT CONCAT(DATE_FORMAT(m.ACCESS_DATE,'%Y'),'-',DATE_FORMAT(m.ACCESS_DATE,'%u')) AS period,
-  
   private static final String SQL_COUNT_ACCESS_PER_PERIOD_FOR_MODULE = 
-      "SELECT dd, COUNT(*) \n" + 
-      "FROM MODULE_USAGE mu, \n" + 
-      "   (select DISTINCT (--PERIOD--), m.ID, m.ACCESS_DATE as dd \n" + 
+      "SELECT period, COUNT(*) \n" + 
+      "FROM MODULE_USAGE mu,  \n" + 
+      "   (select DISTINCT (--PERIOD--) AS period, \n" + 
+      "      m.ID \n" + 
       "      from MODULE_USAGE m \n" + 
-      "     where m.ACCESS_DATE > ?) mu2 \n" + 
+      "     where m.ACCESS_DATE > ?) mu2  \n" + 
       "WHERE mu.ID = mu2.ID \n" + 
       "AND mu.MODULE_ID = ? \n" +
-      "GROUP BY dd \n" + 
-      "ORDER BY dd DESC";
+      "GROUP BY period  \n" + 
+      "ORDER BY period DESC;";
+  
+  
+//  private static final String SQL_COUNT_ACCESS_PER_PERIOD_FOR_MODULE = 
+//      "SELECT dd, COUNT(dd)\n" + 
+//      "FROM MODULE_USAGE mu, \n" + 
+//      "   (select DISTINCT (--PERIOD--) as dd, m.ID \n" + 
+//      "      from MODULE_USAGE m \n" + 
+//      "     where m.ACCESS_DATE > ?) mu2 \n" + 
+//      "WHERE mu.ID = mu2.ID \n" + 
+//      "AND mu.MODULE_ID = ? \n" +
+//      "GROUP BY dd \n" + 
+//      "ORDER BY dd DESC";
   
   /**
    * Configures the datasource .
@@ -79,7 +91,7 @@ public class MUStatServiceDelegate implements IComponentService {
   /**
    * refresh data using datasource
    */
-  public void refresh(final MUStat muStat) {
+  public void refresh(final MUStat muStat, EMUEvent event) {
     
     Logger.getLogger(getClass()).debug("Refreshing stats");
     
@@ -96,49 +108,61 @@ public class MUStatServiceDelegate implements IComponentService {
         });
     
     // users per modules
-    final ArrayList<MUItem> items = new ArrayList<MUItem>();
-    jdbcTemplate.query(SQL_COUNT_USERS_PER_MODULES, restrictionsValues, restrictionsTypes,
-        new RowCallbackHandler() {
-          @Override
-          public void processRow(ResultSet rs) throws SQLException {
-            items.add(getItem(muStat, rs.getString(1), rs.getInt(2)));;
-          }
-        });
-    muStat.setUsersPerModule(items);
+    {
+      final ArrayList<MUItem> items = new ArrayList<MUItem>();
+      jdbcTemplate.query(SQL_COUNT_USERS_PER_MODULES, restrictionsValues, restrictionsTypes,
+          new RowCallbackHandler() {
+        @Override
+        public void processRow(ResultSet rs) throws SQLException {
+          items.add(getItemForModule(muStat, rs.getString(1), rs.getInt(2)));;
+        }
+      });
+      muStat.setUsersPerModule(items);
+    }
     
-    // access per modules
-    items.clear();
-    jdbcTemplate.query(SQL_COUNT_ACCESS_PER_MODULES, restrictionsValues, restrictionsTypes,
-        new RowCallbackHandler() {
-          @Override
-          public void processRow(ResultSet rs) throws SQLException {
-            items.add(getItem(muStat, rs.getString(1), rs.getInt(2)));;
-          }
-        });
-    muStat.setAccessPerModule(items);
+    // access per module
+    {
+      final ArrayList<MUItem> items = new ArrayList<MUItem>();
+      jdbcTemplate.query(SQL_COUNT_ACCESS_PER_MODULES, restrictionsValues, restrictionsTypes,
+          new RowCallbackHandler() {
+        @Override
+        public void processRow(ResultSet rs) throws SQLException {
+          items.add(getItemForModule(muStat, rs.getString(1), rs.getInt(2)));;
+        }
+      });
+      muStat.setAccessPerModule(items);
+    }
     
     // access per period for modules
-    if (muStat.getHistoryModule() !=null && muStat.getHistoryModule().getModuleId()!=null) {
-      items.clear();
-      restrictionsValues = new Object[] {getStartDate(muStat), muStat.getHistoryModule().getModuleId()};
-      restrictionsTypes = new int[] {Types.DATE, Types.CHAR};
-      String query = SQL_COUNT_ACCESS_PER_PERIOD_FOR_MODULE.replaceAll("--PERIOD--", getSQLForPeriod(muStat));
-      jdbcTemplate.query(query, restrictionsValues, restrictionsTypes,
-          new RowCallbackHandler() {
-            @Override
-            public void processRow(ResultSet rs) throws SQLException {
-              rs.getObject(1);
-              items.add(getItem(muStat, formatDateForPeriod(muStat,  rs.getDate(1)), rs.getInt(2)));;
-            }
-      });
+    // Optimization : do not refresh if event is WORKSPACE kind, because a second event MODULE_HISTORY will be raised
+    if (event != EMUEvent.WORKSPACE) {
+        
+      final ArrayList<MUItem> items = new ArrayList<MUItem>();
+      if (muStat.getHistoryModule() !=null  && muStat.getHistoryModule().getModuleId()!=null) {
+        restrictionsValues = new Object[] {getStartDate(muStat), muStat.getHistoryModule().getModuleId()};
+        restrictionsTypes = new int[] {Types.DATE, Types.CHAR};
+        String query = SQL_COUNT_ACCESS_PER_PERIOD_FOR_MODULE.replaceAll("--PERIOD--", getSQLForPeriod(muStat));
+        jdbcTemplate.query(query, restrictionsValues, restrictionsTypes,
+            new RowCallbackHandler() {
+              @Override
+              public void processRow(ResultSet rs) throws SQLException {
+                rs.getObject(1);
+                items.add(getItem(formatDateForPeriod(muStat, rs.getString(1)), rs.getInt(2)));
+              }
+        });
+      }
       muStat.setHistoryDetails(items);
-    }
-    else {
-      muStat.setHistoryDetails(null);
     }
   }
 
-  protected MUItem getItem(MUStat muStat, String moduleId, int count) {
+  protected MUItem getItem(String label, int count) {
+    MUItem item = entityFactory.createComponentInstance(MUItem.class);
+    item.setCount(count);
+    item.setLabel(label);
+    return item;
+  }
+  
+  protected MUItem getItemForModule(MUStat muStat, String moduleId, int count) {
     MUModule module = muStat.getModule(moduleId);
     String label = module!=null ? module.getLabel() : moduleId;
     
@@ -172,32 +196,31 @@ public class MUStatServiceDelegate implements IComponentService {
   
   private String getSQLForPeriod(MUStat muStat) {
     if (MUStat.PERIOD_DAY.equals(muStat.getPeriod())) {
-      return "DAYS(m.ACCESS_DATE) + '-' + HOUR(m.ACCESS_DATE)";
+      return "CONCAT(YEAR(m.ACCESS_DATE),'/',MONTH(m.ACCESS_DATE),'/',DAY(m.ACCESS_DATE),'-',HOUR(m.ACCESS_DATE))";
     }
     else if (MUStat.PERIOD_WEEK.equals(muStat.getPeriod())) {
-      return "DAYS(m.ACCESS_DATE) + '-' + HOUR(m.ACCESS_DATE)";
+      return "CONCAT(YEAR(m.ACCESS_DATE),'/',MONTH(m.ACCESS_DATE),'/',DAY(m.ACCESS_DATE),'-',HOUR(m.ACCESS_DATE))";
     }
     else if (MUStat.PERIOD_MONTH.equals(muStat.getPeriod())) {
-      return "DAYS(m.ACCESS_DATE)";
+      return "CONCAT(YEAR(m.ACCESS_DATE),'/',MONTH(m.ACCESS_DATE),'/',DAY(m.ACCESS_DATE))";
     }
     else {
-      return "DAYS(m.ACCESS_DATE)";
+      return "CONCAT(YEAR(m.ACCESS_DATE),'/',MONTH(m.ACCESS_DATE),'/',DAY(m.ACCESS_DATE))";
     }
   }
 
-  protected String formatDateForPeriod(MUStat muStat, java.sql.Date sqlDate) {
-    Date date = new Date(sqlDate.getTime());
+  protected String formatDateForPeriod(MUStat muStat, String period) {
     if (MUStat.PERIOD_DAY.equals(muStat.getPeriod())) {
-      return new SimpleDateFormat("HH:mm").format(date);
+      return period.substring(period.lastIndexOf('-') +1) + ":00";
     }
     else if (MUStat.PERIOD_WEEK.equals(muStat.getPeriod())) {
-      return new SimpleDateFormat("EEE").format(date);
+      return period.substring(0, period.lastIndexOf('-'));
     }
     else if (MUStat.PERIOD_MONTH.equals(muStat.getPeriod())) {
-      return new SimpleDateFormat("MMM/dd").format(date);
+      return period;
     }
     else {
-      return new SimpleDateFormat("MMM").format(date);
+      return period.substring(0, period.lastIndexOf('/'));
     }
   }
   
