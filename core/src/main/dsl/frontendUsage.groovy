@@ -5,7 +5,7 @@ workspace('usage.workspace',
   beanModule ('usage.module',
     icon:'classpath:org/jspresso/hrsample/ext/images/usage/view_tree.png',
     moduleView:'MUStat.module.view',
-    entry:'usageModuleEntryFrontAction',
+    entry:'usageModuleEntryFrontAction', 
     component:'MUStat')
   
 }

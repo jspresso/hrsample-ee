@@ -22,7 +22,7 @@ namespace('usage') {
     integer 'accessCount'
     list 'accessPerModule', ref:'MUItem'
     
-    reference 'historyModule', ref:'MUModule'
+    reference 'historyModule', ref:'MUModule', processors:['HistoryModuleProcessor']
     list 'historyDetails', ref:'MUItem'
     
     list 'allWorkspaces', ref:'MUWorkspace'
