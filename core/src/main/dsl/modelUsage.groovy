@@ -55,6 +55,7 @@ namespace('usage') {
   }
   
   Component('MUItem') {
+    string 'itemId'  
     string 'label'
     integer 'count'
   }

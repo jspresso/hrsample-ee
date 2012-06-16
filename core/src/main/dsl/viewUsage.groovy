@@ -31,7 +31,7 @@ border('MUStat.module.view', borderType:'TITLED', i18nNameKey:'MU.application.us
                 }
                 center {
                   cartesianChart (model:'MUStat-usersPerModule', label:'label', borderType:'NONE', legend:false) {
-                    barSeries (valueField:'count')
+                    barSeries (valueField:'count', action:'muSelectModuleFrontAction')
                   }
                 }
               }
@@ -50,7 +50,7 @@ border('MUStat.module.view', borderType:'TITLED', i18nNameKey:'MU.application.us
                 center {
                   polarChart (model:'MUStat-accessPerModule', label:'label', borderType:'NONE', preferredHeight:300, preferredWidth:300) {
 
-                    pieSeries (valueField:'count')
+                    pieSeries (valueField:'count', action:'muSelectModuleFrontAction')
                   }
                 }
               }
@@ -82,5 +82,6 @@ border('MUStat.module.view', borderType:'TITLED', i18nNameKey:'MU.application.us
 action ('exportApplicationUsgeFrontAction', 
   class:'org.jspresso.framework.application.frontend.action.FrontendAction')
 
-
+action ('muSelectModuleFrontAction',
+  class:'org.jspresso.hrsample.ext.frontend.usage.SelectModuleFrontAction')
 

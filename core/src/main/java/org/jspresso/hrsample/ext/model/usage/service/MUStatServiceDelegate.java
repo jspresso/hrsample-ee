@@ -168,6 +168,7 @@ public class MUStatServiceDelegate implements IComponentService {
     MUItem item = entityFactory.createComponentInstance(MUItem.class);
     item.setCount(count);
     item.setLabel(label);
+    item.setItemId(moduleId);
     
     return item;
   }
