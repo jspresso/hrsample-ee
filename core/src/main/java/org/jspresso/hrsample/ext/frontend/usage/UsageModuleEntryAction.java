@@ -43,8 +43,9 @@ public class UsageModuleEntryAction<E, F, G> extends FrontendAction<E, F, G> {
       // create stat
       stat = getBackendController(context).getEntityFactory().createComponentInstance(MUStat.class);
       stat.setAllWorkspaces(workspaces); 
-      if (stat.getAllModules().isEmpty()) {
-        stat.setHistoryModule(stat.getAllModules().get(0));
+      List<MUModule> allModules = stat.getAllModules();
+      if (!allModules.isEmpty()) {
+        stat.setHistoryModule(allModules.get(0));
       }
 
       // init period (this will refresh other fields)

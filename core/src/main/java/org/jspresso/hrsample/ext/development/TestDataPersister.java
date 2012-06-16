@@ -41,30 +41,25 @@ public class TestDataPersister extends
     }
     
     try {
-      // furniture.module
+      // furniture workspace
       createModuleUsages("furniture.module", "Tom", 365, 45, 30);
       createModuleUsages("furniture.module", "Bob", 230, 20, 10);
       createModuleUsages("furniture.module", "Alice", 30, 0, 20);
       
-      // organization.workspace
-      createModuleUsages("organization.workspace", "Tom", 365, 3, 10);
-      createModuleUsages("organization.workspace", "Bob", 365, 0, 15);
-      createModuleUsages("organization.workspace", "Alice", 2, 0, 20);
+      // organization workspace
+      createModuleUsages("companies.module", "Tom", 365, 3, 10);
+      createModuleUsages("companies.module", "Bob", 365, 0, 15);
+      createModuleUsages("companies.module", "Alice", 2, 0, 20);
 
-      // employees.workspace
-      createModuleUsages("employees.workspace", "Tom", 365, 0, 15);
-      createModuleUsages("employees.workspace", "Bob", 2, 0, 20);
-      createModuleUsages("employees.workspace", "Alice", 120, 60, 15);
+      // employees workspace
+      createModuleUsages("employees.module", "Tom", 365, 0, 15);
+      createModuleUsages("employees.module", "Bob", 2, 0, 20);
+      createModuleUsages("employees.module", "Alice", 120, 60, 15);
 
-      // masterdata.workspace
-      createModuleUsages("masterdata.workspace", "Tom", 30, 3, 16);
-      createModuleUsages("masterdata.workspace", "Bob", 40, 8, 10);
-      createModuleUsages("masterdata.workspace", "Alice", 2, 0, 10);
-
-      // masterdata.geography.module
-      createModuleUsages("masterdata.geography.module", "Tom", 365, 0, 20);
-      createModuleUsages("masterdata.geography.module", "Bob", 365, 0, 30);
-      createModuleUsages("masterdata.geography.module", "Alice", 1, 0, 15);
+      // masterdata workspace
+      createModuleUsages("masterdata.cities.module", "Tom", 30, 3, 16);
+      createModuleUsages("masterdata.cities.module", "Bob", 40, 8, 10);
+      createModuleUsages("masterdata.cities.module", "Alice", 2, 0, 10);
       
     } catch (Throwable ex) {
       // In no way the test data persister should make the application

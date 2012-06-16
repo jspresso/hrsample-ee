@@ -3,11 +3,9 @@ package org.jspresso.hrsample.ext.model.usage.service;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.StringTokenizer;
+import java.util.Iterator;
 
 import javax.sql.DataSource;
 
@@ -17,6 +15,7 @@ import org.jspresso.framework.model.entity.IEntityFactory;
 import org.jspresso.hrsample.ext.model.usage.MUItem;
 import org.jspresso.hrsample.ext.model.usage.MUModule;
 import org.jspresso.hrsample.ext.model.usage.MUStat;
+import org.jspresso.hrsample.ext.model.usage.MUWorkspace;
 import org.jspresso.hrsample.ext.model.usage.service.MUEvent.EMUEvent;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
@@ -31,13 +30,15 @@ public class MUStatServiceDelegate implements IComponentService {
   
   private static final String SQL_COUNT_BASE = 
       "SELECT COUNT(DISTINCT ACCESS_BY), COUNT(*) \n" + 
-      "  FROM MODULE_USAGE \n" + 
-      " WHERE ACCESS_DATE > ?";
+      "  FROM MODULE_USAGE mu \n" + 
+      " WHERE ACCESS_DATE > ? \n" +
+      " --AND--";
   
   private static final String SQL_COUNT_USERS_PER_MODULES = 
       "SELECT MODULE_ID, COUNT(DISTINCT ACCESS_BY) \n" + 
       "FROM MODULE_USAGE \n" + 
       "WHERE ACCESS_DATE > ? \n" + 
+      " --AND-- \n" +
       "GROUP BY MODULE_ID \n " +
       "ORDER BY MODULE_ID";
   
@@ -45,6 +46,7 @@ public class MUStatServiceDelegate implements IComponentService {
       "SELECT MODULE_ID, COUNT(*) \n" + 
       "  FROM MODULE_USAGE \n" + 
       " WHERE ACCESS_DATE > ? \n" + 
+      " --AND-- \n" +
       " GROUP BY MODULE_ID \n" +
       " ORDER BY MODULE_ID";  
   
@@ -56,21 +58,9 @@ public class MUStatServiceDelegate implements IComponentService {
       "      from MODULE_USAGE m \n" + 
       "     where m.ACCESS_DATE > ?) mu2  \n" + 
       "WHERE mu.ID = mu2.ID \n" + 
-      "AND mu.MODULE_ID = ? \n" +
+      "  AND mu.MODULE_ID = ? \n" +
       "GROUP BY period  \n" + 
       "ORDER BY period DESC;";
-  
-  
-//  private static final String SQL_COUNT_ACCESS_PER_PERIOD_FOR_MODULE = 
-//      "SELECT dd, COUNT(dd)\n" + 
-//      "FROM MODULE_USAGE mu, \n" + 
-//      "   (select DISTINCT (--PERIOD--) as dd, m.ID \n" + 
-//      "      from MODULE_USAGE m \n" + 
-//      "     where m.ACCESS_DATE > ?) mu2 \n" + 
-//      "WHERE mu.ID = mu2.ID \n" + 
-//      "AND mu.MODULE_ID = ? \n" +
-//      "GROUP BY dd \n" + 
-//      "ORDER BY dd DESC";
   
   /**
    * Configures the datasource .
@@ -96,39 +86,48 @@ public class MUStatServiceDelegate implements IComponentService {
     Logger.getLogger(getClass()).debug("Refreshing stats");
     
     // global counters
-    Object[] restrictionsValues = new Object[] {getStartDate(muStat)};
-    int[] restrictionsTypes = new int[] {Types.DATE};
-    jdbcTemplate.query(SQL_COUNT_BASE, restrictionsValues, restrictionsTypes,
-        new RowCallbackHandler() {
-          @Override
-          public void processRow(ResultSet rs) throws SQLException {
-            muStat.setUsersCount(rs.getInt(1));
-            muStat.setAccessCount(rs.getInt(2));
-          }
-        });
+    {
+      Object[] restrictionsValues = new Object[] {getStartDate(muStat)};
+      int[] restrictionsTypes = new int[] {Types.DATE};
+      String query = SQL_COUNT_BASE.replaceAll("--AND--", getWorkspaceRestriction(muStat.getWorkspace()));
+      jdbcTemplate.query(query, restrictionsValues, restrictionsTypes,
+          new RowCallbackHandler() {
+            @Override
+            public void processRow(ResultSet rs) throws SQLException {
+              muStat.setUsersCount(rs.getInt(1));
+              muStat.setAccessCount(rs.getInt(2));
+            }
+          });
+    }
     
     // users per modules
     {
+      Object[] restrictionsValues = new Object[] {getStartDate(muStat)};
+      int[] restrictionsTypes = new int[] {Types.DATE};
       final ArrayList<MUItem> items = new ArrayList<MUItem>();
-      jdbcTemplate.query(SQL_COUNT_USERS_PER_MODULES, restrictionsValues, restrictionsTypes,
+      String query = SQL_COUNT_USERS_PER_MODULES.replaceAll("--AND--", getWorkspaceRestriction(muStat.getWorkspace()));
+      jdbcTemplate.query(query, restrictionsValues, restrictionsTypes,
           new RowCallbackHandler() {
-        @Override
-        public void processRow(ResultSet rs) throws SQLException {
-          items.add(getItemForModule(muStat, rs.getString(1), rs.getInt(2)));;
-        }
+            @Override
+            public void processRow(ResultSet rs) throws SQLException {
+              items.add(getItemForModule(muStat, rs.getString(1), rs.getInt(2)));;
+            }
       });
       muStat.setUsersPerModule(items);
     }
     
     // access per module
     {
+      Object[] restrictionsValues = new Object[] {getStartDate(muStat)};
+      int[] restrictionsTypes = new int[] {Types.DATE};
       final ArrayList<MUItem> items = new ArrayList<MUItem>();
-      jdbcTemplate.query(SQL_COUNT_ACCESS_PER_MODULES, restrictionsValues, restrictionsTypes,
+      String query = SQL_COUNT_ACCESS_PER_MODULES.replaceAll("--AND--", getWorkspaceRestriction(muStat.getWorkspace()));
+      jdbcTemplate.query(query, restrictionsValues, restrictionsTypes,
           new RowCallbackHandler() {
-        @Override
-        public void processRow(ResultSet rs) throws SQLException {
-          items.add(getItemForModule(muStat, rs.getString(1), rs.getInt(2)));;
-        }
+            @Override
+            public void processRow(ResultSet rs) throws SQLException {
+              items.add(getItemForModule(muStat, rs.getString(1), rs.getInt(2)));;
+            }
       });
       muStat.setAccessPerModule(items);
     }
@@ -139,8 +138,8 @@ public class MUStatServiceDelegate implements IComponentService {
         
       final ArrayList<MUItem> items = new ArrayList<MUItem>();
       if (muStat.getHistoryModule() !=null  && muStat.getHistoryModule().getModuleId()!=null) {
-        restrictionsValues = new Object[] {getStartDate(muStat), muStat.getHistoryModule().getModuleId()};
-        restrictionsTypes = new int[] {Types.DATE, Types.CHAR};
+        Object[] restrictionsValues = new Object[] {getStartDate(muStat), muStat.getHistoryModule().getModuleId()};
+        int[] restrictionsTypes = new int[] {Types.DATE, Types.CHAR};
         String query = SQL_COUNT_ACCESS_PER_PERIOD_FOR_MODULE.replaceAll("--PERIOD--", getSQLForPeriod(muStat));
         jdbcTemplate.query(query, restrictionsValues, restrictionsTypes,
             new RowCallbackHandler() {
@@ -237,6 +236,33 @@ public class MUStatServiceDelegate implements IComponentService {
     return null;
   }
   
+  /**
+   * get workspace restriction
+   * @param workspace
+   * @return
+   */
+  private String getWorkspaceRestriction(MUWorkspace workspace) {
+    if (workspace==null || workspace.getLabel()==null) { //WORKAROUND because component is never null !!
+      return "";
+    }
+    else if (workspace.getModules() == null || workspace.getModules().isEmpty()) {
+      return " AND MODULE_ID IS NULL "; // This seams to be studpid but this is a rare case... for which query should return an empty result 
+    }
+    else {
+      StringBuffer sb = new StringBuffer();
+      sb.append(" AND MODULE_ID IN (");
+      Iterator<MUModule> iter = workspace.getAllModules().iterator();
+      while (iter.hasNext()) {
+        MUModule m = iter.next();
+        sb.append('\'').append(m.getModuleId()).append('\'');
+        if (iter.hasNext()) {
+          sb.append(", ");
+        }
+      }
+      sb.append(") ");
+      return sb.toString();
+    }
+  }
 
 
 }
