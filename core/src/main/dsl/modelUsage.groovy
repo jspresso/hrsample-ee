@@ -36,6 +36,7 @@ namespace('usage') {
       services:['org.jspresso.framework.model.component.IComponent' : null]) { 
     
     string 'label'
+    string 'iconImageUrl'
       
     list 'modules', ref:'MUModule'
     list 'allModules', ref:'MUModule', computed:true

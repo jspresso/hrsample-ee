@@ -74,6 +74,9 @@ public class UsageModuleEntryAction<E, F, G> extends FrontendAction<E, F, G> {
     MUWorkspace w = entityFactory.createComponentInstance(MUWorkspace.class);
     w.setWorkspaceId(workspace.getName());
     w.setLabel(workspace.getI18nName());
+    if (workspace.getIcon()!=null) {
+      w.setIconImageUrl(workspace.getIcon().getIconImageURL());
+    }
     
     List<Module> modules = workspace.getModules();
     if (modules!=null) {
@@ -91,6 +94,9 @@ public class UsageModuleEntryAction<E, F, G> extends FrontendAction<E, F, G> {
     MUModule m = entityFactory.createComponentInstance(MUModule.class);
     m.setModuleId(masterModule.getName());
     m.setLabel(masterModule.getI18nName());
+    if (masterModule.getIcon()!=null) {
+      m.setIconImageUrl(masterModule.getIcon().getIconImageURL());
+    }
     
     List<Module> subModules = masterModule.getSubModules();
     if (subModules!=null) {
