@@ -1,6 +1,7 @@
 package org.jspresso.hrsample.ext.model.usage.service;
 
 import org.jspresso.hrsample.ext.model.usage.MUModule;
+import org.jspresso.hrsample.ext.model.usage.MUWorkspace;
 import org.jspresso.hrsample.ext.model.usage.service.MUEvent.EMUEvent;
 
 /**
@@ -10,5 +11,6 @@ public interface MUStatService {
 
   void refresh(EMUEvent event);
   MUModule getModule(String moduleId);
+  MUWorkspace getWorkspaceForModule(String moduleId);
   
 }

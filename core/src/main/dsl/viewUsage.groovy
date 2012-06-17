@@ -7,6 +7,7 @@ border('MUStat.module.view', borderType:'TITLED', i18nNameKey:'MU.application.us
       fields {
         propertyView name:'period'
         referencePropertyView name:'workspace', lovAction:'lovAction'
+        //propertyView name:'workspace', readOnly:true
       }
     }
   }
@@ -16,7 +17,7 @@ border('MUStat.module.view', borderType:'TITLED', i18nNameKey:'MU.application.us
   }
 }
 
-tree('MUStat.workspaces.tree', rendered:'treeTitle', borderType:'TITLED', i18nNameKey:'MU.workspaces.title') {
+tree('MUStat.workspaces.tree', rendered:'treeTitle', borderType:'TITLED', i18nNameKey:'MU.workspaces.title', itemSelectionAction:'muSelectModuleFrontAction') {
   subTree('MUStat-allWorkspaces.treeNode') {
     subTree ('MUWorkspace-modules.treeNode') {
       subTree ('MUModule-modules.treeNode') {
@@ -87,6 +88,7 @@ border ('MUStat.details.view', borderType:'TITLED', i18nNameKey:'MU.distribution
         form () {
           fields {
             referencePropertyView name:'historyModule', lovAction:'lovAction'
+            //propertyView name:'historyModule', readOnly:true
           }
         }
       }

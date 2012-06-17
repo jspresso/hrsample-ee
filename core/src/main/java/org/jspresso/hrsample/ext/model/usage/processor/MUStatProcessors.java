@@ -19,6 +19,16 @@ public class MUStatProcessors {
     @Override
     public void postprocessSetter(MUStat stat, MUWorkspace oldWorkpace, MUWorkspace newWorkspace) {
       if (newWorkspace !=null) {
+        
+        // check if current module already belongs to new selected workspace
+        if (stat.getHistoryModule()!=null) {
+          MUWorkspace w = stat.getWorkspaceForModule(stat.getHistoryModule().getModuleId());
+          if (w!=null && w.equals(newWorkspace)) {
+            return; // do not replace currently selected module
+          }
+        }
+        
+        // select first module
         MUModule m = newWorkspace.getModules().size()>0 ? newWorkspace.getModules().get(0) : null;
         stat.setHistoryModule(m);
       }
@@ -48,7 +58,14 @@ public class MUStatProcessors {
   public static class HistoryModuleProcessor extends EmptyPropertyProcessor<MUStat, MUModule> {
   
     @Override
-    public void postprocessSetter(MUStat stat, MUModule oldPropertyValue, MUModule newPropertyValue) {
+    public void postprocessSetter(MUStat stat, MUModule oldModule, MUModule newModule) {
+      if (newModule!=null) {
+        MUWorkspace workspace = stat.getWorkspaceForModule(newModule.getModuleId());
+        if (workspace!=null && !workspace.equals(stat.getWorkspace())) {
+          stat.setWorkspace(workspace);
+        }
+      }
+      
       stat.refresh(EMUEvent.HISTORY_MODULE);
     }
   }
