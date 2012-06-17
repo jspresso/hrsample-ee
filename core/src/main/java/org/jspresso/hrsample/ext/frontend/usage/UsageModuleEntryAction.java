@@ -2,6 +2,7 @@ package org.jspresso.hrsample.ext.frontend.usage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.jspresso.framework.action.IActionHandler;
@@ -11,6 +12,7 @@ import org.jspresso.framework.application.model.BeanModule;
 import org.jspresso.framework.application.model.Module;
 import org.jspresso.framework.application.model.Workspace;
 import org.jspresso.framework.model.entity.IEntityFactory;
+import org.jspresso.framework.util.i18n.ITranslationProvider;
 import org.jspresso.hrsample.ext.model.usage.MUItem;
 import org.jspresso.hrsample.ext.model.usage.MUModule;
 import org.jspresso.hrsample.ext.model.usage.MUModuleInterface;
@@ -50,6 +52,11 @@ public class UsageModuleEntryAction<E, F, G> extends FrontendAction<E, F, G> {
 
       // init period (this will refresh other fields)
       stat.setPeriod(MUStat.PERIOD_WEEK);
+      
+      // workspace tree title
+      ITranslationProvider translationProvider = getFrontendController(context);
+      Locale locale = getFrontendController(context).getLocale();
+      stat.setTreeTitle(getFrontendController(context).getI18nName(translationProvider, locale));
 
       // init module
       statisticsModule.setModuleObject(stat);

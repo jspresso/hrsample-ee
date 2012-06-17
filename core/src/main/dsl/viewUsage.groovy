@@ -11,73 +11,94 @@ border('MUStat.module.view', borderType:'TITLED', i18nNameKey:'MU.application.us
     }
   }
   center {
+    split_horizontal (left:'MUStat.workspaces.tree', 
+                     right:'MUStat.details.view')
+  }
+}
 
-    // the statistics part
-    border (borderType:'TITLED', i18nNameKey:'MU.distribution.title') {
+tree('MUStat.workspaces.tree', rendered:'treeTitle', borderType:'TITLED', i18nNameKey:'MU.workspaces.title') {
+  subTree('MUStat-allWorkspaces.treeNode') {
+    subTree ('MUWorkspace-modules.treeNode') {
+      subTree ('MUModule-modules.treeNode') {
+        subTree ('MUModule-modules.treeNode')
+      }
+    }
+  }
+}
 
-      north {
-        // two polar charts
-        evenGrid (drivingDimension:'ROW', drivingCellCount:2) {
-          cells {
-            cell {
-              // bar series chart for users count per module
-              border {
-                north {
-                  form {
-                    fields {
-                      propertyView name:'usersCount', readOnly:true, action:'exportApplicationUsgeFrontAction'
-                    }
-                  }
-                }
-                center {
-                  cartesianChart (model:'MUStat-usersPerModule', label:'label', borderType:'NONE', legend:false) {
-                    barSeries (valueField:'count', action:'muSelectModuleFrontAction')
-                  }
+treeNode('MUStat-allWorkspaces.treeNode',
+  rendered:'label') 
+
+treeNode('MUWorkspace-modules.treeNode',
+  rendered:'label')
+
+treeNode('MUModule-modules.treeNode',
+  rendered:'label')
+
+border ('MUStat.details.view', borderType:'TITLED', i18nNameKey:'MU.distribution.title') {
+
+  north {
+    // two polar charts
+    evenGrid (drivingDimension:'ROW', drivingCellCount:2) {
+      cells {
+        cell {
+          // bar series chart for users count per module
+          border {
+            north {
+              form {
+                fields {
+                  propertyView name:'usersCount', readOnly:true, action:'exportApplicationUsgeFrontAction'
                 }
               }
             }
-
-            cell {
-              // polar chart for access count
-              border {
-                north {
-                  form {
-                    fields {
-                      propertyView name:'accessCount', readOnly:true, action:'exportApplicationUsgeFrontAction'
-                    }
-                  }
-                }
-                center {
-                  polarChart (model:'MUStat-accessPerModule', label:'label', borderType:'NONE', preferredHeight:300, preferredWidth:300) {
-
-                    pieSeries (valueField:'count', action:'muSelectModuleFrontAction')
-                  }
-                }
+            center {
+              cartesianChart (model:'MUStat-usersPerModule', label:'label', borderType:'NONE', legend:false) {
+                barSeries (valueField:'count', action:'muSelectModuleFrontAction')
               }
             }
           }
         }
-      }
-      center {
-        // Historical details for selected model
-        border {
-          north {
-            form () {
-              fields {
-                referencePropertyView name:'historyModule', lovAction:'lovAction'
+
+        cell {
+          // polar chart for access count
+          border {
+            north {
+              form {
+                fields {
+                  propertyView name:'accessCount', readOnly:true, action:'exportApplicationUsgeFrontAction'
+                }
               }
             }
-          }
-          center {
-            cartesianChart (model:'MUStat-historyDetails', label:'label', borderType:'NONE', legend:false) {
-               lineSeries (valueField:'count')
+            center {
+              polarChart (model:'MUStat-accessPerModule', label:'label', borderType:'NONE', preferredHeight:300, preferredWidth:300) {
+
+                pieSeries (valueField:'count', action:'muSelectModuleFrontAction')
+              }
             }
           }
         }
       }
     }
   }
+  center {
+    // Historical details for selected model
+    border {
+      north {
+        form () {
+          fields {
+            referencePropertyView name:'historyModule', lovAction:'lovAction'
+          }
+        }
+      }
+      center {
+        cartesianChart (model:'MUStat-historyDetails', label:'label', borderType:'NONE', legend:false) {
+           lineSeries (valueField:'count')
+        }
+      }
+    }
+  }
 }
+
 
 action ('exportApplicationUsgeFrontAction', 
   class:'org.jspresso.framework.application.frontend.action.FrontendAction')

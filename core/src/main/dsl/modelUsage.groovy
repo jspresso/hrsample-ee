@@ -27,11 +27,16 @@ namespace('usage') {
     
     list 'allWorkspaces', ref:'MUWorkspace'
     list 'allModules', ref:'MUModule', computed:true
+    
+    string 'treeTitle'
   }
    
   Interface('MUModuleInterface', 
       extension:'MUModuleInterfaceExtension',
       services:['org.jspresso.framework.model.component.IComponent' : null]) { 
+    
+    string 'label'
+      
     list 'modules', ref:'MUModule'
     list 'allModules', ref:'MUModule', computed:true
   }
@@ -42,7 +47,6 @@ namespace('usage') {
       icon:'workspace.png') {
       
     string 'workspaceId'
-    string 'label'
   }
   
   Component('MUModule', 
@@ -51,7 +55,6 @@ namespace('usage') {
       icon:'module.png') {
       
     string 'moduleId'
-    string 'label'
   }
   
   Component('MUItem') {

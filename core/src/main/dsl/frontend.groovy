@@ -16,7 +16,27 @@ workspace('tools.workspace', icon:'tools.png') {
   filterModule ('furniture.module', 
     moduleView:'Furniture.module.view',
     detailView:'Furniture.detail.view', 
-    component:'Furniture')
+    component:'Furniture') {
+    
+    filterModule ('furniture.module2',
+      moduleView:'Furniture.module.view',
+      detailView:'Furniture.detail.view',
+      component:'Furniture') {
+      
+      filterModule ('furniture.module3',
+        moduleView:'Furniture.module.view',
+        detailView:'Furniture.detail.view',
+        component:'Furniture') {
+        
+        filterModule ('furniture.module4',
+          moduleView:'Furniture.module.view',
+          detailView:'Furniture.detail.view',
+          component:'Furniture') {
+          
+        }
+      }
+    }
+  }
 }
  
 controller ('hrsample-ext.name',
