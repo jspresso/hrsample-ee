@@ -50,7 +50,7 @@ border ('MUStat.details.view', borderType:'TITLED', i18nNameKey:'MU.distribution
             north {
               form {
                 fields {
-                  propertyView name:'usersCount', readOnly:true, action:'exportApplicationUsgeFrontAction', font:';BOLD;'
+                  propertyView name:'usersCount', readOnly:true, action:'muStatExportUsersPerModuleAction', font:';BOLD;'
                 }
               }
             }
@@ -68,7 +68,7 @@ border ('MUStat.details.view', borderType:'TITLED', i18nNameKey:'MU.distribution
             north {
               form {
                 fields {
-                  propertyView name:'accessCount', readOnly:true, action:'exportApplicationUsgeFrontAction', font:';BOLD;'
+                  propertyView name:'accessCount', readOnly:true, action:'muStatExportAccessPerModuleAction', font:';BOLD;'
                 }
               }
             }
@@ -103,10 +103,6 @@ border ('MUStat.details.view', borderType:'TITLED', i18nNameKey:'MU.distribution
   }
 }
 
-
-action ('exportApplicationUsgeFrontAction', 
-  class:'org.jspresso.framework.application.frontend.action.FrontendAction')
-
 action ('muSelectModuleFromTreeFrontAction',
   class:'org.jspresso.hrsample.ext.frontend.usage.SelectModuleFromTreeAction')
 
@@ -116,3 +112,18 @@ action ('muSelectModuleFromChartFrontAction',
 bean ('muStatWorkspaceIconProvideBean', 
   class:'org.jspresso.hrsample.ext.frontend.usage.WorkspaceIconProvideBean')
 
+action ('muStatExportUsersPerModuleAction',
+  parent:'exportComponentsToHtmlAction',
+  custom:[masterDescriptor_ref:'MUStat',
+          collectionField:'usersPerModule',
+          fields:['label', 'count'],
+          fieldI18nNameKeys:['label':'MU.module', 'count':'MU.usersCount'],
+          textForced:false])
+
+action ('muStatExportAccessPerModuleAction',
+  parent:'exportComponentsToHtmlAction',
+  custom:[masterDescriptor_ref:'MUStat',
+          collectionField:'accessPerModule',
+          fields:['label', 'count'],
+          fieldI18nNameKeys:['label':'MU.module', 'count':'MU.accessCount'],
+          textForced:false])

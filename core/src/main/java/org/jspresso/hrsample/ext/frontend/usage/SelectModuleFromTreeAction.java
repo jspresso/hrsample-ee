@@ -32,12 +32,13 @@ public class SelectModuleFromTreeAction<E, F, G> extends FrontendAction<E, F, G>
       
       stat.setWorkspace(workspace);
     }
-    else if (getSelectedModel(context)==null && getModel(context) instanceof MUStat) {
+    else if (getSelectedModel(context)!=null 
+        && getSelectedModel(context) instanceof MUStat
+        && getModel(context) instanceof MUStat) {
 
       // selecting the tree root node
-      // TODO Why is the selected model null when selecting a workspace node ??? it shoud be MUStat...
-      //MUStat stat = (MUStat) getModel(context);
-      //stat.setWorkspace(null);
+      MUStat stat = (MUStat) getModel(context);
+      stat.setWorkspace(null);
     }
     
     return super.execute(actionHandler, context);
