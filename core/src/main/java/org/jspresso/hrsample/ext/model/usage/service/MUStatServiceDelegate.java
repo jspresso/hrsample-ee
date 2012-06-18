@@ -6,6 +6,7 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -113,6 +114,13 @@ public class MUStatServiceDelegate implements IComponentService {
               items.add(getItemForModule(muStat, rs.getString(1), rs.getInt(2)));;
             }
       });
+      completeWithEmptyModules(muStat, items);
+      
+//      //TODO SEE WORKAROUND : collection seams not correctly replaced...
+//      for (MUItem item : muStat.getUsersPerModule().toArray(new MUItem[]{})) {
+//        muStat.removeFromUsersPerModule(item);
+//      }
+      
       muStat.setUsersPerModule(items);
     }
     
@@ -129,6 +137,13 @@ public class MUStatServiceDelegate implements IComponentService {
               items.add(getItemForModule(muStat, rs.getString(1), rs.getInt(2)));;
             }
       });
+      completeWithEmptyModules(muStat, items);
+      
+//      //TODO SEE WORKAROUND : collection seams not correctly replaced...
+//      for (MUItem item : muStat.getAccessPerModule().toArray(new MUItem[]{})) {
+//        muStat.removeFromAccessPerModule(item);
+//      }
+      
       muStat.setAccessPerModule(items);
     }
     
@@ -150,10 +165,16 @@ public class MUStatServiceDelegate implements IComponentService {
               }
         });
       }
+      
+      //TODO SEE WORKAROUND : collection seams not correctly replaced...
+      for (MUItem item : muStat.getHistoryDetails().toArray(new MUItem[]{})) {
+        muStat.removeFromHistoryDetails(item);
+      }
+      
       muStat.setHistoryDetails(items);
     }
   }
-
+  
   protected MUItem getItem(String label, int count) {
     MUItem item = entityFactory.createComponentInstance(MUItem.class);
     item.setCount(count);
@@ -279,6 +300,27 @@ public class MUStatServiceDelegate implements IComponentService {
       }
     }
     return null;
+  }
+
+  /**
+   * add non referenced module into the list
+   * @param items
+   */
+  private void completeWithEmptyModules(MUStat stat, ArrayList<MUItem> items) {
+    // use all module list and filter it with already added items
+    List<MUModule> all = new ArrayList<MUModule>(stat.getAllModules());
+    for (MUItem item : items) {
+      MUModule m = stat.getModule(item.getItemId());
+      if (m!=null) {
+        all.remove(m);
+      }
+    }
+    
+    // add item for remaining modules
+    for (MUModule m : all) {
+      MUItem item = getItemForModule(stat, m.getModuleId(), 0);
+      items.add(item);
+    }
   }
 
 

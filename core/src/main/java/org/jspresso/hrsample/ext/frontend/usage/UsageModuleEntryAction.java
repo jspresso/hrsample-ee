@@ -8,7 +8,9 @@ import java.util.Map;
 import org.jspresso.framework.action.IActionHandler;
 import org.jspresso.framework.application.frontend.IFrontendController;
 import org.jspresso.framework.application.frontend.action.FrontendAction;
+import org.jspresso.framework.application.model.BeanCollectionModule;
 import org.jspresso.framework.application.model.BeanModule;
+import org.jspresso.framework.application.model.FilterableBeanCollectionModule;
 import org.jspresso.framework.application.model.Module;
 import org.jspresso.framework.application.model.Workspace;
 import org.jspresso.framework.model.entity.IEntityFactory;
@@ -51,7 +53,7 @@ public class UsageModuleEntryAction<E, F, G> extends FrontendAction<E, F, G> {
       }
 
       // init period (this will refresh other fields)
-      stat.setPeriod(MUStat.PERIOD_WEEK);
+      stat.setPeriod(MUStat.PERIOD_YEAR);
       
       // workspace tree title
       ITranslationProvider translationProvider = getFrontendController(context);
@@ -94,8 +96,24 @@ public class UsageModuleEntryAction<E, F, G> extends FrontendAction<E, F, G> {
     MUModule m = entityFactory.createComponentInstance(MUModule.class);
     m.setModuleId(masterModule.getName());
     m.setLabel(masterModule.getI18nName());
+    
+    // icon
     if (masterModule.getIcon()!=null) {
       m.setIconImageUrl(masterModule.getIcon().getIconImageURL());
+    }
+    
+    // type
+    if (masterModule instanceof FilterableBeanCollectionModule) {
+      m.setType(MUModule.TYPE_FILTER_MODULE);
+    }
+    else if (masterModule instanceof BeanCollectionModule) {
+      m.setType(MUModule.TYPE_COLLECTION_MODULE);
+    }
+    else if (masterModule instanceof BeanModule) {
+      m.setType(MUModule.TYPE_BEAN_MODULE);
+    }
+    else {
+      m.setType(MUModule.TYPE_NODE_MODULE);
     }
     
     List<Module> subModules = masterModule.getSubModules();

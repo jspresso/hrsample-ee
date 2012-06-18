@@ -1,6 +1,5 @@
 package org.jspresso.hrsample.ext.frontend.usage;
 
-//import org.jspresso.framework.util.gui.IIconImageURLProvider;
 import org.jspresso.framework.util.gui.Icon;
 import org.jspresso.framework.util.gui.IconProvider;
 import org.jspresso.hrsample.ext.model.usage.MUModuleInterface;
@@ -18,16 +17,5 @@ public class WorkspaceIconProvideBean implements IconProvider {
     }
     return null;
   }
-
-//  public String getIconImageURLForObject(Object userObject) {
-//    
-//    if (userObject instanceof MUModuleInterface) {
-//      MUModuleInterface m = (MUModuleInterface)userObject;
-//      return m.getIconImageUrl();
-//    }
-//    else {
-//      return null;
-//    }
-//  }
 
 }

@@ -6,8 +6,7 @@ border('MUStat.module.view', borderType:'TITLED', i18nNameKey:'MU.application.us
     form (model:'MUStat', columnCount:2) {
       fields {
         propertyView name:'period'
-        referencePropertyView name:'workspace', lovAction:'lovAction'
-        //propertyView name:'workspace', readOnly:true
+        //referencePropertyView name:'workspace', lovAction:'lovAction'
       }
     }
   }
@@ -18,7 +17,7 @@ border('MUStat.module.view', borderType:'TITLED', i18nNameKey:'MU.application.us
 }
 
 tree('MUStat.workspaces.tree', rendered:'treeTitle', borderType:'TITLED', i18nNameKey:'MU.workspaces.title', 
-  itemSelectionAction:'muSelectModuleFrontAction',
+  itemSelectionAction:'muSelectModuleFromTreeFrontAction',
   iconProvider:'muStatWorkspaceIconProvideBean')
 {
   subTree('MUStat-allWorkspaces.treeNode') {
@@ -51,13 +50,13 @@ border ('MUStat.details.view', borderType:'TITLED', i18nNameKey:'MU.distribution
             north {
               form {
                 fields {
-                  propertyView name:'usersCount', readOnly:true, action:'exportApplicationUsgeFrontAction'
+                  propertyView name:'usersCount', readOnly:true, action:'exportApplicationUsgeFrontAction', font:';BOLD;'
                 }
               }
             }
             center {
-              cartesianChart (model:'MUStat-usersPerModule', label:'label', borderType:'NONE', legend:false) {
-                barSeries (valueField:'count', action:'muSelectModuleFrontAction')
+              cartesianChart (model:'MUStat-usersPerModule', label:'label', borderType:'NONE', legend:false, orientation:'HORIZONTAL') {
+                barSeries (valueField:'count', action:'muSelectModuleFromChartFrontAction')
               }
             }
           }
@@ -69,14 +68,14 @@ border ('MUStat.details.view', borderType:'TITLED', i18nNameKey:'MU.distribution
             north {
               form {
                 fields {
-                  propertyView name:'accessCount', readOnly:true, action:'exportApplicationUsgeFrontAction'
+                  propertyView name:'accessCount', readOnly:true, action:'exportApplicationUsgeFrontAction', font:';BOLD;'
                 }
               }
             }
             center {
               polarChart (model:'MUStat-accessPerModule', label:'label', borderType:'NONE', preferredHeight:300, preferredWidth:300) {
 
-                pieSeries (valueField:'count', action:'muSelectModuleFrontAction')
+                pieSeries (valueField:'count', action:'muSelectModuleFromChartFrontAction')
               }
             }
           }
@@ -88,10 +87,10 @@ border ('MUStat.details.view', borderType:'TITLED', i18nNameKey:'MU.distribution
     // Historical details for selected model
     border {
       north {
-        form () {
+        form {
           fields {
-            referencePropertyView name:'historyModule', lovAction:'lovAction'
-            //propertyView name:'historyModule', readOnly:true
+            //referencePropertyView name:'historyModule', lovAction:'lovAction'
+            propertyView name:'historyModule.label', readOnly:true, i18nNameKey:'historyModule', font:';BOLD;'
           }
         }
       }
@@ -108,8 +107,11 @@ border ('MUStat.details.view', borderType:'TITLED', i18nNameKey:'MU.distribution
 action ('exportApplicationUsgeFrontAction', 
   class:'org.jspresso.framework.application.frontend.action.FrontendAction')
 
-action ('muSelectModuleFrontAction',
-  class:'org.jspresso.hrsample.ext.frontend.usage.SelectModuleFrontAction')
+action ('muSelectModuleFromTreeFrontAction',
+  class:'org.jspresso.hrsample.ext.frontend.usage.SelectModuleFromTreeAction')
+
+action ('muSelectModuleFromChartFrontAction',
+  class:'org.jspresso.hrsample.ext.frontend.usage.SelectModuleFromChartFrontAction')
 
 bean ('muStatWorkspaceIconProvideBean', 
   class:'org.jspresso.hrsample.ext.frontend.usage.WorkspaceIconProvideBean')

@@ -31,7 +31,9 @@ public class MUModuleInterfaceExtension extends AbstractComponentExtension<MUMod
     return allModules;
   }
   private void fillModules(MUModule masterModule, ArrayList<MUModule> allModules) {
-    allModules.add(masterModule);
+    if (!MUModule.TYPE_NODE_MODULE.equals(masterModule.getType())) {
+      allModules.add(masterModule);
+    }
     for (MUModule m : masterModule.getModules()) {
       fillModules(m, allModules);
     }

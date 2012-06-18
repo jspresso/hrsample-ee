@@ -4,26 +4,19 @@ import java.util.Map;
 
 import org.jspresso.framework.action.IActionHandler;
 import org.jspresso.framework.application.frontend.action.FrontendAction;
-import org.jspresso.hrsample.ext.model.usage.MUItem;
 import org.jspresso.hrsample.ext.model.usage.MUModule;
 import org.jspresso.hrsample.ext.model.usage.MUStat;
 import org.jspresso.hrsample.ext.model.usage.MUWorkspace;
 
-public class SelectModuleFrontAction<E, F, G> extends FrontendAction<E, F, G> {
+public class SelectModuleFromTreeAction<E, F, G> extends FrontendAction<E, F, G> {
 
+  /**
+   * select module from tree node
+   */
   @Override
   public boolean execute(IActionHandler actionHandler, Map<String, Object> context) {
     
-    if (getSelectedModel(context) instanceof MUItem && getParentModel(context) instanceof MUStat) {
-      
-      // selecting a chart slice...
-      MUStat stat = (MUStat) getParentModel(context);
-      MUItem item = (MUItem) getSelectedModel(context);
-      MUModule module = stat.getModule(item.getItemId());
-      
-      stat.setHistoryModule(module);
-    }
-    else if (getSelectedModel(context) instanceof MUModule && getModel(context) instanceof MUStat) {
+    if (getSelectedModel(context) instanceof MUModule && getModel(context) instanceof MUStat) {
       
       // selecting a module tree node
       MUStat stat = (MUStat) getModel(context);
@@ -40,12 +33,16 @@ public class SelectModuleFrontAction<E, F, G> extends FrontendAction<E, F, G> {
       stat.setWorkspace(workspace);
     }
     else if (getSelectedModel(context)==null && getModel(context) instanceof MUStat) {
-      
+
       // selecting the tree root node
-       MUStat stat = (MUStat) getModel(context);
-       stat.setWorkspace(null);
-     }
+      // TODO Why is the selected model null when selecting a workspace node ??? it shoud be MUStat...
+      //MUStat stat = (MUStat) getModel(context);
+      //stat.setWorkspace(null);
+    }
     
     return super.execute(actionHandler, context);
   }
+
+  
+  
 }

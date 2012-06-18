@@ -56,6 +56,7 @@ namespace('usage') {
       icon:'module.png') {
       
     string 'moduleId'
+    enumeration 'type', values:['BEAN_MODULE', 'NODE_MODULE', 'FILTER_MODULE', 'COLLECTION_MODULE']
   }
   
   Component('MUItem') {

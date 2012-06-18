@@ -29,8 +29,16 @@ public class MUStatProcessors {
         }
         
         // select first module
-        MUModule m = newWorkspace.getModules().size()>0 ? newWorkspace.getModules().get(0) : null;
-        stat.setHistoryModule(m);
+        MUModule module = null;
+        if (newWorkspace.getModules() !=null) {
+          for (MUModule m : newWorkspace.getAllModules()) {
+            if (!MUModule.TYPE_NODE_MODULE.equals(m.getType())) {
+              module = m;
+              break;
+            }
+          }
+        }
+        stat.setHistoryModule(module);
       }
       else {
         MUModule m = stat.getAllModules().get(0);
@@ -59,7 +67,9 @@ public class MUStatProcessors {
   
     @Override
     public void postprocessSetter(MUStat stat, MUModule oldModule, MUModule newModule) {
-      if (newModule!=null) {
+      
+      // if new selected module didn't belongs to the selected workspace... then select the new workspace !
+      if (newModule!=null && stat.getWorkspace()!=null && stat.getWorkspace().getLabel()!=null) {
         MUWorkspace workspace = stat.getWorkspaceForModule(newModule.getModuleId());
         if (workspace!=null && !workspace.equals(stat.getWorkspace())) {
           stat.setWorkspace(workspace);
