@@ -18,4 +18,5 @@ action('usageModuleEntryFrontAction',
   class:'org.jspresso.hrsample.ext.frontend.usage.UsageModuleEntryAction')  
 
 action('anyModuleEnterFrontAction',
-  class:'org.jspresso.hrsample.ext.frontend.usage.AnyModuleEnterFrontAction')
+  class:'org.jspresso.hrsample.ext.frontend.usage.AnyModuleEnterFrontAction',
+  custom:[logOncePerSession:true])

@@ -14,7 +14,7 @@ namespace('usage') {
     icon:'view_tree.png') {
     
     enumeration 'period', enumName:'PERIOD', values:['DAY', 'WEEK', 'MONTH', 'YEAR'], processors:['PeriodProcessor'] 
-    reference 'workspace', ref:'MUWorkspace', processors:['WorkspaceProcessor']
+    reference 'workspace', ref:'MUWorkspace', processors:['WorkspaceProcessor'], mandatory:false
     
     integer 'usersCount'
     list 'usersPerModule', ref:'MUItem'
@@ -22,7 +22,7 @@ namespace('usage') {
     integer 'accessCount'
     list 'accessPerModule', ref:'MUItem'
     
-    reference 'historyModule', ref:'MUModule', processors:['HistoryModuleProcessor']
+    reference 'historyModule', ref:'MUModule', processors:['HistoryModuleProcessor'], mandatory:false
     list 'historyDetails', ref:'MUItem'
     
     list 'allWorkspaces', ref:'MUWorkspace'

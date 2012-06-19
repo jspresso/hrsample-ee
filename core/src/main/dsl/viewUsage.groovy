@@ -17,7 +17,7 @@ border('MUStat.module.view', borderType:'TITLED', i18nNameKey:'MU.application.us
 }
 
 tree('MUStat.workspaces.tree', rendered:'treeTitle', borderType:'TITLED', i18nNameKey:'MU.workspaces.title', 
-  itemSelectionAction:'muSelectModuleFromTreeFrontAction',
+  itemSelectionAction:'muSelectModuleFromTreeFrontAction', rowAction:'muDoubleSelectModuleFromTreeFrontAction',
   iconProvider:'muStatWorkspaceIconProvideBean')
 {
   subTree('MUStat-allWorkspaces.treeNode') {
@@ -105,6 +105,9 @@ border ('MUStat.details.view', borderType:'TITLED', i18nNameKey:'MU.distribution
 
 action ('muSelectModuleFromTreeFrontAction',
   class:'org.jspresso.hrsample.ext.frontend.usage.SelectModuleFromTreeAction')
+
+action ('muDoubleSelectModuleFromTreeFrontAction',
+  class:'org.jspresso.hrsample.ext.frontend.usage.DoubleSelectModuleFromTreeAction')
 
 action ('muSelectModuleFromChartFrontAction',
   class:'org.jspresso.hrsample.ext.frontend.usage.SelectModuleFromChartFrontAction')

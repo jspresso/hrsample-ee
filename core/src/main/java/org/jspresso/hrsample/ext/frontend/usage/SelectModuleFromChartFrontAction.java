@@ -31,7 +31,7 @@ public class SelectModuleFromChartFrontAction<E, F, G> extends FrontendAction<E,
       
       stat.setHistoryModule(module);
       
-      selectTreeModule(stat, module, context);
+      //selectTreeModule(stat, module, context);
     }
     
     return super.execute(actionHandler, context);
@@ -99,33 +99,6 @@ public class SelectModuleFromChartFrontAction<E, F, G> extends FrontendAction<E,
       index++;
     }
   }
-  
-//  private boolean selectNodeConnector(ICollectionConnectorProvider parentNode, MUModule module) {
-//    return selectNodeConnector(null, 0, parentNode, module);
-//  }
-//  private boolean selectNodeConnector(ICollectionConnectorProvider parentNode, int index, ICollectionConnectorProvider node, MUModule module) {
-//    Object o = node.getConnectorValue();
-//    //if (o!=null && (o instanceof MUModule) && ((MUModule)o).getModuleId().equals(module.getModuleId())) {
-//    if (module == o) {
-//      parentNode.setSelectedIndices(new int[]{index});
-//      return true;
-//    }
-//    int idx = 0;
-//    for (String workspaceKey : node.getChildConnectorKeys()) {
-//      IValueConnector subNode = node.getChildConnector(workspaceKey); 
-//      if (subNode instanceof ICollectionConnectorProvider) {
-//        boolean stop = selectNodeConnector(node, idx, (ICollectionConnectorProvider) subNode, module);
-//        if (stop) {
-//          return true;
-//        }
-//      }
-//      idx++;
-//    }
-//    return false;
-//  }
-
-
-
 
   /**
    * get path to module

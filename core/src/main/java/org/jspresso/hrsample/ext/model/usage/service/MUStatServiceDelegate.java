@@ -115,12 +115,6 @@ public class MUStatServiceDelegate implements IComponentService {
             }
       });
       completeWithEmptyModules(muStat, items);
-      
-//      //TODO SEE WORKAROUND : collection seams not correctly replaced...
-//      for (MUItem item : muStat.getUsersPerModule().toArray(new MUItem[]{})) {
-//        muStat.removeFromUsersPerModule(item);
-//      }
-      
       muStat.setUsersPerModule(items);
     }
     
@@ -138,12 +132,6 @@ public class MUStatServiceDelegate implements IComponentService {
             }
       });
       completeWithEmptyModules(muStat, items);
-      
-//      //TODO SEE WORKAROUND : collection seams not correctly replaced...
-//      for (MUItem item : muStat.getAccessPerModule().toArray(new MUItem[]{})) {
-//        muStat.removeFromAccessPerModule(item);
-//      }
-      
       muStat.setAccessPerModule(items);
     }
     
@@ -318,6 +306,9 @@ public class MUStatServiceDelegate implements IComponentService {
     
     // add item for remaining modules
     for (MUModule m : all) {
+      if (m.getModuleId()==null) {
+        continue; // remove dynamic mudules !
+      }
       MUItem item = getItemForModule(stat, m.getModuleId(), 0);
       items.add(item);
     }

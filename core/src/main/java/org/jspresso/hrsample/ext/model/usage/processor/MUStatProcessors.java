@@ -23,22 +23,20 @@ public class MUStatProcessors {
         // check if current module already belongs to new selected workspace
         if (stat.getHistoryModule()!=null) {
           MUWorkspace w = stat.getWorkspaceForModule(stat.getHistoryModule().getModuleId());
-          if (w!=null && w.equals(newWorkspace)) {
-            return; // do not replace currently selected module
-          }
-        }
-        
-        // select first module
-        MUModule module = null;
-        if (newWorkspace.getModules() !=null) {
-          for (MUModule m : newWorkspace.getAllModules()) {
-            if (!MUModule.TYPE_NODE_MODULE.equals(m.getType())) {
-              module = m;
-              break;
+          if (w==null || !w.equals(newWorkspace)) {
+            // select first module
+            MUModule module = null;
+            if (newWorkspace.getModules() !=null) {
+              for (MUModule m : newWorkspace.getAllModules()) {
+                if (!MUModule.TYPE_NODE_MODULE.equals(m.getType())) {
+                  module = m;
+                  break;
+                }
+              }
             }
+            stat.setHistoryModule(module);
           }
         }
-        stat.setHistoryModule(module);
       }
       else {
         MUModule m = stat.getAllModules().get(0);
