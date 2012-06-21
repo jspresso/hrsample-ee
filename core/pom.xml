@@ -63,6 +63,13 @@
       <groupId>org.jspresso.contrib</groupId>
       <artifactId>jspresso-extensions-core</artifactId>
     </dependency>   
+    
+    <!-- Jspresso-usage dependencies -->
+    <dependency>
+      <groupId>org.jspresso.contrib</groupId>
+      <artifactId>jspresso-usage-core</artifactId>
+    </dependency> 
+    
   </dependencies>
   <profiles>
     <profile>

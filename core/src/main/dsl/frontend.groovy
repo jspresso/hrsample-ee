@@ -23,11 +23,13 @@ controller 'hrsample-ext.name',
     context:'hrsample-ext',
     language:'en',
     startup:'startupHrsampleAction',
+    onModuleEnter:'anyModuleEnterFrontAction',
     workspaces:[
       'organization.workspace',
       'employees.workspace',
       'masterdata.workspace', 
-      'tools.workspace'
+      'tools.workspace',
+      'usage.workspace'
     ]
 
 spec('remote') {

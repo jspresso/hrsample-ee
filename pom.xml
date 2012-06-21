@@ -135,6 +135,12 @@
 	      <version>1.0-SNAPSHOT</version>
 	    </dependency>   
 	    
+	    <!-- Jspresso-usage dependencies -->
+	    <dependency>
+        <groupId>org.jspresso.contrib</groupId>
+        <artifactId>jspresso-usage-core</artifactId>
+        <version>1.0-SNAPSHOT</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <build>
