@@ -43,7 +43,7 @@ var requiredRevision = ${version_revision};
 </script>
 </head>
 
-<body scroll="no" onBeforeUnload="stop()" onLoad="window.document['${application}'].focus()">
+<body scroll="no" onBeforeUnload="stop()" onLoad="focusFlex()">
 <script language="JavaScript" type="text/javascript">
 <!--
 // Version check for the Flash Player that has the ability to start Player Product Install (6.0r65)
@@ -99,16 +99,29 @@ if ( hasProductInstall && !hasRequestedVersion ) {
 // -->
 </script>
 <script langugage='javascript' type="text/javascript">
-  function getRootURL()
-  {
-      return location.href.substring(0,location.href.indexOf("/flex")); ;
+
+  function getRootURL() {
+    return location.href.substring(0,location.href.indexOf("/flex"));
+  }
+
+  function stop() {
+    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+      var xmlhttp = new XMLHttpRequest();
+    } else {// code for IE6, IE5
+      var xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.open("GET", getRootURL()+"/util/stop",false);
+    xmlhttp.onreadystatechange = function() {
+    };
+    xmlhttp.send();
   }
   
-  function stop()
-  {
-      // Here you'll need to provide the id of your Flex swf
-      document.getElementById("${application}").stop();
-      //alert("Disconnected!");
+  function focusFlex() {
+    var flexApp = document.getElementById("${application}");
+    if(flexApp) {
+    	flexApp.tabIndex = 0;
+      flexApp.focus();
+    }
   }
 </script>
 <noscript>
