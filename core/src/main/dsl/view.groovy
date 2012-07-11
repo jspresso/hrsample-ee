@@ -40,14 +40,22 @@ action('frenchFrontAction', parent:'changeRegistrationLanguageFrontAction',
     custom:['targetLanguage':'fr'], icon:'classpath:org/jspresso/contrib/images/i18n/fr.png')
 
 table ('Furniture.module.view', parent:'filterableBeanCollectionModuleView') {
-  actionMap (parents:[
-    'filterableBeanCollectionModuleActionMap'
-  ]) {
-    actionList { action ref:'exportFilterModuleResultToHtmlAction' }
+  actionMap (parents:['filterableBeanCollectionModuleActionMap']) {
+    actionList { 
+      action ref:'exportFilterModuleResultToHtmlAction' 
+    }
+    actionList {
+      action ref:'createPermaLinkFrontAction'
+    }
   }
 }
 
-tabs('Furniture.detail.view', actionMap:'beanModuleActionMap') {
+tabs('Furniture.detail.view') {
+  actionMap (parents:['beanModuleActionMap']) {
+    actionList {
+      action ref:'createPermaLinkFrontAction'
+    }
+  }
   views {
     form (model:'Furniture')
     table(parent:'ITranslatable-translations.table')

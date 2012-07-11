@@ -22,7 +22,7 @@ controller 'hrsample-ext.name',
     icon:'icon.png',
     context:'hrsample-ext',
     language:'en',
-    startup:'startupHrsampleAction',
+    startup:'startupHrsampleExtAction',
     onModuleEnter:'anyModuleEnterFrontAction',
     workspaces:[
       'organization.workspace',
@@ -31,6 +31,12 @@ controller 'hrsample-ext.name',
       'tools.workspace',
       'usage.workspace'
     ]
+    
+action ('startupHrsampleExtAction', 
+    parent:'permaLinkSelectionAction',
+    custom:[defaultAction_ref:'startupHrsampleAction']
+)    
+
 
 spec('remote') {
   bean ('remotePeerRegistryBase', class:'org.jspresso.framework.util.remote.registry.BasicRemotePeerRegistry', custom:[automationEnabled:true])
