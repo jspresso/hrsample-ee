@@ -233,10 +233,17 @@
                       </params>
                     </component>
                   </components>
-                  <includes>**/ext/model/**/**.java,**/model/Traceable.java,**/model/i18n/*.java</includes>
+                  <includes>**/ext/model/*.java,
+                            **/contrib/usage/model/*.java,
+                            **/contrib/batch/model/*.java,
+                            **/contrib/model/i18n/*.java,
+                            </includes>
                 </config>
               </configs>
-              <sourceArtifacts>org.jspresso.hrsample:hrsample-core,org.jspresso.contrib:jspresso-extensions-core</sourceArtifacts>
+              <sourceArtifacts>org.jspresso.hrsample:hrsample-core,
+                               org.jspresso.contrib:jspresso-extensions-core,
+                               org.jspresso.contrib:jspresso-usage-core,
+                               org.jspresso.contrib:jspresso-batch-core</sourceArtifacts>
             </configuration>
           </execution>
         </executions>
@@ -320,6 +327,29 @@
                     <include name="**/*.hbm.xml" />
                   </fileset>
                 </replaceregexp>
+                <!-- Replace module entities id definitions to support varbinary-->
+                <replaceregexp byline="false" flags="mg">
+                  <regexp pattern="(.*)&lt;id name=&quot;id&quot; type=&quot;string&quot;&gt;(\r?\n)(.*)&lt;column name=&quot;([^&quot;]*)&quot; length=&quot;[^&quot;]*&quot;/&gt;" />
+                  <substitution expression="\1&lt;id name=&quot;id&quot; type=&quot;org.jspresso.framework.model.persistence.hibernate.entity.type.ByteArrayType&quot;&gt;\2\3&lt;column name=&quot;\4&quot; length=&quot;18&quot;/&gt;" />
+                  <fileset dir="${xdoclet.dest}">
+                    <include name="**/*.hbm.xml" />
+                  </fileset>
+                </replaceregexp>
+                <replaceregexp byline="true">
+                  <regexp pattern="&lt;any name=&quot;([^&quot;]*)&quot; id-type=&quot;string&quot;&gt;" />
+                  <substitution expression="&lt;any name=&quot;\1&quot; id-type=&quot;org.jspresso.framework.model.persistence.hibernate.entity.type.ByteArrayType&quot;&gt;" />
+                  <fileset dir="${xdoclet.dest}">
+                    <include name="**/*.hbm.xml" />
+                  </fileset>
+                </replaceregexp>
+                <replaceregexp byline="false" flags="mg">
+                  <regexp pattern="&lt;column name=&quot;([^&quot;]*_ID)&quot; length=&quot;[^&quot;]*&quot; (.*)/&gt;(\r?\n)(.*)&lt;/any&gt;" />
+                  <substitution expression="&lt;column name=&quot;\1&quot; length=&quot;18&quot; \2/&gt;\3\4&lt;/any&gt;" />
+                  <fileset dir="${xdoclet.dest}">
+                    <include name="**/*.hbm.xml" />
+                  </fileset>
+                </replaceregexp>
+                <!-- End replace module entities id definitions to support varbinary-->
               </tasks>
             </configuration>
           </execution>

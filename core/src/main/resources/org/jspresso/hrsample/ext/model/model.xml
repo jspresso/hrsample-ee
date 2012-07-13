@@ -9,7 +9,15 @@
   <!--
     The domain model
   -->
-  <!-- Describe your application domain model here. -->
+  <!-- 
+  Switch to binary entity keys 
+  -->
+  <bean id="entityGUIDGenerator" parent="binaryGUIDGenerator"/>
+  
+  <bean id="rootEntityId" class="org.jspresso.framework.model.descriptor.basic.BasicBinaryPropertyDescriptor">
+    <property name="name" value="id" />
+    <property name="maxLength" value="18" />
+  </bean>
 
   <!--
     The application I18N resources. 
