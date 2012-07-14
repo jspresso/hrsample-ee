@@ -236,7 +236,7 @@
                   <includes>**/ext/model/*.java,
                             **/contrib/usage/model/*.java,
                             **/contrib/batch/model/*.java,
-                            **/contrib/model/i18n/*.java,
+                            **/contrib/model/i18n/*.java
                             </includes>
                 </config>
               </configs>
