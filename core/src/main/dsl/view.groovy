@@ -44,16 +44,18 @@ table ('Furniture.module.view', parent:'filterableBeanCollectionModuleView') {
     actionList { 
       action ref:'exportFilterModuleResultToHtmlAction' 
     }
-    actionList {
-      action ref:'createPermaLinkFrontAction'
+    actionList (collapsable:true) {
+      action ref:'createPermalinkAndCopyToClipboardFrontAction'
+      action ref:'createPermalinkAndMailToFrontAction'
     }
   }
 }
 
 tabs('Furniture.detail.view') {
   actionMap (parents:['beanModuleActionMap']) {
-    actionList {
-      action ref:'createPermaLinkFrontAction'
+    actionList (collapsable:true) {
+      action ref:'createPermalinkAndCopyToClipboardFrontAction'
+      action ref:'createPermalinkAndMailToFrontAction'
     }
   }
   views {

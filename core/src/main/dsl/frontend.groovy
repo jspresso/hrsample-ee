@@ -33,7 +33,7 @@ controller 'hrsample-ext.name',
     ]
     
 action ('startupHrsampleExtAction', 
-    parent:'permaLinkSelectionAction',
+    parent:'permalinkSelectionAction',
     custom:[defaultAction_ref:'startupHrsampleAction']
 )    
 
