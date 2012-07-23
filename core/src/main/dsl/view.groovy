@@ -1,4 +1,5 @@
 // Implement your views here using the SJS DSL.
+external id:['restartModuleWithConfirmationFrontAction']
 
 form('loginViewDescriptor', parent:'loginViewDescriptorBase', model:'CaptchaUsernamePasswordHandler', columnCount:2) {
   fields {
@@ -39,28 +40,64 @@ action('englishFrontAction', parent:'changeRegistrationLanguageFrontAction',
 action('frenchFrontAction', parent:'changeRegistrationLanguageFrontAction',
     custom:['targetLanguage':'fr'], icon:'classpath:org/jspresso/contrib/images/i18n/fr.png')
 
-table ('Furniture.module.view', parent:'filterableBeanCollectionModuleView') {
-  actionMap (parents:['filterableBeanCollectionModuleActionMap']) {
-    actionList { 
-      action ref:'exportFilterModuleResultToHtmlAction' 
-    }
-    actionList (collapsable:true) {
-      action ref:'createPermalinkAndCopyToClipboardFrontAction'
-      action ref:'createPermalinkAndMailToFrontAction'
-    }
-  }
-}
-
-tabs('Furniture.detail.view') {
-  actionMap (parents:['beanModuleActionMap']) {
-    actionList (collapsable:true) {
-      action ref:'createPermalinkAndCopyToClipboardFrontAction'
-      action ref:'createPermalinkAndMailToFrontAction'
-    }
-  }
+tabs('Furniture.detail.view', actionMap:'beanModuleActionMap') {
   views {
     form (model:'Furniture')
     table(parent:'ITranslatable-translations.table')
+  }
+}
+  
+/** 
+ * OVERRIDE JSPRESSO DEFAULT ACTION MAP
+ */
+actionMap ('beanModuleActionMap') {  
+  actionList('SAVE', collapsable:true){
+    action ref:'saveModuleObjectFrontAction'
+    action ref:'reloadModuleObjectFrontAction'
+  }
+  actionList('FILE') {
+    action ref:'removeModuleObjectFrontAction'
+    action ref:'parentModuleConnectorSelectionFrontAction'
+  } 
+  actionList ('PERMALINK', collapsable:true) {
+    action parent:'createPermalinkAndCopyToClipboardFrontAction', custom:[tinyURL:true]
+    action parent:'createPermalinkAndMailToFrontAction', custom:[tinyURL:true]
+  }
+}
+
+/**
+ * OVERRIDE JSPRESSO DEFAULT ACTION MAP
+ */
+actionMap('beanCollectionModuleActionMap') {
+  actionList('RELOAD') {
+    action ref:'restartModuleWithConfirmationFrontAction'
+  }
+  actionList('SAVE', collapsable:true){
+    action ref:'saveModuleObjectFrontAction'
+    action ref:'reloadModuleObjectFrontAction'
+  }
+  actionList('FILE') {
+    action ref:'queryModuleFilterAction'
+  }
+  actionList('PIN', renderingOptions:'ICON') {
+    action ref:'pinQueryCriteriasFrontAction'
+  }
+  actionList('SERVICE') {
+    action ref:'addAsChildModuleFrontAction'
+  }
+  actionList('ADD', collapsable:true) {
+    action ref:'addToMasterFrontAction'
+    action ref:'cloneEntityCollectionFrontAction'
+  }
+  actionList('REMOVE') {
+    action ref:'removeFromModuleObjectsFrontAction'
+  }
+  actionList('EXPORT') {
+    action ref:'exportFilterModuleResultToHtmlAction'
+  }
+  actionList ('PERMALINK', collapsable:true) {
+    action parent:'createPermalinkAndCopyToClipboardFrontAction', custom:[tinyURL:true]
+    action parent:'createPermalinkAndMailToFrontAction', custom:[tinyURL:true]
   }
 }
 

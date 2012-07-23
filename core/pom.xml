@@ -327,7 +327,9 @@
                     <include name="**/*.hbm.xml" />
                   </fileset>
                 </replaceregexp>
-                <!-- Replace module entities id definitions to support varbinary-->
+                
+                <!-- Replace module entities id definitions to support varbinary
+                
                 <replaceregexp byline="false" flags="mg">
                   <regexp pattern="(.*)&lt;id name=&quot;id&quot; type=&quot;string&quot;&gt;(\r?\n)(.*)&lt;column name=&quot;([^&quot;]*)&quot; length=&quot;[^&quot;]*&quot;/&gt;" />
                   <substitution expression="\1&lt;id name=&quot;id&quot; type=&quot;org.jspresso.framework.model.persistence.hibernate.entity.type.ByteArrayType&quot;&gt;\2\3&lt;column name=&quot;\4&quot; length=&quot;18&quot;/&gt;" />
@@ -349,7 +351,9 @@
                     <include name="**/*.hbm.xml" />
                   </fileset>
                 </replaceregexp>
-                <!-- End replace module entities id definitions to support varbinary-->
+                
+                End replace module entities id definitions to support varbinary-->
+                
               </tasks>
             </configuration>
           </execution>

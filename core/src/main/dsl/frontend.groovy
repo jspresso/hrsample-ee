@@ -13,7 +13,6 @@ bean 'viewFactoryBase', parent:'abstractViewFactory',
     
 workspace('tools.workspace', icon:'tools.png') { 
   filterModule ('furniture.module', 
-    moduleView:'Furniture.module.view',
     detailView:'Furniture.detail.view',
     component:'Furniture')
 }
@@ -23,7 +22,7 @@ controller 'hrsample-ext.name',
     context:'hrsample-ext',
     language:'en',
     startup:'startupHrsampleExtAction',
-    onModuleEnter:'anyModuleEnterFrontAction',
+    onModuleEnter:'manageAnyModuleEnterFrontAction',
     actionMap:'controllerActionMap',
     workspaces:[
       'organization.workspace',
@@ -38,6 +37,10 @@ action ('startupHrsampleExtAction',
     custom:[defaultAction_ref:'startupHrsampleAction']
 )    
 
+action ('manageAnyModuleEnterFrontAction',
+  class:'org.jspresso.framework.application.frontend.action.FrontendAction',
+  wrapped:'anyModuleEnterFrontAction', 
+  next:'loadPinnedQueryCriteriasFrontAction')   
 
 spec('remote') {
   bean ('remotePeerRegistryBase', class:'org.jspresso.framework.util.remote.registry.BasicRemotePeerRegistry', custom:[automationEnabled:true])
