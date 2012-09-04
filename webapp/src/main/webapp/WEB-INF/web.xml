@@ -28,7 +28,8 @@
       <description>The regular expression used to allow proxied download URLs.</description>
       <param-name>allowedLocalUrlRegex</param-name>
       <!-- <param-value>(classpath|http):[A-Za-z0-9_\-/ ]*\.(png|jpg|jpeg|gif|pdf|swf.?)</param-value> -->
-      <param-value/>
+      <!-- In order to relax CAPTCHA -->
+      <param-value>(classpath|http):[A-Za-z0-9_\-/ ?=&amp;:\.]*\.(png|jpg|jpeg|gif|pdf|swf.?)</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>
