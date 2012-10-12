@@ -28,7 +28,7 @@ public class TestDataPersister extends
    * Creates some test data using the passed in Spring application context.
    */
   @Override
-  public void persistTestData() {
+  public void createAndPersistTestData() {
     super.persistTestData();
 
     try {
