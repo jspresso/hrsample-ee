@@ -71,8 +71,8 @@ public class TestDataPersister extends
     Furniture furniture = createEntityInstance(Furniture.class);
     furniture.setName(name);
     furniture.setCreateTimestamp(new Date());
-    furniture.setPrice(new Double(price));
-    furniture.setDiscount(new Double(discount));
+    furniture.setPrice(Double.valueOf(price));
+    furniture.setDiscount(Double.valueOf(discount));
     saveOrUpdate(furniture);
     return furniture;
   }
