@@ -146,6 +146,7 @@
         <value>org/jspresso/hrsample/ext/frontend/frontend.xml</value>
 
         <value>org/jspresso/hrsample/ext/core-config.xml</value>
+        <value>org/jspresso/hrsample/ext/config.xml</value>
       </list>
     </constructor-arg>
   </bean>
@@ -198,6 +199,7 @@
         <value>org/jspresso/hrsample/ext/spec/remote-dsl-frontend.xml</value>
         <value>org/jspresso/hrsample/ext/frontend/frontend.xml</value>
 
+        <value>org/jspresso/hrsample/ext/core-config.xml</value>
         <value>org/jspresso/hrsample/ext/config.xml</value>
       </list>
     </constructor-arg>
@@ -252,6 +254,7 @@
 
         <value>org/jspresso/hrsample/ext/spec/remote-recording-dsl-frontend.xml</value>
 
+        <value>org/jspresso/hrsample/ext/core-config.xml</value>
         <value>org/jspresso/hrsample/ext/config.xml</value>
       </list>
     </constructor-arg>
