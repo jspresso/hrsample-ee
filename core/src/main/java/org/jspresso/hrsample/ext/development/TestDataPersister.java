@@ -29,7 +29,7 @@ public class TestDataPersister extends
    */
   @Override
   public void createAndPersistTestData() {
-    super.persistTestData();
+    super.createAndPersistTestData();
 
     try {
       createFurniture("Blue desk - 2012", 99.95, 0.1);
