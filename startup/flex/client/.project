@@ -5,11 +5,11 @@
 	<projects>
 	</projects>
 	<buildSpec>
-    <buildCommand>
-      <name>com.adobe.flexbuilder.project.flexbuilder</name>
-      <arguments>
-      </arguments>
-    </buildCommand>
+		<buildCommand>
+			<name>com.adobe.flexbuilder.project.flexbuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 		<buildCommand>
 			<name>org.eclipse.m2e.core.maven2Builder</name>
 			<arguments>
@@ -18,8 +18,8 @@
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.m2e.core.maven2Nature</nature>
-    <nature>com.adobe.flexbuilder.project.flexnature</nature>
-    <nature>com.adobe.flexbuilder.project.actionscriptnature</nature>
+		<nature>com.adobe.flexbuilder.project.flexnature</nature>
+		<nature>com.adobe.flexbuilder.project.actionscriptnature</nature>
 	</natures>
 	<filteredResources>
 		<filter>
@@ -60,4 +60,3 @@
 		</filter>
 	</filteredResources>
 </projectDescription>
-
