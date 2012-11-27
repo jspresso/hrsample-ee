@@ -42,15 +42,31 @@ action('frenchFrontAction', parent:'changeRegistrationLanguageFrontAction',
 
 tabs('Furniture.detail.view', actionMap:'beanModuleActionMap') {
   views {
-    form (model:'Furniture')
+    border {
+      north {
+        form (model:'Furniture')
+      }
+      center {
+        table (model:'Furniture-previous', borderType:'TITLED') {
+          actionMap {
+            actionList('ALL') {
+              action parent:'chooseEntityFrontAction', custom:[selectionMode:'MULTIPLE_INTERVAL_CUMULATIVE_SELECTION']
+              action ref:'unlinkComponentFrontAction'
+            }
+          }
+        }
+      }
+    }
+
+
     table(parent:'ITranslatable-translations.table')
   }
 }
-  
+
 /** 
  * OVERRIDE JSPRESSO DEFAULT ACTION MAP
  */
-actionMap ('beanModuleActionMap') {  
+actionMap ('beanModuleActionMap') {
   actionList('SAVE', collapsable:true){
     action ref:'saveModuleObjectFrontAction'
     action ref:'reloadModuleObjectFrontAction'
@@ -58,7 +74,7 @@ actionMap ('beanModuleActionMap') {
   actionList('FILE') {
     action ref:'removeModuleObjectFrontAction'
     action ref:'parentModuleConnectorSelectionFrontAction'
-  } 
+  }
   actionList ('PERMALINK', collapsable:true) {
     action parent:'createPermalinkAndCopyToClipboardFrontAction', custom:[tinyURL:true]
     action parent:'createPermalinkAndMailToFrontAction', custom:[tinyURL:true]
