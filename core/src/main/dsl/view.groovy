@@ -76,8 +76,8 @@ actionMap ('beanModuleActionMap') {
     action ref:'parentModuleConnectorSelectionFrontAction'
   }
   actionList ('PERMALINK', collapsable:true) {
-    action parent:'createPermalinkAndCopyToClipboardFrontAction', custom:[tinyURL:true]
-    action parent:'createPermalinkAndMailToFrontAction', custom:[tinyURL:true]
+    action parent:'createPermalinkAndCopyToClipboardFrontAction', custom:[tinyURL:false]
+    action parent:'createPermalinkAndMailToFrontAction', custom:[tinyURL:false]
   }
 }
 
@@ -98,6 +98,10 @@ actionMap('beanCollectionModuleActionMap') {
   actionList('PIN', renderingOptions:'ICON') {
     action ref:'pinQueryCriteriasFrontAction'
   }
+  actionList('PIN2') {
+    action ref:'chooseQueryCriteriasFrontAction'
+  }
+  
   actionList('SERVICE') {
     action ref:'addAsChildModuleFrontAction'
   }
@@ -112,8 +116,8 @@ actionMap('beanCollectionModuleActionMap') {
     action ref:'exportFilterModuleResultToHtmlAction'
   }
   actionList ('PERMALINK', collapsable:true) {
-    action parent:'createPermalinkAndCopyToClipboardFrontAction', custom:[tinyURL:true]
-    action parent:'createPermalinkAndMailToFrontAction', custom:[tinyURL:true]
+    action parent:'createPermalinkAndCopyToClipboardFrontAction', custom:[tinyURL:false]
+    action parent:'createPermalinkAndMailToFrontAction', custom:[tinyURL:false]
   }
 }
 

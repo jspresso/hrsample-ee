@@ -11,10 +11,15 @@ bean 'viewFactoryBase', parent:'abstractViewFactory',
       defaultActionMapRenderingOptions:'LABEL_ICON'
     ]
     
-workspace('tools.workspace', icon:'tools.png') { 
-  filterModule ('furniture.module', 
+workspace('tools.workspace', icon:'tools.png', grantedRoles:['toto']) { 
+  filterModule ('furniture.module', grantedRoles:['toto'], 
     detailView:'Furniture.detail.view',
-    component:'Furniture')
+    component:'Furniture') {
+   
+    filterModule ('furniture.module2', /*grantedRoles:['toto'],*/
+      detailView:'Furniture.detail.view',
+      component:'Furniture')
+  }
 }
  
 controller 'hrsample-ext.name',
