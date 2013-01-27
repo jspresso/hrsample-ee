@@ -68,11 +68,11 @@ public class TestDataPersister extends
     }
     
     try {
-      createFilter("demo", "employees.module", "Start with D", "H4sIAAAAAAAAAFvzloG1tIhBPNonK7EsUS8zXy84tSgzMSezKjEpJ9V63QXONcHX33oyMTBUFDAwMHCVMPAnF6UmlqSGZOamFpck5haUFjLUMYAAUwkDV3J-bkFiUWJJflEJA5NrYAkDS15ibmoJA6NLCYNwTmJxSWhBCnbNIAYLiGAtYeBMyiwqyXABKsQuz1acmJNYVIlNEgBYRP9-0AAAAA", true);
-      createFilter("demo", "employees.module", "Start with B", "H4sIAAAAAAAAAFvzloG1tIhBPNonK7EsUS8zXy84tSgzMSezKjEpJ9V63QXONcHX33oyMTBUFDAwMHCVMPAnF6UmlqSGZOamFpck5haUFjLUMYAAUwkDV3J-bkFiUWJJflEJA5NrYAkDS15ibmoJA6NTCYNwTmJxSWhBCnbNIAYLiGAtYeBMyiwqyXABKsQuz1acmJNYVIlNEgA2xnlV0AAAAA", false);
+      createFilter("demo", "employees.module", "Start with D", "H4sIAAAAAAAAAFvzloG1tIhBPNonK7EsUS8zXy84tSgzMSezKjEpJ9V63QXONcHX33oyMTBUFDAwMHCVMPAnF6UmlqSGZOamFpck5haUFjLUMYAAUwkDV3J-bkFiUWJJflEJA5NrYAkDS15ibmoJA6NLCYNwTmJxSWhBCnbNIAYLiGAtYeBMyiwqyXABKsQuz1acmJNYVIlNEgBYRP9-0AAAAA", true, true);
+      createFilter("demo", "employees.module", "Start with B", "H4sIAAAAAAAAAFvzloG1tIhBPNonK7EsUS8zXy84tSgzMSezKjEpJ9V63QXONcHX33oyMTBUFDAwMHCVMPAnF6UmlqSGZOamFpck5haUFjLUMYAAUwkDV3J-bkFiUWJJflEJA5NrYAkDS15ibmoJA6NTCYNwTmJxSWhBCnbNIAYLiGAtYeBMyiwqyXABKsQuz1acmJNYVIlNEgA2xnlV0AAAAA", false, false);
 
-      createFilter("maxime", "employees.module", "Men", "H4sIAAAAAAAAAHWLMQ6CQBRERwImGBMLC2_BBWy1MNHCoJXVB350yS6sy8eohScinsXOU3AHoccpJpO8eU2LoHZYnLY53ShSZRSzU6TVkxLNy_cnbOJvu_GAuwUwFcxSxyR8UIYrIWPrK17o4wkmaWksOZLSCbz1XuAXZNgK5poqOdps2OyH31cgGJ-5yLjzRztBmCgnl1Vn_TlXpMk9huAPPqrnCtoAAAA", true);
-      createFilter("maxime", "employees.module", "Women", "H4sIAAAAAAAAAHWLMQ6CQBRERwImGBMLC2_BBWzVxMTGoJXVB350yS6sy8eohScinsXOU3AHoccpJpO8eU2LoHZYnHY53ShSZRSzU6TVkxLNy_cnbOJvu_WAuwUwFcxSxyR8UIYrIWPrK17o4wkmaWksOZLSCbz1XuAXZNgK5poqOdps2OyH31cgGJ-5yLjzRxtBmCgnl1Vn_TlXpMk9huAPqJwyu9oAAAA", true);
+      createFilter("maxime", "employees.module", "Men", "H4sIAAAAAAAAAHWLMQ6CQBRERwImGBMLC2_BBWy1MNHCoJXVB350yS6sy8eohScinsXOU3AHoccpJpO8eU2LoHZYnLY53ShSZRSzU6TVkxLNy_cnbOJvu_GAuwUwFcxSxyR8UIYrIWPrK17o4wkmaWksOZLSCbz1XuAXZNgK5poqOdps2OyH31cgGJ-5yLjzRztBmCgnl1Vn_TlXpMk9huAPPqrnCtoAAAA", true, true);
+      createFilter("maxime", "employees.module", "Women", "H4sIAAAAAAAAAHWLMQ6CQBRERwImGBMLC2_BBWzVxMTGoJXVB350yS6sy8eohScinsXOU3AHoccpJpO8eU2LoHZYnHY53ShSZRSzU6TVkxLNy_cnbOJvu_WAuwUwFcxSxyR8UIYrIWPrK17o4wkmaWksOZLSCbz1XuAXZNgK5poqOdps2OyH31cgGJ-5yLjzRxtBmCgnl1Vn_TlXpMk9huAPqJwyu9oAAAA", true, false);
     
     } catch (Throwable ex) {
       // In no way the test data persister should make the application
@@ -81,7 +81,7 @@ public class TestDataPersister extends
   }
 
   private int filterSeq = 0;
-  private void createFilter(String login, String key, String name, String criterias, boolean shared) {
+  private void createFilter(String login, String key, String name, String criterias, boolean shared, boolean defaultCriterias) {
     UserQuery q = createEntityInstance(UserQuery.class);
     
     q.setLogin(login);
@@ -90,6 +90,7 @@ public class TestDataPersister extends
     q.setCriterias(criterias);
     q.setSeq(filterSeq++);
     q.setSharedString(shared ? "ALL" : null);
+    q.setDefaultCriterias(defaultCriterias);
     
     saveOrUpdate(q);
   }
