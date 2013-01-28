@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 
+import org.jspresso.contrib.model.query.UserDefaultQuery;
 import org.jspresso.contrib.model.query.UserQuery;
 import org.jspresso.contrib.usage.model.ModuleUsage;
 import org.jspresso.hrsample.ext.model.Furniture;
@@ -92,9 +93,18 @@ public class TestDataPersister extends
     q.setCriterias(criterias);
     q.setSeq(filterSeq++);
     q.setSharedString(shared);
-    q.setDefaultCriterias(defaultCriterias);
     
     saveOrUpdate(q);
+    
+    if (defaultCriterias) {
+      UserDefaultQuery qd = createEntityInstance(UserDefaultQuery.class);
+      
+      qd.setLogin(login);
+      qd.setKey(key);
+      qd.setQuery(q);
+      
+      saveOrUpdate(qd);
+    }
   }
 
   private Furniture createFurniture(String name, double price, double discount) {
