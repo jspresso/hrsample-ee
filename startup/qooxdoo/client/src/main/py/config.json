@@ -45,7 +45,7 @@
     "QXTHEME"      : "org.jspresso.hrsample.ext.startup.qooxdoo.theme.Theme",
     "QXICONTHEME"  : ["Oxygen"],
     "API_EXCLUDE"  : ["qx.legacy.*","qx.test.*"],
-    "LOCALES"      : ["en","fr","es","pt","de"],
+    "LOCALES"      : ["en","fr","es","pt","de","it","pl","cs","sk"],
     "ROOT"         : "..",
     "BUILD_PATH"   : "${TARGET}/web"
   },
