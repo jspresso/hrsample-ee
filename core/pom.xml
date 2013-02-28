@@ -304,7 +304,7 @@
               <goal>run</goal>
             </goals>
             <configuration>
-              <tasks>
+              <target>
                 <property name="xdoclet.dest" value="${project.build.directory}/generated-resources/xdoclet" />
                 <mkdir dir="${xdoclet.dest}" />
                 <replaceregexp byline="true" preserveLastModified="true">
@@ -362,7 +362,8 @@
                 
                 End replace module entities id definitions to support varbinary-->
                 
-              </tasks>
+                <delete dir="${project.build.directory}/antrun" />
+              </target>
             </configuration>
           </execution>
         </executions>
