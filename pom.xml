@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.jspresso.framework</groupId>
@@ -11,12 +12,12 @@
   <artifactId>hrsample-ext</artifactId>
   <packaging>pom</packaging>
   <version>3.5-SNAPSHOT</version>
-  
+
   <properties>
     <jspresso-extensions.version>1.0-SNAPSHOT</jspresso-extensions.version>
     <jspresso-usage.version>1.4</jspresso-usage.version>
   </properties>
-  
+
   <name>Jspresso HR Sample Application - Extension</name>
   <description>Jspresso HR Sample Application - Extension</description>
   <url>http://www.jspresso.orh</url>
@@ -126,23 +127,23 @@
         <artifactId>hrsample-ext-webservices</artifactId>
         <version>${project.version}</version>
       </dependency>
-      
+
       <!-- HRSample dependencies -->
       <dependency>
         <groupId>org.jspresso.hrsample</groupId>
         <artifactId>hrsample-core</artifactId>
         <version>${project.version}</version>
       </dependency>
-      
+
       <!-- Jspresso-extensions dependencies -->
-	    <dependency>
-	      <groupId>org.jspresso.contrib</groupId>
-	      <artifactId>jspresso-extensions-core</artifactId>
-	      <version>${jspresso-extensions.version}</version>
-	    </dependency>   
-	    
-	    <!-- Jspresso-usage dependencies -->
-	    <dependency>
+      <dependency>
+        <groupId>org.jspresso.contrib</groupId>
+        <artifactId>jspresso-extensions-core</artifactId>
+        <version>${jspresso-extensions.version}</version>
+      </dependency>
+
+      <!-- Jspresso-usage dependencies -->
+      <dependency>
         <groupId>org.jspresso.contrib</groupId>
         <artifactId>jspresso-usage-core</artifactId>
         <version>${jspresso-usage.version}</version>
@@ -161,25 +162,25 @@
             <inherited>false</inherited>
             <configuration>
               <target>
-                <taskdef name="beandoc" classname="org.springframework.beandoc.client.AntTask"/>
-                <taskdef resource="net/sf/antcontrib/antlib.xml"/>
+                <taskdef name="beandoc" classname="org.springframework.beandoc.client.AntTask" />
+                <taskdef resource="net/sf/antcontrib/antlib.xml" />
                 <if>
-                  <equals arg1="${project.artifactId}" arg2="hrsample-ext"/>
+                  <equals arg1="${project.artifactId}" arg2="hrsample-ext" />
                   <then>
-                    <mkdir dir="${project.reporting.outputDirectory}/beandocs"/>
-                    <mkdir dir="${project.reporting.outputDirectory}/beandocs/tmp"/>
+                    <mkdir dir="${project.reporting.outputDirectory}/beandocs" />
+                    <mkdir dir="${project.reporting.outputDirectory}/beandocs/tmp" />
                     <copy todir="${project.reporting.outputDirectory}/beandocs/tmp" flatten="true">
                       <fileset dir="${basedir}/core/src/main/resources">
-                        <include name="**/org/jspresso/hrsample/ext/**/*.xml"/>
-                        <exclude name="**/org/jspresso/hrsample/ext/**/*.hbm.xml"/>
+                        <include name="**/org/jspresso/hrsample/ext/**/*.xml" />
+                        <exclude name="**/org/jspresso/hrsample/ext/**/*.hbm.xml" />
                       </fileset>
                     </copy>
                     <beandoc outputDir="${project.reporting.outputDirectory}/beandocs" beandocProps="${basedir}/conf/beandoc.properties">
                       <fileset dir="${project.reporting.outputDirectory}/beandocs/tmp">
-                        <include name="**/*.xml"/>
+                        <include name="**/*.xml" />
                       </fileset>
                     </beandoc>
-                    <delete dir="${project.reporting.outputDirectory}/beandocs/tmp"/>
+                    <delete dir="${project.reporting.outputDirectory}/beandocs/tmp" />
                   </then>
                 </if>
                 <delete dir="${project.build.directory}/antrun" />
@@ -206,7 +207,8 @@
         <artifactId>maven-release-plugin</artifactId>
         <configuration>
           <autoVersionSubmodules>true</autoVersionSubmodules>
-          <goals>deploy site-deploy assembly:assembly</goals>
+          <goals>deploy assembly:assembly</goals>
+          <!-- <goals>deploy site-deploy assembly:assembly</goals> -->
         </configuration>
       </plugin>
       <plugin>
