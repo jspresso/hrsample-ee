@@ -40,9 +40,6 @@
         <dependent-module archiveName="jspresso-model-3.5-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jspresso-model/jspresso-model">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="hrsample-core-3.5-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/hrsample-core/hrsample-core">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <dependent-module archiveName="jspresso-extensions-core-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jspresso-extensions-core/jspresso-extensions-core">
             <dependency-type>uses</dependency-type>
         </dependent-module>
