@@ -70,6 +70,11 @@
       <artifactId>jspresso-usage-core</artifactId>
     </dependency> 
     
+    <dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+    </dependency>
+
   </dependencies>
   <profiles>
     <profile>

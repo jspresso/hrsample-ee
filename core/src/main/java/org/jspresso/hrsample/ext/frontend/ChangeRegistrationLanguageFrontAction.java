@@ -21,6 +21,7 @@ package org.jspresso.hrsample.ext.frontend;
 import java.util.Locale;
 import java.util.Map;
 
+import org.apache.commons.lang.LocaleUtils;
 import org.jspresso.framework.action.IActionHandler;
 import org.jspresso.framework.application.frontend.action.FrontendAction;
 
@@ -47,7 +48,7 @@ public class ChangeRegistrationLanguageFrontAction<E, F, G> extends
   @Override
   public boolean execute(IActionHandler actionHandler,
       Map<String, Object> context) {
-    Locale targetLocale = new Locale(targetLanguage);
+    Locale targetLocale = LocaleUtils.toLocale(targetLanguage);
     getController(context).getApplicationSession().setLocale(targetLocale);
     getController(context).disposeModalDialog(getSourceComponent(context),
         context);
