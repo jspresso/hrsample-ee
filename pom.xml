@@ -15,7 +15,7 @@
 
   <properties>
     <jspresso-extensions.version>1.0-SNAPSHOT</jspresso-extensions.version>
-    <jspresso-usage.version>1.4</jspresso-usage.version>
+    <jspresso-usage.version>1.5-SNAPSHOT</jspresso-usage.version>
   </properties>
 
   <name>Jspresso HR Sample Application - Extension</name>

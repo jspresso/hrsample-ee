@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beansProjectDescription>
 	<version>1</version>
-	<pluginVersion><![CDATA[3.1.0.201210040510-RELEASE]]></pluginVersion>
+	<pluginVersion><![CDATA[3.2.0.201303060654-RELEASE]]></pluginVersion>
 	<configSuffixes>
 		<configSuffix><![CDATA[xml]]></configSuffix>
 	</configSuffixes>
@@ -16,14 +16,6 @@
 		<config>target/generated-resources/dsl/org/jspresso/hrsample/ext/backend/dsl-backend.xml</config>
 		<config>src/main/resources/org/jspresso/hrsample/ext/model/model.xml</config>
 		<config>target/generated-resources/dsl/org/jspresso/hrsample/ext/model/dsl-model.xml</config>
-		<config>external:/M2_REPO/org/jspresso/contrib/jspresso-usage-core/1.4/jspresso-usage-core-1.4.jar!/org/jspresso/contrib/usage/frontend/frontend.xml</config>
-		<config>external:/M2_REPO/org/jspresso/contrib/jspresso-usage-core/1.4/jspresso-usage-core-1.4.jar!/org/jspresso/contrib/usage/frontend/dsl-frontend.xml</config>
-		<config>external:/M2_REPO/org/jspresso/contrib/jspresso-usage-core/1.4/jspresso-usage-core-1.4.jar!/org/jspresso/contrib/usage/view/view.xml</config>
-		<config>external:/M2_REPO/org/jspresso/contrib/jspresso-usage-core/1.4/jspresso-usage-core-1.4.jar!/org/jspresso/contrib/usage/view/dsl-view.xml</config>
-		<config>external:/M2_REPO/org/jspresso/contrib/jspresso-usage-core/1.4/jspresso-usage-core-1.4.jar!/org/jspresso/contrib/usage/backend/backend.xml</config>
-		<config>external:/M2_REPO/org/jspresso/contrib/jspresso-usage-core/1.4/jspresso-usage-core-1.4.jar!/org/jspresso/contrib/usage/backend/dsl-backend.xml</config>
-		<config>external:/M2_REPO/org/jspresso/contrib/jspresso-usage-core/1.4/jspresso-usage-core-1.4.jar!/org/jspresso/contrib/usage/model/model.xml</config>
-		<config>external:/M2_REPO/org/jspresso/contrib/jspresso-usage-core/1.4/jspresso-usage-core-1.4.jar!/org/jspresso/contrib/usage/model/dsl-model.xml</config>
 		<config>target/generated-resources/dsl/org/jspresso/hrsample/ext/spec/swing-dsl-frontend.xml</config>
 		<config>target/generated-resources/dsl/org/jspresso/hrsample/ext/spec/remote-recording-dsl-frontend.xml</config>
 	</configs>
@@ -50,14 +42,14 @@
 				<config>/hrsample-core/target/generated-resources/dsl/org/jspresso/hrsample/backend/dsl-backend.xml</config>
 				<config>/hrsample-core/src/main/resources/org/jspresso/hrsample/model/model.xml</config>
 				<config>/hrsample-core/target/generated-resources/dsl/org/jspresso/hrsample/model/dsl-model.xml</config>
-				<config>external:/M2_REPO/org/jspresso/contrib/jspresso-usage-core/1.4/jspresso-usage-core-1.4.jar!/org/jspresso/contrib/usage/frontend/frontend.xml</config>
-				<config>external:/M2_REPO/org/jspresso/contrib/jspresso-usage-core/1.4/jspresso-usage-core-1.4.jar!/org/jspresso/contrib/usage/frontend/dsl-frontend.xml</config>
-				<config>external:/M2_REPO/org/jspresso/contrib/jspresso-usage-core/1.4/jspresso-usage-core-1.4.jar!/org/jspresso/contrib/usage/view/view.xml</config>
-				<config>external:/M2_REPO/org/jspresso/contrib/jspresso-usage-core/1.4/jspresso-usage-core-1.4.jar!/org/jspresso/contrib/usage/view/dsl-view.xml</config>
-				<config>external:/M2_REPO/org/jspresso/contrib/jspresso-usage-core/1.4/jspresso-usage-core-1.4.jar!/org/jspresso/contrib/usage/backend/backend.xml</config>
-				<config>external:/M2_REPO/org/jspresso/contrib/jspresso-usage-core/1.4/jspresso-usage-core-1.4.jar!/org/jspresso/contrib/usage/backend/dsl-backend.xml</config>
-				<config>external:/M2_REPO/org/jspresso/contrib/jspresso-usage-core/1.4/jspresso-usage-core-1.4.jar!/org/jspresso/contrib/usage/model/model.xml</config>
-				<config>external:/M2_REPO/org/jspresso/contrib/jspresso-usage-core/1.4/jspresso-usage-core-1.4.jar!/org/jspresso/contrib/usage/model/dsl-model.xml</config>
+				<config>/jspresso-usage-core/src/main/resources/org/jspresso/contrib/usage/frontend/frontend.xml</config>
+				<config>/jspresso-usage-core/target/generated-resources/dsl/org/jspresso/contrib/usage/frontend/dsl-frontend.xml</config>
+				<config>/jspresso-usage-core/src/main/resources/org/jspresso/contrib/usage/view/view.xml</config>
+				<config>/jspresso-usage-core/target/generated-resources/dsl/org/jspresso/contrib/usage/view/dsl-view.xml</config>
+				<config>/jspresso-usage-core/src/main/resources/org/jspresso/contrib/usage/backend/backend.xml</config>
+				<config>/jspresso-usage-core/target/generated-resources/dsl/org/jspresso/contrib/usage/backend/dsl-backend.xml</config>
+				<config>/jspresso-usage-core/src/main/resources/org/jspresso/contrib/usage/model/model.xml</config>
+				<config>/jspresso-usage-core/target/generated-resources/dsl/org/jspresso/contrib/usage/model/dsl-model.xml</config>
 				<config>/jspresso-extensions-core/src/main/resources/org/jspresso/contrib/frontend/frontend.xml</config>
 				<config>/jspresso-extensions-core/target/generated-resources/dsl/org/jspresso/contrib/frontend/dsl-frontend.xml</config>
 				<config>/jspresso-extensions-core/src/main/resources/org/jspresso/contrib/view/view.xml</config>
