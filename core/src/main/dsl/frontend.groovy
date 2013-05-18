@@ -12,10 +12,13 @@ bean 'viewFactoryBase', parent:'abstractViewFactory',
     ]
     
 workspace('tools.workspace', icon:'tools.png') { 
+  
   filterModule ('furniture.module', 
+    startup:'furnitureModuleInitFrontAction',
     detailView:'Furniture.detail.view',
     component:'Furniture') {
   }
+    
 }
  
 controller 'hrsample-ext.name',
@@ -32,6 +35,13 @@ controller 'hrsample-ext.name',
       'tools.workspace',
       'usage.workspace'
     ]
+    
+action ('furnitureModuleInitFrontAction',
+  class:'org.jspresso.framework.application.frontend.action.FrontendAction') {
+  
+  wrapped ref:'initModuleFilterAction'
+  next class:'org.jspresso.hrsample.ext.frontend.FurnitureModuleInitFrontAction'
+}    
     
 action ('startupHrsampleExtAction', 
     parent:'permalinkSelectionAction',

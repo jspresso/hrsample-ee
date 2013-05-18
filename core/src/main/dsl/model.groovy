@@ -18,16 +18,16 @@ Component('Registration') {
 }
 
 Entity('Furniture', 
-  extend:['Traceable', 'ITranslatable'],
+  extend:['Traceable', 'ITranslatable'], 
   icon:'furniture.png',
   toString:'name',
-  queryable:['name'],
+  queryable:['name', 'lastUpdateTimestamp'],
   extension:'FurnitureExtension',
   rendered:['name', 'price', 'discount', 'createTimestamp', 'lastUpdateTimestamp', 'rawLabel', 'nlsLabel', 'nlsOrRawLabel']) {
   string_128 'name'
   
   decimal 'price'
-  percent 'discount' 
+  percent 'discount'   
   
   set 'previous', ref:'Furniture'
 
