@@ -91,29 +91,26 @@
     <orderEntry type="library" name="Maven: jfree:jfreechart:1.0.13" level="project" />
     <orderEntry type="library" name="Maven: eclipse:jdtcore:3.1.0" level="project" />
     <orderEntry type="module" module-name="jspresso-app-launch-core" />
-    <orderEntry type="module" module-name="jspresso-tools" />
-    <orderEntry type="module" module-name="jspresso-swing-components" />
-    <orderEntry type="library" name="Maven: net.sf.nachocalendar:nachocalendar:0.23" level="project" />
-    <orderEntry type="library" name="Maven: net.sf.jedit-syntax:jedit-syntax:2.2.2" level="project" />
-    <orderEntry type="library" name="Maven: commons-cli:commons-cli:1.2" level="project" />
-    <orderEntry type="library" name="Maven: org.freemarker:freemarker:2.3.9" level="project" />
-    <orderEntry type="library" name="Maven: foxtrot:foxtrot:2.0" level="project" />
-    <orderEntry type="library" name="Maven: chrriis:dj-nativeswing:1.0.2.20120308" level="project" />
-    <orderEntry type="library" name="Maven: chrriis:dj-nativeswing-swt:1.0.2.20120308" level="project" />
-    <orderEntry type="library" name="Maven: org.eclipse:swt:3.7.2" level="project" />
-    <orderEntry type="library" name="Maven: org.eclipse.swt:org.eclipse.swt.cocoa.macosx.x86_64:3.7.2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:servlet-api:2.5" level="project" />
     <orderEntry type="module" module-name="jspresso-ext-view" />
-    <orderEntry type="module" module-name="jspresso-ext-remote-application" />
-    <orderEntry type="module" module-name="jspresso-remote-components" />
-    <orderEntry type="module" module-name="jspresso-ext-remote-components" />
-    <orderEntry type="module" module-name="jspresso-remote-application" />
-    <orderEntry type="module" module-name="jspresso-ext-security" />
-    <orderEntry type="library" name="Maven: net.sourceforge.spnego:spnego:7.0" level="project" />
-    <orderEntry type="module" module-name="jspresso-swing-application" />
-    <orderEntry type="library" name="Maven: org.jvnet.substance:substance:4.3" level="project" />
-    <orderEntry type="library" name="Maven: chrriis:dj-swingsuite:0.9.1" level="project" />
-    <orderEntry type="module" module-name="jspresso-ext-remote-testing" />
+    <orderEntry type="module" module-name="jspresso-ext-remote-application" scope="PROVIDED" />
+    <orderEntry type="module" module-name="jspresso-remote-components" scope="PROVIDED" />
+    <orderEntry type="module" module-name="jspresso-ext-remote-components" scope="PROVIDED" />
+    <orderEntry type="module" module-name="jspresso-remote-application" scope="PROVIDED" />
+    <orderEntry type="module" module-name="jspresso-ext-security" scope="PROVIDED" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: net.sourceforge.spnego:spnego:7.0" level="project" />
+    <orderEntry type="module" module-name="jspresso-swing-application" scope="PROVIDED" />
+    <orderEntry type="module" module-name="jspresso-swing-components" scope="PROVIDED" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: net.sf.nachocalendar:nachocalendar:0.23" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: net.sf.jedit-syntax:jedit-syntax:2.2.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: foxtrot:foxtrot:2.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.jvnet.substance:substance:4.3" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: chrriis:dj-nativeswing:1.0.2.20120308" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: chrriis:dj-nativeswing-swt:1.0.2.20120308" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse:swt:3.7.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse.swt:org.eclipse.swt.cocoa.macosx.x86_64:3.7.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: chrriis:dj-swingsuite:0.9.1" level="project" />
+    <orderEntry type="module" module-name="jspresso-ext-remote-testing" scope="PROVIDED" />
     <orderEntry type="module" module-name="hrsample-core" />
     <orderEntry type="library" name="Maven: org.codehaus.groovy:groovy-all:2.0.5" level="project" />
     <orderEntry type="module" module-name="jspresso-extensions-core" />

@@ -118,12 +118,8 @@ public class TestDataPersister extends
   }
 
   /**
-   * create a set of Module usage for module <i>moduleId</i> from <i>daysAgo</i>
-   * to now, using a random method to set a total of <i>accessCount</i> access
-   * 
-   * @param moduleId
-   * @param daysAgo
-   * @param accessCount
+   * create a set of Module usage for module <i>moduleId</i> from <i>formDaysAgo</i>
+   * to <i>toDaysAgo</i>, using a random method to set a total of <i>accessCount</i> access
    */
   private void createModuleUsages(String moduleId, String accessBy,
       int fromDaysAgo, int toDaysAgo, int accessCount) {
