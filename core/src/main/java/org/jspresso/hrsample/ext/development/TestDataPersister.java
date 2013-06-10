@@ -111,15 +111,15 @@ public class TestDataPersister extends
     Furniture furniture = createEntityInstance(Furniture.class);
     furniture.setName(name);
     furniture.setCreateTimestamp(new Date());
-    furniture.setPrice(Double.valueOf(price));
-    furniture.setDiscount(Double.valueOf(discount));
+    furniture.setPrice(price);
+    furniture.setDiscount(discount);
     saveOrUpdate(furniture);
     return furniture;
   }
 
   /**
    * create a set of Module usage for module <i>moduleId</i> from <i>formDaysAgo</i>
-   * to <i>toDaysAgo</i>, using a random method to set a total of <i>accessCount</i> access
+   * to <i>toDaysAgo</i>, using a random method to set a total of <i>accessCount</i> access.
    */
   private void createModuleUsages(String moduleId, String accessBy,
       int fromDaysAgo, int toDaysAgo, int accessCount) {
