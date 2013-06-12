@@ -19,6 +19,9 @@ workspace('tools.workspace', icon:'tools.png') {
     component:'Furniture') {
   }
     
+  filterModule ('Employee.test.module',
+    component:'Employee',
+    moduleView:'Employee.test.view')  
 }
  
 controller 'hrsample-ext.name',

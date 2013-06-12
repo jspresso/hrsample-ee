@@ -114,6 +114,7 @@ actionMap('beanCollectionModuleActionMap') {
   }
   actionList('EXPORT') {
     action ref:'exportFilterModuleResultToHtmlAction'
+    action ref:'importBoxAction'
   }
   actionList ('PERMALINK', collapsable:true) {
     action parent:'createPermalinkAndCopyToClipboardFrontAction', custom:[tinyURL:false]
@@ -121,6 +122,46 @@ actionMap('beanCollectionModuleActionMap') {
   }
 }
 
+table('Employee.test.view',
+  columns:['name', 'firstName', 'gender', 'birthDate', 
+           'company', 
+           'contact.address', 'contact.city', 'contact.phone', 'contact.phone']) {
+  
+   actionMap {
+    actionList('SAVE', collapsable:true) {
+      action ref:'saveModuleObjectFrontAction'
+      action ref:'reloadModuleObjectFrontAction'
+    }
+    actionList('FILE') {
+      action ref:'queryModuleFilterAction'
+    }
+    actionList('SERVICE') {
+      action ref:'addAsChildModuleFrontAction'
+    }
+    actionList('EXPORT') {
+      action ref:'exportFilterModuleResultToHtmlAction'
+      action parent:'importEmployeeBoxAction',  
+                  custom:[mergeFields:['name', 'firstName'],
+                          extraColumns:['zip']]
+    }
+  }
+}
+
+action ('importEmployeeBoxAction',
+  parent:'importBoxAction',
+  custom:[okAction_ref:'importEmployeeBoxOkAction'])
+
+action ('importEmployeeBoxOkAction', 
+  parent:'importBoxOkAction',
+  next:'importEmployeeAction')
+
+action ('importEmployeeAction',
+  parent:'importEntitiesAction',
+  custom:[fileOpenCallback_ref:'importEmployeeFactoryBean'])
+
+bean ('importEmployeeFactoryBean',
+  parent:'importEntitiesFactoryBean',
+  class:'org.jspresso.hrsample.ext.frontend.ImportEmployeeFactoryBean')
 
 
 
