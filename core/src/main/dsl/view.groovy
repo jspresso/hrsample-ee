@@ -122,10 +122,7 @@ actionMap('beanCollectionModuleActionMap') {
   }
 }
 
-table('Employee.test.view',
-  columns:['name', 'firstName', 'gender', 'birthDate', 
-           'company', 
-           'contact.address', 'contact.city', 'contact.phone', 'contact.phone']) {
+table('Employee.test.view') {
   
    actionMap {
     actionList('SAVE', collapsable:true) {
@@ -136,16 +133,44 @@ table('Employee.test.view',
       action ref:'queryModuleFilterAction'
     }
     actionList('SERVICE') {
-      action ref:'addAsChildModuleFrontAction'
+      action parent:'openEmployeeFrontAction'
     }
     actionList('EXPORT') {
-      action ref:'exportFilterModuleResultToHtmlAction'
-      action parent:'importEmployeeBoxAction',  
-                  custom:[mergeFields:['name', 'firstName'],
-                          extraColumns:['zip']]
-    }
+      action parent:'exportFilterModuleResultToHtmlAction',
+                custom:[hideMyExportPopup:false, hideMoreColumnsPopup:false, moreColumnsOneToManyDepth:4]
+      action parent:'importEmployeeBoxAction', 
+                custom:[mergeFields:['name', 'firstName'], extraColumns:['zip'], additionalFields:['teams']] 
+    } 
+  }
+   
+  columns {
+    propertyView name:'company', action:'openEmployeeCompanyFrontAction', readOnly:true
+    propertyView name:'company.workforce', action:'openEmployeeCompanyWorkforceFrontAction', readOnly:true
+    propertyView name:'name', action:'openEmployeeFrontAction', readOnly:true
+    propertyView name:'firstName', readOnly:true
+    propertyView name:'gender', readOnly:true
+    propertyView name:'birthDate', readOnly:true
+    propertyView name:'contact.address', readOnly:true
+    propertyView name:'contact.city', readOnly:true
+    propertyView name:'contact.phone', readOnly:true
+    propertyView name:'contact.phone', readOnly:true
   }
 }
+
+action ('openEmployeeFrontAction',
+  parent:'openReferenceFrontAction',
+  custom:[parentWorkspaceName:'employees.workspace', parentModuleName:'employees.module'])
+
+action ('openEmployeeCompanyFrontAction', 
+  parent:'openReferenceFrontAction', 
+  custom:[parentWorkspaceName:'organization.workspace', parentModuleName:'companies.module', openReferenceName:'company'])
+
+action ('openEmployeeCompanyWorkforceFrontAction',
+  parent:'openReferenceFrontAction',
+  custom:[parentWorkspaceName:'employees.workspace', parentModuleName:'employees.module', openReferenceName:'company.employees'])
+
+action ('openReferenceFrontAction', parent:'addAsChildModuleFrontAction',
+  class:'org.jspresso.hrsample.ext.frontend.AddBeanReferenceAsSubModuleFrontAction')
 
 action ('importEmployeeBoxAction',
   parent:'importBoxAction',

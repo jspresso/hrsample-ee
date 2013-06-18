@@ -32,7 +32,7 @@ public class ImportEmployeeFactoryBean extends ImportEntitiesFactoryBean  {
     // load from database
     IEntity entity = super.findReference(refData, cells, context);
    
-    String property = refData.getProperty().getName();
+    String property = refData.getName();
     if (Employee.COMPANY.equals(property)) {
       if (entity == null) {
         entity = getBackendController().getEntityFactory().createEntityInstance(Company.class);
