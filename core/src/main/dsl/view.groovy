@@ -158,19 +158,17 @@ table('Employee.test.view') {
 }
 
 action ('openEmployeeFrontAction',
-  parent:'openReferenceFrontAction',
+  parent:'addAsChildModuleFrontAction',
   custom:[parentWorkspaceName:'employees.workspace', parentModuleName:'employees.module'])
 
 action ('openEmployeeCompanyFrontAction', 
-  parent:'openReferenceFrontAction', 
-  custom:[parentWorkspaceName:'organization.workspace', parentModuleName:'companies.module', openReferenceName:'company'])
+  parent:'addAsChildModuleFrontAction',
+  custom:[parentWorkspaceName:'organization.workspace', parentModuleName:'companies.module', referencePath:'company'])
 
 action ('openEmployeeCompanyWorkforceFrontAction',
-  parent:'openReferenceFrontAction',
-  custom:[parentWorkspaceName:'employees.workspace', parentModuleName:'employees.module', openReferenceName:'company.employees'])
-
-action ('openReferenceFrontAction', parent:'addAsChildModuleFrontAction',
-  class:'org.jspresso.hrsample.ext.frontend.AddBeanReferenceAsSubModuleFrontAction')
+  parent:'addAsChildModuleFrontAction',
+  custom:[parentWorkspaceName:'employees.workspace', parentModuleName:'employees.module',
+      referencePath:'company.employees'])
 
 action ('importEmployeeBoxAction',
   parent:'importBoxAction',
