@@ -106,7 +106,7 @@
     <orderEntry type="module" module-name="jspresso-ext-remote-testing" scope="PROVIDED" />
     <orderEntry type="module" module-name="hrsample-core" />
     <orderEntry type="library" name="Maven: org.codehaus.groovy:groovy-all:2.0.5" level="project" />
-    <orderEntry type="module" module-name="jspresso-extensions-core" />
+    <orderEntry type="library" name="Maven: org.jspresso.contrib:jspresso-extensions-core:1.3-SNAPSHOT" level="project" />
     <orderEntry type="module" module-name="jspresso-usage-core" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.11" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
