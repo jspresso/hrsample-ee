@@ -78,7 +78,7 @@
     <orderEntry type="module" module-name="jspresso-ext-view" />
     <orderEntry type="module" module-name="hrsample-core" />
     <orderEntry type="library" name="Maven: org.codehaus.groovy:groovy-all:2.0.5" level="project" />
-    <orderEntry type="module" module-name="jspresso-extensions-core" />
+    <orderEntry type="library" name="Maven: org.jspresso.contrib:jspresso-extensions-core:1.4-SNAPSHOT" level="project" />
     <orderEntry type="module" module-name="jspresso-usage-core" />
     <orderEntry type="module" module-name="jspresso-ext-remote-application" />
     <orderEntry type="module" module-name="jspresso-remote-components" />
