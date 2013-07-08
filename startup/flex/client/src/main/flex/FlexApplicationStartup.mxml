@@ -3,7 +3,8 @@
   layout="absolute"
   initialize="init()"
   creationComplete="start()">
-  
+
+  <mx:Style source="../resources/org/jspresso/hrsample/ext/theme.css" />
   <mx:Script>
     <![CDATA[
       import mx.messaging.ChannelSet;
