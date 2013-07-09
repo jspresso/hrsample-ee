@@ -54,7 +54,7 @@
               <goal>compile-swf</goal>
             </goals>
             <configuration>
-             <targetPlayer>11.1.0</targetPlayer>
+              <targetPlayer>11.1.0</targetPlayer>
             </configuration>
           </execution>
           <execution>
