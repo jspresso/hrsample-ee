@@ -205,7 +205,8 @@
                       </params>
                     </component>
                   </components>
-                  <includes>**/ext/model/*.java,
+                  <includes>**/model/Traceable.java,
+                            **/ext/model/*.java,
                             **/contrib/usage/model/*.java,
                             **/contrib/batch/model/*.java,
                             **/contrib/model/i18n/*.java,
