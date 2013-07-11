@@ -21,7 +21,7 @@ Entity('Furniture',
   extend:['Traceable', 'ITranslatable'], 
   icon:'furniture.png',
   toString:'name',
-  queryable:['name', 'lastUpdateTimestamp'],
+  queryable:['name', 'nlsOrRawLabel', 'lastUpdateTimestamp'],
   extension:'FurnitureExtension',
   rendered:['name', 'price', 'discount', 'createTimestamp', 'lastUpdateTimestamp', 'rawLabel', 'nlsLabel', 'nlsOrRawLabel']) {
   string_128 'name'
