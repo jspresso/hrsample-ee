@@ -1,6 +1,7 @@
 // Implement your views here using the SJS DSL.
 external id:['restartModuleWithConfirmationFrontAction']
 
+/* defined in view.xml because SJS does not know about the fields coming from the FW
 form('loginViewDescriptor', parent:'loginViewDescriptorBase', model:'CaptchaUsernamePasswordHandler', columnCount:2) {
   fields {
     propertyView name:'username', width:2
@@ -13,6 +14,7 @@ form('loginViewDescriptor', parent:'loginViewDescriptorBase', model:'CaptchaUser
     propertyView name:'help', readOnly:true, action:'helpFrontAction'
   }
 }
+*/
 
 form('Registration.form', fields:['name', 'firstName']) {
   actionMap {

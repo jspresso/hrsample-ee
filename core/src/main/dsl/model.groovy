@@ -1,28 +1,10 @@
 // Implement your domain here using the SJS DSL.
+external id:['loginModelDescriptor']
 
 namespace('security') {
-  Component('CaptchaUsernamePasswordHandler') {
-    string_64 'username'
-    password 'password', maxLength:64
+  Component('CaptchaUsernamePasswordHandler', extend:['loginModelDescriptor']) {
     imageUrl 'captchaImageUrl'
     string_64 'captchaChallenge'
-    enumeration 'language', enumName:'LANGUAGE',
-    valuesAndIcons:[
-        'fr':'/org/jspresso/framework/application/images/i18n/fr.png',
-        'en':'/org/jspresso/framework/application/images/i18n/en.png',
-        'de':'/org/jspresso/framework/application/images/i18n/de.png',
-        'es':'/org/jspresso/framework/application/images/i18n/es.png',
-        'pt':'/org/jspresso/framework/application/images/i18n/pt.png',
-        'it':'/org/jspresso/framework/application/images/i18n/it.png',
-        'nl':'/org/jspresso/framework/application/images/i18n/nl.png',
-        'pl':'/org/jspresso/framework/application/images/i18n/pl.png',
-        'tr':'/org/jspresso/framework/application/images/i18n/tr.png',
-        'bg':'/org/jspresso/framework/application/images/i18n/bg.png',
-        'ru':'/org/jspresso/framework/application/images/i18n/ru.png',
-        'cs':'/org/jspresso/framework/application/images/i18n/cs.png',
-        'sk':'/org/jspresso/framework/application/images/i18n/sk.png'
-    ]
-    bool 'rememberMe'
     string_64 'register', readOnly:true
     string_64 'help', readOnly:true
   }

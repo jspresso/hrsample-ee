@@ -211,7 +211,7 @@
                             **/contrib/batch/model/*.java,
                             **/contrib/model/i18n/*.java,
                             **/contrib/model/query/*.java
-                            </includes>
+                  </includes>
                 </config>
               </configs>
               <sourceArtifacts>org.jspresso.hrsample:hrsample-core,
