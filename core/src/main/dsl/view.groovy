@@ -7,6 +7,7 @@ form('loginViewDescriptor', parent:'loginViewDescriptorBase', model:'CaptchaUser
     propertyView name:'password', width:2
     propertyView name:'captchaImageUrl', width:2
     propertyView name:'captchaChallenge', width:2
+    propertyView name:'language', width:2
     propertyView name:'rememberMe', width:2
     propertyView name:'register', readOnly:true, action:'registerFrontAction'
     propertyView name:'help', readOnly:true, action:'helpFrontAction'
