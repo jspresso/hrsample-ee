@@ -14,7 +14,7 @@
   <version>3.8-SNAPSHOT</version>
 
   <properties>
-    <jspresso-extensions.version>1.5-SNAPSHOT</jspresso-extensions.version>
+    <jspresso-extensions.version>1.6-SNAPSHOT</jspresso-extensions.version>
     <jspresso-usage.version>1.7-SNAPSHOT</jspresso-usage.version>
   </properties>
 
@@ -141,6 +141,12 @@
         <artifactId>jspresso-extensions-core</artifactId>
         <version>${jspresso-extensions.version}</version>
       </dependency>
+      
+      <dependency>
+	      <groupId>org.jspresso.contrib</groupId>
+	      <artifactId>jspresso-extensions-test</artifactId>
+	      <version>${jspresso-extensions.version}</version>
+	    </dependency>
 
       <!-- Jspresso-usage dependencies -->
       <dependency>

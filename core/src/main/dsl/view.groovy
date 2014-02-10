@@ -143,6 +143,9 @@ table('Employee.test.view') {
                 custom:[hideMyExportPopup:false, hideMoreColumnsPopup:false, moreColumnsOneToManyDepth:4]
       action parent:'importEmployeeBoxAction', 
                 custom:[mergeFields:['name', 'firstName'], extraColumns:['zip'], additionalFields:['teams']] 
+                
+      action ref:'exportTableToTmarAction'
+      action ref:'exportAllToTmarRecursivelyAction'
     } 
   }
    

@@ -1,0 +1,12 @@
+Company employees
+
+Use thos master data :
+/include  MasterData
+
+Here is some test case to check that employees are correctly added and removed from company :
+
+/each 
+ [ operation | name | employee count ? 
+ | add       | Toto | 5                
+
+ 

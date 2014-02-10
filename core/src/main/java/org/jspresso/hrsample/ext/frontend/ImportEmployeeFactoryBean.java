@@ -4,7 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 
-import org.jspresso.contrib.frontend.ImportEntitiesFactoryBean;
+import org.jspresso.contrib.backend.ImportEntitiesFactoryBean;
 import org.jspresso.contrib.frontend.ImportReference;
 import org.jspresso.framework.action.ActionBusinessException;
 import org.jspresso.framework.model.entity.IEntity;

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC "-//LOGGER" "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
+<!-- Should absolutely be configured in an xml file, not a properties because the xml is looked
+     for by log4j before the properties. And sadly, bsf-2.4.0.jar is including a log4j.properties...
+-->
+<log4j:configuration>
+
+    <appender name="stdout" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                value="%5p|%c{1}|%m%n" />
+        </layout>
+    </appender>
+
+    <logger name="fr.gefco.atl">
+        <level value="debug"/>
+    </logger>
+
+    <logger name="fr.gefco.atl.integration">
+        <level value="info"/>
+    </logger>
+
+    <logger name="org.hibernate.SQL">
+        <level value="info"/>
+    </logger>
+    
+    <!-- To disable the "A flush has been attempted outside of any transactional context. Jspresso disallows this bad practice." warning -->
+    <logger name="org.jspresso.framework.application.backend.persistence.hibernate.ControllerAwareEntityProxyInterceptor">
+        <level value="error"/>
+    </logger>    
+    
+    <root>
+        <level value="warn" />
+        <appender-ref ref="stdout" />
+    </root>
+</log4j:configuration>
