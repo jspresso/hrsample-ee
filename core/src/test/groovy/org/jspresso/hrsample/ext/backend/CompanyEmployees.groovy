@@ -4,6 +4,7 @@ import org.jspresso.hrsample.model.City;
 import org.jspresso.hrsample.model.Company
 import org.jspresso.hrsample.model.Department;
 import org.jspresso.hrsample.model.OrganizationalUnit;
+import org.jspresso.hrsample.model.Team;
 
 
 class CompanyEmployees extends TmarBackendStartup {
@@ -16,8 +17,9 @@ class CompanyEmployees extends TmarBackendStartup {
     createEntities(Company, tmar.table.company)
     
     createEntities(
-      [OrganizationalUnit: tmar.table.organizationalUnit, 
-       Employee: tmar.table.employee])
+      [Employee: tmar.table.employee,
+       Team: tmar.table.team,
+       Department: tmar.table.department])
     
     // Prepare assertions
     tmar.employeeCount = 5
