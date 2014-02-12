@@ -1,12 +1,24 @@
 Company employees
 
-Use thos master data :
+Use those master data :
 /include  MasterData
 
 Here is some test case to check that employees are correctly added and removed from company :
 
-/each 
- [ operation | name | employee count ? 
- | add       | Toto | 5                
+Let's check few things :
+ /sequence
+ [ operation | table name | count ? | 
+ | COUNT     | Employee   | 5       | 
+ | COUNT     | City       | 3       | 
+ | COUNT     | Event      | 5       | 
+ | COUNT     | Team       | 3       | 
+ | COUNT     | Company    | 1       | 
+ | COUNT     | Department | 2       | 
+
+Now let's check some values
+ /sequence
+ [ operation | table    | key        | exists ? |  
+ | EXISTS    | Employee | 2256725396 | true     |  
+ | EXISTS    | City     | CI1        | true     |  
 
  
