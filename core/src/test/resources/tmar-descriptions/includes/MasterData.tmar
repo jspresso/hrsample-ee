@@ -14,15 +14,7 @@
  | CI0 | Suresnes | 92150 |
  | CI1 | Paris I  | 75001 |
  | CI2 | Evry     | 91000 |
- 
- /table event
- [ @id | text                                       | @employee  |
- | EV0 | Employee <b>Berlutti</b> has been created. | 2256725396 |
- | EV1 | Employee <b>Doe</b> has been created.      | 1523698754 |
- | EV2 | Employee <b>Den</b> has been created.      | 1859637461 |
- | EV3 | Employee <b>San</b> has been created.      | 2597853274 |
- | EV4 | Employee <b>Trulli</b> has been created.   | 2325985423 |
- 
+  
  /table team
  [ @id | name raw    | ou id  | contact.address          | contact.city | contact.phone   | contact.email        | @manager   | @department |
  | TE0 | HR 003 Team | HR-003 | 124 avenue de la Liberté | CI1          | +33 123 456 103 | hr003@design2see.com | 2256725396 | DE0         |

@@ -1,39 +1,29 @@
 package org.jspresso.hrsample.ext.backend
 
-import java.util.List;
-
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
-import org.jspresso.contrib.model.query.UserQuery;
-import org.jspresso.contrib.tmar.core.Tmar
-import org.jspresso.framework.application.backend.session.EMergeMode;
-import org.jspresso.framework.model.descriptor.IComponentDescriptor;
+import org.hibernate.criterion.DetachedCriteria
+import org.jspresso.contrib.model.query.UserQuery
+import org.jspresso.framework.application.backend.session.EMergeMode
+import org.jspresso.framework.model.descriptor.IComponentDescriptor
 import org.jspresso.hrsample.model.City;
-import org.jspresso.hrsample.model.Company;
-import org.jspresso.hrsample.model.Department;
-import org.jspresso.hrsample.model.Employee;
-import org.jspresso.hrsample.model.Event;
-import org.jspresso.hrsample.model.Team;
 
 class CompanyEmployees extends TmarBackendStartup {
 
-  def test() {
+  def test() { 
 
     when:
       while (tmar.line) {
         
         if (tmar.currentIndexList == 0) {
           
-          createEntities(City, tmar.table.city)
-          createEntities(Company, tmar.table.company)
-    
+          //createEntities(City, tmar.table.city)
+          
           createEntities(
               [Employee: tmar.table.employee,
                Team: tmar.table.team,
-               Department: tmar.table.department])
+               Department: tmar.table.department,
+               City: tmar.table.city,
+               Company: tmar.table.company])
           
-          createEntities(Event, tmar.table.event)
         }
         
         if ('COUNT' == tmar.operation) {

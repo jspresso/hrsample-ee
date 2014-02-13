@@ -10,15 +10,18 @@ Let's check few things :
  [ operation | table name | count ? | 
  | COUNT     | Employee   | 5       | 
  | COUNT     | City       | 3       | 
- | COUNT     | Event      | 5       | 
  | COUNT     | Team       | 3       | 
  | COUNT     | Company    | 1       | 
  | COUNT     | Department | 2       | 
+NB : events are also created when employees are created, then we should have the same result :
+ | COUNT     | Event      | 5       | 
 
-Now let's check some values
+Now let's that some objects are found :
  /sequence
- [ operation | table    | key        | exists ? |  
- | EXISTS    | Employee | 2256725396 | true     |  
- | EXISTS    | City     | CI1        | true     |  
+ [ operation | table    | key        | exists ? | 
+ | EXISTS    | City     | CI1        | true     | 
+ | EXISTS    |          |            |          | 
+ | EXISTS    | Team     | TE0        | true     | 
+ | EXISTS    | Employee | 2256725396 | true     | 
 
  
