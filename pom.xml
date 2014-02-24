@@ -14,7 +14,7 @@
   <version>3.8-SNAPSHOT</version>
 
   <properties>
-    <jspresso-extensions.version>1.6-SNAPSHOT</jspresso-extensions.version>
+    <jspresso-extensions.version>1.7-SNAPSHOT</jspresso-extensions.version>
     <jspresso-usage.version>1.7-SNAPSHOT</jspresso-usage.version>
   </properties>
 

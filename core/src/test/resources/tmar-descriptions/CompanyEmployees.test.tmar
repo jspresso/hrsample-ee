@@ -1,27 +1,34 @@
 Company employees
 
-Use those master data :
-/include  MasterData
+The purpose of this test is to insert some master data and to check that datas are 
+correctly created. 
 
-Here is some test case to check that employees are correctly added and removed from company :
+Here are the master data to insert :
+/include  MasterData 
 
-Let's check few things :
+First of all, let's check that table contains the appropriate number of lines :
  /sequence
- [ operation | table name | count ? | 
- | COUNT     | Employee   | 5       | 
- | COUNT     | City       | 3       | 
- | COUNT     | Team       | 3       | 
- | COUNT     | Company    | 1       | 
- | COUNT     | Department | 2       | 
+ [ operation | table name | size ? | 
+ | COUNT     | Employee   | 5      | 
+ | COUNT     | City       | 3      | 
+ | COUNT     | Team       | 3      | 
+ | COUNT     | Company    | 1      | 
+ | COUNT     | Department | 2      | 
 NB : events are also created when employees are created, then we should have the same result :
- | COUNT     | Event      | 5       | 
+ | COUNT     | Event      | 5      | 
 
 Now let's that some objects are found :
  /sequence
- [ operation | table    | key        | exists ? | 
- | EXISTS    | City     | CI1        | true     | 
- | EXISTS    |          |            |          | 
- | EXISTS    | Team     | TE0        | true     | 
- | EXISTS    | Employee | 2256725396 | true     | 
+ [ operation | table name | key value  | exists ? | 
+ | EXISTS    | City       | CI1        | true     | 
+ | EXISTS    | Team       | TE0        | true     | 
+ | EXISTS    | Employee   | 2256725396 | true     | 
+ | EXISTS    | Employee   | Trilili    | false    | 
+
+Let's check that fields are correctly set according to master data :
+ /sequence
+ [ operation | table name | key value  | field           | value ?                 | 
+ | CHECK     | City       | CI0        | name raw        | Suresnes                | 
+ | CHECK     | Employee   | 2256725396 | contact.address | 104 square des Bégonias | 
 
  
