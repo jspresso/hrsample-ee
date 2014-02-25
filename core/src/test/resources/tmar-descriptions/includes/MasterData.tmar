@@ -1,33 +1,33 @@
  Master Data
  
  /table employee
- [ @ssn       | name raw | first name raw | birth date | hire date  | gender | preferred color | married | salary    | photo | password | contact.address                | contact.city | contact.phone     | contact.email                     | @company | @managed ou |
- | 2256725396 | Berlutti | Graziella      | 1971/01/17 | 2003/01/12 | Femme  | 0xFFAA1133      | false   | 100 000,5 |       |          | 104 square des Bégonias        | CI0          | +33 1 698 234 986 | graziella.berlutti@design2see.com | CO0      | TE0         |
- | 1523698754 | Doe      | John           | 1972/01/02 | 2005/01/03 | Homme  | 0xFF449911      | true    | 100 000   |       | doepass  | 12 allée du Chien qui Fume     | CI2          | +33 1 152 368 984 | john.doe@design2see.com           | CO0      | DE0         |
- | 1859637461 | Den      | Mike           | 1970/01/05 | 2004/01/01 | Homme  | 0xFFCC1255      | false   | 80 000    |       | denpass  | 26 rue de la Pie qui Chante    | CI0          | +33 1 968 846 398 | mike.den@design2see.com           | CO0      | TE1         |
- | 2597853274 | San      | Gloria         | 1969/01/09 | 2006/01/03 | Femme  | 0xFF001276      | false   | 75 000    |       |          | 13 avenue du Poisson Enragé    | CI2          | +33 1 956 367 412 | gloria.san@design2see.com         | CO0      | DE1         |
- | 2325985423 | Trulli   | Maria          | 1976/01/01 | 2006/01/03 | Femme  | 0xFF9489AB      | true    | 110 000   |       |          | 20 avenue du Crocodile Marteau | CI2          | +33 1 868 745 369 | maria.trulli@design2see.com       | CO0      | TE2         |
+ [ @ssn       | name     | first name | birth date | hire date  | gender | preferred color | married | salary  | photo | password | contact.address                | contact.city | contact.phone     | contact.email                     | @company | @managed ou |
+ | 2256725396 | Berlutti | Graziella  | 1971/01/17 | 2003/01/12 | Femme  | 0xFFAA1133      | false   | 100 000 |       |          | 104 square des Bégonias        | CI0          | +33 1 698 234 986 | graziella.berlutti@design2see.com | CO0      | TE0         |
+ | 1523698754 | Doe      | John       | 1972/01/02 | 2005/01/03 | Homme  | 0xFF449911      | true    | 100 000 |       | doepass  | 12 allée du Chien qui Fume     | CI2          | +33 1 152 368 984 | john.doe@design2see.com           | CO0      | DE0         |
+ | 1859637461 | Den      | Mike       | 1970/01/05 | 2004/01/01 | Homme  | 0xFFCC1255      | false   | 80 000  |       | denpass  | 26 rue de la Pie qui Chante    | CI0          | +33 1 968 846 398 | mike.den@design2see.com           | CO0      | TE1         |
+ | 2597853274 | San      | Gloria     | 1969/01/09 | 2006/01/03 | Femme  | 0xFF001276      | false   | 75 000  |       |          | 13 avenue du Poisson Enragé    | CI2          | +33 1 956 367 412 | gloria.san@design2see.com         | CO0      | DE1         |
+ | 2325985423 | Trulli   | Maria      | 1976/01/01 | 2006/01/03 | Femme  | 0xFF9489AB      | true    | 110 000 |       |          | 20 avenue du Crocodile Marteau | CI2          | +33 1 868 745 369 | maria.trulli@design2see.com       | CO0      | TE2         |
   (5 out of 8 records)
 
  /table city
- [ @id | name raw | zip   |
+ [ @id | name     | zip   |
  | CI0 | Suresnes | 92150 |
  | CI1 | Paris I  | 75001 |
  | CI2 | Evry     | 91000 |
-  
+
  /table team
- [ @id | name raw    | ou id  | contact.address          | contact.city | contact.phone   | contact.email        | @manager   | @department |
+ [ @id | name        | ou id  | contact.address          | contact.city | contact.phone   | contact.email        | @manager   | @department |
  | TE0 | HR 003 Team | HR-003 | 124 avenue de la Liberté | CI1          | +33 123 456 103 | hr003@design2see.com | 2256725396 | DE0         |
  | TE1 | HR 001 Team | HR-001 | 124 avenue de la Liberté | CI1          | +33 123 456 101 | hr001@design2see.com | 1859637461 | DE0         |
  | TE2 | IT 001 Team | IT-001 | 125 avenue de la Liberté | CI1          | +33 123 456 201 | it001@design2see.com | 2325985423 | DE1         |
   (3 out of 5 records)
 
  /table company
- [ @id | name raw   | contact.address          | contact.city | contact.phone   | contact.email          |
+ [ @id | name       | contact.address          | contact.city | contact.phone   | contact.email          |
  | CO0 | Design2See | 123 avenue de la Liberté | CI1          | +33 123 456 000 | contact@design2see.com |
  
  /table department
- [ @id | name raw               | ou id  | contact.address          | contact.city | contact.phone   | contact.email     | @manager   | @company |
+ [ @id | name                   | ou id  | contact.address          | contact.city | contact.phone   | contact.email     | @manager   | @company |
  | DE0 | Human Resources        | HR-000 | 124 avenue de la Liberté | CI1          | +33 123 456 100 | hr@design2see.com | 1523698754 | CO0      |
  | DE1 | Information Technology | IT-000 | 125 avenue de la Liberté | CI1          | +33 123 456 200 | it@design2see.com | 2597853274 | CO0      |
  

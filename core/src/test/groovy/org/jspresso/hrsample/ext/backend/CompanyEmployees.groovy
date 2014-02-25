@@ -9,27 +9,38 @@ import org.jspresso.framework.model.descriptor.IComponentDescriptor
 import org.jspresso.framework.model.entity.IEntity
 import org.jspresso.framework.util.accessor.IAccessor
 import org.jspresso.framework.util.accessor.IAccessorFactory
+import org.jspresso.hrsample.model.Company
+import org.jspresso.hrsample.model.Employee
 
 class CompanyEmployees extends TmarBackendStartup {
 
   def test() {
 
     when:
-    while (tmar.line) {
+    while (tmar.hasNext()) {
 
       if (tmar.currentIndexList == 0) {
-
-
+        
         createEntities([City: tmar.table.city])
-
+        
+        createEntities([Company: tmar.table.company])
+       
         createEntities(
-            [Employee: tmar.table.employee,
-              Team: tmar.table.team,
-              Department: tmar.table.department,
-              //City: tmar.table.city,
-              Company: tmar.table.company])
-
+          [Employee: tmar.table.employee,
+           Team: tmar.table.team,
+           Department: tmar.table.department])
+        
       }
+
+//        createEntities([City: tmar.table.city])
+//        createEntities([Company: tmar.table.company])
+        
+//        createEntities(
+//            [Employee: tmar.table.employee,
+//              Team: tmar.table.team,
+//              Department: tmar.table.department,
+//              City: tmar.table.city,
+//              Company: tmar.table.company])
 
       if ('COUNT' == tmar.operation) {
         tmar.size = countTable(tmar.tableName)
@@ -64,6 +75,7 @@ class CompanyEmployees extends TmarBackendStartup {
 
     DetachedCriteria criteria = DetachedCriteria.forClass(c);
     List<?> queries = getBackendController().findByCriteria(criteria, EMergeMode.MERGE_KEEP, c);
+
     return queries.size();
   }
 
@@ -74,7 +86,7 @@ class CompanyEmployees extends TmarBackendStartup {
    * @return
    */
   private IEntity findEntity(String clazz, String keyValue) {
-    IComponentDescriptor<?> d = getApplicationContext().getBean(clazz as String);
+    IComponentDescriptor<?> d = getApplicationContext().getBean(clazz);
     Class c = d.getComponentContract();
     if (keyValue.startsWith("\"")) {
       keyValue = keyValue.substring(1, keyValue.length()-2)
@@ -109,7 +121,7 @@ class CompanyEmployees extends TmarBackendStartup {
     IAccessorFactory accessorFactory = BackendControllerHolder.getCurrentBackendController().getAccessorFactory();
     IAccessor accessor = accessorFactory.createPropertyAccessor(javaField, entity.getComponentContract());
     Object o = accessor.getValue(entity);
-//    Object o = entity.straightGetProperty(javaField)
+    
     return o;
   }
 
