@@ -20,6 +20,9 @@ import org.jspresso.hrsample.model.Employee;
  */
 public class ImportEmployeeFactoryBean extends ImportEntitiesFactoryBean  {
 
+  public ImportEmployeeFactoryBean() {
+  }
+
   public static final String ZIP = "zip";
   public static final String CONTACT_CITY = Employee.CONTACT + "." + ContactInfo.CITY;
       

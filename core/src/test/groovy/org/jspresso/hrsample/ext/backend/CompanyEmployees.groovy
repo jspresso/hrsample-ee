@@ -1,5 +1,6 @@
 package org.jspresso.hrsample.ext.backend
 
+import org.apache.commons.collections.KeyValue
 import org.hibernate.criterion.DetachedCriteria
 import org.hibernate.criterion.Restrictions
 import org.jspresso.contrib.test.backend.tmar.TmarUtil
@@ -9,8 +10,7 @@ import org.jspresso.framework.model.descriptor.IComponentDescriptor
 import org.jspresso.framework.model.entity.IEntity
 import org.jspresso.framework.util.accessor.IAccessor
 import org.jspresso.framework.util.accessor.IAccessorFactory
-import org.jspresso.hrsample.model.Company
-import org.jspresso.hrsample.model.Employee
+import org.jspresso.framework.util.uid.ByteArray
 
 class CompanyEmployees extends TmarBackendStartup {
 
@@ -94,7 +94,9 @@ class CompanyEmployees extends TmarBackendStartup {
 
     String key = TmarUtil.findUnicityScope(d);
     if (key==null) {
-      IEntity entity = getBackendController().findById(keyValue, EMergeMode.MERGE_KEEP, c)
+      Serializable keyId = isStringGUIDGenerator() ? keyValue : new ByteArray(keyValue.getBytes())
+      
+      IEntity entity = getBackendController().findById(keyId, EMergeMode.MERGE_KEEP, c)
       return entity;
     }
 
