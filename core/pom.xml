@@ -346,7 +346,7 @@
                   </fileset>
                 </replaceregexp>
                 
-                <!-- Replace module entities id definitions to support varbinary -->
+                <!-- Replace module entities id definitions to support varbinary
                 
                 <replaceregexp byline="false" flags="mg">
                   <regexp pattern="(.*)&lt;id name=&quot;id&quot; type=&quot;string&quot;&gt;(\r?\n)(.*)&lt;column name=&quot;([^&quot;]*)&quot; length=&quot;[^&quot;]*&quot;/&gt;" />
@@ -370,7 +370,7 @@
                   </fileset>
                 </replaceregexp>
                 
-                <!-- End replace module entities id definitions to support varbinary -->
+                End replace module entities id definitions to support varbinary-->
                 
                 <delete dir="${project.build.directory}/antrun" />
               </target>
