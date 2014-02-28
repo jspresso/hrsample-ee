@@ -28,7 +28,7 @@ import org.springframework.transaction.support.TransactionCallbackWithoutResult
 public class TmarBackendStartup extends AbstractTmarBackendStartup {
 
   /**
-   * Performs DB initialization and test data creation.
+   * Performs DB initialization and test data creation. 
    * 
    * @throws java.lang.Exception
    */
@@ -47,6 +47,7 @@ public class TmarBackendStartup extends AbstractTmarBackendStartup {
   //@AfterClass
   //static tearDownAfterClass
   public void cleanupSpec() throws Exception {
+    
     TmarBackendStartup startup = new TmarBackendStartup();
     startup.start();
     final HibernateBackendController bc = (HibernateBackendController) startup.getBackendController();

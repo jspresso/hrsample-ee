@@ -1,0 +1,40 @@
+Company employees (without specific entity ids)
+
+_THIS TEST IS THE SAME AS TEST2 BUT WITHOUT FORCED ENTITY IDS
+
+//TODO: Import the parent test !
+
+The purpose of this test is to insert some master data and to check that datas are 
+correctly created. 
+ 
+Here are the master data to insert :
+/include  MasterDataB
+
+First of all, let's check that table contains the appropriate number of lines :
+ /sequence
+ [ operation | table name | size ? |  
+ | COUNT     | Employee   | 6      |  
+ | COUNT     | City       | 3      |  
+ | COUNT     | Team       | 4      |  
+ | COUNT     | Company    | 1      |  
+ | COUNT     | Department | 2      |  
+NB : events are also automatically created when employees are created, then we should have the same result :
+ | COUNT     | Event      | 6      |  
+
+Now let's that some objects are found :
+ /sequence
+ [ operation | table name | key value  | exists ? | 
+ | EXISTS    | City       | CI1        | true     | 
+ | EXISTS    | Team       | TE1        | true     | 
+ | EXISTS    | Company    | CO0        | true     | 
+ | EXISTS    | Employee   | 2256725396 | true     | 
+ | EXISTS    | Employee   | Trilili    | false    | 
+
+Let's check that fields are correctly set according to master data :
+ /sequence
+ [ operation | table name | key value  | field           | value ?                  | 
+ | CHECK     | City       | CI1        | name            | Paris I                  | 
+ | CHECK     | Company    | CO0        | contact.address | 123 avenue de la Liberté | 
+ | CHECK     | Employee   | 2256725396 | contact.address | 104 square des Bégonias  | 
+
+ 

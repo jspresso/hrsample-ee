@@ -1,0 +1,35 @@
+ Master Data (with specific entity ids)
+ 
+ /table employee
+ [ @ssn       | name     | first name | birth date | hire date  | gender | preferred color | married | salary  | password | contact.address                | @contact.city | contact.phone     | contact.email                     | @company | @managed ou |
+ | 2256725396 | Berlutti | Graziella  | 1971/01/17 | 2003/01/12 | Femme  | 0xFFAA1133      | false   | 100 000 |          | 104 square des Bégonias        | 92150         | +33 1 698 234 986 | graziella.berlutti@design2see.com | CO0      | HR-003      |
+ | 1523698754 | Doe      | John       | 1972/01/02 | 2005/01/03 | Homme  | 0xFF449911      | true    | 100 000 | doepass  | 12 allée du Chien qui Fume     | 91000         | +33 1 152 368 984 | john.doe@design2see.com           | CO0      | HR-000      |
+ | 1859637461 | Den      | Mike       | 1970/01/05 | 2004/01/01 | Homme  | 0xFFCC1255      | false   | 80 000  | denpass  | 26 rue de la Pie qui Chante    | 92150         | +33 1 968 846 398 | mike.den@design2see.com           | CO0      | HR-001      |
+ | 2856752387 | Green    | Eva        | 1977/01/10 | 2002/01/06 | Femme  | 0xFFAA4411      | true    | 85 000  |          | 68 rue de l'Eléphant Vert      | 92150         | +33 1 958 536 972 | eva.green@design2see.com          | CO0      | HR-002      |
+ | 2597853274 | San      | Gloria     | 1969/01/09 | 2006/01/03 | Femme  | 0xFF001276      | false   | 75 000  |          | 13 avenue du Poisson Enragé    | 91000         | +33 1 956 367 412 | gloria.san@design2see.com         | CO0      | IT-000      |
+ | 2325985423 | Trulli   | Maria      | 1976/01/01 | 2006/01/03 | Femme  | 0xFF9489AB      | true    | 110 000 |          | 20 avenue du Crocodile Marteau | 91000         | +33 1 868 745 369 | maria.trulli@design2see.com       | CO0      | IT-001      |
+  (6 out of 8 records)
+
+ /table city
+ [ @zip  | name     |
+ | 92150 | Suresnes |
+ | 75001 | Paris I  |
+ | 91000 | Evry     |
+ 
+ /table team
+ [ @ou id | name        | contact.address          | @contact.city | contact.phone   | contact.email        | @manager   | @department |
+ | HR-003 | HR 003 Team | 124 avenue de la Liberté | 75001         | +33 123 456 103 | hr003@design2see.com | 2256725396 | HR-000      |
+ | HR-001 | HR 001 Team | 124 avenue de la Liberté | 75001         | +33 123 456 101 | hr001@design2see.com | 1859637461 | HR-000      |
+ | HR-002 | HR 002 Team | 124 avenue de la Liberté | 75001         | +33 123 456 102 | hr002@design2see.com | 2856752387 | HR-000      |
+ | IT-001 | IT 001 Team | 125 avenue de la Liberté | 75001         | +33 123 456 201 | it001@design2see.com | 2325985423 | IT-000      |
+  (4 out of 5 records)
+
+ /table company
+ [ @id | name       | contact.address          | @contact.city | contact.phone   | contact.email          |
+ | CO0 | Design2See | 123 avenue de la Liberté | 75001         | +33 123 456 000 | contact@design2see.com |
+ 
+ /table department
+ [ @ou id | name                   | contact.address          | @contact.city | contact.phone   | contact.email     | @manager   | @company |
+ | HR-000 | Human Resources        | 124 avenue de la Liberté | 75001         | +33 123 456 100 | hr@design2see.com | 1523698754 | CO0      |
+ | IT-000 | Information Technology | 125 avenue de la Liberté | 75001         | +33 123 456 200 | it@design2see.com | 2597853274 | CO0      |
+ 

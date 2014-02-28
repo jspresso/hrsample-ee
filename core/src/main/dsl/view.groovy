@@ -88,12 +88,10 @@ actionMap ('beanModuleActionMap') {
  * OVERRIDE JSPRESSO DEFAULT ACTION MAP
  */
 actionMap('beanCollectionModuleActionMap') {
-  actionList('RELOAD') {
-    action ref:'restartModuleWithConfirmationFrontAction'
-  }
   actionList('SAVE', collapsable:true){
     action ref:'saveModuleObjectFrontAction'
     action ref:'reloadModuleObjectFrontAction'
+    action ref:'restartModuleWithConfirmationFrontAction'
   }
   actionList('FILE') {
     action ref:'queryModuleFilterAction'
@@ -119,6 +117,10 @@ actionMap('beanCollectionModuleActionMap') {
     action ref:'exportFilterModuleResultToHtmlAction'
     action ref:'importBoxAction'
   }
+  actionList('TMAR', collapsable:true) {
+    action ref:'exportAllToTmarRecursivelyAction'
+    action ref:'exportTableToTmarAction'
+  }
   actionList ('PERMALINK', collapsable:true) {
     action parent:'createPermalinkAndCopyToClipboardFrontAction', custom:[tinyURL:false]
     action parent:'createPermalinkAndMailToFrontAction', custom:[tinyURL:false]
@@ -143,10 +145,11 @@ table('Employee.test.view') {
                 custom:[hideMyExportPopup:false, hideMoreColumnsPopup:false, moreColumnsOneToManyDepth:4]
       action parent:'importEmployeeBoxAction', 
                 custom:[mergeFields:['name', 'firstName'], extraColumns:['zip'], additionalFields:['teams']] 
-                
-      action ref:'exportTableToTmarAction'
-      action ref:'exportAllToTmarRecursivelyAction'
     } 
+    actionList('TMAR', collapsable:true) {
+      action ref:'exportAllToTmarRecursivelyAction'
+      action ref:'exportTableToTmarAction'
+    }
   }
    
   columns {
@@ -191,6 +194,7 @@ action ('importEmployeeAction',
 bean ('importEmployeeFactoryBean',
   parent:'importEntitiesFactoryBean',
   class:'org.jspresso.hrsample.ext.frontend.ImportEmployeeFactoryBean')
+
 
 
 

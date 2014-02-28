@@ -1,1 +1,11 @@
 // Implement your application backend here using the SJS DSL
+/**
+ * Tmar export
+ */
+bean('tmarParametersBean',
+  parent:'tmarParametersBaseBean',
+  custom:[collectionLimit:1,
+          excludedEntities:['Event'],
+          excludedFields:['id', 'version', 'photo', 'createTimestamp', 'lastUpdateTimestamp', 'propertyTranslations'],
+          tmarIds:['City':'zip',
+                   'OrganizationalUnit':'ouId', 'Team':'ouId', 'Department':'ouId']])
