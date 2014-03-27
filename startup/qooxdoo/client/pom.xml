@@ -95,7 +95,7 @@
           <workingDirectory>src/main/py</workingDirectory>
           <arguments>
             <argument>${project.build.directory}/qooxdoo-sdk/tool/bin/generator.py</argument>
-            <argument>source-all,build</argument>
+            <argument>source,build,source-mobile,build-mobile</argument>
           </arguments>
         </configuration>
       </plugin>
@@ -109,25 +109,31 @@
       	      <goal>run</goal>
       	    </goals>
       	    <phase>prepare-package</phase>
-      	    <configuration>
-      	      <target>
-      	        <property name="web-debug.dir" value="${project.build.directory}/web-debug" />
-      	        <mkdir dir="" />
-      	        <replace dir="${web-debug.dir}" token="../../../../target" value="file:///${project.build.directory}">
-      	          <include name="**/*.js" />
-      	        </replace>
-      	        <replace dir="${web-debug.dir}" token="../../" value="file:///${basedir}/src/main/">
-      	          <include name="**/*.js" />
-      	        </replace>
-      	        <replace dir="${web-debug.dir}" token="\" value="/">
-      	          <include name="**/*.js" />
-      	        </replace>
-      	        <replace dir="${web-debug.dir}" token="//(" value="\/(">
-      	          <include name="**/*.js" />
-      	        </replace>
+            <configuration>
+              <target>
+                <property name="web-debug.dir" value="${project.build.directory}/web-debug" />
+                <mkdir dir="" />
+                <replace dir="${web-debug.dir}" token="../../../../target" value="file:///${project.build.directory}">
+                  <include name="**/*.js" />
+                </replace>
+                <replace dir="${web-debug.dir}" token="../../../target" value="file:///${project.build.directory}">
+                  <include name="**/*.js" />
+                </replace>
+                <replace dir="${web-debug.dir}" token="../../" value="file:///${basedir}/src/main/">
+                  <include name="**/*.js" />
+                </replace>
+                <replace dir="${web-debug.dir}" token="../" value="file:///${basedir}/src/main/">
+                  <include name="**/*.js" />
+                </replace>
+                <replace dir="${web-debug.dir}" token="\" value="/">
+                  <include name="**/*.js" />
+                </replace>
+                <replace dir="${web-debug.dir}" token="//(" value="\/(">
+                  <include name="**/*.js" />
+                </replace>
                 <delete dir="${project.build.directory}/antrun" />
-      	      </target>
-      	    </configuration>
+              </target>
+            </configuration>
       	  </execution>
         </executions>
       </plugin>
