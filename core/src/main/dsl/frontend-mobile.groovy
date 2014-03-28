@@ -14,6 +14,7 @@ controller 'hrsample-ext.name',
     ]
 
 bean ('remoteFrontController', class:'org.jspresso.hrsample.ext.frontend.remote.mobile.CustomRemoteController',
-    parent:'abstractFrontController')
+    parent:'abstractMobileFrontController')
+
 bean ('remoteViewFactory', class:'org.jspresso.framework.view.remote.mobile.MobileEnhancedRemoteViewFactory',
-    parent:'viewFactoryBase')
+    parent:'mobileViewFactoryBase')
