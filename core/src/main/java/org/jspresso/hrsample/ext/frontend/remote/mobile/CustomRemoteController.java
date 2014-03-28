@@ -20,6 +20,7 @@ package org.jspresso.hrsample.ext.frontend.remote.mobile;
 
 import org.jspresso.framework.application.frontend.controller.remote.mobile.MobileEnhancedRemoteController;
 import org.jspresso.framework.security.UsernamePasswordHandler;
+import org.jspresso.framework.util.gui.Dimension;
 import org.jspresso.framework.util.resources.server.ResourceProviderServlet;
 
 import org.jspresso.hrsample.ext.model.security.CaptchaUsernamePasswordHandler;
@@ -40,7 +41,8 @@ public class CustomRemoteController extends MobileEnhancedRemoteController {
   protected UsernamePasswordHandler createUsernamePasswordHandler() {
     CaptchaUsernamePasswordHandler cuph = new CaptchaUsernamePasswordHandler();
     cuph.setCaptchaImageUrl(ResourceProviderServlet
-        .computeLocalResourceDownloadUrl("classpath:org/jspresso/hrsample/ext/images/jspresso.png"));
+        .computeImageResourceDownloadUrl("classpath:org/jspresso/hrsample/ext/images/jspresso.png",
+            new Dimension(150, 25)));
     return cuph;
   }
 
