@@ -4,7 +4,6 @@ import org.hibernate.criterion.DetachedCriteria
 import org.hibernate.criterion.Restrictions
 import org.jspresso.contrib.backend.tmar.TmarParameters
 import org.jspresso.contrib.test.backend.tmar.TmarPlus
-import org.jspresso.contrib.tmar.core.Tmar;
 import org.jspresso.framework.application.backend.BackendControllerHolder
 import org.jspresso.framework.application.backend.session.EMergeMode
 import org.jspresso.framework.model.descriptor.IComponentDescriptor
