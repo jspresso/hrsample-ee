@@ -16,6 +16,9 @@
   <properties>
     <jspresso-extensions.version>1.8-SNAPSHOT</jspresso-extensions.version>
     <jspresso-usage.version>1.7-SNAPSHOT</jspresso-usage.version>
+    <spock.version>0.7-groovy-2.0</spock.version>
+    <junit.version>4.11</junit.version>
+    <testng.version>6.8.8</testng.version>
   </properties>
 
   <name>Jspresso HR Sample Application - Extension</name>
@@ -147,6 +150,27 @@
 	      <artifactId>jspresso-extensions-test</artifactId>
 	      <version>${jspresso-extensions.version}</version>
 	    </dependency>
+
+      <dependency>
+        <groupId>org.spockframework</groupId>
+        <artifactId>spock-core</artifactId>
+        <version>${spock.version}</version>
+        <optional>true</optional>
+      </dependency>
+
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.version}</version>
+        <optional>true</optional>
+      </dependency>
+
+      <dependency>
+        <groupId>org.testng</groupId>
+        <artifactId>testng</artifactId>
+        <version>${testng.version}</version>
+        <optional>true</optional>
+      </dependency>
 
       <!-- Jspresso-usage dependencies -->
       <dependency>

@@ -77,8 +77,13 @@
       <groupId>org.jspresso.contrib</groupId>
       <artifactId>jspresso-extensions-test</artifactId>
       <scope>test</scope>
-    </dependency>  
-     
+    </dependency>
+    <dependency>
+      <groupId>org.spockframework</groupId>
+      <artifactId>spock-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-ehcache</artifactId>
