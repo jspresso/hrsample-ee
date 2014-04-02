@@ -13,8 +13,7 @@
 
   <bean
       id="loginViewDescriptor"
-      parent="loginViewDescriptorBase"
-      class="org.jspresso.framework.view.descriptor.basic.BasicComponentViewDescriptor">
+      parent="loginViewDescriptorBase">
     <property
         name="modelDescriptor"
         ref="CaptchaUsernamePasswordHandler"/>
