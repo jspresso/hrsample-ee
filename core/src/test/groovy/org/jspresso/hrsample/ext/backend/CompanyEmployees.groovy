@@ -3,6 +3,7 @@ package org.jspresso.hrsample.ext.backend
 import org.hibernate.criterion.DetachedCriteria
 import org.hibernate.criterion.Restrictions
 import org.jspresso.contrib.backend.tmar.TmarParameters
+import org.jspresso.contrib.frontend.ImportExportUtils;
 import org.jspresso.contrib.test.backend.tmar.TmarPlus
 import org.jspresso.framework.application.backend.BackendControllerHolder
 import org.jspresso.framework.application.backend.session.EMergeMode
@@ -27,11 +28,12 @@ class CompanyEmployees extends TmarBackendStartup {
     while (tmar.hasNext()) {
       if (tmar.currentIndexList == 0) {
         createEntities(
-            [Employee: tmar.table.employee,
-             Team: tmar.table.team,
-             Department: tmar.table.department,
-             City: tmar.table.city,
-             Company: tmar.table.company])
+        [City: tmar.table.city])
+        createEntities(
+        [Employee: tmar.table.employee,
+          Team: tmar.table.team,
+          Department: tmar.table.department,
+          Company: tmar.table.company])
       }
       prepareThen(tmar)
     }
@@ -47,10 +49,10 @@ class CompanyEmployees extends TmarBackendStartup {
     //-------
     where:
     tmar << getData('test1')
-    
+
   }
 
-  
+
   /**
    * test2
    */
@@ -63,9 +65,9 @@ class CompanyEmployees extends TmarBackendStartup {
         createEntities([Company: tmar.table.company])
 
         createEntities(
-           [Employee: tmar.table.employee,
-            Team: tmar.table.team,
-            Department: tmar.table.department])
+        [Employee: tmar.table.employee,
+          Team: tmar.table.team,
+          Department: tmar.table.department])
       }
       prepareThen(tmar)
     }
@@ -77,24 +79,24 @@ class CompanyEmployees extends TmarBackendStartup {
     //-------
     cleanup:
     cleanupData(tmar);
-    
+
     //-------
     where:
     tmar << getData('test2')
-    
+
   }
-  
-  
-  
+
+
+
   /**
    * test3
    */
   def test3() {
     when:
-    
+
     // remove all tmar ids !
     getTmarParameters().setTmarIds(null)
-    
+
     while (tmar.hasNext()) {
       if (tmar.currentIndexList == 0) {
         createEntities([City: tmar.table.city])
@@ -102,9 +104,9 @@ class CompanyEmployees extends TmarBackendStartup {
         createEntities([Company: tmar.table.company])
 
         createEntities(
-           [Employee: tmar.table.employee,
-            Team: tmar.table.team,
-            Department: tmar.table.department])
+        [Employee: tmar.table.employee,
+          Team: tmar.table.team,
+          Department: tmar.table.department])
       }
       prepareThen(tmar)
     }
@@ -116,13 +118,13 @@ class CompanyEmployees extends TmarBackendStartup {
     //-------
     cleanup:
     cleanupData(tmar);
-    
+
     //-------
     where:
     tmar << getData('test3')
-    
+
   }
-  
+
   /**
    * cleanup data
    * @param tmar
@@ -132,7 +134,7 @@ class CompanyEmployees extends TmarBackendStartup {
     deleteAllEntities(Company.class)
     deleteAllEntities(City.class)
   }
-  
+
   /**
    * prepate then
    * @param tmar
@@ -152,43 +154,43 @@ class CompanyEmployees extends TmarBackendStartup {
   }
 
 
-  
-  
-  
-//  /**
-//   * do test
-//   */
-//  def doTest(Closure createEntitiesClosure) { 
-//
-//    when:
-//    while (tmar.hasNext()) {
-//
-//      if (tmar.currentIndexList == 0) {
-//        createEntitiesClosure.call()
-//      }
-//
-//      if ('COUNT' == tmar.operation) {
-//        tmar.size = countTable(tmar.tableName)
-//      }
-//      else if ('EXISTS' == tmar.operation) {
-//        tmar.exists = findEntity(tmar.tableName, tmar.keyValue as String) !=null
-//      }
-//      else if ('CHECK' == tmar.operation) {
-//        tmar.value = findEntityField(tmar.tableName, tmar.keyValue as String, tmar.field as String)
-//      }
-//    }
-//
-//    //-------
-//    then:
-//    tmar.asserts()
-//
-//    //-------
-//    where:
-//    tmar << getData('test')
-//  }
 
-  
-  
+
+
+  //  /**
+  //   * do test
+  //   */
+  //  def doTest(Closure createEntitiesClosure) {
+  //
+  //    when:
+  //    while (tmar.hasNext()) {
+  //
+  //      if (tmar.currentIndexList == 0) {
+  //        createEntitiesClosure.call()
+  //      }
+  //
+  //      if ('COUNT' == tmar.operation) {
+  //        tmar.size = countTable(tmar.tableName)
+  //      }
+  //      else if ('EXISTS' == tmar.operation) {
+  //        tmar.exists = findEntity(tmar.tableName, tmar.keyValue as String) !=null
+  //      }
+  //      else if ('CHECK' == tmar.operation) {
+  //        tmar.value = findEntityField(tmar.tableName, tmar.keyValue as String, tmar.field as String)
+  //      }
+  //    }
+  //
+  //    //-------
+  //    then:
+  //    tmar.asserts()
+  //
+  //    //-------
+  //    where:
+  //    tmar << getData('test')
+  //  }
+
+
+
   /**
    * countTable
    * @param clazz
@@ -222,46 +224,47 @@ class CompanyEmployees extends TmarBackendStartup {
     if (param.getTmarIds()!=null) {
       key = param.getTmarIds().get(clazz);
     }
-    
+
     if (key == null) {
-      key = TmarPlus.findUnicityScope(d);
+      key = ImportExportUtils.getUnicityScopeColumn(d, param.getContext());
     }
-    
-    if (key==null) {
+
+    if ("id".equals(key)) {
       Serializable keyId = isStringGUIDGenerator() ? keyValue : new ByteArray(keyValue.getBytes())
-      
+
       IEntity entity = getBackendController().findById(keyId, EMergeMode.MERGE_KEEP, c)
       return entity;
     }
-
-    DetachedCriteria criteria = DetachedCriteria.forClass(c);
-    criteria.add(Restrictions.eq(key, keyValue));
-    IEntity entity = getBackendController().findFirstByCriteria(criteria, EMergeMode.MERGE_KEEP, c);
-    return entity;
-  }
-
-  /**
-   * find entitie's field value
-   * @param clazz
-   * @param keyValue
-   * @param field
-   * @return
-   */
-  private Object findEntityField(String clazz, String keyValue, String field) {
-    IEntity entity = findEntity(clazz, keyValue);
-    if (entity == null) {
-      return null;
+    else {
+      DetachedCriteria criteria = DetachedCriteria.forClass(c);
+      criteria.add(Restrictions.eq(key, keyValue));
+      IEntity entity = getBackendController().findFirstByCriteria(criteria, EMergeMode.MERGE_KEEP, c);
+      return entity;
     }
-    
-    String javaField = org.jspresso.contrib.backend.tmar.TmarUtil.convertSpacesToCamelCase(field);
-    IAccessorFactory accessorFactory = BackendControllerHolder.getCurrentBackendController().getAccessorFactory();
-    IAccessor accessor = accessorFactory.createPropertyAccessor(javaField, entity.getComponentContract());
-    Object o = accessor.getValue(entity);
-    
-    return o;
   }
 
+    /**
+     * find entitie's field value
+     * @param clazz
+     * @param keyValue
+     * @param field
+     * @return
+     */
+    private Object findEntityField(String clazz, String keyValue, String field) {
+      IEntity entity = findEntity(clazz, keyValue);
+      if (entity == null) {
+        return null;
+      }
+
+      String javaField = org.jspresso.contrib.backend.tmar.TmarUtil.convertSpacesToCamelCase(field);
+      IAccessorFactory accessorFactory = BackendControllerHolder.getCurrentBackendController().getAccessorFactory();
+      IAccessor accessor = accessorFactory.createPropertyAccessor(javaField, entity.getComponentContract());
+      Object o = accessor.getValue(entity);
+
+      return o;
+    }
 
 
-  
-}
+
+
+  }
