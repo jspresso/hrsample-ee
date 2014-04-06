@@ -28,12 +28,12 @@ class CompanyEmployees extends TmarBackendStartup {
     while (tmar.hasNext()) {
       if (tmar.currentIndexList == 0) {
         createEntities(
-        [City: tmar.table.city])
+            [City: tmar.table.city])
         createEntities(
-        [Employee: tmar.table.employee,
-          Team: tmar.table.team,
-          Department: tmar.table.department,
-          Company: tmar.table.company])
+            [Employee: tmar.table.employee,
+              Team: tmar.table.team,
+              Department: tmar.table.department,
+              Company: tmar.table.company])
       }
       prepareThen(tmar)
     }
@@ -65,9 +65,9 @@ class CompanyEmployees extends TmarBackendStartup {
         createEntities([Company: tmar.table.company])
 
         createEntities(
-        [Employee: tmar.table.employee,
-          Team: tmar.table.team,
-          Department: tmar.table.department])
+            [Employee: tmar.table.employee,
+              Team: tmar.table.team,
+              Department: tmar.table.department])
       }
       prepareThen(tmar)
     }
@@ -104,9 +104,9 @@ class CompanyEmployees extends TmarBackendStartup {
         createEntities([Company: tmar.table.company])
 
         createEntities(
-        [Employee: tmar.table.employee,
-          Team: tmar.table.team,
-          Department: tmar.table.department])
+            [Employee: tmar.table.employee,
+              Team: tmar.table.team,
+              Department: tmar.table.department])
       }
       prepareThen(tmar)
     }
@@ -124,6 +124,92 @@ class CompanyEmployees extends TmarBackendStartup {
     tmar << getData('test3')
 
   }
+
+
+  /**
+   * test4
+   */
+  def test4() {
+
+    when:
+    while (tmar.hasNext()) {
+      if (tmar.currentIndexList == 0) {
+        
+        createEntities(
+          Company: tmar.table.company)
+            
+        // companies has to be saved before, because of use 
+        // of reference "company.name" which will trigger a
+        // database access
+        createEntities(
+          Employee: tmar.table.employee)
+        
+        // employees has to be saved before, because of use 
+        // of multi field reference "manager.name" + "manager.first name"
+        // which will trigger a database access
+        createEntities(
+           Department: tmar.table.department)
+      }
+      prepareThen(tmar)
+    }
+
+    //-------
+    then:
+    tmar.asserts()
+
+    //-------
+    cleanup:
+    cleanupData(tmar);
+
+    //-------
+    where:
+    tmar << getData('test4')
+
+  }
+
+
+  /**
+   * test5
+   */
+  def test5() {
+
+    when:
+    while (tmar.hasNext()) {
+      if (tmar.currentIndexList == 0) {
+        
+        createEntities(
+          Company: tmar.table.company)
+            
+        // companies has to be saved before, because of use
+        // of reference "company.name" which will trigger a
+        // database access
+        createEntities(
+          Employee: tmar.table.employee)
+        
+        // employees has to be saved before, because of use
+        // of multi field reference "manager.name" + "manager.first name"
+        // which will trigger a database access
+        createEntities(
+           Department: tmar.table.department)
+      }
+      prepareThen(tmar)
+    }
+
+    //-------
+    then:
+    tmar.asserts()
+
+    //-------
+    cleanup:
+    cleanupData(tmar);
+
+    //-------
+    where:
+    tmar << getData('test5')
+
+  }
+  
+  
 
   /**
    * cleanup data
@@ -243,28 +329,29 @@ class CompanyEmployees extends TmarBackendStartup {
     }
   }
 
-    /**
-     * find entitie's field value
-     * @param clazz
-     * @param keyValue
-     * @param field
-     * @return
-     */
-    private Object findEntityField(String clazz, String keyValue, String field) {
-      IEntity entity = findEntity(clazz, keyValue);
-      if (entity == null) {
-        return null;
-      }
-
-      String javaField = org.jspresso.contrib.backend.tmar.TmarUtil.convertSpacesToCamelCase(field);
-      IAccessorFactory accessorFactory = BackendControllerHolder.getCurrentBackendController().getAccessorFactory();
-      IAccessor accessor = accessorFactory.createPropertyAccessor(javaField, entity.getComponentContract());
-      Object o = accessor.getValue(entity);
-
-      return o;
+  /**
+   * find entitie's field value
+   * @param clazz
+   * @param keyValue
+   * @param field
+   * @return
+   */
+  private Object findEntityField(String clazz, String keyValue, String field) {
+    IEntity entity = findEntity(clazz, keyValue);
+    if (entity == null) {
+      return null;
     }
 
+    String javaField = org.jspresso.contrib.backend.tmar.TmarUtil.convertSpacesToCamelCase(field);
+    IAccessorFactory accessorFactory = BackendControllerHolder.getCurrentBackendController().getAccessorFactory();
+    IAccessor accessor = accessorFactory.createPropertyAccessor(javaField, entity.getComponentContract());
+    Object o = accessor.getValue(entity);
 
-
-
+    return o;
   }
+
+
+
+
+
+}

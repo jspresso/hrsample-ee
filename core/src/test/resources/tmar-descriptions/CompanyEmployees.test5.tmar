@@ -1,0 +1,35 @@
+Company employees (using multi-field references + using jspresso keys)
+
+//TODO: Import the parent test !
+
+The purpose of this test is to insert some master data and to check that datas are 
+correctly created. 
+ 
+Here are the master data to insert :
+/include  MasterDataD
+
+First of all, let's check that table contains the appropriate number of lines :
+ /sequence
+ [ operation | table name | size ? |  
+ | COUNT     | Company    | 1      |  
+ | COUNT     | Department | 2      |  
+ | COUNT     | Employee   | 4      |  
+This example do not use all tables :
+ | COUNT     | City       | 0      |  
+ | COUNT     | Team       | 0      |  
+NB : events are also automatically created when employees are created, then we should have the same result :
+ | COUNT     | Event      | 4      |  
+
+Now let's that some objects are found :
+ /sequence
+ [ operation | table name | key value  | exists ? | 
+ | EXISTS    | Employee   | 2256725396 | true     | 
+ | EXISTS    | Employee   | Trilili    | false    | 
+
+Let's check that fields are correctly set according to master data :
+ /sequence
+ [ operation | table name | key value  | field          | value ?                | 
+ | CHECK     | Employee   | 2256725396 | name           | Berlutti               | 
+ | CHECK     | Employee   | 2256725396 | company.name   | Design2See             | 
+
+ 

@@ -1,0 +1,18 @@
+ Master Data (with specific entity ids)
+ 
+ /table company
+ [ @id | name       |
+ | CO0 | Design2See |
+ 
+ /table department
+ [ @ou id | name                   | @manager.name | @manager.first name | @company.name |
+ | HR-000 | Human Resources        | Doe           | John                | Design2See    |
+ | IT-000 | Information Technology | San           | Gloria              | Design2See    |
+ 
+ /table employee
+ [ @ssn       | name     | first name | birth date | contact.address                | @company.name |
+ | 2256725396 | Berlutti | Graziella  | 1971/01/17 | 104 square des Bégonias        | Design2See    |
+ | 1523698754 | Doe      | John       | 1972/01/02 | 12 allée du Chien qui Fume     | Design2See    |
+ | 1859637461 | Den      | Mike       | 1970/01/05 | 26 rue de la Pie qui Chante    | Design2See    |
+ | 2597853274 | San      | Gloria     | 1969/01/09 | 13 avenue du Poisson Enragé    | Design2See    |
+ 
