@@ -94,7 +94,7 @@
     {
       "copy-files" :
       {
-        "files" : ["*.html"],
+        "files" : ["*.html","*.png"],
         "source" : "${ROOT}/html"
       }
     },
