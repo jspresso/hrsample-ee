@@ -29,8 +29,7 @@
       <param-name>allowedLocalUrlRegex</param-name>
       <!-- <param-value>(classpath|http):[A-Za-z0-9_\-/ ]*\.(png|jpg|jpeg|gif|pdf|swf.?)(&amp;width=\d*+&amp;height=\d*+)?</param-value> -->
       <!-- In order to relax CAPTCHA -->
-      <param-value>(classpath|http):[A-Za-z0-9_\-/
-        ?=&amp;:\.]*\.(png|jpg|jpeg|gif|pdf|swf.?)(&amp;width=\d*+&amp;height=\d*+)?</param-value>
+      <param-value>(classpath|http):[A-Za-z0-9_\-/ ?=&amp;:\.]*\.(png|jpg|jpeg|gif|pdf|swf.?)(&amp;width=\d*+&amp;height=\d*+)?</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>
