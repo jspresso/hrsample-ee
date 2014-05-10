@@ -13,7 +13,7 @@
  */
 qx.Class.define("org.jspresso.hrsample.ext.startup.qooxdoo.Application",
 {
-  extend : org.jspresso.framework.application.frontend.Application,
+  extend : org.jspresso.framework.ext.application.frontend.EnhancedApplication,
 
 
 

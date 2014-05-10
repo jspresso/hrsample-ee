@@ -59,7 +59,7 @@ action ('manageAnyModuleEnterFrontAction',
 spec('remote') {
   bean ('remotePeerRegistryBase', class:'org.jspresso.framework.util.remote.registry.BasicRemotePeerRegistry', custom:[automationEnabled:true])
   bean ('remoteFrontController', class:'org.jspresso.hrsample.ext.frontend.remote.CustomRemoteController', parent:'abstractFrontController')
-  bean ('remoteViewFactory', class:'org.jspresso.framework.view.remote.EnhancedRemoteViewFactory', parent:'viewFactoryBase')
+  bean ('remoteViewFactory', class:'org.jspresso.framework.ext.view.remote.EnhancedRemoteViewFactory', parent:'viewFactoryBase')
 }
 
 spec('swing') {

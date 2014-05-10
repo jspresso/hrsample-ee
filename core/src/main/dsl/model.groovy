@@ -3,7 +3,7 @@ external id:['loginModelDescriptor']
 
 namespace('security') {
   Component('CaptchaUsernamePasswordHandler', extend:['loginModelDescriptor']) {
-    imageUrl 'captchaImageUrl'
+    imageUrl 'captchaImageUrl', readOnly: true
     string_64 'captchaChallenge'
     string_64 'register', readOnly:true
     string_64 'help', readOnly:true

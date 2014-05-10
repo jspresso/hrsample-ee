@@ -15,6 +15,9 @@
     <property
         name="permId"
         value="loginViewDescriptor"/>
+  </bean>
+
+  <bean id="basicLoginViewDescriptor" parent="basicLoginViewDescriptorBase">
     <property
         name="propertyViewDescriptors">
       <list>
@@ -41,18 +44,6 @@
           <property
               name="name"
               value="captchaChallenge"/>
-        </bean>
-        <bean
-            class="org.jspresso.framework.view.descriptor.basic.BasicPropertyViewDescriptor">
-          <property
-              name="name"
-              value="language"/>
-        </bean>
-        <bean
-            class="org.jspresso.framework.view.descriptor.basic.BasicPropertyViewDescriptor">
-          <property
-              name="name"
-              value="timeZoneId"/>
         </bean>
         <bean
             class="org.jspresso.framework.view.descriptor.basic.BasicPropertyViewDescriptor">

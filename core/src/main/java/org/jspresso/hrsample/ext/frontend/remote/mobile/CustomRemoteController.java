@@ -18,7 +18,7 @@
  */
 package org.jspresso.hrsample.ext.frontend.remote.mobile;
 
-import org.jspresso.framework.application.frontend.controller.remote.mobile.MobileEnhancedRemoteController;
+import org.jspresso.framework.ext.application.frontend.controller.remote.mobile.MobileEnhancedRemoteController;
 import org.jspresso.framework.security.UsernamePasswordHandler;
 import org.jspresso.framework.util.gui.Dimension;
 import org.jspresso.framework.util.resources.server.ResourceProviderServlet;
