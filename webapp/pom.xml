@@ -113,7 +113,7 @@
               <artifactId>hrsample-ext-startup-qooxdoo-client</artifactId>
               <type>zip</type>
               <classifier>web-resources</classifier>
-              <targetPath>qooxdoo</targetPath>
+              <targetPath>html5</targetPath>
             </overlay>
           </overlays>
         </configuration>
