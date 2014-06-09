@@ -192,7 +192,7 @@
   </filter-mapping>
   <filter-mapping>
     <filter-name>SsoHttpFilter</filter-name>
-    <url-pattern>/qooxdoo/*</url-pattern>
+    <url-pattern>/html5/*</url-pattern>
   </filter-mapping>
   <!-- SSO support -->
  
