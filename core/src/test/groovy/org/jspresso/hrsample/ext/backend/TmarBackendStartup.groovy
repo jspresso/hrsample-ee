@@ -1,8 +1,4 @@
-package org.jspresso.hrsample.ext.backend;
-
-import java.security.acl.Group
-
-import javax.security.auth.Subject
+package org.jspresso.hrsample.ext.backend
 
 import org.hibernate.criterion.DetachedCriteria
 import org.jboss.security.SimpleGroup
@@ -18,6 +14,9 @@ import org.jspresso.hrsample.model.City
 import org.jspresso.hrsample.model.Company
 import org.springframework.transaction.TransactionStatus
 import org.springframework.transaction.support.TransactionCallbackWithoutResult
+
+import javax.security.auth.Subject
+import java.security.acl.Group
 
 /**
  * Base class for integration tests.
