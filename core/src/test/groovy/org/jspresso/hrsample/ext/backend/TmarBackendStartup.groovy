@@ -27,7 +27,7 @@ import groovy.transform.TypeChecked
  * @version $LastChangedRevision$ 
  * @author Maxime Hamm
  */
-@TypeChecked
+//@TypeChecked
 public class TmarBackendStartup extends AbstractTmar4JUnitBackendStartup {
 
   
