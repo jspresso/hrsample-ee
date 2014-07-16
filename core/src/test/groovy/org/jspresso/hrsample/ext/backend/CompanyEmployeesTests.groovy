@@ -66,33 +66,6 @@ class CompanyEmployeesTests extends TmarBackendStartup {
       
       prepareThen(tmar)
     }
-    
-//    when:
-//    while (tmar.hasNext()) {
-//      if (tmar.currentIndexList == 0) {
-//        createEntities([City: tmar.table.city])
-//
-//        createEntities([Company: tmar.table.company])
-//
-//        createEntities(
-//            [Employee: tmar.table.employee,
-//              Team: tmar.table.team,
-//              Department: tmar.table.department])
-//      }
-//      prepareThen(tmar)
-//    }
-//
-//    //-------
-//    then:
-//    tmar.asserts()
-//
-//    //-------
-//    cleanup:
-//    cleanupData(tmar);
-//
-//    //-------
-//    where:
-//    tmar << getData('test2')
 
   }
 
@@ -122,37 +95,6 @@ class CompanyEmployeesTests extends TmarBackendStartup {
       
       prepareThen(tmar)
     }
-    
-//    when:
-//
-//    // remove all tmar ids !
-//    getTmarParameters().setTmarIds(null)
-//
-//    while (tmar.hasNext()) {
-//      if (tmar.currentIndexList == 0) {
-//        createEntities([City: tmar.table.city])
-//
-//        createEntities([Company: tmar.table.company])
-//
-//        createEntities(
-//            [Employee: tmar.table.employee,
-//              Team: tmar.table.team,
-//              Department: tmar.table.department])
-//      }
-//      prepareThen(tmar)
-//    }
-//
-//    //-------
-//    then:
-//    tmar.asserts()
-//
-//    //-------
-//    cleanup:
-//    cleanupData(tmar);
-//
-//    //-------
-//    where:
-//    tmar << getData('test3')
 
   }
 
@@ -185,40 +127,6 @@ class CompanyEmployeesTests extends TmarBackendStartup {
       prepareThen(tmar)
     }
 
-//    when:
-//    while (tmar.hasNext()) {
-//      if (tmar.currentIndexList == 0) {
-//        
-//        createEntities(
-//          Company: tmar.table.company)
-//            
-//        // companies has to be saved before, because of use 
-//        // of reference "company.name" which will trigger a
-//        // database access
-//        createEntities(
-//          Employee: tmar.table.employee)
-//        
-//        // employees has to be saved before, because of use 
-//        // of multi field reference "manager.name" + "manager.first name"
-//        // which will trigger a database access
-//        createEntities(
-//           Department: tmar.table.department)
-//      }
-//      prepareThen(tmar)
-//    }
-//
-//    //-------
-//    then:
-//    tmar.asserts()
-//
-//    //-------
-//    cleanup:
-//    cleanupData(tmar);
-//
-//    //-------
-//    where:
-//    tmar << getData('test4')
-
   }
 
 
@@ -249,40 +157,6 @@ class CompanyEmployeesTests extends TmarBackendStartup {
       
       prepareThen(tmar)
     }
-    
-//    when:
-//    while (tmar.hasNext()) {
-//      if (tmar.currentIndexList == 0) {
-//        
-//        createEntities(
-//          Company: tmar.table.company)
-//            
-//        // companies has to be saved before, because of use
-//        // of reference "company.name" which will trigger a
-//        // database access
-//        createEntities(
-//          Employee: tmar.table.employee)
-//        
-//        // employees has to be saved before, because of use
-//        // of multi field reference "manager.name" + "manager.first name"
-//        // which will trigger a database access
-//        createEntities(
-//           Department: tmar.table.department)
-//      }
-//      prepareThen(tmar)
-//    }
-//
-//    //-------
-//    then:
-//    tmar.asserts()
-//
-//    //-------
-//    cleanup:
-//    cleanupData(tmar);
-//
-//    //-------
-//    where:
-//    tmar << getData('test5')
 
   }
   
@@ -320,39 +194,6 @@ class CompanyEmployeesTests extends TmarBackendStartup {
 
 
 
-
-
-  //  /**
-  //   * do test
-  //   */
-  //  def doTest(Closure createEntitiesClosure) {
-  //
-  //    when:
-  //    while (tmar.hasNext()) {
-  //
-  //      if (tmar.currentIndexList == 0) {
-  //        createEntitiesClosure.call()
-  //      }
-  //
-  //      if ('COUNT' == tmar.operation) {
-  //        tmar.size = countTable(tmar.tableName)
-  //      }
-  //      else if ('EXISTS' == tmar.operation) {
-  //        tmar.exists = findEntity(tmar.tableName, tmar.keyValue as String) !=null
-  //      }
-  //      else if ('CHECK' == tmar.operation) {
-  //        tmar.value = findEntityField(tmar.tableName, tmar.keyValue as String, tmar.field as String)
-  //      }
-  //    }
-  //
-  //    //-------
-  //    then:
-  //    tmar.asserts()
-  //
-  //    //-------
-  //    where:
-  //    tmar << getData('test')
-  //  }
 
 
 
