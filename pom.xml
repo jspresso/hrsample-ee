@@ -228,14 +228,14 @@
         <groupId>org.mortbay.jetty</groupId>
         <artifactId>jetty-maven-plugin</artifactId>
         <configuration>
-          <webApp>${basedir}/webapp/target/hrsample-ext-webapp</webApp>
+          <war>${basedir}/webapp/target/hrsample-ext-webapp</war>
           <webAppConfig>
             <contextPath>/hrsample-ext-webapp</contextPath>
           </webAppConfig>
           <systemProperties>
             <systemProperty>
               <name>java.security.auth.login.config</name>
-              <value>conf/jaas.config</value>
+              <value>${basedir}/conf/jaas.config</value>
             </systemProperty>
           </systemProperties>
         </configuration>
