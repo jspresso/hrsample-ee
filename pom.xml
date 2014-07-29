@@ -5,17 +5,17 @@
   <parent>
     <groupId>org.jspresso.framework</groupId>
     <artifactId>jspresso-ext-root</artifactId>
-    <version>4.0-SNAPSHOT</version>
+    <version>4.1-SNAPSHOT</version>
     <relativePath />
   </parent>
   <groupId>org.jspresso.hrsample</groupId>
   <artifactId>hrsample-ext</artifactId>
   <packaging>pom</packaging>
-  <version>4.0-SNAPSHOT</version>
+  <version>4.1-SNAPSHOT</version>
 
   <properties>
-    <jspresso-extensions.version>2.0-SNAPSHOT</jspresso-extensions.version>
-    <jspresso-usage.version>2.0-SNAPSHOT</jspresso-usage.version>
+    <jspresso-extensions.version>2.0</jspresso-extensions.version>
+    <jspresso-usage.version>2.0</jspresso-usage.version>
   </properties>
 
   <name>Jspresso HR Sample Application - Extension</name>
