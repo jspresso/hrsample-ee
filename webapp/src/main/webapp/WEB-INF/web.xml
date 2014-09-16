@@ -184,7 +184,7 @@
   <!-- SSO support -->
   <filter>
     <filter-name>SsoHttpFilter</filter-name>
-    <filter-class>org.jspresso.framework.security.sso.SsoHttpFilter</filter-class>
+    <filter-class>org.jspresso.framework.ext.security.sso.SsoHttpFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>SsoHttpFilter</filter-name>

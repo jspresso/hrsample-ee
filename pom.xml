@@ -14,8 +14,8 @@
   <version>4.1-SNAPSHOT</version>
 
   <properties>
-    <jspresso-extensions.version>2.0</jspresso-extensions.version>
-    <jspresso-usage.version>2.0</jspresso-usage.version>
+    <jspresso-extensions.version>2.1-SNAPSHOT</jspresso-extensions.version>
+    <jspresso-usage.version>2.1-SNAPSHOT</jspresso-usage.version>
   </properties>
 
   <name>Jspresso HR Sample Application - Extension</name>
