@@ -69,7 +69,7 @@ spec('swing') {
 
 spec('remote-recording') {
   bean('remoteFrontController',
-      class:'org.jspresso.framework.application.testing.RecordingRemoteController',
+      class:'org.jspresso.framework.ext.application.testing.RecordingRemoteController',
       parent:'abstractFrontController', custom:[
         captureDirectory:'/tmp/commands'
       ])
