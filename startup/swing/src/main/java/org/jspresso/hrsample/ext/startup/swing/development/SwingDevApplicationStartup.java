@@ -1,6 +1,6 @@
 package org.jspresso.hrsample.ext.startup.swing.development;
 
-import org.jspresso.hrsample.ext.development.TestDataPersister;
+import org.jspresso.hrsample.ext.development.HibernateTestDataPersister;
 import org.jspresso.hrsample.ext.startup.swing.SwingApplicationStartup;
 
 /**
@@ -15,7 +15,7 @@ public class SwingDevApplicationStartup extends SwingApplicationStartup {
    */
   @Override
   public void start() {
-    new TestDataPersister(getApplicationContext()).persistTestData();
+    new HibernateTestDataPersister(getApplicationContext()).persistTestData();
     super.start();
   }
 }

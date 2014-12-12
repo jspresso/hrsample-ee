@@ -13,8 +13,7 @@ import org.springframework.beans.factory.BeanFactory;
 /**
  * Persists some test data for the application.
  */
-public class TestDataPersister extends
-    org.jspresso.hrsample.development.TestDataPersister {
+public class HibernateTestDataPersister extends org.jspresso.hrsample.development.HibernateTestDataPersister {
 
   /**
    * Constructs a new <code>TestDataPersister</code> instance.
@@ -22,7 +21,7 @@ public class TestDataPersister extends
    * @param beanFactory
    *          the spring bean factory to use.
    */
-  public TestDataPersister(BeanFactory beanFactory) {
+  public HibernateTestDataPersister(BeanFactory beanFactory) {
     super(beanFactory);
   }
 
