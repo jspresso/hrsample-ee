@@ -35,7 +35,6 @@ import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 /**
  * An application health probe.
  * 
- * @version $LastChangedRevision$
  * @author Vincent Vandenschrick
  */
 @Path("/probe")

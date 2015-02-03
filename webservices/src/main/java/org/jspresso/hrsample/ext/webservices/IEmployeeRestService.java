@@ -41,7 +41,6 @@ import org.jspresso.hrsample.model.Event;
  * Employee REST service specification. Can be used on client side by RestEasy
  * client framework.
  * 
- * @version $LastChangedRevision$
  * @author Vincent Vandenschrick
  */
 @Path("/employees")

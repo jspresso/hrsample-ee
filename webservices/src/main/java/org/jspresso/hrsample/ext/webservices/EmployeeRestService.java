@@ -28,7 +28,6 @@ import org.jspresso.hrsample.model.Employee;
 /**
  * A sample employee web service.
  * 
- * @version $LastChangedRevision$
  * @author Vincent Vandenschrick
  */
 public class EmployeeRestService extends AbstractService implements

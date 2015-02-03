@@ -27,7 +27,6 @@ import org.jspresso.hrsample.ext.webservices.IEmployeeRestService.EmployeeDto;
 /**
  * A sample java client for the Employee REST web service.
  * 
- * @version $LastChangedRevision$
  * @author Vincent Vandenschrick
  */
 public class EmployeeRestServiceClient {

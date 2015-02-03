@@ -29,7 +29,6 @@ import org.jspresso.hrsample.ext.model.security.CaptchaUsernamePasswordHandler;
  * A custom remote controller used to override the login process in order to
  * introduce a CAPTCHA challenge.
  * 
- * @version $LastChangedRevision$
  * @author Vincent Vandenschrick
  */
 public class CustomRemoteController extends MobileEnhancedRemoteController {

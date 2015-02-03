@@ -27,7 +27,6 @@ import org.jspresso.hrsample.ext.model.Registration;
 /**
  * Creates the registration component and assigns it a default language.
  * 
- * @version $LastChangedRevision$
  * @author Vincent Vandenschrick
  * @param <E>
  *          the actual gui component type used.

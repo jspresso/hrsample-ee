@@ -26,7 +26,6 @@ import org.jspresso.framework.security.UsernamePasswordHandler;
  * A custom username password handler to demonstrate how login view can be
  * augmented.
  * 
- * @version $LastChangedRevision$
  * @author Vincent Vandenschrick
  */
 public class CaptchaUsernamePasswordHandler extends UsernamePasswordHandler {
