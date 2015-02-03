@@ -26,7 +26,7 @@
     <url>http://www.jspresso.com</url>
   </organization>
   <scm>
-    <connection>scm:svn:https://svn.jspresso.org/jspresso/app-hrsample-ext/trunk</connection>
+    <connection>scm:git:https://bitbucket.org/jspresso/jspresso-ee.git</connection>
   </scm>
   <distributionManagement>
     <repository>
