@@ -105,11 +105,13 @@
             <overlay>
               <groupId>org.jspresso.hrsample</groupId>
               <artifactId>hrsample-ext-startup-flex-config</artifactId>
+              <type>jar</type>
               <targetPath>WEB-INF/flex</targetPath>
             </overlay>
             <overlay>
               <groupId>org.jspresso.hrsample</groupId>
               <artifactId>hrsample-ext-startup-qooxdoo-client</artifactId>
+              <type>jar</type>
               <targetPath>html5</targetPath>
             </overlay>
           </overlays>
