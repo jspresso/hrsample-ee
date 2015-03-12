@@ -18,7 +18,6 @@
     <dependency>
       <groupId>org.jspresso.hrsample</groupId>
       <artifactId>hrsample-ext-startup-flex-config</artifactId>
-      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.jspresso.hrsample</groupId>
@@ -28,7 +27,6 @@
     <dependency>
       <groupId>org.jspresso.hrsample</groupId>
       <artifactId>hrsample-ext-startup-qooxdoo-client</artifactId>
-      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.jspresso.hrsample</groupId>
