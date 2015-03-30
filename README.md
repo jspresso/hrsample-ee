@@ -1,0 +1,1 @@
+Sample Jspresso application to demonstrate some of the Jspresso EE features.
