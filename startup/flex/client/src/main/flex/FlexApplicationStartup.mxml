@@ -13,6 +13,7 @@
     import mx.resources.Locale;
 
     import org.jspresso.framework.ext.application.frontend.controller.flex.EnhancedFlexController;
+    import org.jspresso.framework.ext.flex.controller.ThemedFlexController;
 
     private var flexController:EnhancedFlexController;
 
@@ -30,7 +31,7 @@
         }
         remoteController.channelSet = channelSet;
       }
-      flexController = new EnhancedFlexController(remoteController,
+      flexController = new ThemedFlexController(remoteController,
                                                   new Locale(resourceManager.localeChain[0]).language);
     }
 
