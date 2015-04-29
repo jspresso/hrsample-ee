@@ -15,8 +15,11 @@
     {
       "path": "${TARGET}/jspresso-ext-qooxdoo-zip/py/library.json",
       "as": "jspresso-ext-qooxdoo"
-    }
-    ,
+    },
+    {
+      "path": "${TARGET}/jspresso-qooxdoo-theme-zip/py/library.json",
+      "as": "jspresso-qooxdoo-theme"
+    },
     {
       "path" : "${TARGET}/jspresso-ext-qooxdoo-theme-zip/py/library.json",
       "as"   : "jspresso-ext-qooxdoo-theme"
@@ -57,6 +60,7 @@
 //    "QXTHEME"              : "qx.theme.Modern",
     "QXICONTHEME"          : ["Oxygen", "Tango"],
     "JSPRESSO_QX_DIR"      : "${TARGET}/jspresso-qooxdoo-client-zip",
+    "JSPRESSO_TH_DIR"      : "${TARGET}/jspresso-qooxdoo-theme-zip",
     "JSPRESSO_QX_SCSS_DIR" : "${JSPRESSO_QX_DIR}/resources/org/jspresso/framework/mobile/scss",
     "JSPRESSO_EXT_QX_DIR"  : "${TARGET}/jspresso-ext-qooxdoo-zip",
     "JSPRESSO_EXT_TH_DIR"  : "${TARGET}/jspresso-ext-qooxdoo-theme-zip",
@@ -89,7 +93,10 @@
     },
     "libraries" :
     {
-      "extend" : ["jspresso-ext-qooxdoo::libraries"],
+      "extend" : [
+        "jspresso-ext-qooxdoo::libraries",
+        "jspresso-ext-qooxdoo-theme::libraries"
+      ],
 
       "library" :
           [
