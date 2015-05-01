@@ -18,6 +18,18 @@
       <type>swc</type>
     </dependency>
     <dependency>
+      <groupId>org.apache.flex.framework.themes</groupId>
+      <artifactId>halo</artifactId>
+      <type>swc</type>
+      <scope>theme</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jspresso.framework</groupId>
+      <artifactId>jspresso-flex-theme</artifactId>
+      <type>swc</type>
+      <scope>theme</scope>
+    </dependency>
+    <dependency>
       <groupId>org.jspresso.framework</groupId>
       <artifactId>jspresso-ext-flex-theme</artifactId>
       <type>swc</type>
@@ -67,6 +79,7 @@
           <parameters>
             <swf>${project.artifactId}</swf>
           </parameters>
+          <storepass/>
         </configuration>
       </plugin>
     </plugins>
