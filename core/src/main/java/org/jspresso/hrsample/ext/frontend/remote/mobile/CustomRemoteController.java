@@ -28,7 +28,7 @@ import org.jspresso.hrsample.ext.model.security.CaptchaUsernamePasswordHandler;
 /**
  * A custom remote controller used to override the login process in order to
  * introduce a CAPTCHA challenge.
- * 
+ *
  * @author Vincent Vandenschrick
  */
 public class CustomRemoteController extends MobileEnhancedRemoteController {
@@ -51,10 +51,10 @@ public class CustomRemoteController extends MobileEnhancedRemoteController {
   @Override
   protected boolean performLogin() {
     if (getLoginContextName() != null) {
-      if (!"jspresso"
-          .equalsIgnoreCase(((CaptchaUsernamePasswordHandler) getLoginCallbackHandler())
-              .getCaptchaChallenge())) {
-        // Captcha challenge failed.
+      String password = getLoginCallbackHandler().getPassword();
+      if (password == null || password.length() > 0 && !"jspresso".equalsIgnoreCase(
+          ((CaptchaUsernamePasswordHandler) getLoginCallbackHandler()).getCaptchaChallenge())) {
+        // Captcha challenge failed and it's not an remember me token shortcut.
         return false;
       }
     }
