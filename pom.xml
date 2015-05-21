@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.jspresso.framework</groupId>
     <artifactId>jspresso-ext-root</artifactId>
-    <version>4.1-SNAPSHOT</version>
+    <version>4.1</version>
     <relativePath />
   </parent>
   <groupId>org.jspresso.hrsample</groupId>
@@ -137,7 +137,7 @@
         <artifactId>jspresso-extensions-core</artifactId>
         <version>${jspresso-extensions.version}</version>
       </dependency>
-      
+
       <dependency>
 	      <groupId>org.jspresso.contrib</groupId>
 	      <artifactId>jspresso-extensions-test</artifactId>
