@@ -1,7 +1,7 @@
 Employee tests
 
 This test will check that the age is correctly computed.
-Where are today in **2015** ! 
+Where are today in **2015** !  
  
 /sequence 
  [ name     | birth date | age ? |
