@@ -14,8 +14,10 @@
   <version>4.2-SNAPSHOT</version>
 
   <properties>
-    <jspresso-extensions.version>2.1-SNAPSHOT</jspresso-extensions.version>
+    <jspresso-ext-pivot.version>4.2-SNAPSHOT</jspresso-ext-pivot.version>
+    <jspresso-extensions.version>2.6-SNAPSHOT</jspresso-extensions.version>
     <jspresso-usage.version>2.1-SNAPSHOT</jspresso-usage.version>
+    <groovy.version>2.3.7</groovy.version>
   </properties>
 
   <name>Jspresso HR Sample Application - Extension</name>
@@ -131,6 +133,13 @@
         <version>${project.version}</version>
       </dependency>
 
+      <!-- Jspresso pivot dependencies -->
+      <dependency>
+        <groupId>org.jspresso.framework</groupId>
+        <artifactId>jspresso-ext-pivot</artifactId>
+        <version>${jspresso-ext-pivot.version}</version>
+      </dependency>
+      
       <!-- Jspresso-extensions dependencies -->
       <dependency>
         <groupId>org.jspresso.contrib</groupId>

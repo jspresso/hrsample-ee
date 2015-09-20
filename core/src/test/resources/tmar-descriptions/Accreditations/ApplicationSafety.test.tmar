@@ -1,0 +1,105 @@
+Users accreditations tests
+
+This tests will check wich user (i.e role) is allowed to see or modify what part of the application.
+
+##Examples
+* the Master Data workspace is **not accessible** at all for a non-administrator user. 
+* the CRUD action are not **not visible** for a non-administrator user. 
+* the Company data are **non-editable** for non-administrator user. 
+* an Employee **can only modify** he's own data.
+* an Employee **cannot see** other's employee's SSN.
+
+#Roles and users
+
+HRSample app uses three different roles :
+/table Role
+[ role id       | definition                                                                                    |
+| administrator | An "administrator" manages companies and users creation, and provides also technical supports |
+| manager       | A "manager" manages it's own company's data, he cannot see other's companies data             |
+| employee      | An "employee" can only see it's own company's data, he can only modify he's own data          |
+
+#Master data
+
+Here are some companies we will use for our upcoming tests :
+/table Company
+[ name      |
+| Google    |
+| Microsoft |
+
+Here are few users :
+/table User
+[ login    | role          | firstname | lastname | company   |
+| mhamm    | administrator | Maxime    | Hamm     |           |
+
+| giovanni | manager       | Giovanni  | Boldini  | Google    |
+| gaspard  | empl          | Gaspard   | Monge    | Google    |
+
+| melissa  | manager       | Melissa   | Horn     | Microsoft |
+| maureen  | employee      | Maureen   | Nisima   | Microsoft |
+
+#Workspaces acces restrictions
+
+Security restrictions for workspaces :
+/sequence 
+[ workspace    | mhamm ? | giovanni ? | gaspard ? | melissa ? | maureen ? |
+| Organization | yes     | yes        | yes       | yes       | yes       |
+| Employees    | yes     | yes        | yes       | yes       | yes       |
+| Master data  | yes     | no         | no        | no        | no        |
+
+#CRUD operations restrictions
+
+CRUD restrictions for the **Company** module's **list** :
+/sequence 
+[ workspace    | module    | view part                       | action    | mhamm ? | giovanni ? | gaspard ? | melissa ? | maureen ? |
+| Organization | Companies | filter list                     | Add       | yes     | no         | no        | no        | no        |
+| Organization | Companies | filter list                     | Duplicate | yes     | no         | no        | no        | no        |
+| Organization | Companies | filter list                     | Delete    | yes     | no         | no        | no        | no        |
+| Organization | Companies | filter list                     | Save      | yes     | yes        | no        | yes       | no        |
+| Organization | Companies | filter list                     | Cancel    | yes     | yes        | no        | yes       | no        |
+
+CRUD restrictions for the **Company** module's **detail** :
+/sequence 
+[ workspace    | module    | view part                       | action    | mhamm ? | giovanni ? | gaspard ? | melissa ? | maureen ? |
+| Organization | Companies | detail                          | Save      | yes     | yes        | no        | yes       | no        |
+| Organization | Companies | detail                          | Cancel    | yes     | yes        | no        | yes       | no        |
+| Organization | Companies | detail                          | Generate  | yes     | yes        | yes       | yes       | yes       |
+
+/sequence 
+[ workspace    | module    | view part                       | action    | mhamm ? | giovanni ? | gaspard ? | melissa ? | maureen ? |
+| Organization | Companies | detail / Company / Departments  | Add       | yes     | yes        | no        | yes       | no        |
+| Organization | Companies | detail / Company / Departments  | Duplicate | yes     | yes        | no        | yes       | no        |
+| Organization | Companies | detail / Company / Departments  | Delete    | yes     | yes        | no        | yes       | no        |
+| Organization | Companies | detail / Company / Departments  | Copy      | yes     | yes        | no        | yes       | no        |
+| Organization | Companies | detail / Company / Departments  | Cut       | yes     | yes        | no        | yes       | no        |
+| Organization | Companies | detail / Company / Departments  | Paste     | yes     | yes        | no        | yes       | no        |
+
+/sequence                                                                                                                           
+[ workspace    | module    | view part                       | action    | mhamm ? | giovanni ? | gaspard ? | melissa ? | maureen ? |
+| Organization | Companies | detail / Company / Teams        | Add       | yes     | yes        | no        | yes       | no        |
+| Organization | Companies | detail / Company / Teams        | Duplicate | yes     | yes        | no        | yes       | no        |
+| Organization | Companies | detail / Company / Teams        | Delete    | yes     | yes        | no        | yes       | no        |
+| Organization | Companies | detail / Company / Teams        | Copy      | yes     | yes        | no        | yes       | no        |
+| Organization | Companies | detail / Company / Teams        | Cut       | yes     | yes        | no        | yes       | no        |
+| Organization | Companies | detail / Company / Teams        | Paste     | yes     | yes        | no        | yes       | no        |
+
+| Organization | Companies | detail / Company / Team members | Add       | yes     | yes        | no        | yes       | no        |    
+| Organization | Companies | detail / Company / Team members | Duplicate | yes     | yes        | no        | yes       | no        |    
+
+CRUD restrictions for the **Employee** module's **list** :
+/sequence 
+[ workspace    | module   | view part                        | action    | mhamm ? | giovanni ? | gaspard ? | melissa ? | maureen ? |
+| Organization | Employee | filter list                      | Add       | yes     | no         | no        | no        | no        |
+| Organization | Employee | filter list                      | Duplicate | yes     | no         | no        | no        | no        |
+| Organization | Employee | filter list                      | Delete    | yes     | no         | no        | no        | no        |
+| Organization | Employee | filter list                      | Save      | yes     | yes        | no        | yes       | no        |
+| Organization | Employee | filter list                      | Cancel    | yes     | yes        | no        | yes       | no        |
+
+CRUD restrictions for the **Employee** module's **detail** :
+/sequence 
+[ workspace    | module   | view part                        | action    | mhamm ? | giovanni ? | gaspard ? | melissa ? | maureen ? |
+| Organization | Employee | detail                           | Save      | yes     | yes        | no        | yes       | no        |
+| Organization | Employee | detail                           | Cancel    | yes     | yes        | no        | yes       | no        |
+| Organization | Employee | detail                           | Generate  | yes     | yes        | yes       | yes       | yes       |
+
+#Read/write permisions on data
+

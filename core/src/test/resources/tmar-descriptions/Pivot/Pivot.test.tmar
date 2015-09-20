@@ -1,0 +1,31 @@
+Pivot testing 
+
+Here is a list of fields to serialize and deserialize :
+
+/sequence 
+[ field                           | translation?      | serialization ? |
+| salary                          | Salary            | ok              |
+| company.managedOu               | Organisation Unit | ok              |
+| company.managedOu.manager       | Manager           | ok              |
+
+And, more complexe, here is a list of measures :
+
+/sequence 
+[ measure                              | type ?        | sum?  | not null? | distinct? | percentil? | reference?        | percent? | percent ref ?  | translation ?                     | to cross items measure ?             | explanation                                                                                                           | serialization ? |
+| name@count                           | count         |       |           |           |            |                   |          |                | Nb. Name                          | name@count                           | Nombre d'items (identique quelque soit l'attribut)                                                                    | ok              |
+| name@countNotNull                    | count         |       | true      |           |            |                   |          |                | Nb. Name not Ø                    | name@count                           | Nombre d'items dont la valeur de l'item n'est pas nul                                                                 | ok              |
+| name@countDistinct                   | count         |       |           | true      |            |                   |          |                | Nb. Name                          | name@count                           | Nombre de valeurs distinctes de l'attribut 'name'                                                                     | ok              |
+| salary@sum                           | sum           | true  |           |           |            |                   |          |                | Σ Salary                          | salary@sum                           | Somme des valeurs de l'attribut 'salary'                                                                              | ok              |
+| salary@average                       | average       | true  |           |           |            |                   |          |                | Moy. Salary                       | salary@average                       | Somme des valeurs de l'attribut 'salary' divisée par le nombre d'items                                                | ok              |
+| salary@averageNotNull                | average       | true  | true      |           |            |                   |          |                | Moy. Salary non Ø                 | salary@average                       | Somme des valeurs de l'attribut 'salary' divisée par le nombre d' items dont la valeur de l'item n'est pas null       | ok              |
+| salary@average/company.managedOu     | average       | true  |           |           |            | company.managedOu |          |                | Moy. Salary par Organisation Unit | salary@average/company.managedOu     | Somme des valeurs de l'attribut 'salary' divisée par le nombre de valeurs distincts de l'attribut 'company.managedOu' | ok              |
+| salary@percentile80                  | percentile    | true  |           |           | 80         |                   |          |                | Percentile80 Salary               | salary@percentile80                  | Valeur de l'attribut 'salary' pour le percentile 80 des items                                                         | ok              |
+| salary@percentile80NotNull           | percentile    | true  | true      |           | 80         |                   |          |                | Percentile80 Salary not Ø         | salary@percentile80                  | Valeur de l'attribut 'salary' pour le percentile 80 des items dont la valeur de l'attribut 'salary' n'est pas null    | ok              |
+| %salary@sum/total                    | sum           | true  |           |           |            |                   | %        | total          | % Σ/Total salary                  | %salary@sum/total                    | % de la somme de l'attribut 'salary' / total général de la somme                                                      | ok              |
+| %salary@count/columnTotal            | count         |       |           |           |            |                   | %        | columnTotal    | % Nb./Colonne salary              | %salary@count/columnTotal            | % du nombre de l'attribut 'salary' / total de la somme de la colonne                                                  | ok              |
+| %salary@countNotNull/lineTotal       | count         |       | true      |           |            |                   | %        | lineTotal      | % Nb./Ligne salary non Ø          | %salary@count/lineTotal              | % du nombre de l'attribut 'salary' pas nul / total de la somme de la ligne                                            | ok              |
+| %salary@countDistinct/columnSubTotal | count         |       |           | true      |            |                   | %        | columnSubTotal | % Σ/Col-1 salary                  | %salary@count/columnSubTotal         | % du nombre de l'attribut 'salary' distinct / sous total  de la somme de la colonne de niveau supérieur               | ok              |
+| %salary@average/lineSubTotal         | average       | true  |           |           |            |                   | %        | lineSubTotal   | % Moy./Col-1 salary               | %salary@average/lineSubTotal         | % de la moyenne de l'attribut 'salary' / sous total  de la ligne de niveau supérieur                                  | ok              |
+| %%salary@sum/total                   | sum           | true  |           |           |            |                   | %%       | total          | %% Σ/Total salary                 | %%salary@sum/total                   | %% de la somme de l'attribut 'salary' / total général de la somme                                                     | ok              |
+
+That's it !

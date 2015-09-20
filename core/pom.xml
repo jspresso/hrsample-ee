@@ -55,6 +55,12 @@
 			<groupId>org.jspresso.hrsample</groupId>
 			<artifactId>hrsample-core</artifactId>
 		</dependency>
+		
+    <!-- Jspresso pivot dependencies -->
+    <dependency>
+      <groupId>org.jspresso.framework</groupId>
+      <artifactId>jspresso-ext-pivot</artifactId>
+    </dependency>		
 
 		<!-- Jspresso-extensions dependencies -->
 		<dependency>

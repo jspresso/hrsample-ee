@@ -19,6 +19,9 @@
 
         <value>org/jspresso/contrib/usage/model/dsl-model.xml</value>
         <value>org/jspresso/contrib/usage/model/model.xml</value>
+
+        <value>org/jspresso/framework/ext/pivot/model/dsl-model.xml</value>
+        <value>org/jspresso/framework/ext/pivot/model/model.xml</value>
         
         <value>org/jspresso/hrsample/model/dsl-model.xml</value>
         <value>org/jspresso/hrsample/model/model.xml</value>
@@ -49,6 +52,11 @@
         <value>org/jspresso/contrib/usage/model/model.xml</value>
         <value>org/jspresso/contrib/usage/view/dsl-view.xml</value>
         <value>org/jspresso/contrib/usage/view/view.xml</value>      
+
+        <value>org/jspresso/framework/ext/pivot/model/dsl-model.xml</value>
+        <value>org/jspresso/framework/ext/pivot/model/model.xml</value>
+        <value>org/jspresso/framework/ext/pivot/view/dsl-view.xml</value>
+        <value>org/jspresso/framework/ext/pivot/view/view.xml</value>
         
         <value>org/jspresso/hrsample/model/dsl-model.xml</value>
         <value>org/jspresso/hrsample/model/model.xml</value>
@@ -82,6 +90,11 @@
         <value>org/jspresso/contrib/usage/backend/dsl-backend.xml</value>
         <value>org/jspresso/contrib/usage/backend/backend.xml</value>
                 
+        <value>org/jspresso/framework/ext/pivot/model/dsl-model.xml</value>
+        <value>org/jspresso/framework/ext/pivot/model/model.xml</value>
+        <value>org/jspresso/framework/ext/pivot/backend/dsl-backend.xml</value>
+        <value>org/jspresso/framework/ext/pivot/backend/backend.xml</value>
+
         <value>org/jspresso/hrsample/model/dsl-model.xml</value>
         <value>org/jspresso/hrsample/model/model.xml</value>
         <value>org/jspresso/hrsample/backend/dsl-backend.xml</value>
@@ -126,6 +139,15 @@
         <value>org/jspresso/contrib/usage/frontend/dsl-frontend.xml</value>
         <value>org/jspresso/contrib/usage/frontend/frontend.xml</value>
                 
+        <value>org/jspresso/framework/ext/pivot/model/dsl-model.xml</value>
+        <value>org/jspresso/framework/ext/pivot/model/model.xml</value>
+        <value>org/jspresso/framework/ext/pivot/backend/dsl-backend.xml</value>
+        <value>org/jspresso/framework/ext/pivot/backend/backend.xml</value>
+        <value>org/jspresso/framework/ext/pivot/view/dsl-view.xml</value>
+        <value>org/jspresso/framework/ext/pivot/view/view.xml</value>
+        <value>org/jspresso/framework/ext/pivot/frontend/dsl-frontend.xml</value>
+        <value>org/jspresso/framework/ext/pivot/frontend/frontend.xml</value>
+
         <value>org/jspresso/hrsample/model/dsl-model.xml</value>
         <value>org/jspresso/hrsample/model/model.xml</value>
         <value>org/jspresso/hrsample/backend/dsl-backend.xml</value>
@@ -180,6 +202,15 @@
         <value>org/jspresso/contrib/usage/frontend/dsl-frontend.xml</value>
         <value>org/jspresso/contrib/usage/frontend/frontend.xml</value>        
         
+        <value>org/jspresso/framework/ext/pivot/model/dsl-model.xml</value>
+        <value>org/jspresso/framework/ext/pivot/model/model.xml</value>
+        <value>org/jspresso/framework/ext/pivot/backend/dsl-backend.xml</value>
+        <value>org/jspresso/framework/ext/pivot/backend/backend.xml</value>
+        <value>org/jspresso/framework/ext/pivot/view/dsl-view.xml</value>
+        <value>org/jspresso/framework/ext/pivot/view/view.xml</value>
+        <value>org/jspresso/framework/ext/pivot/frontend/dsl-frontend.xml</value>
+        <value>org/jspresso/framework/ext/pivot/frontend/frontend.xml</value>
+
         <value>org/jspresso/hrsample/model/dsl-model.xml</value>
         <value>org/jspresso/hrsample/model/model.xml</value>
         <value>org/jspresso/hrsample/backend/dsl-backend.xml</value>
@@ -234,6 +265,15 @@
         <value>org/jspresso/contrib/usage/view/view.xml</value>
         <value>org/jspresso/contrib/usage/frontend/dsl-frontend.xml</value>
         <value>org/jspresso/contrib/usage/frontend/frontend.xml</value>
+
+        <value>org/jspresso/framework/ext/pivot/model/dsl-model.xml</value>
+        <value>org/jspresso/framework/ext/pivot/model/model.xml</value>
+        <value>org/jspresso/framework/ext/pivot/backend/dsl-backend.xml</value>
+        <value>org/jspresso/framework/ext/pivot/backend/backend.xml</value>
+        <value>org/jspresso/framework/ext/pivot/view/dsl-view.xml</value>
+        <value>org/jspresso/framework/ext/pivot/view/view.xml</value>
+        <value>org/jspresso/framework/ext/pivot/frontend/dsl-frontend.xml</value>
+        <value>org/jspresso/framework/ext/pivot/frontend/frontend.xml</value>
 
         <value>org/jspresso/hrsample/model/dsl-model.xml</value>
         <value>org/jspresso/hrsample/model/model.xml</value>
@@ -303,6 +343,15 @@
         <value>org/jspresso/contrib/usage/frontend/dsl-frontend.xml</value>
         <value>org/jspresso/contrib/usage/frontend/frontend.xml</value>
                 
+        <value>org/jspresso/framework/ext/pivot/model/dsl-model.xml</value>
+        <value>org/jspresso/framework/ext/pivot/model/model.xml</value>
+        <value>org/jspresso/framework/ext/pivot/backend/dsl-backend.xml</value>
+        <value>org/jspresso/framework/ext/pivot/backend/backend.xml</value>
+        <value>org/jspresso/framework/ext/pivot/view/dsl-view.xml</value>
+        <value>org/jspresso/framework/ext/pivot/view/view.xml</value>
+        <value>org/jspresso/framework/ext/pivot/frontend/dsl-frontend.xml</value>
+        <value>org/jspresso/framework/ext/pivot/frontend/frontend.xml</value>
+
         <value>org/jspresso/hrsample/model/dsl-model.xml</value>
         <value>org/jspresso/hrsample/model/model.xml</value>
         <value>org/jspresso/hrsample/backend/dsl-backend.xml</value>
