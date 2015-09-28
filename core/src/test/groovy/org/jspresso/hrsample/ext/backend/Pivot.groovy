@@ -73,9 +73,9 @@ class Pivot extends TmarBackendStartup {
           tmar.notNull = pm.isNotNull()
           tmar.distinct = pm.isDistinct()
           tmar.percentil = pm.getPercentileRank()
-          tmar.reference = pm.getReferenceCode()
           tmar.percent = pm.getPercent()
-          tmar.percentRef = pm.getPercentRef()
+          tmar.referencedAttribut = pm.getReferenceCode()
+          tmar.referencedMeasure = pm.getReferenceTotal()
           
           if (pm.getReferenceCode()!=null) {
             
