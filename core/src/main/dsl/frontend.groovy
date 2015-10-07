@@ -7,9 +7,26 @@
 // Describe your workspaces and modules here.
 
 bean 'viewFactoryBase', parent:'abstractViewFactory',
-    custom: [
-      defaultActionMapRenderingOptions:'LABEL_ICON'
-    ]
+    custom: [defaultActionMapRenderingOptions:'LABEL_ICON']
+    
+workspace('statistics.workspace', icon:'tools.png') {
+  
+  pivotModule ('employee.statistics.module', 
+    dimensions:['salary(40000, 80000, 100000)',
+              'age(30, 40)',
+              'gender', 
+              'managedOu.ouId',
+              //'managedOu.manager.name',
+              //'company.name',
+              'company.departments'],
+    measures:['ssn@count',
+              'salary@sum', 
+              'salary@percentile90', 
+              'salary@average/managedOu.ouId'],
+    refiner:'employeePivotRefiner',
+    component:'Employee')  
+  
+}
     
 workspace('tools.workspace', icon:'tools.png') { 
   
@@ -32,12 +49,12 @@ controller 'hrsample-ext.name',
     onModuleEnter:'manageAnyModuleEnterFrontAction',
     actionMap:'controllerActionMap',
     workspaces:[
+      'statistics.workspace',
       'organization.workspace',
       'employees.workspace',
       'masterdata.workspace', 
       'tools.workspace',
-      'usage.workspace'
-    ]
+      'usage.workspace']
     
 action ('furnitureModuleInitFrontAction',
   class:'org.jspresso.framework.application.frontend.action.FrontendAction') {
@@ -70,7 +87,6 @@ spec('swing') {
 spec('remote-recording') {
   bean('remoteFrontController',
       class:'org.jspresso.framework.ext.application.testing.RecordingRemoteController',
-      parent:'abstractFrontController', custom:[
-        captureDirectory:'/tmp/commands'
-      ])
+      parent:'abstractFrontController', 
+      custom:[captureDirectory:'/tmp/commands'])
 }

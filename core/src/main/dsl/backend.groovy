@@ -9,3 +9,9 @@ bean('tmarParametersBean',
           excludedFields:['id', 'version', 'photo', 'createTimestamp', 'lastUpdateTimestamp', 'propertyTranslations'],
           tmarIds:['City':'zip',
                    'OrganizationalUnit':'ouId', 'Team':'ouId', 'Department':'ouId']])
+ 
+external id:['pivotRefiner']
+
+bean('employeePivotRefiner',
+  parent:'pivotRefiner',
+  class:'org.jspresso.hrsample.ext.backend.EmployeePivotRefiner') 

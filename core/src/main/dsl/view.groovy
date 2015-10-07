@@ -166,6 +166,17 @@ table('Employee.test.view') {
   }
 }
 
+actionMap('pivotModuleTableActionMap') {
+  actionList ('ADD') {
+    action ref:'checkAllLinesAction'
+    action ref:'uncheckAllLinesAction'
+    action ref:'addAsChildModuleFrontAction'
+  }
+  actionList ('EXPORT') {
+    action ref:'exportPivotModuleResultToHtmlAction'
+  }
+}
+
 action ('openEmployeeFrontAction',
   parent:'addAsChildModuleFrontAction',
   custom:[parentWorkspaceName:'employees.workspace', parentModuleName:'employees.module'])
