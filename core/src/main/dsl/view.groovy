@@ -1,5 +1,7 @@
 // Implement your views here using the SJS DSL.
-external id:['restartModuleWithConfirmationFrontAction']
+external id:['restartModuleWithConfirmationFrontAction', 
+  'queryPivotModuleAndReloadFilterFrontAction',
+  'queryPivotModuleFilterFrontAction']
 
 /* defined in view.xml because SJS does not know about the fields coming from the FW
 form('loginViewDescriptor', parent:'loginViewDescriptorBase', model:'CaptchaUsernamePasswordHandler', columnCount:2) {
@@ -166,6 +168,7 @@ table('Employee.test.view') {
   }
 }
 
+// Overriding bean from jspresso-extension-pivot
 actionMap('pivotModuleTableActionMap') {
   actionList ('ADD') {
     action ref:'checkAllLinesAction'
@@ -174,6 +177,18 @@ actionMap('pivotModuleTableActionMap') {
   }
   actionList ('EXPORT') {
     action ref:'exportPivotModuleResultToHtmlAction'
+  }
+}
+
+// Overriding bean from jspresso-extension-pivot
+actionMap ('pivotModuleActionMap') {
+  actionList('PIVOT_QUERY', collapsable: true) {
+    action ref:'queryPivotModuleFilterFrontAction'
+    action ref:'queryPivotModuleAndReloadFilterFrontAction'
+  }
+  actionList ('EXTENSIONS') {
+    action ref:'chooseQueryCriteriasFrontAction'
+    action ref:'createPermalinkAndCopyToClipboardFrontAction'
   }
 }
 
