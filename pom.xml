@@ -28,7 +28,7 @@
     <url>http://www.jspresso.com</url>
   </organization>
   <scm>
-    <connection>scm:git:https://bitbucket.org/jspresso/hrsample-ee.git</connection>
+    <connection>scm:git:https://github.com/jspresso/hrsample-ee.git</connection>
   </scm>
   <distributionManagement>
     <repository>
