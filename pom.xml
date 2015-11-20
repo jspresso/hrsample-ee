@@ -11,7 +11,7 @@
   <groupId>org.jspresso.hrsample</groupId>
   <artifactId>hrsample-ext</artifactId>
   <packaging>pom</packaging>
-  <version>4.2-SNAPSHOT</version>
+  <version>4.3-SNAPSHOT</version>
 
   <properties>
     <jspresso-ext-pivot.version>4.2-SNAPSHOT</jspresso-ext-pivot.version>
@@ -139,7 +139,7 @@
         <artifactId>jspresso-ext-pivot</artifactId>
         <version>${jspresso-ext-pivot.version}</version>
       </dependency>
-      
+
       <!-- Jspresso-extensions dependencies -->
       <dependency>
         <groupId>org.jspresso.contrib</groupId>
