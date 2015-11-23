@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.jspresso.framework</groupId>
     <artifactId>jspresso-ext-root</artifactId>
-    <version>4.2-SNAPSHOT</version>
+    <version>4.3-SNAPSHOT</version>
     <relativePath />
   </parent>
   <groupId>org.jspresso.hrsample</groupId>
@@ -14,8 +14,7 @@
   <version>4.3-SNAPSHOT</version>
 
   <properties>
-    <jspresso-ext-pivot.version>4.2-SNAPSHOT</jspresso-ext-pivot.version>
-    <jspresso-extensions.version>2.6-SNAPSHOT</jspresso-extensions.version>
+    <jspresso-extensions.version>2.6</jspresso-extensions.version>
     <jspresso-usage.version>2.1-SNAPSHOT</jspresso-usage.version>
     <groovy.version>2.3.7</groovy.version>
   </properties>
@@ -131,13 +130,6 @@
         <groupId>org.jspresso.hrsample</groupId>
         <artifactId>hrsample-core</artifactId>
         <version>${project.version}</version>
-      </dependency>
-
-      <!-- Jspresso pivot dependencies -->
-      <dependency>
-        <groupId>org.jspresso.framework</groupId>
-        <artifactId>jspresso-ext-pivot</artifactId>
-        <version>${jspresso-ext-pivot.version}</version>
       </dependency>
 
       <!-- Jspresso-extensions dependencies -->
