@@ -17,18 +17,18 @@ public class EmployeePivotRefiner extends DefaultPivotRefiner<Employee> {
 
   @Override
   protected IPivotRefinerField<Employee, ?> createRefinerField(String field) {
-    if ("salary".equals(field)) 
+    if ("salary".equals(field))
       return new SalaryField(this);
     return super.createRefinerField(field);
   }
-  
+
   private class SalaryField extends SimplePivotRefinerField<Employee, BigDecimal> {
     public SalaryField(IPivotRefiner<Employee> refiner) {
       super(refiner, Employee.SALARY);
     }
     @Override
-    public Map<String, Object> getStyle(String measure, Map<String, Object> parentStyle) {
-      Map<String, Object> style = super.getStyle(measure, parentStyle);
+    public Map<String, Object> getStyle(String measure) {
+      Map<String, Object> style = super.getStyle(measure);
       style.put(IPivotStyles.STYLE_UNIT, "K€");
       return style;
     }
@@ -39,5 +39,5 @@ public class EmployeePivotRefiner extends DefaultPivotRefiner<Employee> {
       super.setValue(value);
     }
   }
-  
+
 }
