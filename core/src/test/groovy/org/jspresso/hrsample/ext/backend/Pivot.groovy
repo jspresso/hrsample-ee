@@ -74,16 +74,32 @@ class Pivot extends TmarBackendStartup {
           tmar.distinct = pm.isDistinct()
           tmar.percentil = pm.getPercentileRank()
           tmar.percent = pm.getPercent()
-          tmar.referencedAttribut = pm.getReferenceCode()
-          tmar.referencedMeasure = pm.getReferenceTotal()
+          tmar.referenceCode = pm.getReferenceCode()
+          tmar.referenceTotal = pm.getReferenceTotal()
           
-          if (pm.getReferenceCode()!=null) {
+          String code = pm.getReferenceCode();
+          if (code!=null) {
             
-            PivotField pfr = factory.createComponentInstance(PivotField.class)
-            pfr.setComponentClass(Employee.class)
-            pfr.setCode(pm.getReferenceCode())
-
-            pm.setReference(pfr)
+            if (code.contains("@")) {
+              
+              PivotField pfr = factory.createComponentInstance(PivotField.class)
+              pfr.setComponentClass(Employee.class)
+              pfr.setCode(code.substring(0, code.indexOf('@')))
+              
+              PivotMeasure pmv = factory.createComponentInstance(PivotMeasure.class)
+              pmv.setupMeasure(code)
+              pmv.setField(pfr)  
+              
+              pm.setReferenceMeasure(pmv)
+              
+            }
+            else {
+              PivotField pfr = factory.createComponentInstance(PivotField.class)
+              pfr.setComponentClass(Employee.class)
+              pfr.setCode(pm.getReferenceCode())
+  
+              pm.setReferenceField(pfr)
+            }
           }
           
           // serialize and deserialize
