@@ -52,7 +52,7 @@ class Pivot extends TmarBackendStartup {
           tmar.serialization = (back == fieldName) ? "ok" : "KO: "+back;
           
           // translation
-          tmar.translation = pf.getTranslation(Employee.class, controller)
+          tmar.translation = pf.getTranslation(controller)
         }
         else {
           
