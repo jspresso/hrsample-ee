@@ -25,6 +25,7 @@ import org.jspresso.framework.model.component.query.EnumValueQueryStructure;
 import org.jspresso.framework.model.component.query.QueryComponent;
 import org.jspresso.framework.model.component.query.QueryComponentSerializationUtil;
 import org.jspresso.framework.model.descriptor.IEnumerationPropertyDescriptor;
+import org.jspresso.framework.model.descriptor.IPropertyDescriptor;
 import org.jspresso.hrsample.ext.model.Furniture;
 import org.jspresso.hrsample.model.Employee;
 import org.slf4j.Logger;
@@ -131,8 +132,9 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
       String key = criterias[i];
       Object value = criterias[i+1];
       
-      if (key.equals(Employee.GENDER)) {
-        IEnumerationPropertyDescriptor epd = (IEnumerationPropertyDescriptor) module.getElementComponentDescriptor().getPropertyDescriptor(key);
+      IPropertyDescriptor propertyDescriptor = module.getElementComponentDescriptor().getPropertyDescriptor(key);
+      if (propertyDescriptor instanceof IEnumerationPropertyDescriptor) {
+        IEnumerationPropertyDescriptor epd = (IEnumerationPropertyDescriptor) propertyDescriptor;
         EnumQueryStructure eqs = new EnumQueryStructure(epd);
         
         Set<EnumValueQueryStructure> selected = new HashSet<>();
@@ -202,16 +204,5 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     }
 
   }
-
-//  @SuppressWarnings({ "unchecked" })
-//  private FilterableBeanCollectionModule createFilterModule(String moduleName, Class<?> componentClass) {
-//    IEntityFactory factory = getEntityFactory();
-//    
-//    FilterableBeanCollectionModule module = new FilterableBeanCollectionModule();
-//    module.setElementComponentDescriptor((IComponentDescriptor<Object>) factory.getComponentDescriptor(componentClass));
-//    module.setFilter(new QueryComponent(factory.getComponentDescriptor(componentClass), factory));
-//    module.setPermId(moduleName);
-//    return module;
-//  }
 
 }
