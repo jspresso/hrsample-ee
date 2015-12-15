@@ -12,7 +12,7 @@ bean 'viewFactoryBase', parent:'abstractViewFactory',
 workspace('statistics.workspace', icon:'tools.png') {
   
   pivotModule ('employee.statistics.module', 
-    dimensions:['salary(40000, 80000, 100000)',
+    dimensions:['salary(40, 80, 100)',
               'age(30, 40)',
               'gender', 
               'managedOu.ouId',
