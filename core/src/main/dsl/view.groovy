@@ -98,10 +98,10 @@ actionMap('beanCollectionModuleActionMap') {
   actionList('FILE') {
     action ref:'queryModuleFilterAction'
   }
-  actionList('PIN', renderingOptions:'ICON') {
-    action ref:'pinQueryCriteriasFrontAction'
-  }
-  actionList('PIN2') {
+//  actionList('PIN', renderingOptions:'ICON') {
+//    action ref:'pinQueryCriteriasFrontAction'
+//  }
+  actionList('MY_REQUEST') {
     action ref:'chooseQueryCriteriasFrontAction'
   }
   

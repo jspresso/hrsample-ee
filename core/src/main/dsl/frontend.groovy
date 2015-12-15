@@ -28,6 +28,16 @@ workspace('statistics.workspace', icon:'tools.png') {
   
 }
     
+workspace('administration.workspace', icon:'classpath:org/jspresso/framework/application/images/execute-48x48.png') {
+  
+  module ('userqueries.admin.module',
+    parent:'userqueries.admin.module')
+  
+  module ('pivot.admin.module',
+    parent:'pivot.admin.module')
+  
+}
+
 workspace('tools.workspace', icon:'tools.png') { 
   
   filterModule ('furniture.module', 
@@ -54,7 +64,8 @@ controller 'hrsample-ext.name',
       'employees.workspace',
       'masterdata.workspace', 
       'tools.workspace',
-      'usage.workspace']
+      'usage.workspace',
+      'administration.workspace']
     
 action ('furnitureModuleInitFrontAction',
   class:'org.jspresso.framework.application.frontend.action.FrontendAction') {

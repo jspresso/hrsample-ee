@@ -1,18 +1,16 @@
 package org.jspresso.hrsample.ext.backend
 
-import java.io.Serializable;
-
 import org.jspresso.framework.application.backend.BackendControllerHolder
 import org.jspresso.framework.application.backend.IBackendController
 import org.jspresso.framework.ext.pivot.backend.DefaultPivotRefiner
 import org.jspresso.framework.ext.pivot.backend.PivotHelper
-import org.jspresso.framework.ext.pivot.model.PivotCriteria;
+import org.jspresso.framework.ext.pivot.model.PivotCriteria
 import org.jspresso.framework.ext.pivot.model.PivotField
 import org.jspresso.framework.ext.pivot.model.PivotFilterableBeanCollectionModule
 import org.jspresso.framework.ext.pivot.model.PivotMeasure
-import org.jspresso.framework.model.component.query.QueryComponent;
-import org.jspresso.framework.model.component.query.QueryComponentSerializationUtil;
-import org.jspresso.framework.model.descriptor.basic.BasicQueryComponentDescriptorFactory;
+import org.jspresso.framework.ext.pivot.model.service.InvalidMeasureException
+import org.jspresso.framework.model.component.query.QueryComponent
+import org.jspresso.framework.model.component.query.QueryComponentSerializationUtil
 import org.jspresso.framework.model.entity.IEntityFactory
 import org.jspresso.hrsample.model.Employee
 import org.junit.Test
@@ -55,6 +53,17 @@ class Pivot extends TmarBackendStartup {
           tmar.translation = pf.getTranslation(controller)
         }
         else {
+          
+          // check measure
+          try {
+            PivotHelper.checkMeasure(tmar.measure, 
+              ["gender@count", "managedOu@countNotNull", "managedOu@countDistinct", "managedOu.teamCount@sum"])
+            
+            tmar.check = "ok";
+          } catch (InvalidMeasureException e) {
+            tmar.check = e.getMessage()
+            return
+          }
           
           // manage measure
           PivotField pf = factory.createComponentInstance(PivotField.class)
