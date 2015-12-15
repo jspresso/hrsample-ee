@@ -1,13 +1,34 @@
 package org.jspresso.hrsample.ext.development;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
-import org.jspresso.contrib.model.query.UserDefaultQuery;
+import org.jspresso.contrib.backend.query.IUserQueriesHelper;
 import org.jspresso.contrib.model.query.UserQuery;
 import org.jspresso.contrib.usage.model.ModuleUsage;
+import org.jspresso.framework.action.ActionContextConstants;
+import org.jspresso.framework.application.model.FilterableBeanCollectionModule;
+import org.jspresso.framework.application.model.Module;
+import org.jspresso.framework.application.model.Workspace;
+import org.jspresso.framework.model.component.IQueryComponent;
+import org.jspresso.framework.model.component.query.EnumQueryStructure;
+import org.jspresso.framework.model.component.query.EnumValueQueryStructure;
+import org.jspresso.framework.model.component.query.QueryComponent;
+import org.jspresso.framework.model.component.query.QueryComponentSerializationUtil;
+import org.jspresso.framework.model.descriptor.IEnumerationPropertyDescriptor;
 import org.jspresso.hrsample.ext.model.Furniture;
+import org.jspresso.hrsample.model.Employee;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanFactory;
 
 /**
@@ -15,6 +36,10 @@ import org.springframework.beans.factory.BeanFactory;
  */
 public class HibernateTestDataPersister extends org.jspresso.hrsample.development.HibernateTestDataPersister {
 
+  private static final Logger LOGGER = LoggerFactory.getLogger(HibernateTestDataPersister.class);
+  
+  private BeanFactory beanFactory = null;
+  
   /**
    * Constructs a new <code>TestDataPersister</code> instance.
    * 
@@ -23,6 +48,7 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
    */
   public HibernateTestDataPersister(BeanFactory beanFactory) {
     super(beanFactory);
+    this.beanFactory = beanFactory;
   }
 
   /**
@@ -68,42 +94,81 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     }
     
     try {
-      createFilter("demo", "employees.module", "Start with D", "H4sIAAAAAAAAAFvzloG1tIhBPNonK7EsUS8zXy84tSgzMSezKjEpJ9V63QXONcHX33oyMTBUFDAwMHCVMPAnF6UmlqSGZOamFpck5haUFjLUMYAAUwkDV3J-bkFiUWJJflEJA5NrYAkDS15ibmoJA6NLCYNwTmJxSWhBCnbNIAYLiGAtYeBMyiwqyXABKsQuz1acmJNYVIlNEgBYRP9-0AAAAA", "[administrator]", true);
-      createFilter("demo", "employees.module", "Start with B", "H4sIAAAAAAAAAFvzloG1tIhBPNonK7EsUS8zXy84tSgzMSezKjEpJ9V63QXONcHX33oyMTBUFDAwMHCVMPAnF6UmlqSGZOamFpck5haUFjLUMYAAUwkDV3J-bkFiUWJJflEJA5NrYAkDS15ibmoJA6NTCYNwTmJxSWhBCnbNIAYLiGAtYeBMyiwqyXABKsQuz1acmJNYVIlNEgA2xnlV0AAAAA", null, false);
-
-      createFilter("maxime", "employees.module", "Men", "H4sIAAAAAAAAAHWLMQ6CQBRERwImGBMLC2_BBWy1MNHCoJXVB350yS6sy8eohScinsXOU3AHoccpJpO8eU2LoHZYnLY53ShSZRSzU6TVkxLNy_cnbOJvu_GAuwUwFcxSxyR8UIYrIWPrK17o4wkmaWksOZLSCbz1XuAXZNgK5poqOdps2OyH31cgGJ-5yLjzRztBmCgnl1Vn_TlXpMk9huAPPqrnCtoAAAA", "[administrator]", true);
-      createFilter("maxime", "employees.module", "Women", "H4sIAAAAAAAAAHWLMQ6CQBRERwImGBMLC2_BBWzVxMTGoJXVB350yS6sy8eohScinsXOU3AHoccpJpO8eU2LoHZYnHY53ShSZRSzU6TVkxLNy_cnbOJvu_WAuwUwFcxSxyR8UIYrIWPrK17o4wkmaWksOZLSCbz1XuAXZNgK5poqOdps2OyH31cgGJ-5yLjzRxtBmCgnl1Vn_TlXpMk9huAPqJwyu9oAAAA", "[administrator]", false);
-
-      createFilter("toto", "employees.module", "Test", "H4sIAAAAAAAAAHWLMQ6CQBRERwImGBMLC2_BBWzVxMTGoJXVB350yS6sy8eohScinsXOU3AHoccpJpO8eU2LoHZYnHY53ShSZRSzU6TVkxLNy_cnbOJvu_WAuwUwFcxSxyR8UIYrIWPrK17o4wkmaWksOZLSCbz1XuAXZNgK5poqOdps2OyH31cgGJ-5yLjzRxtBmCgnl1Vn_TlXpMk9huAPqJwyu9oAAAA", "[standard]", false);
+      createFilter("demo", "employees.workspace", "employees.module", "Start with D", Employee.NAME, "D%");
+      createFilter("demo", "employees.workspace", "employees.module", "Start with B", Employee.NAME, "B%");
+      
+      createFilter("maxime", "employees.workspace", "employees.module", "Men", Employee.GENDER, Employee.GENDER_M);
+      createFilter("maxime", "employees.workspace", "employees.module", "Women", Employee.GENDER, Employee.GENDER_F);
 
     } catch (Throwable ex) {
+      LOGGER.warn("Unable to create filter criterias !", ex);
       // In no way the test data persister should make the application
       // startup fail.
     }
   }
 
   private int filterSeq = 0;
-  private void createFilter(String login, String key, String name, String criterias, String shared, boolean defaultCriterias) {
-    UserQuery q = createEntityInstance(UserQuery.class);
+  @SuppressWarnings("null")
+  private void createFilter(
+      String login, 
+      String workspaceId,
+      String moduleId, 
+      String queryName, 
+      String... criterias) throws IOException {
     
+    FilterableBeanCollectionModule module = null;
+    Workspace workspace = (Workspace) beanFactory.getBean(workspaceId);
+    for (Module m : workspace.getModules()) {
+      if (moduleId.equals(m.getName())) {
+        module = (FilterableBeanCollectionModule) m;
+        break;
+      }
+    }
+    
+    module.setFilter(new QueryComponent(module.getElementComponentDescriptor(), getEntityFactory()));
+    IQueryComponent filter = module.getFilter();
+    for (int i = 0; i < criterias.length; i+=2) {
+      String key = criterias[i];
+      Object value = criterias[i+1];
+      
+      if (key.equals(Employee.GENDER)) {
+        IEnumerationPropertyDescriptor epd = (IEnumerationPropertyDescriptor) module.getElementComponentDescriptor().getPropertyDescriptor(key);
+        EnumQueryStructure eqs = new EnumQueryStructure(epd);
+        
+        Set<EnumValueQueryStructure> selected = new HashSet<>();
+        for (EnumValueQueryStructure evqs : eqs.getEnumerationValues()) {
+          if (value.equals(evqs.getValue())) {
+            selected.add(evqs);
+            break;
+          }
+        }
+        eqs.setSelectedEnumerationValues(selected);
+
+        value = eqs;
+      }
+      
+      filter.put(key, value);
+    }
+    
+    String criteria = QueryComponentSerializationUtil.serializeFilter(
+            filter, new LinkedHashMap<String, Serializable>());
+    
+    Map<String, Object> context = new HashMap<>();
+    context.put(ActionContextConstants.MODULE, module);
+    
+    IUserQueriesHelper helper = (IUserQueriesHelper) beanFactory.getBean("userQueriesHelper");
+    String key = helper.getKey(context);
+    
+    UserQuery q = createEntityInstance(UserQuery.class);
+
     q.setLogin(login);
     q.setKey(key);
-    q.setName(name);
-    q.setCriterias(criterias);
+    q.setName(queryName);
+    q.setCriterias(criteria);
     q.setSeq(filterSeq++);
-    q.setSharedString(shared);
-    
+    q.setSharedString("[administrator]");
+
     saveOrUpdate(q);
-    
-    if (defaultCriterias) {
-      UserDefaultQuery qd = createEntityInstance(UserDefaultQuery.class);
-      
-      qd.setLogin(login);
-      qd.setKey(key);
-      qd.setQuery(q);
-      
-      saveOrUpdate(qd);
-    }
   }
 
   private Furniture createFurniture(String name, double price, double discount) {
@@ -137,5 +202,16 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     }
 
   }
+
+//  @SuppressWarnings({ "unchecked" })
+//  private FilterableBeanCollectionModule createFilterModule(String moduleName, Class<?> componentClass) {
+//    IEntityFactory factory = getEntityFactory();
+//    
+//    FilterableBeanCollectionModule module = new FilterableBeanCollectionModule();
+//    module.setElementComponentDescriptor((IComponentDescriptor<Object>) factory.getComponentDescriptor(componentClass));
+//    module.setFilter(new QueryComponent(factory.getComponentDescriptor(componentClass), factory));
+//    module.setPermId(moduleName);
+//    return module;
+//  }
 
 }
