@@ -147,10 +147,13 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     
     PivotFilterableBeanCollectionModule module = null;
     Workspace workspace = (Workspace) beanFactory.getBean(workspaceId);
-    for (Module m : workspace.getModules()) {
-      if (moduleId.equals(m.getName())) {
-        module = (PivotFilterableBeanCollectionModule) m;
-        break;
+    List<Module> modules = workspace.getModules(true);
+    if (modules!=null) {
+      for (Module m : modules) {
+        if (moduleId.equals(m.getName())) {
+          module = (PivotFilterableBeanCollectionModule) m;
+          break;
+        }
       }
     }
     
@@ -208,10 +211,13 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     
     FilterableBeanCollectionModule module = null;
     Workspace workspace = (Workspace) beanFactory.getBean(workspaceId);
-    for (Module m : workspace.getModules()) {
-      if (moduleId.equals(m.getName())) {
-        module = (FilterableBeanCollectionModule) m;
-        break;
+    List<Module> modules = workspace.getModules(true);
+    if (modules!=null) {
+      for (Module m : modules) {
+        if (moduleId.equals(m.getName())) {
+          module = (FilterableBeanCollectionModule) m;
+          break;
+        }
       }
     }
     
