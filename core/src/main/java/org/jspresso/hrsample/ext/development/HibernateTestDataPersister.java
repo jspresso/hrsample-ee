@@ -31,6 +31,7 @@ import org.jspresso.framework.model.component.query.QueryComponent;
 import org.jspresso.framework.model.descriptor.IEnumerationPropertyDescriptor;
 import org.jspresso.framework.model.descriptor.IPropertyDescriptor;
 import org.jspresso.hrsample.ext.model.Furniture;
+import org.jspresso.hrsample.model.ContactInfo;
 import org.jspresso.hrsample.model.Employee;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -99,12 +100,23 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     }
     
     try {
-      createFilter(false, "demo", "employees.workspace", "employees.module", "Start with D", Employee.NAME, "D%");
-      createFilter(false, "demo", "employees.workspace", "employees.module", "Start with B", Employee.NAME, "B%");
       
       createFilter(false, "maxime", "employees.workspace", "employees.module", "Men", Employee.GENDER, Employee.GENDER_M);
       createFilter(false, "maxime", "employees.workspace", "employees.module", "Women", Employee.GENDER, Employee.GENDER_F);
 
+      createFilter(false, "demo", "employees.workspace", "employees.module", "Living at Every", Employee.CONTACT+'.'+ContactInfo.CITY, "Evry");
+      createFilter(false, "demo", "employees.workspace", "employees.module", "More than 40 yers old", Employee.AGE, "40");
+
+      createFilter(false, "demo", "employees.workspace", "employees.module", "Start with D", Employee.NAME, "D%");
+      createFilter(false, "demo", "employees.workspace", "employees.module", "Start with B", Employee.NAME, "B%");
+      createFilter(false, "demo", "employees.workspace", "employees.module", "Start with M", Employee.NAME, "M%");
+//      createFilter(false, "demo", "employees.workspace", "employees.module", "Start with U", Employee.NAME, "D%");
+//      createFilter(false, "demo", "employees.workspace", "employees.module", "Start with V", Employee.NAME, "B%");
+//      createFilter(false, "demo", "employees.workspace", "employees.module", "Start with W", Employee.NAME, "E%");
+//      createFilter(false, "demo", "employees.workspace", "employees.module", "Start with X", Employee.NAME, "D%");
+//      createFilter(false, "demo", "employees.workspace", "employees.module", "Start with Y", Employee.NAME, "B%");
+//      createFilter(false, "demo", "employees.workspace", "employees.module", "Start with Z", Employee.NAME, "E%");
+      
     } catch (Throwable ex) {
       LOGGER.warn("Unable to create filter criterias !", ex);
       // In no way the test data persister should make the application
@@ -272,7 +284,7 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     q.setKey(key);
     q.setName(queryName);
     q.setCriterias(criteria);
-    q.setSeq(filterSeq++);
+//    q.setSeq(filterSeq++);
     q.setSharedString("[administrator]");
 
     saveOrUpdate(q);
@@ -282,7 +294,7 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
       
       qd.setLogin(login);
       qd.setKey(key);
-      qd.setQuery(q);
+//      qd.setQuery(q);
       
       saveOrUpdate(qd);
     }

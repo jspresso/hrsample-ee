@@ -138,6 +138,7 @@ table('Employee.test.view') {
     }
     actionList('FILE') {
       action ref:'queryModuleFilterAction'
+      action ref:'pinQueryCriteriasFrontAction'
     }
     actionList('SERVICE') {
       action parent:'openEmployeeFrontAction'
