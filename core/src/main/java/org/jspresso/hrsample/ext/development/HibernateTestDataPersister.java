@@ -285,7 +285,7 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     q.setName(queryName);
     q.setCriterias(criteria);
 //    q.setSeq(filterSeq++);
-    q.setSharedString("Design2See");
+    q.setSharedString("[administrator]");
 
     saveOrUpdate(q);
     
