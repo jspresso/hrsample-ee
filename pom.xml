@@ -14,14 +14,14 @@
   <version>4.3-SNAPSHOT</version>
 
   <properties>
-    <jspresso-extensions.version>2.6</jspresso-extensions.version>
+    <jspresso-extensions.version>2.8-SNAPSHOT</jspresso-extensions.version>
     <jspresso-usage.version>2.1-SNAPSHOT</jspresso-usage.version>
     <groovy.version>2.3.7</groovy.version>
   </properties>
 
   <name>Jspresso HR Sample Application - Extension</name>
   <description>Jspresso HR Sample Application - Extension</description>
-  <url>http://www.jspresso.orh</url>
+  <url>http://www.jspresso.org</url>
   <organization>
     <name>Jspresso.com</name>
     <url>http://www.jspresso.com</url>
