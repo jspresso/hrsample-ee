@@ -100,22 +100,21 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     }
     
     try {
-      
-      createFilter(false, "maxime", "employees.workspace", "employees.module", "Men", Employee.GENDER, Employee.GENDER_M);
-      createFilter(false, "maxime", "employees.workspace", "employees.module", "Women", Employee.GENDER, Employee.GENDER_F);
-
-      createFilter(false, "demo", "employees.workspace", "employees.module", "Living at Every", Employee.CONTACT+'.'+ContactInfo.CITY, "Evry");
       createFilter(false, "demo", "employees.workspace", "employees.module", "More than 40 yers old", Employee.AGE, "40");
-
+      createFilter(false, "demo", "employees.workspace", "employees.module", "Men", Employee.GENDER, Employee.GENDER_M);
+      createFilter(false, "demo", "employees.workspace", "employees.module", "Living at Every", Employee.CONTACT+'.'+ContactInfo.CITY, "Evry");
+      createFilter(false, "demo", "employees.workspace", "employees.module", "Women", Employee.GENDER, Employee.GENDER_F);
+      
       createFilter(false, "demo", "employees.workspace", "employees.module", "Start with D", Employee.NAME, "D%");
       createFilter(false, "demo", "employees.workspace", "employees.module", "Start with B", Employee.NAME, "B%");
       createFilter(false, "demo", "employees.workspace", "employees.module", "Start with M", Employee.NAME, "M%");
-//      createFilter(false, "demo", "employees.workspace", "employees.module", "Start with U", Employee.NAME, "D%");
-//      createFilter(false, "demo", "employees.workspace", "employees.module", "Start with V", Employee.NAME, "B%");
-//      createFilter(false, "demo", "employees.workspace", "employees.module", "Start with W", Employee.NAME, "E%");
-//      createFilter(false, "demo", "employees.workspace", "employees.module", "Start with X", Employee.NAME, "D%");
-//      createFilter(false, "demo", "employees.workspace", "employees.module", "Start with Y", Employee.NAME, "B%");
-//      createFilter(false, "demo", "employees.workspace", "employees.module", "Start with Z", Employee.NAME, "E%");
+      createFilter(false, "demo", "employees.workspace", "employees.module", "Start with U", Employee.NAME, "U%");
+      createFilter(false, "demo", "employees.workspace", "employees.module", "Start with V", Employee.NAME, "V%");
+      createFilter(false, "demo", "employees.workspace", "employees.module", "Start with W", Employee.NAME, "W%");
+
+      createFilter(false, "maxime", "employees.workspace", "employees.module", "Start with X", Employee.NAME, "D%");
+      createFilter(false, "maxime", "employees.workspace", "employees.module", "Start with Y", Employee.NAME, "B%");
+      createFilter(false, "maxime", "employees.workspace", "employees.module", "Start with Z", Employee.NAME, "E%");
       
     } catch (Throwable ex) {
       LOGGER.warn("Unable to create filter criterias !", ex);
