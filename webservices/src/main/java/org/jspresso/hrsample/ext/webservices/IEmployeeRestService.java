@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005-2013 Vincent Vandenschrick. All rights reserved.
+ * Copyright (c) 2005-2016 Vincent Vandenschrick. All rights reserved.
  *
  *  This file is part of the Jspresso framework.
  *
@@ -40,7 +40,7 @@ import org.jspresso.hrsample.model.Event;
 /**
  * Employee REST service specification. Can be used on client side by RestEasy
  * client framework.
- * 
+ *
  * @author Vincent Vandenschrick
  */
 @Path("/employees")
@@ -48,7 +48,7 @@ public interface IEmployeeRestService {
 
   /**
    * Retrieves an employee by its name.
-   * 
+   *
    * @param name
    *          the name of the employee to retrieve.
    * @return the employee simplified DTO.
@@ -105,7 +105,7 @@ public interface IEmployeeRestService {
 
     /**
      * Constructs a new <code>EmployeeDto</code> instance.
-     * 
+     *
      * @param employee
      *          the employee to create the DTO for.
      */
@@ -150,7 +150,7 @@ public interface IEmployeeRestService {
 
     /**
      * Constructs a new <code>AddressDto</code> instance.
-     * 
+     *
      * @param contact
      *          the contact to create the DTO for.
      */
@@ -183,7 +183,7 @@ public interface IEmployeeRestService {
 
     /**
      * Constructs a new <code>EventDto</code> instance.
-     * 
+     *
      * @param event
      *          the event to create the DTO for.
      */

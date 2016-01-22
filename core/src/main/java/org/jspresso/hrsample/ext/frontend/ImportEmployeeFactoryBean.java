@@ -1,3 +1,21 @@
+/*
+ * Copyright (c) 2005-2016 Vincent Vandenschrick. All rights reserved.
+ *
+ *  This file is part of the Jspresso framework.
+ *
+ *  Jspresso is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU Lesser General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  Jspresso is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU Lesser General Public License for more details.
+ *
+ *  You should have received a copy of the GNU Lesser General Public License
+ *  along with Jspresso.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package org.jspresso.hrsample.ext.frontend;
 
 import java.lang.reflect.InvocationTargetException;
@@ -25,22 +43,22 @@ public class ImportEmployeeFactoryBean extends ImportEntitiesFactoryBean  {
 
   public static final String ZIP = "zip";
   public static final String CONTACT_CITY = Employee.CONTACT + "." + ContactInfo.CITY;
-      
+
   /**
    * create Company and City if does not exists
    */
   @Override
   public IEntity findReference(ImportReference refData, Map<String, String> cells, Map<String, Object> context) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-    
+
     // load from database
     IEntity entity = super.findReference(refData, cells, context);
-   
+
     String property = refData.getName();
     if (Employee.COMPANY.equals(property)) {
       if (entity == null) {
         entity = getBackendController().getEntityFactory().createEntityInstance(Company.class);
         ((Company) entity).setName(cells.get(Employee.COMPANY));
-        
+
         // manage cache !
         getCache(context).put(refData.getKeyCache(), entity);
       }
@@ -53,16 +71,16 @@ public class ImportEmployeeFactoryBean extends ImportEntitiesFactoryBean  {
         // manage cache !
         getCache(context).put(refData.getKeyCache(), entity);
       }
-      
+
       // update zip
       ((City) entity).setZip(cells.get(ZIP));
       getBackendController().registerForUpdate(entity);
     }
-    
-    
+
+
     return entity;
   }
-  
+
   /**
    * manage also an extrat column 'test'
    */

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005-2013 Vincent Vandenschrick. All rights reserved.
+ * Copyright (c) 2005-2016 Vincent Vandenschrick. All rights reserved.
  *
  *  This file is part of the Jspresso framework.
  *
@@ -26,14 +26,14 @@ import org.jspresso.hrsample.ext.webservices.IEmployeeRestService.EmployeeDto;
 
 /**
  * A sample java client for the Employee REST web service.
- * 
+ *
  * @author Vincent Vandenschrick
  */
 public class EmployeeRestServiceClient {
 
   /**
    * Calls the employee web service using the args parameter.
-   * 
+   *
    * @param args
    *          the names of the Employees to lookup.
    */

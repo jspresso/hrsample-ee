@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005-2013 Vincent Vandenschrick. All rights reserved.
+ * Copyright (c) 2005-2016 Vincent Vandenschrick. All rights reserved.
  *
  *  This file is part of the Jspresso framework.
  *
@@ -25,7 +25,7 @@ import org.jspresso.framework.security.UsernamePasswordHandler;
 /**
  * A custom username password handler to demonstrate how login view can be
  * augmented.
- * 
+ *
  * @author Vincent Vandenschrick
  */
 public class CaptchaUsernamePasswordHandler extends UsernamePasswordHandler {
@@ -35,7 +35,7 @@ public class CaptchaUsernamePasswordHandler extends UsernamePasswordHandler {
 
   /**
    * Gets the captchaImageUrl.
-   * 
+   *
    * @return the captchaImageUrl.
    */
   public String getCaptchaImageUrl() {
@@ -44,7 +44,7 @@ public class CaptchaUsernamePasswordHandler extends UsernamePasswordHandler {
 
   /**
    * Sets the captchaImageUrl.
-   * 
+   *
    * @param captchaImageUrl
    *          the captchaImageUrl to set.
    */
@@ -54,7 +54,7 @@ public class CaptchaUsernamePasswordHandler extends UsernamePasswordHandler {
 
   /**
    * Gets the captchaChallenge.
-   * 
+   *
    * @return the captchaChallenge.
    */
   public String getCaptchaChallenge() {
@@ -63,7 +63,7 @@ public class CaptchaUsernamePasswordHandler extends UsernamePasswordHandler {
 
   /**
    * Sets the captchaChallenge.
-   * 
+   *
    * @param captchaChallenge
    *          the captchaChallenge to set.
    */
@@ -73,7 +73,7 @@ public class CaptchaUsernamePasswordHandler extends UsernamePasswordHandler {
 
   /**
    * Gets the registration link text.
-   * 
+   *
    * @return the registration link text.
    */
   public String getRegister() {
@@ -87,7 +87,7 @@ public class CaptchaUsernamePasswordHandler extends UsernamePasswordHandler {
 
   /**
    * Gets the help link text.
-   * 
+   *
    * @return the help link text.
    */
   public String getHelp() {

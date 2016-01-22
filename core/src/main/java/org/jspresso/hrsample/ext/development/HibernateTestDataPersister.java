@@ -1,3 +1,21 @@
+/*
+ * Copyright (c) 2005-2016 Vincent Vandenschrick. All rights reserved.
+ *
+ *  This file is part of the Jspresso framework.
+ *
+ *  Jspresso is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU Lesser General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  Jspresso is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU Lesser General Public License for more details.
+ *
+ *  You should have received a copy of the GNU Lesser General Public License
+ *  along with Jspresso.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package org.jspresso.hrsample.ext.development;
 
 import java.io.IOException;
@@ -43,12 +61,12 @@ import org.springframework.beans.factory.BeanFactory;
 public class HibernateTestDataPersister extends org.jspresso.hrsample.development.HibernateTestDataPersister {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(HibernateTestDataPersister.class);
-  
+
   private BeanFactory beanFactory = null;
-  
+
   /**
    * Constructs a new <code>TestDataPersister</code> instance.
-   * 
+   *
    * @param beanFactory
    *          the spring bean factory to use.
    */
@@ -98,13 +116,13 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
       // In no way the test data persister should make the application
       // startup fail.
     }
-    
+
     try {
       createFilter(false, "demo", "employees.workspace", "employees.module", "More than 40 yers old", Employee.AGE, "40");
       createFilter(false, "demo", "employees.workspace", "employees.module", "Men", Employee.GENDER, Employee.GENDER_M);
       createFilter(false, "demo", "employees.workspace", "employees.module", "Living at Every", Employee.CONTACT+'.'+ContactInfo.CITY, "Evry");
       createFilter(false, "demo", "employees.workspace", "employees.module", "Women", Employee.GENDER, Employee.GENDER_F);
-      
+
       createFilter(false, "demo", "employees.workspace", "employees.module", "Start with D", Employee.NAME, "D%");
       createFilter(false, "demo", "employees.workspace", "employees.module", "Start with B", Employee.NAME, "B%");
       createFilter(false, "demo", "employees.workspace", "employees.module", "Start with M", Employee.NAME, "M%");
@@ -115,29 +133,29 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
       createFilter(false, "maxime", "employees.workspace", "employees.module", "Start with X", Employee.NAME, "D%");
       createFilter(false, "maxime", "employees.workspace", "employees.module", "Start with Y", Employee.NAME, "B%");
       createFilter(false, "maxime", "employees.workspace", "employees.module", "Start with Z", Employee.NAME, "E%");
-      
+
     } catch (Throwable ex) {
       LOGGER.warn("Unable to create filter criterias !", ex);
       // In no way the test data persister should make the application
       // startup fail.
     }
-    
+
     try {
-      createPivotFilter(false, "demo", "statistics.workspace", "employee.statistics.module", "Salary per age group", 
-          new String[]{"gender"}, 
+      createPivotFilter(false, "demo", "statistics.workspace", "employee.statistics.module", "Salary per age group",
+          new String[]{"gender"},
           new String[]{"age(30, 40)"},
           new String[]{"salary@sum"});
-      
-      createPivotFilter(false, "demo", "statistics.workspace", "employee.statistics.module", "Salary & Employees per age group", 
-          new String[]{"gender"}, 
+
+      createPivotFilter(false, "demo", "statistics.workspace", "employee.statistics.module", "Salary & Employees per age group",
+          new String[]{"gender"},
           new String[]{"age(30, 40)"},
-          new String[]{"salary@sum", "ssn@count"});      
-      
-      createPivotFilter(true, "demo", "statistics.workspace", "employee.statistics.module", "Salary per department", 
-          new String[]{"managedOu.ouId"}, 
+          new String[]{"salary@sum", "ssn@count"});
+
+      createPivotFilter(true, "demo", "statistics.workspace", "employee.statistics.module", "Salary per department",
+          new String[]{"managedOu.ouId"},
           new String[]{"salary(40, 80, 100)"},
-          new String[]{"salary@sum", "ssn@count"});     
-      
+          new String[]{"salary@sum", "ssn@count"});
+
     } catch (Throwable ex) {
       LOGGER.warn("Unable to create filter criterias !", ex);
       // In no way the test data persister should make the application
@@ -146,16 +164,16 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
   }
 
   private void createPivotFilter(
-      boolean defaultFilter, 
-      String login, 
+      boolean defaultFilter,
+      String login,
       String workspaceId,
-      String moduleId, 
-      String queryName, 
+      String moduleId,
+      String queryName,
       String[] pivotLines,
       String[] pivotColumns,
       String[] pivotMeasures,
       String... criterias) throws IOException {
-    
+
     PivotFilterableBeanCollectionModule module = null;
     Workspace workspace = (Workspace) beanFactory.getBean(workspaceId);
     List<Module> modules = workspace.getModules(true);
@@ -167,10 +185,10 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
         }
       }
     }
-    
+
     @SuppressWarnings("null")
     PivotCriteria pivot = module.getPivot();
-    
+
     pivot.setLinesRef(createPivotFields(pivotLines, module));
     pivot.setColumnsRef(createPivotFields(pivotColumns, module));
     pivot.setMeasuresRef(createPivotFields(pivotMeasures, module));
@@ -182,7 +200,7 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
   private List<PivotField> createPivotFields(String[] pivotFields, PivotFilterableBeanCollectionModule module) {
     List<PivotField> fields = new ArrayList<>();
     for (String s : pivotFields) {
-      
+
       String fieldName;
       if (s.contains("@")) {
         fieldName = PivotHelper.getFieldFromRestrictions(s);
@@ -190,36 +208,36 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
       else {
         fieldName = s;
       }
-      
-      
+
+
       PivotField pf = getEntityFactory().createComponentInstance(PivotField.class);
       pf.setComponentClass(module.getElementComponentDescriptor().getComponentContract());
       pf.setCode(fieldName);
       pf.setSelected(true);
-      
+
       if (s.contains("@")) {
         PivotMeasure pm = getEntityFactory().createComponentInstance(PivotMeasure.class);
         pm.setupMeasure(s);
         pm.setSelected(true);
-        
+
         pf.addToMeasures(pm) ;
       }
-      
+
       fields.add(pf);
     }
     return fields;
   }
-  
+
   private int filterSeq = 0;
-  
+
   private void createFilter(
       boolean defaultFilter,
-      String login, 
+      String login,
       String workspaceId,
-      String moduleId, 
-      String queryName, 
+      String moduleId,
+      String queryName,
       String... criterias) throws IOException {
-    
+
     FilterableBeanCollectionModule module = null;
     Workspace workspace = (Workspace) beanFactory.getBean(workspaceId);
     List<Module> modules = workspace.getModules(true);
@@ -231,29 +249,29 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
         }
       }
     }
-    
+
     createFilter(defaultFilter, login, queryName, module, criterias);
   }
-  
+
   private void createFilter(
       boolean defaultFilter,
-      String login, 
-      String queryName, 
+      String login,
+      String queryName,
       FilterableBeanCollectionModule module,
       String... criterias) throws IOException {
-    
+
     module.setFilter(new QueryComponent(module.getElementComponentDescriptor(), getEntityFactory()));
-    
+
     IQueryComponent filter = module.getFilter();
     for (int i = 0; i < criterias.length; i+=2) {
       String key = criterias[i];
       Object value = criterias[i+1];
-      
+
       IPropertyDescriptor propertyDescriptor = module.getElementComponentDescriptor().getPropertyDescriptor(key);
       if (propertyDescriptor instanceof IEnumerationPropertyDescriptor) {
         IEnumerationPropertyDescriptor epd = (IEnumerationPropertyDescriptor) propertyDescriptor;
         EnumQueryStructure eqs = new EnumQueryStructure(epd);
-        
+
         Set<EnumValueQueryStructure> selected = new HashSet<>();
         for (EnumValueQueryStructure evqs : eqs.getEnumerationValues()) {
           if (value.equals(evqs.getValue())) {
@@ -265,18 +283,18 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
 
         value = eqs;
       }
-      
+
       filter.put(key, value);
     }
-    
+
     String criteria = module.serializeCriteria();
-    
+
     Map<String, Object> context = new HashMap<>();
     context.put(ActionContextConstants.MODULE, module);
-    
+
     IUserQueriesHelper helper = (IUserQueriesHelper) beanFactory.getBean("userQueriesHelper");
     String key = helper.getKey(context);
-    
+
     UserQuery q = createEntityInstance(UserQuery.class);
 
     q.setLogin(login);
@@ -287,14 +305,14 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     q.setSharedString("[administrator]");
 
     saveOrUpdate(q);
-    
+
     if (defaultFilter) {
       UserDefaultQuery qd = createEntityInstance(UserDefaultQuery.class);
-      
+
       qd.setLogin(login);
       qd.setKey(key);
 //      qd.setQuery(q);
-      
+
       saveOrUpdate(qd);
     }
   }

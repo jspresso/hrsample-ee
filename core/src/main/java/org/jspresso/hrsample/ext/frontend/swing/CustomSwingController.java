@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005-2013 Vincent Vandenschrick. All rights reserved.
+ * Copyright (c) 2005-2016 Vincent Vandenschrick. All rights reserved.
  *
  *  This file is part of the Jspresso framework.
  *
@@ -25,7 +25,7 @@ import org.jspresso.hrsample.ext.model.security.CaptchaUsernamePasswordHandler;
 /**
  * A custom remote controller used to override the login process in order to
  * introduce a CAPTCHA challenge.
- * 
+ *
  * @author Vincent Vandenschrick
  */
 public class CustomSwingController extends DefaultSwingController {
