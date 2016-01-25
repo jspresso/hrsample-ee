@@ -36,7 +36,7 @@ public class CustomSwingController extends DefaultSwingController {
   @Override
   protected UsernamePasswordHandler createUsernamePasswordHandler() {
     CaptchaUsernamePasswordHandler cuph = new CaptchaUsernamePasswordHandler();
-    cuph.setCaptchaImageUrl("http://www.jspresso.org/files/logo.png");
+    cuph.setCaptchaImageUrl("classpath:org/jspresso/hrsample/ext/images/jspresso.png");
     return cuph;
   }
 
