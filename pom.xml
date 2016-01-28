@@ -14,8 +14,9 @@
   <version>4.3-SNAPSHOT</version>
 
   <properties>
-    <jspresso-extensions.version>2.8-SNAPSHOT</jspresso-extensions.version>
-    <jspresso-usage.version>2.1-SNAPSHOT</jspresso-usage.version>
+    <jspresso-extensions.version>2.9-SNAPSHOT</jspresso-extensions.version>
+    <jspresso-crossitems.version>1.2-SNAPSHOT</jspresso-crossitems.version>
+    <jspresso-usage.version>2.3-SNAPSHOT</jspresso-usage.version>
     <groovy.version>2.3.7</groovy.version>
   </properties>
 
