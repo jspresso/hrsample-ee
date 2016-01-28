@@ -57,19 +57,19 @@ border ('loginViewDescriptor', model:'CaptchaUsernamePasswordHandler',
               fields {
                 propertyView name:'help', readOnly:true, action:'helpFrontAction'
               }
-            }
+            } 
           }
-        }
-      }
-    }
+        } 
+      } 
+    } 
   }  
-}
-
+} 
+ 
 propertyView ('language', model:'languagePropertyDescriptor')
-propertyView ('rememberMe', model:'rememberMePropertyDescriptor') 
-propertyView ('username', model:'usernamePropertyDescriptor')
-propertyView ('password', model:'passwordPropertyDescriptor')
-propertyView ('timeZoneId', model:'timeZoneIdPropertyDescriptor')
+propertyView ('rememberMe', model:'rememberMePropertyDescriptor')        
+propertyView ('username', model:'usernamePropertyDescriptor')  
+propertyView ('password', model:'passwordPropertyDescriptor') 
+propertyView ('timeZoneId', model:'timeZoneIdPropertyDescriptor')  
 
 form('Registration.form', fields:['name', 'firstName']) {
   actionMap {
@@ -169,7 +169,7 @@ actionMap('beanCollectionModuleActionMap') {
     action ref:'removeFromModuleObjectsFrontAction'
   }
   actionList('EXPORT') {
-    action ref:'exportFilterModuleResultToHtmlAction'
+    action ref:'exportFilterModuleResultToHtmlAction' 
     action ref:'importBoxAction'
   }
   actionList('TMAR', collapsable:true) {
@@ -219,30 +219,6 @@ table('Employee.test.view') {
     propertyView name:'contact.city', readOnly:true
     propertyView name:'contact.phone', readOnly:true
     propertyView name:'contact.phone', readOnly:true
-  }
-}
-
-// Overriding bean from jspresso-extension-pivot
-actionMap('pivotModuleTableActionMap') {
-  actionList ('ADD') {
-    action ref:'checkAllLinesAction'
-    action ref:'uncheckAllLinesAction'
-    action ref:'addAsChildModuleFrontAction'
-  }
-  actionList ('EXPORT') {
-    action ref:'exportPivotModuleResultToHtmlAction'
-  }
-}
-
-// Overriding bean from jspresso-extension-pivot
-actionMap ('pivotModuleActionMap') {
-  actionList('PIVOT_QUERY', collapsable: true) {
-    action ref:'queryPivotModuleFilterFrontAction'
-    action ref:'queryPivotModuleAndReloadFilterFrontAction'
-  }
-  actionList ('EXTENSIONS') {
-    action ref:'chooseQueryCriteriasFrontAction'
-    action ref:'createPermalinkAndCopyToClipboardFrontAction'
   }
 }
 
