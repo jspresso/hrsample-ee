@@ -19,3 +19,19 @@ bean('employeePivotRefiner',
 bean('userQueriesHelper',
   parent:'userQueriesHelperBase',
   class:'org.jspresso.hrsample.ext.backend.UserQueriesHelper')
+
+bean('rememberMePropertyDescriptor', 
+  class:'org.jspresso.framework.model.descriptor.basic.BasicBooleanPropertyDescriptor',
+  name:'rememberMe')
+
+bean('usernamePropertyDescriptor',
+  class:'org.jspresso.framework.model.descriptor.basic.BasicStringPropertyDescriptor',
+  name:'username')
+
+bean('passwordPropertyDescriptor',
+  class:'org.jspresso.framework.model.descriptor.basic.BasicPasswordPropertyDescriptor',
+  name:'password')
+
+bean('timeZoneIdPropertyDescriptor', 
+  class:'org.jspresso.framework.model.descriptor.basic.TimeZoneEnumerationPropertyDescriptor',
+  name:'timeZoneId')

@@ -4,19 +4,72 @@ external id:['restartModuleWithConfirmationFrontAction',
   'queryPivotModuleFilterFrontAction']
 
 /* defined in view.xml because SJS does not know about the fields coming from the FW
-form('loginViewDescriptor', parent:'loginViewDescriptorBase', model:'CaptchaUsernamePasswordHandler', columnCount:2) {
-  fields {
-    propertyView name:'username', width:2
-    propertyView name:'password', width:2
-    propertyView name:'captchaImageUrl', width:2
-    propertyView name:'captchaChallenge', width:2
-    propertyView name:'language', width:2
-    propertyView name:'rememberMe', width:2
-    propertyView name:'register', readOnly:true, action:'registerFrontAction'
-    propertyView name:'help', readOnly:true, action:'helpFrontAction'
-  }
-}
 */
+external id:['loginActionMap', 'secondaryLoginActionMap']
+border ('loginViewDescriptor', model:'CaptchaUsernamePasswordHandler',
+    name:'login.name', description:'credentialMessage',  
+    actionMap:'loginActionMap',
+    secondaryActionMap:'secondaryLoginActionMap',
+    ) {
+  
+  center {
+    border (borderType:'NONE') {
+      north {
+        border (borderType:'NONE') {
+          center {
+            form (model:'CaptchaUsernamePasswordHandler', columnCount:2, borderType:'NONE') { //loginViewDescriptorBase
+              fields {
+                propertyView parent:'username', width:2, preferredWidth:330
+                propertyView parent:'password', width:2, preferredWidth:330
+                propertyView name:'captchaChallenge', width:2, preferredWidth:330
+                
+                propertyView parent:'rememberMe'
+                propertyView name:'register', readOnly:true, action:'registerFrontAction'
+                
+              }
+            }
+          }
+          east {
+            border {
+              north {
+                form (borderType:'SIMPLE', preferredWidth:180, labelsPosition:'ABOVE', background:'0xFFA4B0B7') {
+                  fields {
+                    propertyView name:'captchaImageUrl', labelFont:';BOLD;', horizontalAlignment:'CENTER'
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      center {
+        border {
+          west {
+            form (columnCount:2, borderType:'NONE') {
+              fields {
+                propertyView parent:'language', preferredWidth:100
+                propertyView parent:'timeZoneId', preferredWidth:150
+              }
+            }
+          }
+          east {
+            form (columnCount:1, borderType:'NONE') {
+              fields {
+                propertyView name:'help', readOnly:true, action:'helpFrontAction'
+              }
+            }
+          }
+        }
+      }
+    }
+  }  
+}
+
+propertyView ('language', model:'languagePropertyDescriptor')
+propertyView ('rememberMe', model:'rememberMePropertyDescriptor') 
+propertyView ('username', model:'usernamePropertyDescriptor')
+propertyView ('password', model:'passwordPropertyDescriptor')
+propertyView ('timeZoneId', model:'timeZoneIdPropertyDescriptor')
 
 form('Registration.form', fields:['name', 'firstName']) {
   actionMap {
