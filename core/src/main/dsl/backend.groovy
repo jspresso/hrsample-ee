@@ -10,19 +10,19 @@ bean('tmarParametersBean',
           tmarIds:['City':'zip',
                    'OrganizationalUnit':'ouId', 'Team':'ouId', 'Department':'ouId']])
  
-external id:['pivotRefiner']
+external id:['pivotRefiner'] 
 
 bean('employeePivotRefiner',
   parent:'pivotRefiner',
   class:'org.jspresso.hrsample.ext.backend.EmployeePivotRefiner') 
-
-bean('userQueriesHelper',
-  parent:'userQueriesHelperBase',
+ 
+bean('userQueriesHelper', 
+  parent:'userQueriesHelperBase', 
   class:'org.jspresso.hrsample.ext.backend.UserQueriesHelper')
 
-bean('rememberMePropertyDescriptor', 
+bean('rememberMePropertyDescriptor',    
   class:'org.jspresso.framework.model.descriptor.basic.BasicBooleanPropertyDescriptor',
-  name:'rememberMe')
+  name:'rememberMe') 
 
 bean('usernamePropertyDescriptor',
   class:'org.jspresso.framework.model.descriptor.basic.BasicStringPropertyDescriptor',

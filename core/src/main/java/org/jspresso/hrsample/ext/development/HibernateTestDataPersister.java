@@ -186,7 +186,6 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
       }
     }
 
-    @SuppressWarnings("null")
     PivotCriteria pivot = module.getPivot();
 
     pivot.setLinesRef(createPivotFields(pivotLines, module));
@@ -228,7 +227,7 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     return fields;
   }
 
-  private int filterSeq = 0;
+  //private int filterSeq = 0;
 
   private void createFilter(
       boolean defaultFilter,

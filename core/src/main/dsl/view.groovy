@@ -13,15 +13,54 @@ border ('loginViewDescriptor', model:'CaptchaUsernamePasswordHandler',
     ) {
   
   center {
+    
+    border {
+      west {
+        form (model:'CaptchaUsernamePasswordHandler', columnCount:2, preferredWidth:500) { //loginViewDescriptorBase
+          fields {
+            propertyView parent:'username', width:2, preferredWidth:380
+            propertyView parent:'password', width:2, preferredWidth:380
+            propertyView name:'captchaChallenge', width:2, preferredWidth:380
+            
+            propertyView parent:'rememberMe', width:2
+            
+            propertyView parent:'language'
+            propertyView parent:'timeZoneId'
+          }
+        }
+      }
+      east {
+        border {
+          north {
+            form (borderType:'SIMPLE', preferredWidth:180, labelsPosition:'ABOVE', background:'0xFFA4B0B7') {
+              fields {
+                propertyView name:'captchaImageUrl', labelFont:';BOLD;', horizontalAlignment:'CENTER'
+              }
+            }
+          }
+          south {
+            form (columnCount:1, borderType:'NONE') {
+              fields {
+                propertyView name:'register', readOnly:true, action:'registerFrontAction'
+                propertyView name:'help', readOnly:true, action:'helpFrontAction'
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    
+    /*
     border (borderType:'NONE') {
       north {
-        border (borderType:'NONE') {
+        border (borderType:'NONE', preferredWidth:500) {
           center {
             form (model:'CaptchaUsernamePasswordHandler', columnCount:2, borderType:'NONE') { //loginViewDescriptorBase
               fields {
-                propertyView parent:'username', width:2, preferredWidth:330
-                propertyView parent:'password', width:2, preferredWidth:330
-                propertyView name:'captchaChallenge', width:2, preferredWidth:330
+                propertyView parent:'username', width:2, preferredWidth:430
+                propertyView parent:'password', width:2, preferredWidth:430
+                propertyView name:'captchaChallenge', width:2, preferredWidth:430
                 
                 propertyView parent:'rememberMe'
                 propertyView name:'register', readOnly:true, action:'registerFrontAction'
@@ -47,8 +86,8 @@ border ('loginViewDescriptor', model:'CaptchaUsernamePasswordHandler',
           west {
             form (columnCount:2, borderType:'NONE') {
               fields {
-                propertyView parent:'language', preferredWidth:100
-                propertyView parent:'timeZoneId', preferredWidth:150
+                propertyView parent:'language'
+                propertyView parent:'timeZoneId'
               }
             }
           }
@@ -62,6 +101,7 @@ border ('loginViewDescriptor', model:'CaptchaUsernamePasswordHandler',
         } 
       } 
     } 
+    */
   }  
 } 
  
