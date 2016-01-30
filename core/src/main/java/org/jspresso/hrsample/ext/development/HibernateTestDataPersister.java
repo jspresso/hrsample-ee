@@ -19,6 +19,7 @@
 package org.jspresso.hrsample.ext.development;
 
 import java.io.IOException;
+import java.text.Format;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -30,6 +31,8 @@ import java.util.Random;
 import java.util.Set;
 
 import org.jspresso.contrib.backend.query.IUserQueriesHelper;
+import org.jspresso.contrib.crossitems.core.DateShortcut;
+import org.jspresso.contrib.model.ModuleUtils;
 import org.jspresso.contrib.model.query.UserDefaultQuery;
 import org.jspresso.contrib.model.query.UserQuery;
 import org.jspresso.contrib.usage.model.ModuleUsage;
@@ -43,11 +46,14 @@ import org.jspresso.framework.ext.pivot.model.PivotField;
 import org.jspresso.framework.ext.pivot.model.PivotFilterableBeanCollectionModule;
 import org.jspresso.framework.ext.pivot.model.PivotMeasure;
 import org.jspresso.framework.model.component.IQueryComponent;
+import org.jspresso.framework.model.component.query.ComparableQueryStructure;
 import org.jspresso.framework.model.component.query.EnumQueryStructure;
 import org.jspresso.framework.model.component.query.EnumValueQueryStructure;
 import org.jspresso.framework.model.component.query.QueryComponent;
+import org.jspresso.framework.model.descriptor.IDatePropertyDescriptor;
 import org.jspresso.framework.model.descriptor.IEnumerationPropertyDescriptor;
 import org.jspresso.framework.model.descriptor.IPropertyDescriptor;
+import org.jspresso.framework.model.descriptor.query.ComparableQueryStructureDescriptor;
 import org.jspresso.hrsample.ext.model.Furniture;
 import org.jspresso.hrsample.model.ContactInfo;
 import org.jspresso.hrsample.model.Employee;
@@ -118,7 +124,7 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     }
 
     try {
-      createFilter(false, "demo", "employees.workspace", "employees.module", "More than 40 yers old", Employee.AGE, "40");
+      createFilter(false, "demo", "employees.workspace", "employees.module", "More than 40 years old", Employee.BIRTH_DATE, "> year-40");
       createFilter(false, "demo", "employees.workspace", "employees.module", "Men", Employee.GENDER, Employee.GENDER_M);
       createFilter(false, "demo", "employees.workspace", "employees.module", "Living at Every", Employee.CONTACT+'.'+ContactInfo.CITY, "Evry");
       createFilter(false, "demo", "employees.workspace", "employees.module", "Women", Employee.GENDER, Employee.GENDER_F);
@@ -172,7 +178,7 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
       String[] pivotLines,
       String[] pivotColumns,
       String[] pivotMeasures,
-      String... criterias) throws IOException {
+      Object... criterias) throws IOException {
 
     PivotFilterableBeanCollectionModule module = null;
     Workspace workspace = (Workspace) beanFactory.getBean(workspaceId);
@@ -235,7 +241,7 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
       String workspaceId,
       String moduleId,
       String queryName,
-      String... criterias) throws IOException {
+      Object... criterias) throws IOException {
 
     FilterableBeanCollectionModule module = null;
     Workspace workspace = (Workspace) beanFactory.getBean(workspaceId);
@@ -257,13 +263,13 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
       String login,
       String queryName,
       FilterableBeanCollectionModule module,
-      String... criterias) throws IOException {
+      Object... criterias) throws IOException {
 
     module.setFilter(new QueryComponent(module.getElementComponentDescriptor(), getEntityFactory()));
 
     IQueryComponent filter = module.getFilter();
     for (int i = 0; i < criterias.length; i+=2) {
-      String key = criterias[i];
+      String key = (String) criterias[i];
       Object value = criterias[i+1];
 
       IPropertyDescriptor propertyDescriptor = module.getElementComponentDescriptor().getPropertyDescriptor(key);
@@ -282,7 +288,27 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
 
         value = eqs;
       }
-
+      else if (propertyDescriptor instanceof IDatePropertyDescriptor) {
+        ComparableQueryStructure qs = new ComparableQueryStructure(module.getElementComponentDescriptor(), getEntityFactory(), propertyDescriptor);
+        qs.setLocale(getBackendController().getLocale());
+        qs.setTranslationProvider(getBackendController());
+        String s = (String)value;
+        String comparator;
+        if (s.startsWith(">")) 
+          comparator = ComparableQueryStructureDescriptor.GT;
+        else if (s.startsWith("<")) 
+          comparator = ComparableQueryStructureDescriptor.LT;
+        else 
+          comparator = ComparableQueryStructureDescriptor.EQ;
+        
+        qs.setComparator(comparator);
+        s = s.substring(s.indexOf(' '));
+        
+        Date infDate = DateShortcut.dateTimeJava(s);
+        qs.setInfValue(infDate);
+        value = qs;
+      }
+      
       filter.put(key, value);
     }
 
