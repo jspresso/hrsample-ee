@@ -19,7 +19,6 @@
 package org.jspresso.hrsample.ext.development;
 
 import java.io.IOException;
-import java.text.Format;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -30,12 +29,10 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-import org.jspresso.contrib.backend.query.IUserQueriesHelper;
-import org.jspresso.contrib.crossitems.core.DateShortcut;
-import org.jspresso.contrib.model.ModuleUtils;
-import org.jspresso.contrib.model.query.UserDefaultQuery;
-import org.jspresso.contrib.model.query.UserQuery;
-import org.jspresso.contrib.usage.model.ModuleUsage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.BeanFactory;
+
 import org.jspresso.framework.action.ActionContextConstants;
 import org.jspresso.framework.application.model.FilterableBeanCollectionModule;
 import org.jspresso.framework.application.model.Module;
@@ -54,12 +51,15 @@ import org.jspresso.framework.model.descriptor.IDatePropertyDescriptor;
 import org.jspresso.framework.model.descriptor.IEnumerationPropertyDescriptor;
 import org.jspresso.framework.model.descriptor.IPropertyDescriptor;
 import org.jspresso.framework.model.descriptor.query.ComparableQueryStructureDescriptor;
+
+import org.jspresso.contrib.backend.query.IUserQueriesHelper;
+import org.jspresso.contrib.crossitems.core.DateShortcut;
+import org.jspresso.contrib.model.query.UserDefaultQuery;
+import org.jspresso.contrib.model.query.UserQuery;
+import org.jspresso.contrib.usage.model.ModuleUsage;
 import org.jspresso.hrsample.ext.model.Furniture;
 import org.jspresso.hrsample.model.ContactInfo;
 import org.jspresso.hrsample.model.Employee;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.BeanFactory;
 
 /**
  * Persists some test data for the application.
@@ -294,21 +294,21 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
         qs.setTranslationProvider(getBackendController());
         String s = (String)value;
         String comparator;
-        if (s.startsWith(">")) 
+        if (s.startsWith(">"))
           comparator = ComparableQueryStructureDescriptor.GT;
-        else if (s.startsWith("<")) 
+        else if (s.startsWith("<"))
           comparator = ComparableQueryStructureDescriptor.LT;
-        else 
+        else
           comparator = ComparableQueryStructureDescriptor.EQ;
-        
+
         qs.setComparator(comparator);
         s = s.substring(s.indexOf(' '));
-        
+
         Date infDate = DateShortcut.dateTimeJava(s);
         qs.setInfValue(infDate);
         value = qs;
       }
-      
+
       filter.put(key, value);
     }
 

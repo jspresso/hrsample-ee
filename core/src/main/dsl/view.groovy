@@ -9,21 +9,21 @@ external id:['loginActionMap', 'secondaryLoginActionMap']
 border ('loginViewDescriptor', model:'CaptchaUsernamePasswordHandler',
     name:'login.name', description:'credentialMessage',
     actionMap:'loginActionMap',
-    secondaryActionMap:'secondaryLoginActionMap',
+    secondaryActionMap:'secondaryLoginActionMap'
     ) {
-  
+
   center {
-    
+
     border {
       west {
-        form (model:'CaptchaUsernamePasswordHandler', columnCount:2, preferredWidth:500) { //loginViewDescriptorBase
+        form (model:'CaptchaUsernamePasswordHandler', columnCount:2) { //loginViewDescriptorBase
           fields {
-            propertyView parent:'username', width:2, preferredWidth:380
-            propertyView parent:'password', width:2, preferredWidth:380
-            propertyView name:'captchaChallenge', width:2, preferredWidth:380
-            
+            propertyView parent:'username', width:2
+            propertyView parent:'password', width:2
+            propertyView name:'captchaChallenge', width:2
+
             propertyView parent:'rememberMe', width:2
-            
+
             propertyView parent:'language'
             propertyView parent:'timeZoneId'
           }
@@ -32,14 +32,14 @@ border ('loginViewDescriptor', model:'CaptchaUsernamePasswordHandler',
       east {
         border (preferredWidth:200){
           north {
-            form (borderType:'SIMPLE', preferredWidth:180, labelsPosition:'ABOVE', background:'0xFFA4B0B7') {
+            form (borderType:'SIMPLE', labelsPosition:'ABOVE', background:'0xFFA4B0B7') {
               fields {
                 propertyView name:'captchaImageUrl', labelFont:';BOLD;', horizontalAlignment:'CENTER'
               }
             }
           }
           south {
-            form (columnCount:1, borderType:'NONE', preferredWidth:180, labelsPosition:'NONE') {
+            form (columnCount:1, borderType:'NONE', labelsPosition:'NONE') {
               fields {
                 propertyView name:'register', readOnly:true, action:'registerFrontAction', horizontalAlignment:'RIGHT'
                 propertyView name:'help', readOnly:true, action:'helpFrontAction',  horizontalAlignment:'RIGHT'
@@ -51,7 +51,7 @@ border ('loginViewDescriptor', model:'CaptchaUsernamePasswordHandler',
     }
   }
 }
- 
+
 propertyView ('language', model:'languagePropertyDescriptor')
 propertyView ('rememberMe', model:'rememberMePropertyDescriptor')
 propertyView ('username', model:'usernamePropertyDescriptor')
@@ -144,7 +144,7 @@ actionMap('beanCollectionModuleActionMap') {
   actionList('MY_REQUEST') {
     action ref:'chooseQueryCriteriasFrontAction'
   }
-  
+
   actionList('SERVICE') {
     action ref:'addAsChildModuleFrontAction'
   }
@@ -170,7 +170,7 @@ actionMap('beanCollectionModuleActionMap') {
 }
 
 table('Employee.test.view') {
-  
+
    actionMap {
     actionList('SAVE', collapsable:true) {
       action ref:'saveModuleObjectFrontAction'
@@ -194,7 +194,7 @@ table('Employee.test.view') {
       action ref:'exportTableToTmarAction'
     }
   }
-   
+
   columns {
     propertyView name:'company', action:'openEmployeeCompanyFrontAction', readOnly:true
     propertyView name:'company.workforce', action:'openEmployeeCompanyWorkforceFrontAction', readOnly:true
