@@ -239,5 +239,11 @@ bean ('importEmployeeFactoryBean',
   class:'org.jspresso.hrsample.ext.frontend.ImportEmployeeFactoryBean')
 
 
-
+actionMap ('eventsTableActionMap', 
+  parents:['masterDetailActionMap']) {
+ 
+  actionList ('EXPORT') {
+    action ref:'exportTableToHtmlAction'
+  } 
+}
 
