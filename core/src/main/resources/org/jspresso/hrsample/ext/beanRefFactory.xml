@@ -32,14 +32,14 @@
         <value>org/jspresso/framework/application/commons.xml</value>
         <value>org/jspresso/framework/tools/mock.xml</value>
 
+        <value>org/jspresso/framework/ext/pivot/model/dsl-model.xml</value>
+        <value>org/jspresso/framework/ext/pivot/model/model.xml</value>
+
         <value>org/jspresso/contrib/model/dsl-model.xml</value>
         <value>org/jspresso/contrib/model/model.xml</value>
 
         <value>org/jspresso/contrib/usage/model/dsl-model.xml</value>
         <value>org/jspresso/contrib/usage/model/model.xml</value>
-
-        <value>org/jspresso/framework/ext/pivot/model/dsl-model.xml</value>
-        <value>org/jspresso/framework/ext/pivot/model/model.xml</value>
 
         <value>org/jspresso/hrsample/model/dsl-model.xml</value>
         <value>org/jspresso/hrsample/model/model.xml</value>
