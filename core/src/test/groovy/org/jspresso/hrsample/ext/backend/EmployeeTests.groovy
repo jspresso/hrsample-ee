@@ -26,7 +26,7 @@ class EmployeeTests extends TmarBackendStartup {
 
       // make age relative to 2015 !
       def age = employee.age
-      age += Calendar.instance.get(Calendar.YEAR) - 2015
+      age += 2015 -  Calendar.instance.get(Calendar.YEAR) 
 
       // assert age is correctly calculated
       tmar.age = age
