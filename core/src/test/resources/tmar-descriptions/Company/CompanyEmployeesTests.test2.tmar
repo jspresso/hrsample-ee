@@ -31,16 +31,4 @@ Now let's that some objects are found :
  | EXISTS    | Employee   | Trilili    | false    |    
 
 Let's check that fields are correctly set according to master data :
- /sequence 
- [ operation | 
- | CHECK     | 
- | CHECK     | 
- | CHECK     | 
-qdd
- 
-  /sequence
- [ operation |
- | CHECK     |
- | CHECK     |
- | CHECK     |
-qdd
+//TODO
