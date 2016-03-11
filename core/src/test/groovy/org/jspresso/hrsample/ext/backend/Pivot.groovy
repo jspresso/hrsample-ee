@@ -86,7 +86,8 @@ class Pivot extends TmarBackendStartup {
           tmar.referenceCode = pm.getReferenceCode()
           tmar.referenceTotal = pm.getReferenceTotal()
           
-          String code = pm.getReferenceCode();
+          PivotField referencedField = null
+          String code = pm.getReferenceCode()
           if (code!=null) {
             
             if (code.contains("@")) {
@@ -99,8 +100,7 @@ class Pivot extends TmarBackendStartup {
               pmv.setupMeasure(code)
               pmv.setField(pfr)  
               
-              pm.setReferenceMeasure(pmv)
-              
+              pm.setReferenceMeasure(pmv)               
             }
             else {
               PivotField pfr = factory.createComponentInstance(PivotField.class)
@@ -115,7 +115,19 @@ class Pivot extends TmarBackendStartup {
           pf.setSelected(true)
           pm.setSelected(true)
           PivotFilterableBeanCollectionModule module = createPivotModule(factory, Employee.class)
-          module.getPivot().setMeasuresRef([pf])
+          
+          if (pm.getReferenceMeasure() == null) {
+            module.getPivot().setMeasuresRef([pf])
+          }
+          else {
+            module.getPivot().setMeasuresRef([pf, pm.getReferenceMeasure().getField()])
+          }
+            
+           if (pm.getReferenceField()!=null)
+            module.getPivot().setLinesRef([pm.getReferenceField()])
+          if (pm.getReferenceMeasure()!=null)
+            module.getPivot().setColumnsRef([pm.getReferenceMeasure().getField()])
+            
           String ser = module.serializeCriteria()
           
           module.deserializeCriteria(ser)
