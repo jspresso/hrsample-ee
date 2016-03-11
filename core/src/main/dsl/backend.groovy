@@ -12,7 +12,7 @@ bean('tmarParametersBean',
  
 external id:['pivotRefiner'] 
 
-bean('employeePivotRefiner',
+bean('employeePivotRefiner', 
   parent:'pivotRefiner',
   class:'org.jspresso.hrsample.ext.backend.EmployeePivotRefiner') 
  
