@@ -1,0 +1,91 @@
+Pivot admin styles tests
+
+Let's considere some styles sets :
+
+/table pivot style sets
+[ name      | parent style | custom style                                                
+| main      |              | color='#000000', decimal-separator='.', text-align='center' 
+| decimal   | main         | decimal=2, text-align='right'                               
+| currency  | decimal      | unit='$', thousand-separator='\\,'                          
+| salary    | currency     | decimal=0, unit='K$'                                        
+
+Here is the pivot setup definition :
+/table pivot setup
+/inline  
+[ pivot Id ] employee.statistics.module |
+
+[ available measures ]  """
+  ssn@count, 
+  salary@sum, 
+  salary@percentile90, 
+  salary@average/managedOu.ouId, 
+  managedOu.teamCount@sum, 
+  %salary@sum/managedOu.teamCount@sum """ |
+
+[ available dimensions ] 
+  ssn, salary, managedOu.ouId, managedOu.teamCount  |
+/endInline 
+
+_Check global styles :
+/sequence 
+[ global parent | global custom | global full style ?                                                   | comments                                                                   
+|               |               | thousand-separator='\,', decimal-separator='.'                        | --> Default hardcoded in DefaultPivotRefiner#getDefaultStyle               
+|               | unit='X'      | unit='X'                                                              | --> Override default locally                                               
+| main          |               | color='#000000', decimal-separator='.', text-align='center'           | --> Override default by setting a paret style set                          
+| main          | unit='X'      | unit='X', color='#000000', decimal-separator='.', text-align='center' | --> Override default by setting a paret style set + adding local attributs 
+
+_Check fields styles wihout any customization
+For this first assertions, the global pivot style is not overrided,
+that mean that the defaut value is **thousand-separator='\,', decimal-separator='.'**
+
+/sequence  
+ [ measure                             | cross items style ?                                                                      | 
+ | ssn@count                           | text-align='right', decimal=0, decimal-separator='.', thousand-separator='\,'            |
+ | salary@sum                          | text-align='right', decimal=2, decimal-separator='.', thousand-separator='\,', unit='K€' |
+ | salary@percentile90                 | text-align='right', decimal=2, decimal-separator='.', thousand-separator='\,', unit='K€' |
+ | salary@average/managedOu.ouId       | text-align='right', decimal=2, decimal-separator='.', thousand-separator='\,', unit='K€' |
+ | managedOu.teamCount@sum             | text-align='right', decimal=0, decimal-separator='.', thousand-separator='\,'            |
+ | %salary@sum/managedOu.teamCount@sum | text-align='right', decimal=2, decimal-separator='.', thousand-separator='\,', unit='%'  |
+
+_Check field style with customization
+For this first assertions, the global pivot style still is not overrided,
+that mean that the defaut field's parent style value is **thousand-separator='\,', decimal-separator='.'**
+
+//TODO 
+
+_Check field style with customization and global style cusomization also
+
+//TODO
+
+_Check dynamic styles
+
+
+
+
+
+
+
+
+///sequence Styles 
+// [ measure                       | parent | custom          | full style ?                                                                                              | 
+// | ssn@count                     |        | unit='SSN'      | unit='SSN', decimal-separator='.', thousand-separator='\,'                                                | 
+// | salary@sum                    |        |                 | decimal=2, unit='K€', decimal-separator='.', thousand-separator='\,'                                      | 
+// | salary@percentile90           | salary |                 | thousand-separator='\,', unit='K$', color='#000000', decimal-separator='.', decimal=0, text-align='right' | 
+// | salary@average/managedOu.ouId | salary | color='#999999' | thousand-separator='\,', unit='K$', color='#999999', decimal-separator='.', decimal=0, text-align='right' | 
+// | managedOu.teamCount@sum       | main   | decimal=0       | xxx                                                                                                       | 
+//
+
+ 
+//Here is the pivot setup customized measures :
+///table pivot setup field
+//[ pivot setup                | field id                      | custom style    | parent style | 
+//| employee.statistics.module | ssn@count                     | unit='SSN'      |              | 
+//| employee.statistics.module | salary@sum                    |                 | salary       | 
+//| employee.statistics.module | salary@average/managedOu.ouId | unit='$'        | decimal      | 
+//| employee.statistics.module | managedOu.teamCount@sum       | decimal=0       | main         | 
+
+
+
+
+
+

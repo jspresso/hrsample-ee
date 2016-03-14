@@ -29,10 +29,15 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.BeanFactory;
-
+import org.jspresso.contrib.backend.pivot.ExtendedPivotRefiner;
+import org.jspresso.contrib.backend.query.IUserQueriesHelper;
+import org.jspresso.contrib.crossitems.core.DateShortcut;
+import org.jspresso.contrib.model.pivot.PivotSetup;
+import org.jspresso.contrib.model.pivot.PivotSetupField;
+import org.jspresso.contrib.model.pivot.PivotStyleSet;
+import org.jspresso.contrib.model.query.UserDefaultQuery;
+import org.jspresso.contrib.model.query.UserQuery;
+import org.jspresso.contrib.usage.model.ModuleUsage;
 import org.jspresso.framework.action.ActionContextConstants;
 import org.jspresso.framework.application.model.FilterableBeanCollectionModule;
 import org.jspresso.framework.application.model.Module;
@@ -51,15 +56,12 @@ import org.jspresso.framework.model.descriptor.IDatePropertyDescriptor;
 import org.jspresso.framework.model.descriptor.IEnumerationPropertyDescriptor;
 import org.jspresso.framework.model.descriptor.IPropertyDescriptor;
 import org.jspresso.framework.model.descriptor.query.ComparableQueryStructureDescriptor;
-
-import org.jspresso.contrib.backend.query.IUserQueriesHelper;
-import org.jspresso.contrib.crossitems.core.DateShortcut;
-import org.jspresso.contrib.model.query.UserDefaultQuery;
-import org.jspresso.contrib.model.query.UserQuery;
-import org.jspresso.contrib.usage.model.ModuleUsage;
 import org.jspresso.hrsample.ext.model.Furniture;
 import org.jspresso.hrsample.model.ContactInfo;
 import org.jspresso.hrsample.model.Employee;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.BeanFactory;
 
 /**
  * Persists some test data for the application.
@@ -167,7 +169,98 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
       // In no way the test data persister should make the application
       // startup fail.
     }
+    
+    // 
+    // Pivot setup
+    createPivotSetup();
   }
+  
+  @SuppressWarnings("unused")
+  private void createPivotSetup() {
+    
+    // load style sets
+    PivotStyleSet styleMain = createPivotStyleSet("main", "color='#000000',\ndecimal-separator='.',\ntext-align='center'", null);
+    PivotStyleSet styleDecimal = createPivotStyleSet("decimal", "decimal=2,\ntext-align='right'", styleMain);
+    PivotStyleSet styleCurrency = createPivotStyleSet("currency", "unit='$',\nthousand-separator='\\,'", styleDecimal);
+    PivotStyleSet styleSalary = createPivotStyleSet("salary", "decimal=0,\nunit='K$'", styleCurrency);
+     
+    PivotStyleSet greyBackgroundSalary = createPivotStyleSet("grey-background", "background-color='#E6E6E6'", null);
+    PivotStyleSet styleBenefitsRed = createPivotStyleSet("profit-red", "color='#FF0000'", styleCurrency);
+    PivotStyleSet styleBenefitsOrange = createPivotStyleSet("profit-orange", "color='#FF8000'", styleCurrency);
+    PivotStyleSet styleBenefitsGreen = createPivotStyleSet("profit-green", "color='#008000'", styleCurrency);
+    PivotStyleSet styleBenefits = createPivotStyleSet("profit", "default:'profit-red',\ncomparator:'>',\n-1000:'profit-orange',\n1000:'profit-green',\nempty:'grey-background'", styleCurrency);
+
+    // find module
+    PivotFilterableBeanCollectionModule module = findModule("statistics.workspace", "employee.statistics.module");
+    
+    // pivot
+    PivotSetup pivotSetup = createEntityInstance(PivotSetup.class);
+    pivotSetup.init(module.getPivotRefiner());
+    
+    // override it
+    pivotSetup.setPivotId(module.getPermId());
+    pivotSetup.setPivotName("Statistics - Employees");
+    pivotSetup.setAvailableMeasures(
+        "ssn@count\n" + 
+        "salary@sum\n" + 
+        "salary@percentile90\n" + 
+        "salary@average/managedOu.ouId\n" + 
+        "managedOu.teamCount@sum\n" + 
+        "%salary@sum/managedOu.teamCount@sum");
+    pivotSetup.setParentStyle(styleMain);
+   
+    
+    saveOrUpdate(pivotSetup);
+        
+    // dimension
+    List<PivotSetupField> fields = new ArrayList<>();
+    fields.add(createPivotSetupField(pivotSetup, "managedOu.teamCount", "Nb managed people", "Nb collaborateurs", null, null));
+    
+    // measures
+    fields.add(createPivotSetupField(pivotSetup, "ssn@count", "Nb persons", "Nb personnes", "unit='P'", styleMain));
+    fields.add(createPivotSetupField(pivotSetup, "salary@percentile90", null, null, null, styleSalary));
+    fields.add(createPivotSetupField(pivotSetup, "salary@percentile90", null, null, "decimal=0", styleSalary));
+    
+    // update module
+    ((ExtendedPivotRefiner<?>)module.getPivotRefiner()).resetCache();
+    module.getPivot();
+    module.reloadPivotCriteria();
+  }
+ 
+  private PivotSetupField createPivotSetupField(PivotSetup pivotSetup, String fieldId, String fieldLabel, String frenchLabel, String customStyle, PivotStyleSet parentStyle) {
+    PivotSetupField f = createEntityInstance(PivotSetupField.class);
+    f.setPivotSetup(pivotSetup);
+    f.setFieldId(fieldId); 
+    
+    if (fieldLabel!=null) { 
+      f.setLabel(fieldLabel);
+      
+      PivotSetupField.Translation labelEN = createComponentInstance(PivotSetupField.Translation.class);
+      labelEN.setLanguage("en");
+      labelEN.setPropertyName(PivotSetupField.CUSTOM_LABEL);
+      labelEN.setTranslatedValue(fieldLabel);
+      f.addToPropertyTranslations(labelEN);
+    }
+    
+    if (frenchLabel !=null) {
+      PivotSetupField.Translation labelFR = createComponentInstance(PivotSetupField.Translation.class);
+      labelFR.setLanguage("fr");
+      labelFR.setPropertyName(PivotSetupField.CUSTOM_LABEL);
+      labelFR.setTranslatedValue(frenchLabel);
+      f.addToPropertyTranslations(labelFR);
+    }
+    
+    if (customStyle!=null) {
+      f.setCustomStyle(customStyle);
+    }
+    if (parentStyle!=null) {
+      f.setParentStyle(parentStyle);
+    }
+    
+    saveOrUpdate(f);
+    return f; 
+  }
+
 
   private void createPivotFilter(
       boolean defaultFilter,
@@ -180,6 +273,19 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
       String[] pivotMeasures,
       Object... criterias) throws IOException {
 
+    PivotFilterableBeanCollectionModule module = findModule(workspaceId, moduleId);
+
+    PivotCriteria pivot = module.getPivot();
+
+    pivot.setLinesRef(createPivotFields(pivotLines, module));
+    pivot.setColumnsRef(createPivotFields(pivotColumns, module));
+    pivot.setMeasuresRef(createPivotFields(pivotMeasures, module));
+
+    createFilter(
+        defaultFilter, login, queryName, module, criterias);
+  }
+
+  private PivotFilterableBeanCollectionModule findModule(String workspaceId, String moduleId) {
     PivotFilterableBeanCollectionModule module = null;
     Workspace workspace = (Workspace) beanFactory.getBean(workspaceId);
     List<Module> modules = workspace.getModules(true);
@@ -191,15 +297,7 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
         }
       }
     }
-
-    PivotCriteria pivot = module.getPivot();
-
-    pivot.setLinesRef(createPivotFields(pivotLines, module));
-    pivot.setColumnsRef(createPivotFields(pivotColumns, module));
-    pivot.setMeasuresRef(createPivotFields(pivotMeasures, module));
-
-    createFilter(
-        defaultFilter, login, queryName, module, criterias);
+    return module;
   }
 
   private List<PivotField> createPivotFields(String[] pivotFields, PivotFilterableBeanCollectionModule module) {
@@ -342,6 +440,31 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     }
   }
 
+  /**
+   * 
+   * @param name
+   * @param price
+   * @param discount
+   * @return
+   */
+  private PivotStyleSet createPivotStyleSet(String name, String style, PivotStyleSet parent) {
+    PivotStyleSet s = createEntityInstance(PivotStyleSet.class);
+    s.setName(name);
+    s.setParentStyle(parent);
+    s.setCustomStyle(style);
+    if (style.contains("default:"))
+      s.setDynamic(true);
+    saveOrUpdate(s);
+    return s;
+  }  
+  
+  /**
+   * create furniture
+   * @param name
+   * @param price
+   * @param discount
+   * @return
+   */
   private Furniture createFurniture(String name, double price, double discount) {
     Furniture furniture = createEntityInstance(Furniture.class);
     furniture.setName(name);

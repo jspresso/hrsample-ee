@@ -33,6 +33,13 @@ import org.jspresso.hrsample.ext.model.Furniture;
 /**
  * init furniture filter module
  * @author Maxime HAMM
+ * 
+ * @param <E>
+ *          the actual gui component type used.
+ * @param <F>
+ *          the actual icon type used.
+ * @param <G>
+ *          the actual action type used. 
  */
 public class FurnitureModuleInitFrontAction<E, F, G> extends FrontendAction<E, F, G> {
 

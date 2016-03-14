@@ -19,6 +19,7 @@
 package org.jspresso.hrsample.ext.backend;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.jspresso.contrib.backend.pivot.ExtendedPivotRefiner;
@@ -26,6 +27,8 @@ import org.jspresso.framework.ext.pivot.backend.IPivotRefiner;
 import org.jspresso.framework.ext.pivot.backend.IPivotRefinerField;
 import org.jspresso.framework.ext.pivot.backend.IPivotStyles;
 import org.jspresso.framework.ext.pivot.backend.SimplePivotRefinerField;
+import org.jspresso.framework.ext.pivot.model.IStyle;
+import org.jspresso.framework.ext.pivot.model.Style;
 import org.jspresso.hrsample.model.Employee;
 
 /**
@@ -41,15 +44,26 @@ public class EmployeePivotRefiner extends ExtendedPivotRefiner<Employee> {
   }
 
   private class SalaryField extends SimplePivotRefinerField<Employee, BigDecimal> {
+    
     public SalaryField(IPivotRefiner<Employee> refiner) {
       super(refiner, Employee.SALARY);
     }
+
     @Override
-    public Map<String, Object> getStyle(String measure) {
-      Map<String, Object> style = super.getStyle(measure);
-      style.put(IPivotStyles.STYLE_UNIT, "K€");
-      return style;
+    public IStyle getStyle(String measure) {
+      IStyle style = super.getStyle(measure);
+      if (style.getStyleAttributs().containsKey(IPivotStyles.STYLE_UNIT))
+        return style;
+      
+      Map<String, Object> attributs = new HashMap<>(style.getStyleAttributs());
+      attributs.put(IPivotStyles.STYLE_UNIT, "K€");
+      
+      IStyle parent = getRefiner().getDefaultStyle();
+      
+      IStyle newStyle = new Style(measure + STYLE_SUFFIX, parent.getStyleName(), attributs);
+      return newStyle;
     }
+    
     @Override
     protected void setValue(BigDecimal value) {
       if (value != null)
