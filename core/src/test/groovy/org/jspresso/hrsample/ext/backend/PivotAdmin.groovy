@@ -30,6 +30,8 @@ class PivotAdmin extends TmarBackendStartup {
   void test() {
     eachIteration('test') { tmar ->
 
+      int l = tmar.getCurrentIterationNumber()
+      
       HibernateBackendController controller = BackendControllerHolder.getCurrentBackendController()
       controller.getApplicationSession().setLocale(Locale.ENGLISH);
       IEntityFactory factory = controller.getEntityFactory()
@@ -49,10 +51,8 @@ class PivotAdmin extends TmarBackendStartup {
       criteria.add(Restrictions.eq(PivotSetup.PIVOT_ID, moduleId))
       PivotSetup pivotSetup = controller.findFirstByCriteria(criteria, EMergeMode.MERGE_CLEAN_EAGER, PivotSetup.class)
      
-//      if (tmar.globalParent!=null)
-        pivotSetup.setParentStyle(findParentStyle(tmar.globalParent))
-//      if (tmar.globalCustom!=null)
-        pivotSetup.setCustomStyle(tmar.globalCustom)
+      pivotSetup.setParentStyle(findParentStyle(tmar.globalParent))
+      pivotSetup.setCustomStyle(tmar.globalCustom)
       
       // create pivot setup's field
       PivotSetupField field = null
@@ -60,10 +60,16 @@ class PivotAdmin extends TmarBackendStartup {
         field = factory.createEntityInstance(PivotSetupField.class);
         field.setPivotSetup(pivotSetup)
         field.setFieldId(tmar.measure)
+        
+        if (tmar.parent!=null) {
+          DetachedCriteria c = DetachedCriteria.forClass(PivotStyleSet.class)
+          c.add(Restrictions.eq(PivotStyleSet.NAME, tmar.parent))
+          PivotStyleSet style = controller.findFirstByCriteria(c, EMergeMode.MERGE_CLEAN_EAGER, PivotStyleSet.class)
+          
+          field.setParentStyle(style)
+        }
+        field.setCustomStyle(tmar.custom)
       }
-
-      
-      
       // save admin entities
       controller.getTransactionTemplate().execute(new TransactionCallback() {
         @Override
