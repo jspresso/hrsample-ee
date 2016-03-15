@@ -179,17 +179,20 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
   private void createPivotSetup() {
     
     // load style sets
-    PivotStyleSet styleMain = createPivotStyleSet("default", "color='#000000',\ndecimal-separator='.',\ntext-align='center'", null);
+    PivotStyleSet styleMain = createPivotStyleSet("main", "color='#000000',\ndecimal-separator='.',\ntext-align='center'", null);
+    PivotStyleSet styleMain2 = createPivotStyleSet("main2", "color='#ABABAB'", null);
     PivotStyleSet styleDecimal = createPivotStyleSet("decimal", "decimal=2,\ntext-align='right'", styleMain);
     PivotStyleSet styleCurrency = createPivotStyleSet("currency", "unit='$',\nthousand-separator='\\,'", styleDecimal);
     PivotStyleSet styleSalary = createPivotStyleSet("salary", "decimal=0,\nunit='K$'", styleCurrency);
      
-    PivotStyleSet greyBackgroundSalary = createPivotStyleSet("grey-background", "background-color='#E6E6E6'", null);
-    PivotStyleSet styleBenefitsRed = createPivotStyleSet("profit-red", "color='#FF0000'", styleCurrency);
-    PivotStyleSet styleBenefitsOrange = createPivotStyleSet("profit-orange", "color='#FF8000'", styleCurrency);
-    PivotStyleSet styleBenefitsGreen = createPivotStyleSet("profit-green", "color='#008000'", styleCurrency);
-    PivotStyleSet styleBenefits = createPivotStyleSet("profit", "default:'profit-red',\ncomparator:'>',\n-1000:'profit-orange',\n1000:'profit-green',\nempty:'grey-background'", styleCurrency);
-
+    PivotStyleSet grey = createPivotStyleSet("grey", "background-color='#E6E6E6'", null);
+    PivotStyleSet red = createPivotStyleSet("red", "color='#FF0000'", null);
+    PivotStyleSet orange = createPivotStyleSet("orange", "color='#FF8000'", null);
+    PivotStyleSet green = createPivotStyleSet("green", "color='#008000'", null);
+    
+    PivotStyleSet styleSalaryWithColor = createPivotStyleSet("salary-colored", "default:'red',\ncomparator:'>',\n100:'orange',\n200:'green',\nempty:'grey'", styleSalary);
+    PivotStyleSet styleTest = createPivotStyleSet("euro", "unit='K€'", styleSalaryWithColor);
+    
     // find module
     PivotFilterableBeanCollectionModule module = findModule("statistics.workspace", "employee.statistics.module");
     
@@ -218,8 +221,9 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     
     // measures
     fields.add(createPivotSetupField(pivotSetup, "ssn@count", "Nb persons", "Nb personnes", "unit='P'", styleMain));
-    fields.add(createPivotSetupField(pivotSetup, "salary@percentile90", null, null, null, styleSalary));
+    fields.add(createPivotSetupField(pivotSetup, "salary@sum", null, null, null, styleSalaryWithColor));
     fields.add(createPivotSetupField(pivotSetup, "salary@percentile90", null, null, "decimal=0", styleSalary));
+    fields.add(createPivotSetupField(pivotSetup, "salary@average/managedOu.ouId", null, null, null, styleSalary));
     
     // update module
     ((ExtendedPivotRefiner<?>)module.getPivotRefiner()).resetCache();
