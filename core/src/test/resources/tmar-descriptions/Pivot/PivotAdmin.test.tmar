@@ -3,12 +3,12 @@ Pivot admin styles tests
 Let's considere some styles sets :
 
 /table pivot style sets
-[ name     | parent style | custom style                                                
-| main     |              | color='#000000', decimal-separator='.', text-align='center' 
-| main2    |              | font-style='italic'                                         
-| decimal  | main         | decimal=2, text-align='right'                               
-| currency | decimal      | unit='$', thousand-separator=' '                            
-| salary   | currency     | decimal=0, unit='K$'                                        
+[ name     | parent style | custom style                                                |
+| main     |              | color='#000000', decimal-separator='.', text-align='center' |
+| main2    |              | font-style='italic'                                         |
+| decimal  | main         | decimal=2, text-align='right'                               |
+| currency | decimal      | unit='$', thousand-separator=' '                            |
+| salary   | currency     | decimal=0, unit='K$'                                        |
 
 Here is the pivot setup definition :
 /table pivot setup
@@ -42,7 +42,7 @@ _Check global styles :
 _Check fields styles wihout any customization
 
 For this first set of tests, the global pivot style is not overrided, that mean that the defaut style is the one hardcoded into *DefaultPivotRefiner#getDefaultStyle()* :
- **color='#000000', decimal-separator='.', text-align='center'**
+ **decimal-separator='.', thousand-separator='\,'**
 
  The measure starting with *percent* has also an hardcoded style into *SimplePivotRefinerField#getStyle()* :
  **unit='%'**

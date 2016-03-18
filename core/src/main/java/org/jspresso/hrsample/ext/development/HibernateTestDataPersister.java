@@ -210,9 +210,9 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
         "salary@average/managedOu.ouId\n" + 
         "managedOu.teamCount@sum\n" + 
         "%salary@sum/managedOu.teamCount@sum");
-    pivotSetup.setParentStyle(styleMain);
+    //pivotSetup.setParentStyle(styleMain);
+    pivotSetup.addToAscendantStyles(styleMain);
    
-    
     saveOrUpdate(pivotSetup);
         
     // dimension
@@ -258,7 +258,8 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
       f.setCustomStyle(customStyle);
     }
     if (parentStyle!=null) {
-      f.setParentStyle(parentStyle);
+      //f.setParentStyle(parentStyle);
+      f.addToAscendantStyles(parentStyle);
     }
     
     saveOrUpdate(f);
@@ -334,8 +335,6 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     }
     return fields;
   }
-
-  //private int filterSeq = 0;
 
   private void createFilter(
       boolean defaultFilter,
@@ -428,7 +427,6 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     q.setKey(key);
     q.setName(queryName);
     q.setCriterias(criteria);
-//    q.setSeq(filterSeq++);
     q.setSharedString("[administrator]");
 
     saveOrUpdate(q);
@@ -438,7 +436,6 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
 
       qd.setLogin(login);
       qd.setKey(key);
-//      qd.setQuery(q);
 
       saveOrUpdate(qd);
     }
@@ -454,7 +451,9 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
   private PivotStyleSet createPivotStyleSet(String name, String style, PivotStyleSet parent) {
     PivotStyleSet s = createEntityInstance(PivotStyleSet.class);
     s.setName(name);
-    s.setParentStyle(parent);
+//    s.setParentStyle(parent);
+    if (parent!=null)
+      s.addToAscendantStyles(parent);
     s.setCustomStyle(style);
     if (style.contains("default:"))
       s.setDynamic(true);

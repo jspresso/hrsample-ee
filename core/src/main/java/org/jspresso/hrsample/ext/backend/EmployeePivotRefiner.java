@@ -20,6 +20,7 @@ package org.jspresso.hrsample.ext.backend;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.jspresso.contrib.backend.pivot.ExtendedPivotRefiner;
@@ -50,18 +51,18 @@ public class EmployeePivotRefiner extends ExtendedPivotRefiner<Employee> {
     }
 
     @Override
-    public IStyle getStyle(String measure) {
-      IStyle style = super.getStyle(measure);
-      if (style.getStyleAttributs().containsKey(IPivotStyles.STYLE_UNIT))
-        return style;
+    public List<IStyle> getStyles(String measure) {
+      List<IStyle> styles = super.getStyles(measure);
+      for (IStyle style : styles) { 
+        if (style.getStyleAttributs().containsKey(IPivotStyles.STYLE_UNIT))
+          return styles;
+      }
       
-      Map<String, Object> attributs = new HashMap<>(style.getStyleAttributs());
+      Map<String, Object> attributs = new HashMap<>();
       attributs.put(IPivotStyles.STYLE_UNIT, "K€");
+      styles.add( new Style(measure, attributs));
       
-      IStyle parent = getRefiner().getDefaultStyle();
-      
-      IStyle newStyle = new Style(measure + STYLE_SUFFIX, parent.getStyleName(), attributs);
-      return newStyle;
+      return styles;
     }
     
     @Override
