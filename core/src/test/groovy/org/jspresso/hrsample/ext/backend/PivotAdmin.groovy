@@ -12,14 +12,14 @@ import org.jspresso.framework.application.backend.persistence.hibernate.Hibernat
 import org.jspresso.framework.application.backend.session.EMergeMode
 import org.jspresso.framework.application.model.Module
 import org.jspresso.framework.application.model.Workspace
-import org.jspresso.framework.ext.pivot.backend.IPivotRefiner
 import org.jspresso.framework.ext.pivot.backend.PivotHelper
 import org.jspresso.framework.ext.pivot.model.IStyle
 import org.jspresso.framework.ext.pivot.model.PivotFilterableBeanCollectionModule
-import org.jspresso.framework.model.entity.IEntityFactory
+import org.jspresso.framework.model.entity.IEntity
 import org.junit.Test
 import org.springframework.transaction.TransactionStatus
 import org.springframework.transaction.support.TransactionCallback
+import org.springframework.transaction.support.TransactionCallbackWithoutResult
 
 class PivotAdmin extends TmarBackendStartup {
 
@@ -34,11 +34,33 @@ class PivotAdmin extends TmarBackendStartup {
       
       HibernateBackendController controller = BackendControllerHolder.getCurrentBackendController()
       controller.getApplicationSession().setLocale(Locale.ENGLISH);
-      IEntityFactory factory = controller.getEntityFactory()
-
-      // load styles sets
-      createEntities(PivotStyleSet: tmar.table.pivotStyleSets)
-
+      
+      Map styleSets = new HashMap<String, IEntity>();
+      if (l == 1) {
+        // load styles sets
+        for (int i=0; i<tmar.getTableSize('pivotStyleSets'); i++) {
+          Map line = tmar.getTableLine('pivotStyleSets', i)
+          PivotStyleSet style = createEntityInstance(PivotStyleSet.class)
+          style.setName(line.get('name'))
+          style.setCustomStyle(line.get('customStyle'))
+          
+          saveEntity(controller, style);
+          styleSets.put(style.getName(), style)          
+        }
+        
+        // setup styles ancestors
+        for (int i=0; i<tmar.getTableSize('pivotStyleSets'); i++) {
+          Map line = tmar.getTableLine('pivotStyleSets', i)
+          PivotStyleSet style = styleSets.get(line.get('name'))
+          def parents = line.get('parents')
+          if (parents!=null)
+            style.setAscendantStylesString(parents)
+            
+          saveEntity(controller, style);
+        }
+        
+      }
+      
       // create and load pivot setup
       createEntities(PivotSetup: tmar.table.pivotSetup)
       
@@ -50,24 +72,16 @@ class PivotAdmin extends TmarBackendStartup {
       DetachedCriteria criteria = DetachedCriteria.forClass(PivotSetup.class)
       criteria.add(Restrictions.eq(PivotSetup.PIVOT_ID, moduleId))
       PivotSetup pivotSetup = controller.findFirstByCriteria(criteria, EMergeMode.MERGE_CLEAN_EAGER, PivotSetup.class)
-     
-      pivotSetup.setParentStyle(findParentStyle(tmar.globalParent))
+      pivotSetup.setAscendantStylesString(tmar.globalParent)
       pivotSetup.setCustomStyle(tmar.globalCustom)
       
       // create pivot setup's field
       PivotSetupField field = null
       if (tmar.measure !=null) {
-        field = factory.createEntityInstance(PivotSetupField.class);
+        field = createEntityInstance(PivotSetupField.class);
         field.setPivotSetup(pivotSetup)
         field.setFieldId(tmar.measure)
-        
-        if (tmar.parent!=null) {
-          DetachedCriteria c = DetachedCriteria.forClass(PivotStyleSet.class)
-          c.add(Restrictions.eq(PivotStyleSet.NAME, tmar.parent))
-          PivotStyleSet style = controller.findFirstByCriteria(c, EMergeMode.MERGE_CLEAN_EAGER, PivotStyleSet.class)
-          
-          field.setParentStyle(style)
-        }
+        field.setAscendantStylesString(tmar.parents)
         field.setCustomStyle(tmar.custom)
       }
       // save admin entities
@@ -89,7 +103,7 @@ class PivotAdmin extends TmarBackendStartup {
 
       // init cross items
       refiner.resetCache()
-     module.resetPivotBuilder()
+      module.resetPivotBuilder()
         
       // prepare assertions
       IStyle defaultStyle = refiner.getDefaultStyle();
@@ -97,19 +111,40 @@ class PivotAdmin extends TmarBackendStartup {
       if (tmar.measure !=null) {
         
         String fieldId = PivotHelper.getFieldFromMeasure(tmar.measure)
-        IStyle style = refiner.getFieldStyle(fieldId, tmar.measure);
-        if (style == null) 
-          style = defaultStyle;
+        List<IStyle> fieldStyles = refiner.getFieldStyles(fieldId, tmar.measure);
+       
+//        Map<String, String> styles = new HashMap<>()
+//        for (IStyle style : fieldStyles) {
+//          String styleName = style.getStyleName();
+//          Map<String, String> m = refiner.getCrossItems().getStyleAsMapAttributes(styleName)
+//          styles.putAll(m);
+//        } 
+//        tmar.crossItemsStyle = PivotHelper.stylesMapToString(styles)
+        
+        IStyle style = fieldStyles.isEmpty() ? defaultStyle : fieldStyles.get(0)
         String styleName = style.getStyleName();
-        
         Map styles = refiner.getCrossItems().getStyleAsMapAttributes(styleName)
-        tmar.crossItemsStyle = PivotHelper.stylesMapToString(styles)
         
-        //tmar.customStyle = PivotHelper.stylesMapToString(field.getStyleAsMap())
-        //tmar.fullStyle = module.getPivotRefiner().getFieldStyle(null, tmar.measure)
-        // tmar.fullStyle = PivotHelper.stylesMapToString(field.getFullStyleAsMap())
-      }
+        tmar.crossItemsStyle = PivotHelper.stylesMapToString(styles)
+       }
     }
+  }
+
+  private saveEntity(HibernateBackendController controller, IEntity entity) {
+    controller.registerForUpdate(entity)
+    controller.getTransactionTemplate().execute(
+      new TransactionCallbackWithoutResult() {
+
+        @Override
+        protected void doInTransactionWithoutResult(TransactionStatus status) {
+          try {
+            controller.performPendingOperations();
+          } catch (RuntimeException ex) {
+            controller.clearPendingOperations();
+            throw ex;
+          }
+        }
+      })
   }
 
   /**

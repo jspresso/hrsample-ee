@@ -3,12 +3,12 @@ Pivot admin styles tests
 Let's considere some styles sets :
 
 /table pivot style sets
-[ name     | parent style | custom style                                                |
-| main     |              | color='#000000', decimal-separator='.', text-align='center' |
-| main2    |              | font-style='italic'                                         |
-| decimal  | main         | decimal=2, text-align='right'                               |
-| currency | decimal      | unit='$', thousand-separator=' '                            |
-| salary   | currency     | decimal=0, unit='K$'                                        |
+[ name     | parents  | custom style                                                |
+| main     |          | color='#000000', decimal-separator='.', text-align='center' |
+| main2    |          | font-style='italic'                                         |
+| decimal  | main     | decimal=2, text-align='right'                               |
+| currency | decimal  | unit='$', thousand-separator=' '                            |
+| salary   | currency | decimal=0, unit='K$'                                        |
 
 Here is the pivot setup definition :
 /table pivot setup
@@ -26,8 +26,6 @@ Here is the pivot setup definition :
 [ available dimensions ] 
   ssn, salary, managedOu.ouId, managedOu.teamCount  |
 /endInline 
-
-
 
 _Check global styles :
 /sequence 
@@ -84,7 +82,7 @@ When the global parent is set, the hardcoded default style is no more used.
 _Check field style with customization using parent style
 
 /sequence 
- [ measure                       | global parent | parent  | custom          | cross items style ?                                                                                      | comments                                                                        |
+ [ measure                       | global parent | parents | custom          | cross items style ?                                                                                      | comments                                                                        |
  | salary@sum                    | main          | main    |                 | color='#000000', decimal-separator='.', text-align='center'                                              | --> parent is 'default', then it is exactly as if no parent was set for field ! |
  | salary@percentile90           | main          | salary  |                 | color='#000000', decimal-separator='.', text-align='right', decimal=0, unit='K$', thousand-separator=' ' | --> salary                                                                      |
  | salary@average/managedOu.ouId | main          | salary  | color='#999999' | color='#999999', decimal-separator='.', text-align='right', decimal=0, unit='K$', thousand-separator=' ' | --> salary + custom                                                             |
@@ -93,7 +91,7 @@ _Check field style with customization using parent style
  If the global parent is not set, it means that the global parent is the one hadcoded into *DefaultPivotRefiner#getDefaultStyle()* 
  
 /sequence 
- [ measure                       | global parent | parent  | custom    | cross items style ?                                                    | comments              |
+ [ measure                       | global parent | parents | custom    | cross items style ?                                                    | comments              |
  | salary@sum                    |               |         |           | decimal-separator='.', thousand-separator='\,', decimal=2, unit='K€'   | --> Default hardcoded |
  | salary@sum                    |               | main    |           | color='#000000', decimal-separator='.', text-align='center'            | --> Main              |
  | salary@sum                    |               | main    | decimal=5 | color='#000000', decimal-separator='.', text-align='center', decimal=5 | --> Main + custom     |
@@ -101,10 +99,10 @@ _Check field style with customization using parent style
  The global parent is ignored when the field's parent overrides it :
  
 /sequence 
- [ measure                       | global parent | global custom   | parent | custom | cross items style ?                                         | comments                                                      |
- | salary@sum                    | main2         |                 |        |        | font-style='italic', decimal=2, unit='K€'                   | --> Main2                                                     |
- | salary@sum                    | main2         |                 | main   |        | color='#000000', decimal-separator='.', text-align='center' | --> Main hides the global Main2                               |
- | salary@sum                    | main2         | color='#FFFFFF' | main   |        | color='#000000', decimal-separator='.', text-align='center' | --> Main hides the global Main2 including Main2 customization |
+ [ measure                       | global parent | global custom   | parents | custom | cross items style ?                                         | comments                                                      |
+ | salary@sum                    | main2         |                 |         |        | font-style='italic', decimal=2, unit='K€'                   | --> Main2                                                     |
+ | salary@sum                    | main2         |                 | main    |        | color='#000000', decimal-separator='.', text-align='center' | --> Main hides the global Main2                               |
+ | salary@sum                    | main2         | color='#FFFFFF' | main    |        | color='#000000', decimal-separator='.', text-align='center' | --> Main hides the global Main2 including Main2 customization |
 
 
 

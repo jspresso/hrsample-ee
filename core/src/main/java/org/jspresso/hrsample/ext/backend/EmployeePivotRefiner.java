@@ -58,9 +58,14 @@ public class EmployeePivotRefiner extends ExtendedPivotRefiner<Employee> {
           return styles;
       }
       
-      Map<String, Object> attributs = new HashMap<>();
+      Map<String, Object> attributs = new HashMap<>(styles.get(0).getStyleAttributs());
       attributs.put(IPivotStyles.STYLE_UNIT, "K€");
-      styles.add( new Style(measure, attributs));
+      IStyle parent = getRefiner().getDefaultStyle();
+      IStyle newStyle = new Style(measure, attributs, parent.getStyleName());
+      
+      if (! styles.isEmpty())
+        styles.remove(0);
+      styles.add(0, newStyle);
       
       return styles;
     }
