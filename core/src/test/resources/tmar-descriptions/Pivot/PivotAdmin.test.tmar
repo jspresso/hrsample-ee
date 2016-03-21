@@ -1,14 +1,20 @@
-Pivot admin styles tests
+Pivot admin styles test
 
-Let's considere some styles sets :
+Those are simple styles :
+/table pivot style sets
+ [ name          | custom style       |
+ | white         | color='#000000'    |
+ | currency-unit | unit='$'           |
 
 /table pivot style sets
-[ name     | parents  | custom style                                                |
-| main     |          | color='#000000', decimal-separator='.', text-align='center' |
-| main2    |          | font-style='italic'                                         |
-| decimal  | main     | decimal=2, text-align='right'                               |
-| currency | decimal  | unit='$', thousand-separator=' '                            |
-| salary   | currency | decimal=0, unit='K$'                                        |
+ [ name          | parents                | custom style                                              |
+ | main          | white                  | decimal-separator='.', text-align='center'                |
+ | main2         |                        | background-color='#000002'                                |
+ | main3         |                        | background-color='#000003'                                |
+ | decimal       | main                   | decimal=2, text-align='right'                             |
+ | currency      | decimal, currency-unit | thousand-separator=' '                                    |
+ | salary        | currency               | decimal=0, unit='K$'                                      |
+
 
 Here is the pivot setup definition :
 /table pivot setup
@@ -27,13 +33,14 @@ Here is the pivot setup definition :
   ssn, salary, managedOu.ouId, managedOu.teamCount  |
 /endInline 
 
+
 _Check global styles :
 /sequence 
- [ global parent | global custom | global full style ?                                                            | comments                                                                    
- |               |               | thousand-separator='\,', decimal-separator='.'                                 | --> Default hardcoded into DefaultPivotRefiner#getDefaultStyle              
- |               | unit='X'      | unit='X'                                                                       | --> Override default locally                                                
- | main          |               | color='#000000', decimal-separator='.', text-align='center'                    | --> Override default by setting a parent style set                          
- | main          | unit='X'      | unit='X', color='#000000', decimal-separator='.', text-align='center'          | --> Override default by setting a parent style set + adding local attributs 
+ [ global parent | global custom | global full style ?                                                   | comments                                                                    
+ |               |               | decimal-separator='.', thousand-separator='\,'                        | --> Default hardcoded into DefaultPivotRefiner#getDefaultStyle              
+ |               | unit='X'      | unit='X'                                                              | --> Override default locally                                                
+ | main          |               | color='#000000', decimal-separator='.', text-align='center'           | --> Override default by setting a parent style set                          
+ | main          | unit='X'      | color='#000000', decimal-separator='.', text-align='center', unit='X' | --> Override default by setting a parent style set + adding local attributs 
 
 
 
@@ -54,55 +61,56 @@ For this first set of tests, the global pivot style is not overrided, that mean 
 /sequence  
  [ measure                             | cross items style ?                                                  | comments                                                                                                  |
  | ssn@count                           | decimal-separator='.', thousand-separator='\,'                       | --> Default hardcoded DefaultPivotRefiner#getDefaultStyle()                                               |
- | salary@sum                          | decimal-separator='.', thousand-separator='\,', decimal=2, unit='K€' | --> Default hardcoded DefaultPivotRefiner#getDefaultStyle() + EmployeePivotRefiner.SalaryField#getStyle() |
- | salary@percentile90                 | decimal-separator='.', thousand-separator='\,', decimal=2, unit='K€' | --> Default hardcoded DefaultPivotRefiner#getDefaultStyle() + EmployeePivotRefiner.SalaryField#getStyle() |
+ | salary@sum                          | decimal=2, decimal-separator='.', thousand-separator='\,', unit='K€' | --> Default hardcoded DefaultPivotRefiner#getDefaultStyle() + EmployeePivotRefiner.SalaryField#getStyle() |
+ | salary@percentile90                 | decimal=2, decimal-separator='.', thousand-separator='\,', unit='K€' | --> Default hardcoded DefaultPivotRefiner#getDefaultStyle() + EmployeePivotRefiner.SalaryField#getStyle() |
  | managedOu.teamCount@sum             | decimal-separator='.', thousand-separator='\,'                       | --> Default hardcoded DefaultPivotRefiner#getDefaultStyle()                                               |
- | %salary@sum/managedOu.teamCount@sum | decimal-separator='.', thousand-separator='\,', decimal=2, unit='%'  | --> Default hardcoded DefaultPivotRefiner#getDefaultStyle() + SimplePivotRefinerField#getStyle()          |
+ | %salary@sum/managedOu.teamCount@sum | decimal=2, decimal-separator='.', thousand-separator='\,', unit='%'  | --> Default hardcoded DefaultPivotRefiner#getDefaultStyle() + SimplePivotRefinerField#getStyle()          |
 
 
 
 _Check field style with customization using custom style
 
-When the global parent is set, the hardcoded default style is no more used. 
+When a **global parent** and / or **global custom** is set, the hardcoded default style is overriden partially or totally :
 
 /sequence 
- [ measure    | global parent | global custom   | custom     | cross items style ?                                                               | comments                             |
- | ssn@count  |               |                 | unit='SSN' | decimal-separator='.', thousand-separator='\,', unit='SSN'                        | --> Custom + Default hardcoded       |
- | ssn@count  | main          |                 |            | color='#000000', decimal-separator='.', text-align='center'                       | --> Main                             |
- | ssn@count  | main          |                 | unit='SSN' | color='#000000', decimal-separator='.', text-align='center', unit='SSN'           | --> Main + custom                    |
- | ssn@count  | main2         |                 |            | font-style='italic'                                                               | --> Main2                            |
- | ssn@count  | main2         |                 | unit='SSN' | font-style='italic', unit='SSN'                                                   | --> Main2 + custom                   |
- | ssn@count  | main2         | color='#AAAAAA' | unit='SSN' | color='#AAAAAA', font-style='italic', unit='SSN'                                  | --> Main2 overided style + custom    |
-
- The harcoded custom style is used only if not redifined for field :
-
- | salary@sum | main          |                 |            | color='#000000', decimal-separator='.', text-align='center', decimal=2, unit='K€' | --> Custom + Default hardcoded       | 
+ [ measure    | global parent | global custom   | custom     | cross items style ?                                                                                         | comment                                  |
+ | ssn@count  |               |                 | unit='SSN' | decimal-separator='.', thousand-separator='\,', unit='SSN'                                                  | --> SSN added                            |
+ | ssn@count  | main          |                 |            | color='#000000', decimal-separator='.', text-align='center', thousand-separator='\,'                        |                                          |
+ | ssn@count  | main          |                 | unit='SSN' | color='#000000', decimal-separator='.', text-align='center', thousand-separator='\,', unit='SSN'            | --> SSN added                            |
+ | ssn@count  | main2         |                 |            | background-color='#000002', decimal-separator='.', thousand-separator='\,'                                  | --> background-color added               |
+ | ssn@count  | main2         |                 | unit='SSN' | background-color='#000002', decimal-separator='.', thousand-separator='\,', unit='SSN'                      | --> background-color added + SSN         |
+ | ssn@count  | main2         | color='#AAAAAA' | unit='SSN' | background-color='#000002', color='#AAAAAA', decimal-separator='.', thousand-separator='\,', unit='SSN'     | --> background-color added + color + ssb |
+ | salary@sum | main          |                 |            | color='#000000', decimal=2, decimal-separator='.', text-align='center', thousand-separator='\,', unit='K€'  |                                          | 
 
 
 _Check field style with customization using parent style
 
+when a field's **parent** and / or **cutom** is set, the *global parent* and *global custom* or overriden partially or totally :
+
 /sequence 
- [ measure                       | global parent | parents | custom          | cross items style ?                                                                                      | comments                                                                        |
- | salary@sum                    | main          | main    |                 | color='#000000', decimal-separator='.', text-align='center'                                              | --> parent is 'default', then it is exactly as if no parent was set for field ! |
- | salary@percentile90           | main          | salary  |                 | color='#000000', decimal-separator='.', text-align='right', decimal=0, unit='K$', thousand-separator=' ' | --> salary                                                                      |
- | salary@average/managedOu.ouId | main          | salary  | color='#999999' | color='#999999', decimal-separator='.', text-align='right', decimal=0, unit='K$', thousand-separator=' ' | --> salary + custom                                                             |
- | managedOu.teamCount@sum       | main          | main    | decimal=4       | color='#000000', decimal-separator='.', text-align='center', decimal=4                                   | --> main + custom                                                               |
+ [ measure                       | global parent | parents | custom          | cross items style ?                                                                                        | comments                                                                                         |
+ | salary@sum                    | main          | main    |                 | color='#000000', decimal=2, decimal-separator='.', text-align='center', thousand-separator='\,', unit='K€' | --> parent is identical to global parent, then it is exactly as if no parent was set for field ! |
+ | salary@percentile90           | main          | salary  |                 | color='#000000', decimal=0, decimal-separator='.', text-align='right', thousand-separator=' ', unit='K$'   | --> unit replaced by "K$" instead of "K€"                                                        |
+ | salary@average/managedOu.ouId | main          | salary  | color='#999999' | color='#999999', decimal=0, decimal-separator='.', text-align='right', thousand-separator=' ', unit='K$'   | --> unit replaced by "K$" instead of "K€" + color replaced                                       |
+ | managedOu.teamCount@sum       | main          | main    | decimal=4       | color='#000000', decimal=4, decimal-separator='.', text-align='center', thousand-separator='\,'            | --> decimal replaced                                                                             |
 
  If the global parent is not set, it means that the global parent is the one hadcoded into *DefaultPivotRefiner#getDefaultStyle()* 
  
 /sequence 
- [ measure                       | global parent | parents | custom    | cross items style ?                                                    | comments              |
- | salary@sum                    |               |         |           | decimal-separator='.', thousand-separator='\,', decimal=2, unit='K€'   | --> Default hardcoded |
- | salary@sum                    |               | main    |           | color='#000000', decimal-separator='.', text-align='center'            | --> Main              |
- | salary@sum                    |               | main    | decimal=5 | color='#000000', decimal-separator='.', text-align='center', decimal=5 | --> Main + custom     |
+ [ measure                       | global parent | parents | custom    | cross items style ?                                                                                        | comments                      |
+ | salary@sum                    |               |         |           | decimal=2, decimal-separator='.', thousand-separator='\,', unit='K€'                                       | --> Default                   |
+ | salary@sum                    |               | main    |           | color='#000000', decimal=2, decimal-separator='.', text-align='center', thousand-separator='\,', unit='K€' | --> Default + Main            |
+ | salary@sum                    |               | main    | decimal=5 | color='#000000', decimal=5, decimal-separator='.', text-align='center', thousand-separator='\,', unit='K€' | --> Default + Main + decimal  |
 
- The global parent is ignored when the field's parent overrides it :
+ Now let's use some example with **multiple style parents** and **complexe style mix** and check wich defintion of
  
 /sequence 
- [ measure                       | global parent | global custom   | parents | custom | cross items style ?                                         | comments                                                      |
- | salary@sum                    | main2         |                 |         |        | font-style='italic', decimal=2, unit='K€'                   | --> Main2                                                     |
- | salary@sum                    | main2         |                 | main    |        | color='#000000', decimal-separator='.', text-align='center' | --> Main hides the global Main2                               |
- | salary@sum                    | main2         | color='#FFFFFF' | main    |        | color='#000000', decimal-separator='.', text-align='center' | --> Main hides the global Main2 including Main2 customization |
+ [ measure                       | global parent | global custom              | parents | custom                     | cross items style ?                                                                              | comments                                |
+ | salary@sum                    | main2, main3  |                            |         |                            | background-color='#000003', decimal=2, decimal-separator='.', thousand-separator='\,', unit='K€' | --> background-color from 'main3'       |
+ | salary@sum                    | main3, main2  |                            |         |                            | background-color='#000002', decimal=2, decimal-separator='.', thousand-separator='\,', unit='K€' | --> background-color from 'main2'       |
+ | salary@sum                    | main2         | background-color='#000099' |         |                            | background-color='#000099', decimal=2, decimal-separator='.', thousand-separator='\,', unit='K€' | --> background-color from global custom |
+ | salary@sum                    | main2         | background-color='#000099' | main3   |                            | background-color='#000003', decimal=2, decimal-separator='.', thousand-separator='\,', unit='K€' | --> background-color from 'main3'       |
+ | salary@sum                    | main2         | background-color='#000099' | main3   | background-color='#000088' | background-color='#000088', decimal=2, decimal-separator='.', thousand-separator='\,', unit='K€' | --> background-color from custom        |
 
 
 

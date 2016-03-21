@@ -83,50 +83,31 @@ class PivotAdmin extends TmarBackendStartup {
         field.setFieldId(tmar.measure)
         field.setAscendantStylesString(tmar.parents)
         field.setCustomStyle(tmar.custom)
+        
+        saveEntity(controller, field)
       }
+      
       // save admin entities
-      controller.getTransactionTemplate().execute(new TransactionCallback() {
-        @Override
-        public Object doInTransaction(TransactionStatus status) {
-          PivotSetup ps = controller.cloneInUnitOfWork(pivotSetup)
-          controller.registerForUpdate(ps)
-          
-          if (field!=null) {
-            PivotSetupField f = controller.cloneInUnitOfWork(field)
-            controller.registerForUpdate(f)
-          }
-          
-          controller.performPendingOperations();
-          return null;
-        }
-      });
+      saveEntity(controller, pivotSetup)
 
       // init cross items
+      module.resetPivotBuilder()     
       refiner.resetCache()
-      module.resetPivotBuilder()
+      
+      int i = refiner.getRefinerFields().size();
         
       // prepare assertions
-      IStyle defaultStyle = refiner.getDefaultStyle();
+      List<IStyle> defaultStyles = refiner.getDefaultStyles();
       tmar.globalFullStyle = PivotHelper.stylesMapToString(pivotSetup.getFullStyleAsMap())
       if (tmar.measure !=null) {
         
+        String measure = tmar.measure
         String fieldId = PivotHelper.getFieldFromMeasure(tmar.measure)
         List<IStyle> fieldStyles = refiner.getFieldStyles(fieldId, tmar.measure);
        
-//        Map<String, String> styles = new HashMap<>()
-//        for (IStyle style : fieldStyles) {
-//          String styleName = style.getStyleName();
-//          Map<String, String> m = refiner.getCrossItems().getStyleAsMapAttributes(styleName)
-//          styles.putAll(m);
-//        } 
-//        tmar.crossItemsStyle = PivotHelper.stylesMapToString(styles)
-        
-        IStyle style = fieldStyles.isEmpty() ? defaultStyle : fieldStyles.get(0)
-        String styleName = style.getStyleName();
-        Map styles = refiner.getCrossItems().getStyleAsMapAttributes(styleName)
-        
+        Map<String, String> styles = refiner.getCrossItems().getMeasureStyleAsMapAttributes(measure)
         tmar.crossItemsStyle = PivotHelper.stylesMapToString(styles)
-       }
+      }
     }
   }
 

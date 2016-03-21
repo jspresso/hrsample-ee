@@ -179,10 +179,10 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
   private void createPivotSetup() {
     
     // load style sets
-    PivotStyleSet styleMain = createPivotStyleSet("main", "color='#000000',\ndecimal-separator='.',\ntext-align='center'", null);
+    PivotStyleSet styleMain = createPivotStyleSet("main", "color='#000000',\ndecimal-separator='.',\nthousand-separator='\\,',\ntext-align='center'", null);
     PivotStyleSet styleMain2 = createPivotStyleSet("main2", "color='#ABABAB'", null);
     PivotStyleSet styleDecimal = createPivotStyleSet("decimal", "decimal=2,\ntext-align='right'", styleMain);
-    PivotStyleSet styleCurrency = createPivotStyleSet("currency", "unit='$',\nthousand-separator='\\,'", styleDecimal);
+    PivotStyleSet styleCurrency = createPivotStyleSet("currency", "unit='$'", styleDecimal);
     PivotStyleSet styleSalary = createPivotStyleSet("salary", "decimal=0,\nunit='K$'", styleCurrency);
      
     PivotStyleSet grey = createPivotStyleSet("grey", "background-color='#E6E6E6'", null);
