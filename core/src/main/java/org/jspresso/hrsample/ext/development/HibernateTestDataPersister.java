@@ -21,6 +21,7 @@ package org.jspresso.hrsample.ext.development;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Currency;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -125,6 +126,12 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
       // startup fail.
     }
 
+    // 
+    // Pivot setup
+    createPivotSetup();
+    
+    //
+    // Filter module saved criteria
     try {
       createFilter(false, "demo", "employees.workspace", "employees.module", "More than 40 years old", Employee.BIRTH_DATE, "> year-40");
       createFilter(false, "demo", "employees.workspace", "employees.module", "Men", Employee.GENDER, Employee.GENDER_M);
@@ -148,6 +155,8 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
       // startup fail.
     }
 
+    //
+    // Pivots module saved criteria
     try {
       createPivotFilter(false, "demo", "statistics.workspace", "employee.statistics.module", "Salary per age group",
           new String[]{"gender"},
@@ -170,9 +179,6 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
       // startup fail.
     }
     
-    // 
-    // Pivot setup
-    createPivotSetup();
   }
   
   @SuppressWarnings("unused")
@@ -191,7 +197,7 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     PivotStyleSet green = createPivotStyleSet("green", "color='#008000'", null);
     
     PivotStyleSet styleSalaryWithColor = createPivotStyleSet("salary-colored", "default:'red',\ncomparator:'>',\n100:'orange',\n200:'green',\nempty:'grey'", styleSalary);
-    PivotStyleSet styleTest = createPivotStyleSet("euro", "unit='K€'", styleSalaryWithColor);
+    PivotStyleSet styleTest = createPivotStyleSet("euro", "unit='K€'", styleCurrency);
     
     // find module
     PivotFilterableBeanCollectionModule module = findModule("statistics.workspace", "employee.statistics.module");
@@ -451,7 +457,6 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
   private PivotStyleSet createPivotStyleSet(String name, String style, PivotStyleSet parent) {
     PivotStyleSet s = createEntityInstance(PivotStyleSet.class);
     s.setName(name);
-//    s.setParentStyle(parent);
     if (parent!=null)
       s.addToAscendantStyles(parent);
     s.setCustomStyle(style);

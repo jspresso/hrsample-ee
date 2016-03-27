@@ -15,6 +15,7 @@ Those are simple styles :
  | currency      | decimal, currency-unit | thousand-separator=' '                                    |
  | salary        | currency               | decimal=0, unit='K$'                                      |
 
+_The pivot definition
 
 Here is the pivot setup definition :
 /table pivot setup
@@ -32,6 +33,7 @@ Here is the pivot setup definition :
 [ available dimensions ] 
   ssn, salary, managedOu.ouId, managedOu.teamCount  |
 /endInline 
+
 
 
 _Check global styles :

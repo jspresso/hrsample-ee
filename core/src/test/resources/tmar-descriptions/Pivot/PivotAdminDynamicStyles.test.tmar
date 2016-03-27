@@ -1,0 +1,65 @@
+Pivot admin styles test
+
+Those are simple styles about colors :
+/table pivot style sets
+ [ name      | custom style               |
+ | grey-back | background-color='#DEDEDE' |
+ | red       | color='#FF0000'            |
+ | orange    | color='#FF7F00'            |
+ | green     | color='#008000'            |
+
+Some other styles having parents :
+/table pivot style sets
+ [ name     | custom style                                                       | parents |
+ | main     | text-align='center'                                                |         |
+ | decimal  | decimal-separator='.', thousand-separator='\,', text-align='right' | main    |
+ | euro     | unit='€'                                                           | decimal |
+ | usd      | unit='$'                                                           | decimal |
+
+And few dynalic styles :
+/table pivot dynamic style sets
+ [ name   | custom style                                                                          | parents       |
+ | level1 | default:'red', comparator:'>', 0:'orange', 100:'green', empty:'grey-back'             |               |
+ | level2 | default:'red', comparator:'>=', 0:'orange', 100:'green', empty:'grey-back'            | decimal, euro | 
+ | level3 | """ default:['red', 'usd'], comparator:'>', 0:['green', 'usd'], empty:'grey-back' """ | decimal       |
+                                                                               
+
+_The pivot definition
+
+Here is the pivot setup definition :
+/table pivot setup
+[ pivot Id                   | available measures | available dimensions |
+| employee.statistics.module | salary@sum         | salary               |
+
+
+
+_Dynamic styles tests 
+ 
+Let's make some tests using dynamic style '**level1**' :
+/sequence  
+ [ measure    | parents | value | cross items style ?                |
+ | salary@sum | level1  |  null | background-color='#DEDEDE'         |
+ | salary@sum | level1  |   -20 | color='#FF0000'                    |
+ | salary@sum | level1  |     0 | color='#FF0000'                    |
+ | salary@sum | level1  |    55 | color='#FF7F00'                    |
+ | salary@sum | level1  |   100 | color='#FF7F00'                    |
+ | salary@sum | level1  |   101 | color='#008000'                    | 
+
+
+Let's make some tests using dynamic style '**level2**' :
+/sequence                                                             
+ [ measure    | parents | value | cross items style ?                                                                           |
+ | salary@sum | level2  |  null | background-color='#DEDEDE'                                                                    |
+ | salary@sum | level2  |   -99 | color='#FF0000', decimal-separator='.', text-align='right', thousand-separator='\,', unit='€' |
+ | salary@sum | level2  |     0 | color='#FF7F00', decimal-separator='.', text-align='right', thousand-separator='\,', unit='€' |
+ | salary@sum | level2  |     1 | color='#FF7F00', decimal-separator='.', text-align='right', thousand-separator='\,', unit='€' |
+ | salary@sum | level2  |   100 | color='#008000', decimal-separator='.', text-align='right', thousand-separator='\,', unit='€' |
+ | salary@sum | level2  |   101 | color='#008000', decimal-separator='.', text-align='right', thousand-separator='\,', unit='€' |
+
+Let's make some tests using dynamic style '**level3**' :
+/sequence                                                             
+ [ measure    | parents | value | cross items style ?                                                                           |
+ | salary@sum | level3  |  null | background-color='#DEDEDE'                                                                    |
+ | salary@sum | level3  |    -1 | color='#FF0000', decimal-separator='.', text-align='right', thousand-separator='\,', unit='$' |
+ | salary@sum | level3  |     1 | color='#008000', decimal-separator='.', text-align='right', thousand-separator='\,', unit='$' |
+
