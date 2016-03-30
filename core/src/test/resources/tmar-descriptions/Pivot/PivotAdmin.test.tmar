@@ -19,9 +19,8 @@ _The pivot definition
 
 Here is the pivot setup definition :
 /table pivot setup
-/inline  
+/inline   
 [ pivot Id ] employee.statistics.module |
-
 [ available measures ]  """
   ssn@count, 
   salary@sum, 
@@ -29,7 +28,6 @@ Here is the pivot setup definition :
   salary@average/managedOu.ouId, 
   managedOu.teamCount@sum, 
   %salary@sum/managedOu.teamCount@sum """ |
-
 [ available dimensions ] 
   ssn, salary, managedOu.ouId, managedOu.teamCount  |
 /endInline 

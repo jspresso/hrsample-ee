@@ -2,20 +2,20 @@ package org.jspresso.hrsample.ext.backend
 
 import org.hibernate.criterion.DetachedCriteria
 import org.hibernate.criterion.Restrictions
+import org.jspresso.contrib.backend.pivot.ExtendedPivotRefiner;
 import org.jspresso.contrib.model.pivot.PivotSetup
 import org.jspresso.contrib.model.pivot.PivotSetupField
 import org.jspresso.contrib.model.pivot.PivotStyleSet
-import org.jspresso.contrib.model.pivot.service.PivotSetupServiceDelegate
-import org.jspresso.contrib.tmar.core.TmarDataSequence;
+import org.jspresso.contrib.tmar.core.TmarDataSequence
 import org.jspresso.framework.application.backend.BackendControllerHolder
 import org.jspresso.framework.application.backend.persistence.hibernate.HibernateBackendController
 import org.jspresso.framework.application.backend.session.EMergeMode
 import org.jspresso.framework.application.model.Module
 import org.jspresso.framework.application.model.Workspace
 import org.jspresso.framework.ext.pivot.backend.PivotHelper
-import org.jspresso.framework.ext.pivot.model.IStyle
 import org.jspresso.framework.ext.pivot.model.PivotFilterableBeanCollectionModule
 import org.jspresso.framework.model.entity.IEntity
+import org.junit.After;
 import org.junit.Test
 import org.springframework.transaction.TransactionStatus
 import org.springframework.transaction.support.TransactionCallbackWithoutResult
@@ -35,7 +35,8 @@ class PivotAdmin extends TmarBackendStartup {
       HibernateBackendController controller = BackendControllerHolder.getCurrentBackendController()
       controller.getApplicationSession().setLocale(Locale.ENGLISH);
   
-      loadStyles(tmar)
+      if (l == 1)
+        loadStyles(tmar)
       
       // create and load pivot setup
       PivotSetup pivotSetup = createPivotSetup(tmar)
@@ -62,9 +63,13 @@ class PivotAdmin extends TmarBackendStartup {
    */
   protected PivotFilterableBeanCollectionModule initPivotModule(PivotSetup pivotSetup) {
     PivotFilterableBeanCollectionModule module = findModule("statistics.workspace", "employee.statistics.module")
+    
+    ((ExtendedPivotRefiner)module.getPivotRefiner()).getPivotService().reloadApplicationStyles()
+    
     module.setPermId(pivotSetup.getPivotId())
     module.resetPivotBuilder()
     module.getPivotRefiner().resetCache()
+    ((ExtendedPivotRefiner)module.getPivotRefiner()).getPivotService().reloadApplicationStyles()
     return module
   }
 
@@ -112,6 +117,28 @@ class PivotAdmin extends TmarBackendStartup {
     
     return pivotSetup
   }
+  
+  /**
+   * clean pivot admin
+   */
+  protected void cleanPivotAdmin() {
+    HibernateBackendController controller = BackendControllerHolder.getCurrentBackendController()
+    
+    // Delete pivot setup fields
+    DetachedCriteria criteria = DetachedCriteria.forClass(PivotSetupField.class)
+    deleteEntity( controller.findByCriteria(criteria, EMergeMode.MERGE_CLEAN_EAGER, PivotSetupField.class).toArray(new IEntity[0]))
+    
+    // Delete pivot setups
+    criteria = DetachedCriteria.forClass(PivotSetup.class)
+    deleteEntity( controller.findByCriteria(criteria, EMergeMode.MERGE_CLEAN_EAGER, PivotSetup.class).toArray(new IEntity[0]))
+    
+    // Delete all styles (from previous tests)
+    criteria = DetachedCriteria.forClass(PivotStyleSet.class)
+    List<PivotStyleSet> all = controller.findByCriteria(criteria, EMergeMode.MERGE_CLEAN_EAGER, PivotStyleSet.class)
+    List<PivotStyleSet> ordered = PivotHelper.getSortedStyles(all)
+    deleteEntity(ordered.toArray(new IEntity[0]))
+
+  }
 
   /**
    * Load styles
@@ -120,32 +147,27 @@ class PivotAdmin extends TmarBackendStartup {
   protected Map loadStyles(TmarDataSequence  tmar) {
     Map styleSets = new HashMap<String, IEntity>();
   
-    int l = tmar.getCurrentIterationNumber()
-    if (l == 1) {
+    HibernateBackendController controller = BackendControllerHolder.getCurrentBackendController()
+       
+    // load styles sets
+    for (int i=0; i<tmar.getTableSize('pivotStyleSets'); i++) {
+      Map line = tmar.getTableLine('pivotStyleSets', i)
+      PivotStyleSet style = createEntityInstance(PivotStyleSet.class)
+      style.setName(line.get('name'))
+      style.setCustomStyle(line.get('customStyle'))
 
-      HibernateBackendController controller = BackendControllerHolder.getCurrentBackendController()
-  
-      // load styles sets
-      for (int i=0; i<tmar.getTableSize('pivotStyleSets'); i++) {
-        Map line = tmar.getTableLine('pivotStyleSets', i)
-        PivotStyleSet style = createEntityInstance(PivotStyleSet.class)
-        style.setName(line.get('name'))
-        style.setCustomStyle(line.get('customStyle'))
+      styleSets.put(style.getName(), style)
+    }
 
-        styleSets.put(style.getName(), style)
-      }
+    // setup styles ancestors
+    for (int i=0; i<tmar.getTableSize('pivotStyleSets'); i++) {
+      Map line = tmar.getTableLine('pivotStyleSets', i)
+      PivotStyleSet style = styleSets.get(line.get('name'))
+      def parents = line.get('parents')
+      if (parents!=null)
+        style.setAscendantStylesString(parents)
 
-      // setup styles ancestors
-      for (int i=0; i<tmar.getTableSize('pivotStyleSets'); i++) {
-        Map line = tmar.getTableLine('pivotStyleSets', i)
-        PivotStyleSet style = styleSets.get(line.get('name'))
-        def parents = line.get('parents')
-        if (parents!=null)
-          style.setAscendantStylesString(parents)
-
-        saveEntity(controller, style);
-      }
-
+      saveEntity(controller, style);
     }
     
     return styleSets
@@ -203,6 +225,26 @@ class PivotAdmin extends TmarBackendStartup {
         }
       })
   }
+  
+  /**
+   * saveEntity
+   */
+  protected deleteEntity(HibernateBackendController controller, IEntity entity) {
+    controller.registerForDeletion(entity)
+    controller.getTransactionTemplate().execute(
+      new TransactionCallbackWithoutResult() {
+
+        @Override
+        protected void doInTransactionWithoutResult(TransactionStatus status) {
+          try {
+            controller.performPendingOperations();
+          } catch (RuntimeException ex) {
+            controller.clearPendingOperations();
+            throw ex;
+          }
+        }
+      })
+  }
 
   /**
    * findParentStyle
@@ -242,5 +284,15 @@ class PivotAdmin extends TmarBackendStartup {
   @Override
   protected String getApplicationContextKey() {
     return "hrsample-ext-frontend-test-context";
+  }
+  
+  /**
+   * cleanup data
+   * @param tmar
+   * @return
+   */
+  @After
+  public void cleanupData() {
+    cleanPivotAdmin()
   }
 }

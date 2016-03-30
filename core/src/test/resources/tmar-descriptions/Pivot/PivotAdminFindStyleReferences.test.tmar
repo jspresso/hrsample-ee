@@ -1,0 +1,86 @@
+Pivot admin styles test
+
+Those are simple styles about colors :
+/table pivot style sets
+ [ name      | custom style               |
+ | grey-back | background-color='#DEDEDE' |
+ | red       | color='#FF0000'            |
+ | orange    | color='#FF7F00'            |
+ | green     | color='#008000'            |
+
+Some other styles having parents :
+/table pivot style sets
+ [ name     | custom style                                                       | parents |
+ | main     | text-align='center'                                                |         |
+ | decimal  | decimal-separator='.', thousand-separator='\,', text-align='right' | main    |
+ | euro     | unit='€'                                                           | decimal |
+ | usd      | unit='$'                                                           | decimal |
+
+And few dynalic styles :
+/table pivot dynamic style sets
+ [ name   | custom style                                                                          | parents       |
+ | level1 | default:'red', comparator:'>', 0:'orange', 100:'green', empty:'grey-back'             |               |
+ | level2 | default:'red', comparator:'>=', 0:'orange', 100:'green', empty:'grey-back'            | decimal, euro | 
+ | level3 | """ default:['red', 'usd'], comparator:'>', 0:['green', 'usd'], empty:'grey-back' """ | decimal       |
+                                                                               
+
+_The pivot definition
+
+Here is the pivot setup definition :
+/table pivot setup
+[ pivot Id                   | available measures | available dimensions | pivot name           |
+| employee.statistics.module | salary@sum         | salary               | Employees Statistics |
+
+
+
+_Check references
+
+/sequence  
+/inline
+**Test 1** : Check reference for style  [ style ] main |
+
+The pivot module's globale style is : [ global parents ] main | 
+The pivot measure [ measure ] salary@sum | have two parent styles  [ parents ] red, decimal |
+
+The expected references are : [ references ? ] """
+Employees Statistics  →  main
+Employees Statistics  /  salary@sum  →  decimal  →  main
+decimal  →  main
+euro  →  decimal  →  main
+level2  →  decimal  →  main
+level2  →  euro  →  decimal  →  main
+level3  →  usd  →  decimal  →  main
+level3  →  decimal  →  main
+usd  →  decimal  →  main
+""" |
+/endInline 
+
+
+/inline
+**Test 1** : Check reference for style  [ style ] red |
+
+The pivot module's globale style is : [ global parents ] main | 
+The pivot measure [ measure ] salary@sum | have two parent styles  [ parents ] red, decimal |
+
+The expected references are : [ references ? ] """
+Employees Statistics  /  salary@sum  →  red
+level1  →  red
+level2  →  red
+level3  →  red
+"""|
+/endInline 
+
+
+
+/inline
+**Test 3** : Check reference for style  [ style ] usd |
+
+The pivot module's globale style is : [ global parents ] main | 
+The pivot measure [ measure ] salary@sum | have two parent styles  [ parents ] red, decimal |
+
+The expected references are : [ references ? ] """
+level3  →  usd
+""" |
+/endInline 
+
+That's it !
