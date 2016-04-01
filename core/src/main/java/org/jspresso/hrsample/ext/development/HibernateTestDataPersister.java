@@ -21,7 +21,6 @@ package org.jspresso.hrsample.ext.development;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Currency;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -168,10 +167,15 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
           new String[]{"age(30, 40)"},
           new String[]{"salary@sum", "ssn@count"});
 
-      createPivotFilter(true, "demo", "statistics.workspace", "employee.statistics.module", "Salary per department",
-          new String[]{"managedOu.ouId"},
+      createPivotFilter(true, "demo", "statistics.workspace", "employee.statistics.module", "Salary per gender & department",
+          new String[]{"gender", "managedOu.ouId"},
           new String[]{"salary(40, 80, 100)"},
           new String[]{"salary@sum", "ssn@count"});
+      
+      createPivotFilter(true, "demo", "statistics.workspace", "employee.statistics.module", "Number of people per age & gender",
+          new String[]{"contact.city.name", "managedOu.ouId"},
+          new String[]{"salary(40, 80, 100)", "gender"},
+          new String[]{"ssn@count"});
 
     } catch (Throwable ex) {
       LOGGER.warn("Unable to create filter criterias !", ex);
@@ -197,7 +201,7 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     PivotStyleSet green = createPivotStyleSet("green", "color='#008000'", null);
     
     PivotStyleSet styleSalaryWithColor = createPivotStyleSet("salary-colored", "default:'red',\ncomparator:'>',\n100:'orange',\n200:'green',\nempty:'grey'", styleSalary);
-    PivotStyleSet styleTest = createPivotStyleSet("euro", "unit='K€'", styleCurrency);
+    PivotStyleSet styleEuro = createPivotStyleSet("euro", "unit='K€'", styleCurrency);
     
     // find module
     PivotFilterableBeanCollectionModule module = findModule("statistics.workspace", "employee.statistics.module");
@@ -209,6 +213,13 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     // override it
     pivotSetup.setPivotId(module.getPermId());
     pivotSetup.setPivotName("Statistics - Employees");
+    pivotSetup.setAvailableDimensions(
+        "salary(40, 80, 100)\n" + 
+        "age(30, 40)\n" + 
+        "gender\n" + 
+        "managedOu.ouId\n" + 
+        "company.departments\n" + 
+        "contact.city.name");
     pivotSetup.setAvailableMeasures(
         "ssn@count\n" + 
         "salary@sum\n" + 
@@ -216,18 +227,18 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
         "salary@average/managedOu.ouId\n" + 
         "managedOu.teamCount@sum\n" + 
         "%salary@sum/managedOu.teamCount@sum");
-    //pivotSetup.setParentStyle(styleMain);
     pivotSetup.addToAscendantStyles(styleMain);
    
     saveOrUpdate(pivotSetup);
         
     // dimension
     List<PivotSetupField> fields = new ArrayList<>();
-    fields.add(createPivotSetupField(pivotSetup, "managedOu.teamCount", "Nb managed people", "Nb collaborateurs", null, null));
+    fields.add(createPivotSetupField(pivotSetup, "managedOu.teamCount", "Nb managed people", "Nb collaborateurs", null));
+    fields.add(createPivotSetupField(pivotSetup, "contact.city.name", "City", "Ville", null));
     
     // measures
     fields.add(createPivotSetupField(pivotSetup, "ssn@count", "Nb persons", "Nb personnes", "unit='P'", styleMain));
-    fields.add(createPivotSetupField(pivotSetup, "salary@sum", null, null, null, styleSalaryWithColor));
+    fields.add(createPivotSetupField(pivotSetup, "salary@sum", null, null, null, styleEuro, styleSalaryWithColor));
     fields.add(createPivotSetupField(pivotSetup, "salary@percentile90", null, null, "decimal=0", styleSalary));
     fields.add(createPivotSetupField(pivotSetup, "salary@average/managedOu.ouId", null, null, null, styleSalary));
     
@@ -237,7 +248,7 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     module.reloadPivotCriteria();
   }
  
-  private PivotSetupField createPivotSetupField(PivotSetup pivotSetup, String fieldId, String fieldLabel, String frenchLabel, String customStyle, PivotStyleSet parentStyle) {
+  private PivotSetupField createPivotSetupField(PivotSetup pivotSetup, String fieldId, String fieldLabel, String frenchLabel, String customStyle, PivotStyleSet... parentStyles) {
     PivotSetupField f = createEntityInstance(PivotSetupField.class);
     f.setPivotSetup(pivotSetup);
     f.setFieldId(fieldId); 
@@ -263,9 +274,8 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     if (customStyle!=null) {
       f.setCustomStyle(customStyle);
     }
-    if (parentStyle!=null) {
-      //f.setParentStyle(parentStyle);
-      f.addToAscendantStyles(parentStyle);
+    for (PivotStyleSet p : parentStyles) {
+      f.addToAscendantStyles(p);
     }
     
     saveOrUpdate(f);
