@@ -219,7 +219,8 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
         "gender\n" + 
         "managedOu.ouId\n" + 
         "company.departments\n" + 
-        "contact.city.name");
+        "contact.city.name\n" +
+        "managedOu.contact.city.name");
     pivotSetup.setAvailableMeasures(
         "ssn@count\n" + 
         "salary@sum\n" + 
@@ -235,6 +236,7 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     List<PivotSetupField> fields = new ArrayList<>();
     fields.add(createPivotSetupField(pivotSetup, "managedOu.teamCount", "Nb managed people", "Nb collaborateurs", null));
     fields.add(createPivotSetupField(pivotSetup, "contact.city.name", "City", "Ville", null));
+    fields.add(createPivotSetupField(pivotSetup, "managedOu.contact.city.name", "Workplace", "Lieu de travail", null));
     
     // measures
     fields.add(createPivotSetupField(pivotSetup, "ssn@count", "Nb persons", "Nb personnes", "unit='P'", styleMain));
