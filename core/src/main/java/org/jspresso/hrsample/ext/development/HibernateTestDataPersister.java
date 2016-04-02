@@ -220,14 +220,16 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
         "managedOu.ouId\n" + 
         "company.departments\n" + 
         "contact.city.name\n" +
-        "managedOu.contact.city.name");
+        "managedOu.contact.city.name\n" +
+        "contact.city.neighbours");
     pivotSetup.setAvailableMeasures(
         "ssn@count\n" + 
         "salary@sum\n" + 
         "salary@percentile90\n" + 
         "salary@average/managedOu.ouId\n" + 
         "managedOu.teamCount@sum\n" + 
-        "%salary@sum/managedOu.teamCount@sum");
+        "%salary@sum/managedOu.teamCount@sum\n" +
+        "company.departments@sum");
     pivotSetup.addToAscendantStyles(styleMain);
    
     saveOrUpdate(pivotSetup);
@@ -237,12 +239,13 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     fields.add(createPivotSetupField(pivotSetup, "managedOu.teamCount", "Nb managed people", "Nb collaborateurs", null));
     fields.add(createPivotSetupField(pivotSetup, "contact.city.name", "City", "Ville", null));
     fields.add(createPivotSetupField(pivotSetup, "managedOu.contact.city.name", "Workplace", "Lieu de travail", null));
+    fields.add(createPivotSetupField(pivotSetup, "contact.city.neighbours", "City size", "Importante de la ville", null));
     
     // measures
     fields.add(createPivotSetupField(pivotSetup, "ssn@count", "Nb persons", "Nb personnes", "unit='P'", styleMain));
     fields.add(createPivotSetupField(pivotSetup, "salary@sum", null, null, null, styleEuro, styleSalaryWithColor));
     fields.add(createPivotSetupField(pivotSetup, "salary@percentile90", null, null, "decimal=0", styleSalary));
-    fields.add(createPivotSetupField(pivotSetup, "salary@average/managedOu.ouId", null, null, null, styleSalary));
+    fields.add(createPivotSetupField(pivotSetup, "salary@average/managedOu.ouId", null, null, null, styleSalary));    
     
     // update module
     ((ExtendedPivotRefiner<?>)module.getPivotRefiner()).resetCache();
