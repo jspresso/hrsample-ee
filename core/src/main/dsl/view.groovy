@@ -3,88 +3,9 @@ external id:['restartModuleWithConfirmationFrontAction',
   'queryPivotModuleAndReloadFilterFrontAction',
   'queryPivotModuleFilterFrontAction']
 
-/* defined in view.xml because SJS does not know about the fields coming from the FW
-*/
-external id:['loginActionMap', 'secondaryLoginActionMap']
-border ('loginViewDescriptor', model:'CaptchaUsernamePasswordHandler',
-    name:'login.name', description:'credentialMessage',
-    actionMap:'loginActionMap',
-    secondaryActionMap:'secondaryLoginActionMap'
-    ) {
-
-  center {
-
-    border {
-      west {
-        form (model:'CaptchaUsernamePasswordHandler', columnCount:2, preferredWidth:500) { //loginViewDescriptorBase
-          fields {
-            propertyView parent:'username', width:2, preferredWidth:380
-            propertyView parent:'password', width:2, preferredWidth:380
-            propertyView name:'captchaChallenge', width:2, preferredWidth:380
-
-            propertyView parent:'rememberMe', width:2
-
-            propertyView parent:'language'
-            propertyView parent:'timeZoneId'
-          }
-        }
-      }
-      east {
-        border (preferredWidth:200){
-          north {
-            form (borderType:'SIMPLE', labelsPosition:'ABOVE', background:'0xFFA4B0B7') {
-              fields {
-                propertyView name:'captchaImageUrl', labelFont:';BOLD;', horizontalAlignment:'CENTER', action:'helpFrontAction'
-              }
-            }
-          }
-          south {
-            form (columnCount:1, borderType:'NONE', labelsPosition:'NONE') {
-              fields {
-                propertyView name:'register', readOnly:true, action:'registerFrontAction', horizontalAlignment:'RIGHT'
-                propertyView name:'help', readOnly:true, action:'helpFrontAction',  horizontalAlignment:'RIGHT'
-              }
-            }
-          }
-        }
-      }
-    }
-  } 
-}
-
-propertyView ('language', model:'languagePropertyDescriptor')
-propertyView ('rememberMe', model:'rememberMePropertyDescriptor')
-propertyView ('username', model:'usernamePropertyDescriptor')
-propertyView ('password', model:'passwordPropertyDescriptor')
-propertyView ('timeZoneId', model:'timeZoneIdPropertyDescriptor')
-
-form('Registration.form', fields:['name', 'firstName']) {
-  actionMap {
-    actionList {
-      action ref:'englishFrontAction'
-      action ref:'frenchFrontAction'
-    }
-  }
-}
-
-action('helpFrontAction', parent:'staticInfoFrontAction', custom:[messageCode:'help'])
-
-action('registerFrontAction', class:'org.jspresso.hrsample.ext.frontend.RegisterFrontAction', parent:'editComponentAction',
-    custom:[okAction_ref:'performRegistrationFrontAction',
-      cancelAction_ref:'cancelDialogFrontAction',
-      viewDescriptor_ref:'Registration.form'])
-
-action('performRegistrationFrontAction', parent:'staticInfoFrontAction', name:'doRegister',
-    custom:[messageCode:'register'])
-
-action('changeRegistrationLanguageFrontAction',
-    class:'org.jspresso.hrsample.ext.frontend.ChangeRegistrationLanguageFrontAction', next:'registerFrontAction')
-
-action('englishFrontAction', parent:'changeRegistrationLanguageFrontAction',
-    custom:['targetLanguage':'en'], icon:'classpath:org/jspresso/contrib/images/i18n/en.png')
-action('frenchFrontAction', parent:'changeRegistrationLanguageFrontAction',
-    custom:['targetLanguage':'fr'], icon:'classpath:org/jspresso/contrib/images/i18n/fr.png')
-
+/*
+ * Furnitures
+ */
 tabs('Furniture.detail.view', actionMap:'beanModuleActionMap') {
   views {
     border {
@@ -108,8 +29,8 @@ tabs('Furniture.detail.view', actionMap:'beanModuleActionMap') {
   }
 }
 
-/**
- * OVERRIDE JSPRESSO DEFAULT ACTION MAP
+/*
+ * OVERRIDE JSPRESSO DEFAULT ACTION MAPS
  */
 actionMap ('beanModuleActionMap') {
   actionList('SAVE', collapsable:true){

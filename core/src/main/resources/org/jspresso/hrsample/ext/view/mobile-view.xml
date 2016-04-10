@@ -24,6 +24,7 @@
                       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
   default-lazy-init="true">
 
+<!-- 
   <bean
       id="loginViewDescriptor"
       parent="loginViewDescriptorBase">
@@ -34,7 +35,9 @@
         name="permId"
         value="loginViewDescriptor"/>
   </bean>
-
+-->
+ 
+<!-- 
   <bean id="basicLoginViewDescriptor" parent="basicLoginViewDescriptorBase">
     <property
         name="propertyViewDescriptors">
@@ -98,4 +101,6 @@
       </list>
     </property>
   </bean>
+ -->  
+  
 </beans>
