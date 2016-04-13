@@ -12,6 +12,7 @@ controller ('hrsample-ext.name',
   icon:'icon.png',
   context:'hrsample-ext',
   language:'en',
+  startup:'applicationStartupFrontAction',
   onModuleEnter:'manageAnyModuleEnterFrontAction',
   actionMap:'controllerActionMap',
   workspaces:[
@@ -28,6 +29,9 @@ bean ('loginViewDescriptor', parent:'loginViewDescriptorBase',
           permId:'loginViewDescriptor'])
 
 external id:['basicLoginViewDescriptorBase']
+
+action ('applicationStartupFrontAction',  
+  class:'org.jspresso.hrsample.ext.frontend.ApplicationStartupFrontAction')
 
 /*
 mobileCompositePage('basicLoginViewDescriptor',
