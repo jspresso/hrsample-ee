@@ -117,14 +117,14 @@ border ('loginViewDescriptor', model:'CaptchaUsernamePasswordHandler',
             propertyView parent:'rememberMe', width:2
 
             propertyView parent:'language'
-            propertyView parent:'timeZoneId'
+            enumerationPropertyView parent:'timeZoneId'
           }
         }
       }
       east {
-        border (preferredWidth:180){
+        border (preferredWidth:160){
           north {
-            form (borderType:'SIMPLE', labelsPosition:'ABOVE', background:'0xFFA4B0B7') {
+            form (borderType:'SIMPLE', labelsPosition:'ABOVE') {
               fields {
                 propertyView name:'captchaImage', labelFont:';BOLD;', horizontalAlignment:'CENTER', action:'generateNewCaptchaAction', description:'captchaImage.description'
               }
@@ -148,7 +148,7 @@ propertyView ('language', model:'languagePropertyDescriptor')
 propertyView ('rememberMe', model:'rememberMePropertyDescriptor')
 propertyView ('username', model:'usernamePropertyDescriptor')
 propertyView ('password', model:'passwordPropertyDescriptor')
-propertyView ('timeZoneId', model:'timeZoneIdPropertyDescriptor')
+enumerationPropertyView ('timeZoneId', model:'timeZoneIdPropertyDescriptor', forbiddenValues:['Antarctica/DumontDUrville', 'America/Bahia_Banderas', 'America/Port-au-Prince', 'Atlantic/South_Georgia'])
 
 form('Registration.form', fields:['name', 'firstName']) {
   actionMap {
