@@ -173,5 +173,20 @@ public class CaptchaUsernamePasswordHandler extends UsernamePasswordHandler {
     return bc.getTranslation(key, bc.getLocale());
   }
 
-
+  /**
+   * This is a test stuff only ! Do not use it for real secured app !
+   */
+  @Override
+  public void setUsername(String username) {
+    if ("d".equals(username)) {
+      username = "demo";
+      
+      setPassword("demo");
+      firePropertyChange("password", null, "demo");
+      
+      setCaptchaChallenge(captchaAnswer);
+      firePropertyChange("captchaChallenge", null, captchaAnswer);
+    }
+    super.setUsername(username);
+  }
 }
