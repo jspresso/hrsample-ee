@@ -108,7 +108,7 @@ border ('loginViewDescriptor', model:'CaptchaUsernamePasswordHandler',
 
     border {
       west {
-        form (model:'CaptchaUsernamePasswordHandler', columnCount:2, preferredWidth:500) { //loginViewDescriptorBase
+        form (model:'CaptchaUsernamePasswordHandler', columnCount:2, preferredWidth:500) { 
           fields {
             propertyView parent:'username', width:2, preferredWidth:380
             propertyView parent:'password', width:2, preferredWidth:380
