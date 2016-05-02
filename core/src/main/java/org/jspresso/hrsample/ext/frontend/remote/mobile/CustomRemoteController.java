@@ -20,9 +20,7 @@ package org.jspresso.hrsample.ext.frontend.remote.mobile;
 
 import org.jspresso.framework.ext.application.frontend.controller.remote.mobile.MobileEnhancedRemoteController;
 import org.jspresso.framework.security.UsernamePasswordHandler;
-import org.jspresso.framework.util.gui.Dimension;
-import org.jspresso.framework.util.resources.server.ResourceProviderServlet;
-
+import org.jspresso.hrsample.ext.frontend.ICaptchaController;
 import org.jspresso.hrsample.ext.model.security.CaptchaUsernamePasswordHandler;
 
 /**
@@ -31,18 +29,14 @@ import org.jspresso.hrsample.ext.model.security.CaptchaUsernamePasswordHandler;
  *
  * @author Vincent Vandenschrick
  */
-public class CustomRemoteController extends MobileEnhancedRemoteController {
+public class CustomRemoteController extends MobileEnhancedRemoteController implements ICaptchaController {
 
   /**
    * {@inheritDoc}
    */
   @Override
   protected UsernamePasswordHandler createUsernamePasswordHandler() {
-    CaptchaUsernamePasswordHandler cuph = new CaptchaUsernamePasswordHandler();
-    cuph.setCaptchaImageUrl(ResourceProviderServlet
-        .computeImageResourceDownloadUrl("classpath:org/jspresso/hrsample/ext/images/jspresso.png",
-            new Dimension(150, 25)));
-    return cuph;
+    return new CaptchaUsernamePasswordHandler();
   }
 
   /**
@@ -52,12 +46,20 @@ public class CustomRemoteController extends MobileEnhancedRemoteController {
   protected boolean performLogin() {
     if (getLoginContextName() != null) {
       String password = getLoginCallbackHandler().getPassword();
-      if (password == null || password.length() > 0 && !"jspresso".equalsIgnoreCase(
-          ((CaptchaUsernamePasswordHandler) getLoginCallbackHandler()).getCaptchaChallenge())) {
-        // Captcha challenge failed and it's not an remember me token shortcut.
+      if (password == null || password.length() > 0 
+          && ! ((CaptchaUsernamePasswordHandler) getLoginCallbackHandler()).checkCaptcha()) {
+        generateNewCaptcha();
         return false;
       }
     }
     return super.performLogin();
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void generateNewCaptcha() {
+    ((CaptchaUsernamePasswordHandler) getLoginCallbackHandler()).generateCaptcha();
   }
 }

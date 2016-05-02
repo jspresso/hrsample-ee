@@ -20,6 +20,7 @@ package org.jspresso.hrsample.ext.frontend.swing;
 
 import org.jspresso.framework.application.frontend.controller.swing.DefaultSwingController;
 import org.jspresso.framework.security.UsernamePasswordHandler;
+import org.jspresso.hrsample.ext.frontend.ICaptchaController;
 import org.jspresso.hrsample.ext.model.security.CaptchaUsernamePasswordHandler;
 
 /**
@@ -28,16 +29,14 @@ import org.jspresso.hrsample.ext.model.security.CaptchaUsernamePasswordHandler;
  *
  * @author Vincent Vandenschrick
  */
-public class CustomSwingController extends DefaultSwingController {
+public class CustomSwingController extends DefaultSwingController implements ICaptchaController {
 
   /**
    * {@inheritDoc}
    */
   @Override
   protected UsernamePasswordHandler createUsernamePasswordHandler() {
-    CaptchaUsernamePasswordHandler cuph = new CaptchaUsernamePasswordHandler();
-    cuph.setCaptchaImageUrl("classpath:org/jspresso/hrsample/ext/images/jspresso.png");
-    return cuph;
+    return new CaptchaUsernamePasswordHandler();
   }
 
   /**
@@ -46,13 +45,19 @@ public class CustomSwingController extends DefaultSwingController {
   @Override
   protected boolean performLogin() {
     if (getLoginContextName() != null) {
-      if (!"jspresso"
-          .equalsIgnoreCase(((CaptchaUsernamePasswordHandler) getLoginCallbackHandler())
-              .getCaptchaChallenge())) {
-        // Captcha challenge failed.
+      if (! ((CaptchaUsernamePasswordHandler) getLoginCallbackHandler()).checkCaptcha()) {
+        generateNewCaptcha();
         return false;
       }
     }
     return super.performLogin();
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void generateNewCaptcha() {
+    ((CaptchaUsernamePasswordHandler) getLoginCallbackHandler()).generateCaptcha();
   }
 }

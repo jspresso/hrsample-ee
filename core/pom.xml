@@ -74,6 +74,16 @@
 			<artifactId>jspresso-usage-core</artifactId>
 		</dependency>
 
+    <!-- Captcha -->
+    <dependency>
+      <groupId>com.google.code.maven-play-plugin.org.playframework</groupId>
+      <artifactId>jj-simplecaptcha</artifactId>
+    </dependency>    
+<!--     <dependency> -->
+<!--       <groupId>nl.captcha</groupId> -->
+<!--       <artifactId>simple-captcha</artifactId> -->
+<!--     </dependency> -->
+
 		<!-- Tests dependencies -->
 		<dependency>
 			<groupId>org.jspresso.contrib</groupId>

@@ -68,7 +68,7 @@ mobileForm('basicLoginViewDescriptor',
     propertyView parent:'username'
     propertyView parent:'password'
     
-    propertyView name:'captchaImageUrl'
+    propertyView name:'captchaImage'
     propertyView name:'captchaChallenge'
 
     propertyView parent:'rememberMe'

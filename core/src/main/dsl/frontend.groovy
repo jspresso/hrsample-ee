@@ -122,11 +122,11 @@ border ('loginViewDescriptor', model:'CaptchaUsernamePasswordHandler',
         }
       }
       east {
-        border (preferredWidth:200){
+        border (preferredWidth:180){
           north {
             form (borderType:'SIMPLE', labelsPosition:'ABOVE', background:'0xFFA4B0B7') {
               fields {
-                propertyView name:'captchaImageUrl', labelFont:';BOLD;', horizontalAlignment:'CENTER', action:'helpFrontAction'
+                propertyView name:'captchaImage', labelFont:';BOLD;', horizontalAlignment:'CENTER', action:'generateNewCaptchaAction', description:'captchaImage.description'
               }
             }
           }
@@ -134,8 +134,7 @@ border ('loginViewDescriptor', model:'CaptchaUsernamePasswordHandler',
             form (columnCount:1, borderType:'NONE', labelsPosition:'NONE') {
               fields {
                 propertyView name:'register', readOnly:true, action:'registerFrontAction', horizontalAlignment:'RIGHT'
-                //propertyView name:'help', readOnly:true, action:'helpFrontAction',  horizontalAlignment:'RIGHT'
-                propertyView name:'swithUI', readOnly:true, action:'switchToUIFrontAction',  horizontalAlignment:'RIGHT'
+                propertyView name:'switchUI', readOnly:true, action:'switchToUIFrontAction',  horizontalAlignment:'RIGHT'
               }
             }
           }
@@ -182,6 +181,9 @@ action('englishFrontAction', parent:'changeRegistrationLanguageFrontAction',
     custom:['targetLanguage':'en'], icon:'uk.png')
 action('frenchFrontAction', parent:'changeRegistrationLanguageFrontAction',
     custom:['targetLanguage':'fr'], icon:'fr.png')
+
+action('generateNewCaptchaAction',
+  class:'org.jspresso.hrsample.ext.frontend.GenerateNewCaptchaFrontAction')
 
 /*
  * Furnitures 

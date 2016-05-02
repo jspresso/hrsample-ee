@@ -5,11 +5,12 @@ namespace('security') {
   Component('CaptchaUsernamePasswordHandler', 
     extend:['loginModelDescriptor']) {
     
-    imageUrl 'captchaImageUrl', readOnly: true
+    image 'captchaImage', readOnly: true, i18nNameKey:'captchaImageUrl'
+    
     string_64 'captchaChallenge'
     string_64 'register', readOnly:true
     string_64 'help', readOnly:true 
-    string_64 'swithUI', readOnly:true
+    string_64 'switchUI', readOnly:true
   }
 }
 

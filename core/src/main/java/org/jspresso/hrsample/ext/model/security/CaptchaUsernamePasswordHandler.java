@@ -18,11 +18,21 @@
  */
 package org.jspresso.hrsample.ext.model.security;
 
+import java.awt.Color;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
+
+import jj.play.ns.nl.captcha.Captcha;
+import jj.play.ns.nl.captcha.gimpy.FishEyeGimpyRenderer;
+import jj.play.ns.nl.captcha.noise.StraightLineNoiseProducer;
 
 import org.jspresso.framework.application.backend.BackendControllerHolder;
 import org.jspresso.framework.application.backend.IBackendController;
 import org.jspresso.framework.security.UsernamePasswordHandler;
+import org.jspresso.framework.util.exception.NestedRuntimeException;
 import org.jspresso.framework.util.http.HttpRequestHolder;
 
 /**
@@ -30,29 +40,71 @@ import org.jspresso.framework.util.http.HttpRequestHolder;
  * augmented.
  *
  * @author Vincent Vandenschrick
+ * @author Maxime Hamm
  */
 public class CaptchaUsernamePasswordHandler extends UsernamePasswordHandler {
 
-  private String captchaImageUrl;
   private String captchaChallenge;
+  private byte[] captchaImage;
+  private String captchaAnswer;
 
   /**
-   * Gets the captchaImageUrl.
-   *
-   * @return the captchaImageUrl.
+   * CaptchaUsernamePasswordHandler constructor
    */
-  public String getCaptchaImageUrl() {
-    return captchaImageUrl;
+  public CaptchaUsernamePasswordHandler() {
+    generateCaptcha();
   }
 
   /**
-   * Sets the captchaImageUrl.
-   *
-   * @param captchaImageUrl
-   *          the captchaImageUrl to set.
+   * Generate new captcha.
    */
-  public void setCaptchaImageUrl(String captchaImageUrl) {
-    this.captchaImageUrl = captchaImageUrl;
+  public void generateCaptcha() {
+    Captcha captcha = 
+        new Captcha.Builder(150, 50)
+          .addText()
+          .addNoise(new StraightLineNoiseProducer(Color.RED, 2))
+          .gimp(new FishEyeGimpyRenderer(Color.BLUE, Color.BLUE))
+          .build();
+
+    this.captchaAnswer = captcha.getAnswer();
+
+    try {
+      ByteArrayOutputStream baos = new ByteArrayOutputStream();
+      ImageIO.write(captcha.getImage(), "png", baos);
+      baos.flush();
+
+      setCaptchaImage(baos.toByteArray());
+
+      baos.close();
+    } catch (IOException e) {
+      throw new NestedRuntimeException(e);
+    }
+  }
+  
+  /**
+   * Check captcha.
+   * @return true if captcha answer is correct.
+   */
+  public boolean checkCaptcha() {
+    return captchaAnswer == null || captchaAnswer.equalsIgnoreCase(captchaChallenge);
+  }
+  
+  /**
+   * Gets the captchaChallenge image.
+   * 
+   * @return the captchaChallenge image.
+   */
+  public byte[] getCaptchaImage() {
+    return captchaImage;
+  }
+  
+  /**
+   * Sets captcha image
+   * @param captchaImage the captcha image.
+   */
+  public void setCaptchaImage(byte[] captchaImage) {
+    this.captchaImage = captchaImage;
+    firePropertyChange("captchaImage", null, this.captchaImage);
   }
 
   /**
@@ -105,7 +157,7 @@ public class CaptchaUsernamePasswordHandler extends UsernamePasswordHandler {
    *
    * @return the help link text.
    */
-  public String getSwithUI() {
+  public String getSwitchUI() {
     IBackendController bc = BackendControllerHolder.getCurrentBackendController();
     if (bc == null) {
       return "...";
@@ -120,5 +172,6 @@ public class CaptchaUsernamePasswordHandler extends UsernamePasswordHandler {
     
     return bc.getTranslation(key, bc.getLocale());
   }
+
 
 }
