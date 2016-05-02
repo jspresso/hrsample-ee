@@ -43,7 +43,7 @@ import org.jspresso.framework.util.http.HttpRequestHolder;
  * @author Maxime Hamm
  */
 public class CaptchaUsernamePasswordHandler extends UsernamePasswordHandler {
-
+  
   private String captchaChallenge;
   private byte[] captchaImage;
   private String captchaAnswer;
@@ -62,8 +62,8 @@ public class CaptchaUsernamePasswordHandler extends UsernamePasswordHandler {
     Captcha captcha = 
         new Captcha.Builder(150, 50)
           .addText()
-          .addNoise(new StraightLineNoiseProducer(Color.RED, 2))
-          .gimp(new FishEyeGimpyRenderer(Color.BLUE, Color.BLUE))
+          .gimp(new FishEyeGimpyRenderer(new Color(149, 199, 47), new Color(146, 201, 47)))
+          .addNoise(new StraightLineNoiseProducer(new Color(61, 114, 201), 2))
           .build();
 
     this.captchaAnswer = captcha.getAnswer();
