@@ -134,7 +134,8 @@ border ('loginViewDescriptor', model:'CaptchaUsernamePasswordHandler',
             form (columnCount:1, borderType:'NONE', labelsPosition:'NONE') {
               fields {
                 propertyView name:'register', readOnly:true, action:'registerFrontAction', horizontalAlignment:'RIGHT'
-                propertyView name:'help', readOnly:true, action:'helpFrontAction',  horizontalAlignment:'RIGHT'
+                //propertyView name:'help', readOnly:true, action:'helpFrontAction',  horizontalAlignment:'RIGHT'
+                propertyView name:'swithUI', readOnly:true, action:'switchToUIFrontAction',  horizontalAlignment:'RIGHT'
               }
             }
           }
@@ -163,7 +164,13 @@ action('registerFrontAction', class:'org.jspresso.hrsample.ext.frontend.Register
   name:'register.action.name', description:'', icon:'tools.png',
   custom:[okAction_ref:'performRegistrationFrontAction',
     cancelAction_ref:'cancelDialogFrontAction',
-    viewDescriptor_ref:'Registration.form'])
+    viewDescriptor_ref:'Registration.form']) 
+
+action('switchToUIFrontAction',
+  description:'', icon:'tools.png',
+  class:'org.jspresso.hrsample.ext.frontend.SwitchToUIFrontAction') {
+  next parent:'displayUrlFrontAction', custom:[target:'_self']
+}
 
 action('performRegistrationFrontAction', parent:'staticInfoFrontAction', name:'doRegister',
   custom:[messageCode:'register'])

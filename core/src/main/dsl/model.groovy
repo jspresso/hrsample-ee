@@ -8,7 +8,8 @@ namespace('security') {
     imageUrl 'captchaImageUrl', readOnly: true
     string_64 'captchaChallenge'
     string_64 'register', readOnly:true
-    string_64 'help', readOnly:true
+    string_64 'help', readOnly:true 
+    string_64 'swithUI', readOnly:true
   }
 }
 

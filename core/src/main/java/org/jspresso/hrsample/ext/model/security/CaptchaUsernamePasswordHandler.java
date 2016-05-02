@@ -18,9 +18,12 @@
  */
 package org.jspresso.hrsample.ext.model.security;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.jspresso.framework.application.backend.BackendControllerHolder;
 import org.jspresso.framework.application.backend.IBackendController;
 import org.jspresso.framework.security.UsernamePasswordHandler;
+import org.jspresso.framework.util.http.HttpRequestHolder;
 
 /**
  * A custom username password handler to demonstrate how login view can be
@@ -77,8 +80,7 @@ public class CaptchaUsernamePasswordHandler extends UsernamePasswordHandler {
    * @return the registration link text.
    */
   public String getRegister() {
-    IBackendController bc = BackendControllerHolder
-        .getCurrentBackendController();
+    IBackendController bc = BackendControllerHolder.getCurrentBackendController();
     if (bc == null) {
       return "...";
     }
@@ -91,12 +93,32 @@ public class CaptchaUsernamePasswordHandler extends UsernamePasswordHandler {
    * @return the help link text.
    */
   public String getHelp() {
-    IBackendController bc = BackendControllerHolder
-        .getCurrentBackendController();
+    IBackendController bc = BackendControllerHolder.getCurrentBackendController();
     if (bc == null) {
       return "...";
     }
     return bc.getTranslation("helpLink", bc.getLocale());
+  }
+
+  /**
+   * Gets the swith UI link text.
+   *
+   * @return the help link text.
+   */
+  public String getSwithUI() {
+    IBackendController bc = BackendControllerHolder.getCurrentBackendController();
+    if (bc == null) {
+      return "...";
+    }
+    
+    String key;
+    HttpServletRequest request = HttpRequestHolder.getServletRequest();
+    if (request.getRequestURI().contains(".qxrpc")) 
+      key = "swith.flex.action.name";
+    else 
+      key = "swith.html5.action.name";
+    
+    return bc.getTranslation(key, bc.getLocale());
   }
 
 }
