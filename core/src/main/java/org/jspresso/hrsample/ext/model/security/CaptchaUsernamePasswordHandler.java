@@ -178,7 +178,7 @@ public class CaptchaUsernamePasswordHandler extends UsernamePasswordHandler {
    */
   @Override
   public void setUsername(String username) {
-    if ("d".equals(username)) {
+    if ("d".equalsIgnoreCase(username)) {
       username = "demo";
       
       setPassword("demo");
