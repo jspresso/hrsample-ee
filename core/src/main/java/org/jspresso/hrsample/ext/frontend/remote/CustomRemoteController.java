@@ -18,8 +18,11 @@
  */
 package org.jspresso.hrsample.ext.frontend.remote;
 
+import javax.security.auth.Subject;
+
 import org.jspresso.framework.ext.application.frontend.controller.remote.EnhancedRemoteController;
 import org.jspresso.framework.security.UsernamePasswordHandler;
+import org.jspresso.framework.util.bean.integrity.IntegrityException;
 import org.jspresso.hrsample.ext.frontend.ICaptchaController;
 import org.jspresso.hrsample.ext.model.security.CaptchaUsernamePasswordHandler;
 
@@ -43,16 +46,12 @@ public class CustomRemoteController extends EnhancedRemoteController implements 
    * {@inheritDoc}
    */
   @Override
-  protected boolean performLogin() {
-    if (getLoginContextName() != null) {
-      String password = getLoginCallbackHandler().getPassword();
-      if (password == null || password.length() > 0 
-          && ! ((CaptchaUsernamePasswordHandler) getLoginCallbackHandler()).checkCaptcha()) {
-        generateNewCaptcha();
-        return false;
-      }
+  public void loggedIn(Subject subject) {
+    if (! ((CaptchaUsernamePasswordHandler) getLoginCallbackHandler()).checkCaptcha()) {
+      generateNewCaptcha();
+      throw new IntegrityException("Captcha challenge failed", "captcha.failed.msg");
     }
-    return super.performLogin();
+    super.loggedIn(subject);
   }
   
   /**

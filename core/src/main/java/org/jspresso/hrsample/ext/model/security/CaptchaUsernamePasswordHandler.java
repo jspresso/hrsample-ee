@@ -67,6 +67,8 @@ public class CaptchaUsernamePasswordHandler extends UsernamePasswordHandler {
           .build();
 
     this.captchaAnswer = captcha.getAnswer();
+    
+    setCaptchaChallenge(null);
 
     try {
       ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -86,7 +88,7 @@ public class CaptchaUsernamePasswordHandler extends UsernamePasswordHandler {
    * @return true if captcha answer is correct.
    */
   public boolean checkCaptcha() {
-    return captchaAnswer == null || captchaAnswer.equalsIgnoreCase(captchaChallenge);
+    return captchaChallenge != null && captchaChallenge.equalsIgnoreCase(captchaAnswer);
   }
   
   /**
@@ -123,7 +125,9 @@ public class CaptchaUsernamePasswordHandler extends UsernamePasswordHandler {
    *          the captchaChallenge to set.
    */
   public void setCaptchaChallenge(String captchaChallenge) {
+    String oldValue = this.captchaChallenge;
     this.captchaChallenge = captchaChallenge;
+    firePropertyChange("captchaChallenge", oldValue, captchaChallenge);
   }
 
   /**
@@ -178,15 +182,33 @@ public class CaptchaUsernamePasswordHandler extends UsernamePasswordHandler {
    */
   @Override
   public void setUsername(String username) {
+    String oldValue = getUsername();
     if ("d".equalsIgnoreCase(username)) {
       username = "demo";
       
       setPassword("demo");
-      firePropertyChange("password", null, "demo");
-      
       setCaptchaChallenge(captchaAnswer);
-      firePropertyChange("captchaChallenge", null, captchaAnswer);
     }
+    
     super.setUsername(username);
+    firePropertyChange("username", oldValue, username);
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setPassword(String newPassword) {
+    String oldPassword = getPassword();
+    super.setPassword(newPassword);
+    firePropertyChange("password", oldPassword, newPassword);
+  }
+  
+  /**
+   * Do not clear all values
+   */
+  @Override
+  public void clear() {
+    //
   }
 }
