@@ -47,7 +47,8 @@ public class CustomSwingController extends DefaultSwingController implements ICa
    */
   @Override
   public void loggedIn(Subject subject) {
-    if (! ((CaptchaUsernamePasswordHandler) getLoginCallbackHandler()).checkCaptcha()) {
+    CaptchaUsernamePasswordHandler login = (CaptchaUsernamePasswordHandler) getLoginCallbackHandler();
+    if (login.getPassword()!=null && login.getPassword().length()>0 && !login.checkCaptcha()) {
       generateNewCaptcha();
       throw new IntegrityException("Captcha challenge failed", "captcha.failed.msg");
     }
