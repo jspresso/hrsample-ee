@@ -311,7 +311,7 @@
         <value>org/jspresso/hrsample/ext/frontend/frontend.xml</value>
 
         <value>org/jspresso/hrsample/ext/core-config.xml</value>
-        <value>org/jspresso/hrsample/ext/config.xml</value>
+<!--         <value>org/jspresso/hrsample/ext/config.xml</value> -->
       </list>
     </constructor-arg>
   </bean>

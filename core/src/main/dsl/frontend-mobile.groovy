@@ -18,7 +18,8 @@ controller ('hrsample-ext.name',
   workspaces:[
     'organization.workspace',
     'employees.workspace',
-    'masterdata.workspace'
+    'masterdata.workspace',
+    'parameters.mobile.workspace'  
   ])
 
 /*

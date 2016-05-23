@@ -90,43 +90,65 @@ actionMap('beanCollectionModuleActionMap') {
   }
 }
 
-table('Employee.test.view') {
-
-   actionMap {
-    actionList('SAVE', collapsable:true) {
-      action ref:'saveModuleObjectFrontAction'
-      action ref:'reloadModuleObjectFrontAction'
-    }
-    actionList('FILE') {
-      action ref:'queryModuleFilterAction'
-      action ref:'pinQueryCriteriasFrontAction'
-    }
-    actionList('SERVICE') {
-      action ref:'navigateToModuleFrontAction'
-    }
-    actionList('EXPORT') {
-      action parent:'exportFilterModuleResultToHtmlAction',
-                custom:[hideMyExportPopup:false, hideMoreColumnsPopup:false, moreColumnsOneToManyDepth:4]
-      action parent:'importEmployeeBoxAction',
-                custom:[mergeFields:['name', 'firstName'], extraColumns:['zip'], additionalFields:['teams']]
-    }
-    actionList('TMAR', collapsable:true) {
-      action ref:'exportAllToTmarRecursivelyAction'
-      action ref:'exportTableToTmarAction'
+border ('Employee.test.view', cascadingModels:true) {
+  center {
+    table {
+       actionMap {
+        actionList('SAVE', collapsable:true) {
+          action ref:'saveModuleObjectFrontAction'
+          action ref:'reloadModuleObjectFrontAction'
+        }
+        actionList('FILE') {
+          action parent:'queryModuleFilterAction', permId:'Employee.test.view--actionMap--queryModuleFilterAction'
+          action ref:'pinQueryCriteriasFrontAction'
+        }
+        actionList('SERVICE', collapsable:true) {
+          action parent:'navigateToModuleFrontAction', permId:'Employee.test.view--table--actionMap'
+          action parent:'navigateToModuleFrontAction', collectionBased:false, permId:'Employee.test.view--table--actionMapParent'
+        }
+        actionList('EXPORT') {
+          action parent:'exportFilterModuleResultToHtmlAction',
+                    custom:[hideMyExportPopup:false, hideMoreColumnsPopup:false, moreColumnsOneToManyDepth:4]
+          action parent:'importEmployeeBoxAction',
+                    custom:[mergeFields:['name', 'firstName'], extraColumns:['zip'], additionalFields:['teams']]
+        }
+        actionList('TMAR', collapsable:true) {
+          action ref:'exportAllToTmarRecursivelyAction'
+          action ref:'exportTableToTmarAction'
+        }
+      }
+    
+      columns {
+        propertyView name:'company', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employee.test.view--table--company'
+        propertyView name:'company.workforce', readOnly:true
+        propertyView name:'name', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employee.test.view--table--name'
+        propertyView name:'firstName', readOnly:true
+        propertyView name:'gender', readOnly:true
+        propertyView name:'birthDate', readOnly:true
+        propertyView name:'contact.address', readOnly:true
+        propertyView name:'contact.city', readOnly:true
+        propertyView name:'contact.phone', readOnly:true
+        propertyView name:'contact.phone', readOnly:true
+      }
     }
   }
-
-  columns {
-    propertyView name:'company', action:'navigateToModuleFrontAction', readOnly:true
-    propertyView name:'company.workforce', action:'navigateToModuleFrontAction', readOnly:true
-    propertyView name:'name', action:'navigateToModuleFrontAction', readOnly:true
-    propertyView name:'firstName', readOnly:true
-    propertyView name:'gender', readOnly:true
-    propertyView name:'birthDate', readOnly:true
-    propertyView name:'contact.address', readOnly:true
-    propertyView name:'contact.city', readOnly:true
-    propertyView name:'contact.phone', readOnly:true
-    propertyView name:'contact.phone', readOnly:true
+  east {
+    form {
+      actionMap {
+        actionList('SERVICE') {
+          action parent:'navigateToModuleFrontAction', permId:'Employee.test.view--east--actionMap'
+        }
+      }
+      fields {
+        propertyView name:'firstName'
+        propertyView name:'birthDate'
+        
+        propertyView name:'company', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employee.test.view--east--company'
+        propertyView name:'company.workforce', readOnly:true, horizontalAlignment:'LEFT'
+        propertyView name:'name', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employee.test.view--east--name'
+      
+      }
+    }
   }
 }
 
@@ -156,13 +178,15 @@ actionMap ('eventsTableActionMap',
 }
 
 
-/**
+/** 
  * navigate to module
  */
 action ('navigateToModuleFrontAction',
   parent:'navigateToModuleFrontActionBase',
-  custom:[models2Module:['org.jspresso.hrsample.modelEmployee/name':'employees.workspace/employees.module',
-                         'org.jspresso.hrsample.model.Company':'employees.workspace/employees.module']])
+  custom:[models2Module:['org.jspresso.hrsample.model.Employee':'employees.workspace/employees.module',
+                         'org.jspresso.hrsample.model.Employee/name':'employees.workspace/employees.module',
+                     
+                         'org.jspresso.hrsample.model.Company':'organization.workspace/companies.module']])
 
 /**
  * target factory
