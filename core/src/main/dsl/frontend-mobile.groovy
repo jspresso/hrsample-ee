@@ -32,7 +32,8 @@ bean ('loginViewDescriptor', parent:'loginViewDescriptorBase',
 external id:['basicLoginViewDescriptorBase']
 
 action ('applicationStartupFrontAction',  
-  class:'org.jspresso.hrsample.ext.frontend.ApplicationStartupFrontAction')
+  class:'org.jspresso.hrsample.ext.frontend.ApplicationStartupFrontAction',
+  next:'startupHRSampleAction')
 
 /*
 mobileCompositePage('basicLoginViewDescriptor',
