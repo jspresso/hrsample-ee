@@ -43,10 +43,6 @@ public class JspressoNavigationToModuleTest extends FrontTestStartup {
 
   private static final String QUERY_ACTION = "queryModuleFilterAction";
   private static final String NAVIGATE_ACTION = "navigateToModuleFrontAction";
-
-  //TODO Tests from from action map
-  //TODO Tests from table action map (collection based)
-  //TODO Tests from table action map (not collection based)
   
   //TODO Tests from from property action map  
   //TODO Tests from table property action map 
@@ -65,7 +61,7 @@ public class JspressoNavigationToModuleTest extends FrontTestStartup {
     context.originModuleId = "Employee.test.module";
     context.originPermId = "Employee.test.view--east--name";
     
-    testNavigationModuleAction(context, "employees.module", "Berlutti Graziella");
+    doNavigationModuleAction(context, "employees.module", "Berlutti Graziella");
 
   }
   
@@ -80,7 +76,7 @@ public class JspressoNavigationToModuleTest extends FrontTestStartup {
     helper.originModuleId = "Employee.test.module";
     helper.originPermId = "Employee.test.view--east--company";
     
-    testNavigationModuleAction(helper, "companies.module", "Design2See");
+    doNavigationModuleAction(helper, "companies.module", "Design2See");
 
   }
   
@@ -95,7 +91,7 @@ public class JspressoNavigationToModuleTest extends FrontTestStartup {
     helper.originModuleId = "Employee.test.module";
     helper.originPermId = "Employee.test.view--east--actionMap";
     
-    testNavigationModuleAction(helper, "employees.module", "Berlutti Graziella");
+    doNavigationModuleAction(helper, "employees.module", "Berlutti Graziella");
   }
 
   /**
@@ -110,7 +106,31 @@ public class JspressoNavigationToModuleTest extends FrontTestStartup {
     helper.originPermId = "Employee.test.view--table--name";
     helper.originComponentToString = "Den Mike"; 
     
-    testNavigationModuleAction(helper, "employees.module", "Den Mike");
+    doNavigationModuleAction(helper, "employees.module", "Den Mike");
+
+  }
+  
+  /**
+   * Test 
+   */
+  @Test 
+  public void testNavigateFromTableUsingScalarProperty2() {
+
+    FrontendTestHelper helper = new FrontendTestHelper();
+    helper.originWorkspaceId = "tools.workspace";
+    helper.originModuleId = "Employee.test.module";
+    
+    doLoadModule(helper);
+    
+    helper.originPermId = "Employee.test.view--table--name";
+    helper.originComponentToString = "Demo Demo"; 
+    doSetFocus(helper);
+    
+    helper.originPermId = "Employee.test.view--east-table--login";
+    helper.originComponentToString = "demo"; 
+    doSetFocus(helper);
+    
+    doNavigateAndCheck(helper, "users.admin.module", "demo");
 
   }
   
@@ -126,7 +146,7 @@ public class JspressoNavigationToModuleTest extends FrontTestStartup {
     helper.originPermId = "Employee.test.view--table--company";
     helper.originComponentToString = "Den Mike"; 
     
-    testNavigationModuleAction(helper, "companies.module", "Design2See");
+    doNavigationModuleAction(helper, "companies.module", "Design2See");
 
   }
  
@@ -143,27 +163,19 @@ public class JspressoNavigationToModuleTest extends FrontTestStartup {
     
     helper.originComponentToString = "Den Mike"; 
     
-    testNavigationModuleAction(helper, "employees.module", "Den Mike");
+    doNavigationModuleAction(helper, "employees.module", "Den Mike");
   }
-  
-  
-  
-  
-  
+
   
   
   
   /**
    * Test navigation to module action 
    * @param helper The test context
-   * @param expectedTargetParentModule The expected target parent module name
-   * @param expectedTargetModuleI18nName The expected module name
    */
   @SuppressWarnings("rawtypes")
-  protected void testNavigationModuleAction(
-      FrontendTestHelper helper, 
-      String expectedTargetParentModule, 
-      String expectedTargetModuleI18nName) {
+  protected void doLoadModule(
+      FrontendTestHelper helper) {
     
     // load app'
     IFrontendController<RComponent, RIcon, RAction> frontendController = getFrontendController();
@@ -177,11 +189,74 @@ public class JspressoNavigationToModuleTest extends FrontTestStartup {
     frontendController.displayModule(module);
     
     // load the filter module
-    IView<RComponent> currentModuleView = frontendController.getCurrentModuleView();
     IAction queryAction = (IAction) getApplicationContext().getBean(QUERY_ACTION);
     getFrontendController().execute(queryAction, getFrontendController().getInitialActionContext());
+  
+  }
+  
+  
+  
+  
+  /**
+   * Test navigation to module action 
+   * @param helper The test context
+   * @param expectedTargetParentModule The expected target parent module name
+   * @param expectedTargetModuleI18nName The expected module name
+   */
+  protected void doNavigationModuleAction(
+      FrontendTestHelper helper, 
+      String expectedTargetParentModule, 
+      String expectedTargetModuleI18nName) {
+    
+    // load app'
+    doLoadModule(helper);
     
     // set focus to tested field
+    doSetFocus(helper);
+    
+    // simulate navigation
+    doNavigateAndCheck(helper, expectedTargetParentModule, expectedTargetModuleI18nName);
+  }
+
+  /**
+   * doNavigateAndCheck
+   * @param helper
+   * @param expectedTargetParentModule
+   * @param expectedTargetModuleI18nName
+   */
+  @SuppressWarnings("rawtypes")
+  protected void doNavigateAndCheck(
+      FrontendTestHelper helper, 
+      String expectedTargetParentModule, 
+      String expectedTargetModuleI18nName) {
+    
+    IFrontendController<RComponent, RIcon, RAction> frontendController = getFrontendController();
+    
+    FocusedComponent focused = helper.focused;
+    if (focused.peer instanceof RAction) {
+      helper.executeAction((RAction) focused.peer, focused, frontendController);
+    }
+    else {  
+      NavigateToModuleFrontAction navAction = (NavigateToModuleFrontAction) getApplicationContext().getBean(NAVIGATE_ACTION);
+      helper.executeAction(navAction, focused, frontendController);
+    }
+    
+    // Assert module is the expected one !
+    Module targetModule = frontendController.getSelectedModule();
+    Assert.assertEquals(expectedTargetModuleI18nName, targetModule.getI18nName());
+    Assert.assertEquals(expectedTargetParentModule, targetModule.getParent().getName());
+  }
+
+  /**
+   * doSetFocus
+   * @param helper
+   * @return focused object
+   */
+  protected FocusedComponent doSetFocus(FrontendTestHelper helper) {
+    
+    IFrontendController<RComponent, RIcon, RAction> frontendController = getFrontendController();
+    
+    IView<RComponent> currentModuleView = frontendController.getCurrentModuleView();
     FocusedComponent focused = helper.findComponent(currentModuleView, helper.originPermId);
     if (focused.peer instanceof RComponent) {
       frontendController.focus((RComponent) focused.peer);
@@ -192,13 +267,9 @@ public class JspressoNavigationToModuleTest extends FrontTestStartup {
       helper.selectTableLine(focused);
     }
     
-    // simulate navigation
-    helper.executeAction(navAction, focused, frontendController);
+    helper.focused = focused;
     
-    // Assert module is the expected one !
-    Module targetModule = frontendController.getSelectedModule();
-    Assert.assertEquals(expectedTargetModuleI18nName, targetModule.getI18nName());
-    Assert.assertEquals(expectedTargetParentModule, targetModule.getParent().getName());
+    return focused;
   }
   
 }

@@ -72,6 +72,9 @@ workspace('statistics.workspace', icon:'tools.png') {
     
 workspace('administration.workspace', icon:'classpath:org/jspresso/framework/application/images/execute-48x48.png') {
   
+  filterModule ('users.admin.module',
+    component:'User')
+  
   module ('userqueries.admin.module',
     parent:'userqueries.admin.module')
   

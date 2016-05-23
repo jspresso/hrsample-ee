@@ -104,7 +104,6 @@ border ('Employee.test.view', cascadingModels:true) {
         }
         actionList('SERVICE', collapsable:true) {
           action parent:'navigateToModuleFrontAction', permId:'Employee.test.view--table--actionMap'
-          action parent:'navigateToModuleFrontAction', collectionBased:false, permId:'Employee.test.view--table--actionMapParent'
         }
         actionList('EXPORT') {
           action parent:'exportFilterModuleResultToHtmlAction',
@@ -133,20 +132,37 @@ border ('Employee.test.view', cascadingModels:true) {
     }
   }
   east {
-    form {
-      actionMap {
-        actionList('SERVICE') {
-          action parent:'navigateToModuleFrontAction', permId:'Employee.test.view--east--actionMap'
+    border {
+      north {
+        form {
+          actionMap {
+            actionList('SERVICE') {
+              action parent:'navigateToModuleFrontAction', permId:'Employee.test.view--east--actionMap'
+            }
+          }
+          fields {
+            propertyView name:'firstName'
+            propertyView name:'birthDate'
+            
+            propertyView name:'company', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employee.test.view--east--company'
+            propertyView name:'company.workforce', readOnly:true, horizontalAlignment:'LEFT'
+            propertyView name:'name', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employee.test.view--east--name'
+          
+          }
         }
       }
-      fields {
-        propertyView name:'firstName'
-        propertyView name:'birthDate'
-        
-        propertyView name:'company', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employee.test.view--east--company'
-        propertyView name:'company.workforce', readOnly:true, horizontalAlignment:'LEFT'
-        propertyView name:'name', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employee.test.view--east--name'
-      
+      center {
+        table (model:'Employee-users') {
+          actionMap {
+            actionList('SERVICE', collapsable:true) {
+              action parent:'navigateToModuleFrontAction', permId:'Employee.test.view--east-table--actionMap'
+              action parent:'navigateToModuleFrontAction', permId:'Employee.test.view--east-table--actionMap.notCollectionBased'
+            }
+          }
+          columns {
+            propertyView name:'login', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employee.test.view--east-table--login'
+          }
+        }
       }
     }
   }
@@ -186,7 +202,9 @@ action ('navigateToModuleFrontAction',
   custom:[models2Module:['org.jspresso.hrsample.model.Employee':'employees.workspace/employees.module',
                          'org.jspresso.hrsample.model.Employee/name':'employees.workspace/employees.module',
                      
-                         'org.jspresso.hrsample.model.Company':'organization.workspace/companies.module']])
+                         'org.jspresso.hrsample.model.Company':'organization.workspace/companies.module',
+                         
+                         'org.jspresso.hrsample.model.User/login':'administration.workspace/users.admin.module']])
 
 /**
  * target factory
