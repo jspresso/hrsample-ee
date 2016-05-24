@@ -75,6 +75,9 @@ workspace('administration.workspace', icon:'classpath:org/jspresso/framework/app
   filterModule ('users.admin.module',
     component:'User')
   
+  filterModule('roles.admin.module',
+    component:'Role')
+  
   module ('userqueries.admin.module',
     parent:'userqueries.admin.module')
   

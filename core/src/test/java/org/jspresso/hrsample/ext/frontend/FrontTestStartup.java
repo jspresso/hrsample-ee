@@ -125,6 +125,7 @@ public class FrontTestStartup extends RemoteStartup {
     p.putCustomProperty(UserPrincipal.LANGUAGE_PROPERTY, "en");
     Group rolesGroup = new SimpleGroup(SecurityHelper.ROLES_GROUP_NAME);
     rolesGroup.addMember(new SimplePrincipal("administrator"));
+    rolesGroup.addMember(new SimplePrincipal("test"));
     testSubject.getPrincipals().add(rolesGroup);
     return testSubject;
   }

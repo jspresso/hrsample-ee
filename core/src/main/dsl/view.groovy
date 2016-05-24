@@ -119,7 +119,7 @@ border ('Employee.test.view', cascadingModels:true) {
     
       columns {
         propertyView name:'company', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employee.test.view--table--company'
-        propertyView name:'company.workforce', readOnly:true
+        propertyView name:'company.workforce', readOnly:true 
         propertyView name:'name', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employee.test.view--table--name'
         propertyView name:'firstName', readOnly:true
         propertyView name:'gender', readOnly:true
@@ -128,39 +128,58 @@ border ('Employee.test.view', cascadingModels:true) {
         propertyView name:'contact.city', readOnly:true
         propertyView name:'contact.phone', readOnly:true
         propertyView name:'contact.phone', readOnly:true
+        
+        // FOR UNIT TEST ONLY : @See JspressoNavigationToModuleTest
+        propertyView name:'name', actionMap:'navigateToModuleActionMap', permId:'Employee.test.view--table--name.actionMap', grantedRoles:['test']
+        propertyView name:'company', actionMap:'navigateToModuleActionMap', permId:'Employee.test.view--table--company.actionMap', grantedRoles:['test']
+        
       }
     }
   }
   east {
-    border {
+    
+    // FOR UNIT TEST ONLY : @See JspressoNavigationToModuleTest
+    border (grantedRoles:['test']) {
       north {
-        form {
+        form (columnCount:2) {
           actionMap {
             actionList('SERVICE') {
               action parent:'navigateToModuleFrontAction', permId:'Employee.test.view--east--actionMap'
             }
           }
           fields {
-            propertyView name:'firstName'
-            propertyView name:'birthDate'
+            propertyView name:'firstName', width:2
+            propertyView name:'birthDate', width:2
             
             propertyView name:'company', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employee.test.view--east--company'
-            propertyView name:'company.workforce', readOnly:true, horizontalAlignment:'LEFT'
+            propertyView name:'company', actionMap:'navigateToModuleActionMap', permId:'Employee.test.view--east--company.actionMap', preferredWidth:120
+            
+            propertyView name:'company.workforce', readOnly:true, horizontalAlignment:'LEFT', width:2
+            
             propertyView name:'name', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employee.test.view--east--name'
-          
+            propertyView name:'name', actionMap:'navigateToModuleActionMap', permId:'Employee.test.view--east--name.actionMap', preferredWidth:120
+            
+            propertyView name:'company.contact.city', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employee.test.view--east--company.contact.city'
+            propertyView name:'company.contact.city.name', action:'navigateToModuleFrontAction', readOnly:true, i18nNameKey:'org.jspresso.hrsample.model.City', permId:'Employee.test.view--east--company.contact.city.name'
+            
           }
         }
       }
       center {
         table (model:'Employee-users') {
           actionMap {
-            actionList('SERVICE', collapsable:true) {
+            actionList('SERVICE') {
               action parent:'navigateToModuleFrontAction', permId:'Employee.test.view--east-table--actionMap'
-              action parent:'navigateToModuleFrontAction', permId:'Employee.test.view--east-table--actionMap.notCollectionBased'
+              action parent:'navigateToModuleFrontAction', permId:'Employee.test.view--east-table--actionMap.notCollectionBased', collectionBased:false
             }
           }
           columns {
             propertyView name:'login', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employee.test.view--east-table--login'
+            
+            propertyView name:'mainRole.roleId', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employee.test.view--east-table--mainRole.roleId'
+            propertyView name:'mainRole.roleId', actionMap:'navigateToModuleActionMap'
+            
+            propertyView name:'mainRole', action:'navigateToModuleFrontAction', readOnly:true
           }
         }
       }
@@ -199,12 +218,22 @@ actionMap ('eventsTableActionMap',
  */
 action ('navigateToModuleFrontAction',
   parent:'navigateToModuleFrontActionBase',
-  custom:[models2Module:['org.jspresso.hrsample.model.Employee':'employees.workspace/employees.module',
-                         'org.jspresso.hrsample.model.Employee/name':'employees.workspace/employees.module',
-                     
-                         'org.jspresso.hrsample.model.Company':'organization.workspace/companies.module',
-                         
-                         'org.jspresso.hrsample.model.User/login':'administration.workspace/users.admin.module']])
+  custom:[models2Module:[
+    'org.jspresso.hrsample.model.Employee':'employees.workspace/employees.module',
+    'org.jspresso.hrsample.model.Employee/name':'employees.workspace/employees.module',
+ 
+    'org.jspresso.hrsample.model.Company':'organization.workspace/companies.module',
+    'org.jspresso.hrsample.model.Company.name':'organization.workspace/companies.module',
+   
+    'org.jspresso.hrsample.model.City':'masterdata.workspace/masterdata.cities.module',
+    'org.jspresso.hrsample.model.City/name':'masterdata.workspace/masterdata.cities.module',
+   
+    'org.jspresso.hrsample.model.Role':'administration.workspace/roles.admin.module',
+    'org.jspresso.hrsample.model.Role/roleId':'administration.workspace/roles.admin.module',
+   
+    'org.jspresso.hrsample.model.User/login':'administration.workspace/users.admin.module',
+    'org.jspresso.hrsample.model.User':'administration.workspace/users.admin.module']])
+
 
 /**
  * target factory
@@ -212,6 +241,9 @@ action ('navigateToModuleFrontAction',
 bean ('targetActionsConfigurator',
   parent:'targetActionsConfiguratorBase',
   custom:[targets_ref:['navigateToModuleFrontAction']]);
+
+bean ('applicationContextFactoryBean',
+  class:'org.jspresso.framework.util.spring.ThisApplicationContextFactoryBean')
 
 //action ('openEmployeeFrontAction',
 //  parent:'addAsChildModuleFrontAction',
