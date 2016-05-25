@@ -62,4 +62,5 @@ public class CustomRemoteController extends EnhancedRemoteController implements 
   public void generateNewCaptcha() {
     ((CaptchaUsernamePasswordHandler) getLoginCallbackHandler()).generateCaptcha();
   }
+
 }

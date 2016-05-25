@@ -8,7 +8,7 @@ bean ('remoteViewFactory', class:'org.jspresso.framework.ext.view.remote.mobile.
  * Controller
  */
 controller ('hrsample-ext.name',
-  description: 'hrsample.description',
+  description: 'hrsample-ext.description',
   icon:'icon.png',
   context:'hrsample-ext',
   language:'en',
