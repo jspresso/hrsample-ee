@@ -29,6 +29,10 @@ tabs('Furniture.detail.view', actionMap:'beanModuleActionMap') {
   }
 }
 
+// Overide HRSample property views
+propertyView('Employee-fullname.property', actionMap:'navigateToModuleActionMap')
+propertyView('OrganizationalUnit-manager.property', actionMap:'navigateToModuleActionMap')
+
 /*
  * OVERRIDE JSPRESSO DEFAULT ACTION MAPS
  */

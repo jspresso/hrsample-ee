@@ -58,9 +58,6 @@ public class JspressoNavigationToModuleTest extends FrontTestStartup {
 
   private static final String QUERY_ACTION = "queryModuleFilterAction";
   
-  //TODO Tests from table dots + scalar property action map 
-  //TODO Tests from table dots + ref property action map 
-  
   /**
    * Test 
    */
