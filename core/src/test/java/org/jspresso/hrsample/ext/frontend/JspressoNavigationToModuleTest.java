@@ -28,6 +28,7 @@ import org.jspresso.framework.application.model.FilterableBeanCollectionModule;
 import org.jspresso.framework.application.model.Module;
 import org.jspresso.framework.gui.remote.RAction;
 import org.jspresso.framework.gui.remote.RActionField;
+import org.jspresso.framework.gui.remote.RActionList;
 import org.jspresso.framework.gui.remote.RComponent;
 import org.jspresso.framework.gui.remote.RIcon;
 import org.jspresso.framework.gui.remote.RLink;
@@ -39,7 +40,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.context.ApplicationContext;
 
-/**
+/** 
  * Test navigation from property view to module using
  * action {@link NavigateToModuleFrontAction}.
  * 
@@ -56,6 +57,7 @@ import org.springframework.context.ApplicationContext;
  */
 public class JspressoNavigationToModuleTest extends FrontTestStartup {
 
+  private static final String NAVIGATE_TO_MODULE_ACTION = "navigateToModuleFrontAction";
   private static final String QUERY_ACTION = "queryModuleFilterAction";
   
   /**
@@ -412,8 +414,7 @@ public class JspressoNavigationToModuleTest extends FrontTestStartup {
       FrontendTestHelper helper, 
       String expectedTargetParentModule, 
       String expectedTargetModuleI18nName) {
-    
-    IFrontendController<RComponent, RIcon, RAction> frontendController = getFrontendController();
+        IFrontendController<RComponent, RIcon, RAction> frontendController = getFrontendController();
     
     FocusedComponent focused = helper.focused;
     if (focused.peer instanceof RAction) {
@@ -428,10 +429,12 @@ public class JspressoNavigationToModuleTest extends FrontTestStartup {
         raction = ((RLink) focused.peer).getAction();
       }
       else if (focused.peer instanceof RTextField) {
-        raction = ((RTextField) focused.peer).getActionLists()[0].getActions()[0];
+        RActionList[] actionLists = ((RTextField) focused.peer).getActionLists();
+        raction = findNavigationAction(actionLists);
       }
       else if (focused.peer instanceof RActionField) {
-        raction = ((RActionField) focused.peer).getActionLists()[0].getActions()[0];
+        RActionList[] actionLists = ((RActionField) focused.peer).getActionLists();
+        raction = findNavigationAction(actionLists);
       }
       else {
         throw new RuntimeException("Navigate action not found !");
@@ -448,6 +451,19 @@ public class JspressoNavigationToModuleTest extends FrontTestStartup {
     
     Assert.assertEquals(expectedTargetParentModule, targetModule.getParent().getName());
     Assert.assertEquals(expectedTargetModuleI18nName, targetModule.getI18nName());
+  }
+
+  private RAction findNavigationAction(RActionList[] actionLists) {
+    for (RActionList l : actionLists) {
+      RAction[] actions = l.getActions();
+      if (actions != null) {
+        for (RAction a : l.getActions()) {
+          if (a.getPermId().startsWith(NAVIGATE_TO_MODULE_ACTION))
+            return a;
+        }
+      }
+    }
+    return null;
   }
 
   /**
