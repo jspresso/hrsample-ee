@@ -11,7 +11,7 @@ def domainBuilder = new Domain(libraries)
 
 domainBuilder.Domain(projectName:'hrsample-ext', mute:true, includeDirectory:project.properties['srcDir']) {
   namespace('org.jspresso.hrsample.ext') {
-    include('model.groovy')
+    include('model.sjs')
   }
 }
 if(!domainBuilder.isOK()) {
@@ -23,21 +23,21 @@ def frontendBuilder = new Front(domainBuilder.getReferenceDomain())
 frontendBuilder.Front(){
   namespace('org.jspresso.hrsample.ext'){
     view {
-      include('view.groovy')
+      include('view.sjs')
       spec('mobile') {
-        include('view-mobile.groovy')
+        include('view-mobile.sjs')
       }
     }
     frontend {
-      include('frontend.groovy')
+      include('frontend.sjs')
       spec('mobile') {
-        include('frontend-mobile.groovy')
+        include('frontend-mobile.sjs')
       }
     }
     backend {
-      include('backend.groovy')
+      include('backend.sjs')
       spec('mobile') {
-        include('backend-mobile.groovy')
+        include('backend-mobile.sjs')
       }
     }
   }
