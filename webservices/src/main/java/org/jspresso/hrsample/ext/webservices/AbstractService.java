@@ -38,7 +38,7 @@ public abstract class AbstractService extends AbstractBackendStartup {
    */
   @Override
   protected String getApplicationContextKey() {
-    return "hrsample-ext-backend-context";
+    return "hrsample-ext-remote-context";
   }
 
   /**
