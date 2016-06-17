@@ -161,7 +161,7 @@
         <artifactId>jspresso-usage-core</artifactId>
         <version>${jspresso-usage.version}</version>
       </dependency>
-      
+
        <!-- Captcha -->
        <dependency>
          <groupId>com.google.code.maven-play-plugin.org.playframework</groupId>
@@ -173,7 +173,7 @@
 <!--         <artifactId>simple-captcha</artifactId> -->
 <!--         <version>${nl.captcha.version}</version> -->
 <!--       </dependency> -->
-      
+
     </dependencies>
   </dependencyManagement>
   <build>
@@ -238,7 +238,7 @@
         </configuration>
       </plugin>
       <plugin>
-        <groupId>org.mortbay.jetty</groupId>
+        <groupId>org.eclipse.jetty</groupId>
         <artifactId>jetty-maven-plugin</artifactId>
         <configuration>
           <war>${basedir}/webapp/target/hrsample-ext-webapp</war>
