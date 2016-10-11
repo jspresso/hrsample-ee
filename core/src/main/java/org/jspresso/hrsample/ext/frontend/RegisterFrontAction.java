@@ -18,11 +18,11 @@
  */
 package org.jspresso.hrsample.ext.frontend;
 
-import java.util.Map;
-
 import org.jspresso.framework.action.IActionHandler;
 import org.jspresso.framework.application.frontend.action.std.EditComponentAction;
 import org.jspresso.hrsample.ext.model.Registration;
+
+import java.util.Map;
 
 /**
  * Creates the registration component and assigns it a default language.
