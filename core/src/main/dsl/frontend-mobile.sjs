@@ -1,4 +1,5 @@
-bean ('remoteFrontController', class:'org.jspresso.hrsample.ext.frontend.remote.mobile.CustomRemoteController',
+bean ('remoteFrontController',
+    class:'org.jspresso.hrsample.ext.frontend.remote.mobile.CustomRemoteController',
     parent:'abstractMobileFrontController')
 
 bean ('remoteViewFactory', class:'org.jspresso.framework.ext.view.remote.mobile.MobileEnhancedRemoteViewFactory',

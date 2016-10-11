@@ -20,19 +20,29 @@ Component('Registration') {
 }
 
 Entity('Furniture', 
-  extend:['Traceable', 'ITranslatable'], 
+  extend:['Traceable', 'ITranslatable', 'IHRModificationTracker'], 
   icon:'furniture.png',
   toString:'name',
   queryable:['name', 'nlsOrRawLabel', 'lastUpdateTimestamp'],
   extension:'FurnitureExtension',
-  rendered:['name', 'price', 'discount', 'createTimestamp', 'lastUpdateTimestamp', 'rawLabel', 'nlsLabel', 'nlsOrRawLabel']) {
+  rendered:['name', 'price', 'discount', 'rawLabel', 'nlsLabel', 'nlsOrRawLabel']) {
   string_128 'name'
   
   decimal 'price'
   percent 'discount'   
   
-  set 'previous', ref:'Furniture'
+  set 'previous', ref:'Furniture', i18nNameKey:'details'
+  reference 'parent', ref:'Furniture', reverse:'Furniture-previous'
 
   string_256 'nlsLabel', computed:true, delegateWritable:true, sqlName:"(SELECT T.LABEL FROM TRANSLATION T WHERE T.TRANSLATED_ID = ID AND T.LANGUAGE = :JspressoSessionGlobals.language AND T.TRANSLATED_NAME = '{entityName}')"
   string_256 'nlsOrRawLabel', computed:true, delegateWritable:true, sqlName:"CASE WHEN (SELECT T.LABEL FROM TRANSLATION T WHERE T.TRANSLATED_ID = ID AND T.LANGUAGE = :JspressoSessionGlobals.language  AND T.TRANSLATED_NAME = '{entityName}') IS NULL THEN RAW_LABEL ELSE (SELECT T.LABEL FROM TRANSLATION T WHERE T.TRANSLATED_ID = ID AND T.LANGUAGE = :JspressoSessionGlobals.language AND T.TRANSLATED_NAME = '{entityName}') END"
+}
+  
+Interface ('IHRModificationTracker',
+  extend:['IModificationTracker'],
+  extension:'IHRModificationTrackerExtension',
+  services:['org.jspresso.contrib.model.tracking.service.IModificationTrackerService':'HRTrackerServiceDelegate']) {
+  
+  reference 'trackingFilterUser', ref:'User', computed:true, delegateWritable:true, i18nNameKey:'tracking.updatedBy'
+  
 }

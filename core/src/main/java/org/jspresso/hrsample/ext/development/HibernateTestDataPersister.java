@@ -97,6 +97,7 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     } catch (Throwable ex) {
       // In no way the test data persister should make the application
       // startup fail.
+      LOGGER.error("Data loading error", ex);
     }
 
     try {
@@ -123,6 +124,7 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     } catch (Throwable ex) {
       // In no way the test data persister should make the application
       // startup fail.
+      LOGGER.error("Data loading error", ex);
     }
 
     // 
@@ -494,6 +496,10 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     furniture.setCreateTimestamp(new Date());
     furniture.setPrice(price);
     furniture.setDiscount(discount);
+    
+    furniture.setCreateTimestamp(new Date());
+    furniture.setLastUpdateTimestamp(new Date());
+    
     saveOrUpdate(furniture);
     return furniture;
   }

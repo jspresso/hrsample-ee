@@ -13,7 +13,8 @@ tabs('Furniture.detail.view', actionMap:'beanModuleActionMap') {
         form (model:'Furniture')
       }
       center {
-        table (model:'Furniture-previous', borderType:'TITLED') {
+        
+        table (model:'Furniture-previous') {
           actionMap {
             actionList('ALL') {
               action parent:'chooseEntityFrontAction', custom:[selectionMode:'MULTIPLE_INTERVAL_CUMULATIVE_SELECTION']
@@ -21,21 +22,33 @@ tabs('Furniture.detail.view', actionMap:'beanModuleActionMap') {
             }
           }
         }
+        
       }
     }
 
-
+    // translation
     table(parent:'ITranslatable-translations.table')
+    
+    // tracking
+    border (parent:'Tracking.view', model:'Furniture')
+    
   }
 }
 
-// Overide HRSample property views
+// OVERRIDE HRSample property views
 propertyView('Employee-fullname.property', actionMap:'navigateToModuleActionMap') 
 propertyView('OrganizationalUnit-manager.property', actionMap:'navigateToModuleActionMap')
 
-/*
- * OVERRIDE JSPRESSO DEFAULT ACTION MAPS
- */
+// OVERRIDE default tracking filter vies
+form ('Tracking.filter.view', borderType:'NONE', columnCount:3, model:'IHRModificationTracker') {
+  fields {
+    referencePropertyView name:'trackingFilterUser', action:'refreshTrackingEventsFrontAction'
+    propertyView name:'trackingFilterFrom', action:'refreshTrackingEventsFrontAction'
+    propertyView name:'trackingFilterTo', action:'refreshTrackingEventsFrontAction'
+  }
+}
+
+// OVERRIDE JSPRESSO DEFAULT ACTION MAPS
 actionMap ('beanModuleActionMap') {
   actionList('SAVE', collapsable:true){
     action ref:'saveModuleObjectFrontAction'
