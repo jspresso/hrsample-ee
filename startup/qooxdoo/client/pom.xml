@@ -108,38 +108,35 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-antrun-plugin</artifactId>
         <executions>
-      	  <execution>
-      	    <id>web-debug</id>
-      	    <goals>
-      	      <goal>run</goal>
-      	    </goals>
-      	    <phase>prepare-package</phase>
+          <execution>
+            <id>web-debug</id>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <phase>prepare-package</phase>
             <configuration>
               <target>
-                <property name="web-debug.dir" value="${project.build.directory}/web-debug" />
-                <mkdir dir="${web-debug.dir}" />
-                <replace dir="${web-debug.dir}" token="../../../../target" value="file:///${project.build.directory}">
-                  <include name="**/*.js" />
+                <property name="web-debug.dir" value="${project.build.directory}/web-debug"/>
+                <mkdir dir="${web-debug.dir}"/>
+                <replace dir="${web-debug.dir}" token="../../../../target" value="../../target">
+                  <include name="**/*.js"/>
                 </replace>
-                <replace dir="${web-debug.dir}" token="../../../target" value="file:///${project.build.directory}">
-                  <include name="**/*.js" />
+                <replace dir="${web-debug.dir}" token="../../../target" value="../../target">
+                  <include name="**/*.js"/>
                 </replace>
-                <replace dir="${web-debug.dir}" token="../../" value="file:///${basedir}/src/main/">
-                  <include name="**/*.js" />
-                </replace>
-                <replace dir="${web-debug.dir}" token="../" value="file:///${basedir}/src/main/">
-                  <include name="**/*.js" />
+                <replace dir="${web-debug.dir}" token="../../js" value="../../src/main/js">
+                  <include name="**/*.js"/>
                 </replace>
                 <replace dir="${web-debug.dir}" token="\" value="/">
-                  <include name="**/*.js" />
+                  <include name="**/*.js"/>
                 </replace>
                 <replace dir="${web-debug.dir}" token="//(" value="\/(">
-                  <include name="**/*.js" />
+                  <include name="**/*.js"/>
                 </replace>
-                <delete dir="${project.build.directory}/antrun" />
+                <delete dir="${project.build.directory}/antrun"/>
               </target>
             </configuration>
-      	  </execution>
+          </execution>
         </executions>
       </plugin>
       <plugin>
