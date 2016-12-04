@@ -26,7 +26,7 @@ controller ('hrsample-ext.name',
     icon:'icon.png',
     context:'hrsample-ext',
     language:'en',
-    startup:'startupHrsampleExtAction', 
+    startup:'startupHrsampleExtAction',
     onModuleEnter:'manageAnyModuleEnterFrontAction',
     actionMap:'controllerActionMap',
     workspaces:[
@@ -38,10 +38,10 @@ controller ('hrsample-ext.name',
       'usage.workspace',
       'administration.workspace'])
 
-action ('startupHrsampleExtAction', 
+action ('startupHrsampleExtAction',
     parent:'permalinkSelectionAction',
-    custom:[defaultAction_ref:'startupHrsampleAction'])    
-    
+    custom:[defaultAction_ref:'startupHrsampleAction'])
+
 action ('manageAnyModuleEnterFrontAction',
     class:'org.jspresso.framework.application.frontend.action.FrontendAction',
     wrapped:'anyModuleEnterFrontAction',
@@ -49,57 +49,57 @@ action ('manageAnyModuleEnterFrontAction',
 
 
 /*
- * Workspaces    
+ * Workspaces
  */
 workspace('statistics.workspace', icon:'tools.png') {
-   
-  pivotModule ('employee.statistics.module', 
+
+  pivotModule ('employee.statistics.module',
     dimensions:['salary(40, 80, 100)',
               'age(30, 40)',
-              'gender', 
+              'gender',
               'managedOu.ouId',
               //'managedOu.manager.name',
               //'company.name',
               'company.departments'],
     measures:['ssn@count',
-              'salary@sum', 
-              'salary@percentile90', 
+              'salary@sum',
+              'salary@percentile90',
               'salary@average/managedOu.ouId'],
     refiner:'employeePivotRefiner',
-    component:'Employee')  
-  
-}
-    
-workspace('administration.workspace', icon:'classpath:org/jspresso/framework/application/images/execute-48x48.png') {
-  
-  filterModule ('users.admin.module',
-    component:'User')
-  
-  filterModule('roles.admin.module',
-    component:'Role')
-  
-  module ('userqueries.admin.module',
-    parent:'userqueries.admin.module')
-  
-  module ('pivot.admin.module',
-    parent:'pivot.admin.module')
-  
+    component:'Employee')
+
 }
 
-workspace('tools.workspace', icon:'tools.png') { 
-  
-  filterModule ('furniture.module', 
+workspace('administration.workspace', icon:'classpath:org/jspresso/framework/application/images/execute-48x48.png') {
+
+  filterModule ('users.admin.module',
+    component:'User')
+
+  filterModule('roles.admin.module',
+    component:'Role')
+
+  module ('userqueries.admin.module',
+    parent:'userqueries.admin.module')
+
+  module ('pivot.admin.module',
+    parent:'pivot.admin.module')
+
+}
+
+workspace('tools.workspace', icon:'tools.png') {
+
+  filterModule ('furniture.module',
     startup:'furnitureModuleInitFrontAction',
     detailView:'Furniture.detail.view',
     component:'Furniture') {
   }
-    
+
   filterModule ('Employee.test.module',
     component:'Employee',
-    moduleView:'Employee.test.view')  
+    moduleView:'Employee.test.view')
 }
 
-    
+
 /*
  * login
  */
@@ -114,7 +114,7 @@ border ('loginViewDescriptor', model:'CaptchaUsernamePasswordHandler',
 
     border {
       west {
-        form (model:'CaptchaUsernamePasswordHandler', columnCount:2, preferredWidth:500) { 
+        form (model:'CaptchaUsernamePasswordHandler', columnCount:2, preferredWidth:600) {
           fields {
             propertyView parent:'username', width:2, preferredWidth:380
             propertyView parent:'password', width:2, preferredWidth:380
@@ -169,7 +169,7 @@ action('registerFrontAction', class:'org.jspresso.hrsample.ext.frontend.Register
   name:'register.action.name', description:'', icon:'tools.png',
   custom:[okAction_ref:'performRegistrationFrontAction',
     cancelAction_ref:'cancelDialogFrontAction',
-    viewDescriptor_ref:'Registration.form']) 
+    viewDescriptor_ref:'Registration.form'])
 
 action('switchToUIFrontAction',
   description:'', icon:'tools.png',
@@ -192,13 +192,12 @@ action('generateNewCaptchaAction',
   class:'org.jspresso.hrsample.ext.frontend.GenerateNewCaptchaFrontAction')
 
 /*
- * Furnitures 
+ * Furnitures
  */
 action ('furnitureModuleInitFrontAction',
   class:'org.jspresso.framework.application.frontend.action.FrontendAction') {
-  
+
   wrapped ref:'initModuleFilterAction'
   next class:'org.jspresso.hrsample.ext.frontend.FurnitureModuleInitFrontAction'
-}    
-    
- 
+}
+
