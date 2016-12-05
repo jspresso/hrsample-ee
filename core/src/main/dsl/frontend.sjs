@@ -1,5 +1,6 @@
 bean ('viewFactoryBase', parent:'abstractViewFactory',
-    custom: [defaultActionMapRenderingOptions:'LABEL_ICON'])
+  custom: [defaultActionMapRenderingOptions:'ICON',
+  defaultTabRenderingOptions:'LABEL'])
 
 spec('remote') {
   bean ('remotePeerRegistryBase', class:'org.jspresso.framework.util.remote.registry.BasicRemotePeerRegistry', custom:[automationEnabled:true])
