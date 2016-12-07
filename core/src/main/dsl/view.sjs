@@ -16,7 +16,7 @@ tabs('Furniture.detail.view', actionMap:'beanModuleActionMap') {
 
         table (model:'Furniture-previous') {
           actionMap {
-            actionList('ALL') {
+            actionList('ALL', renderingOptions:'ICON') {
               action parent:'chooseEntityFrontAction', custom:[selectionMode:'MULTIPLE_INTERVAL_CUMULATIVE_SELECTION']
               action ref:'unlinkComponentFrontAction'
             }
