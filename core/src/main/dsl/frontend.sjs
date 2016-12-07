@@ -6,6 +6,12 @@ spec('remote') {
   bean ('remotePeerRegistryBase', class:'org.jspresso.framework.util.remote.registry.BasicRemotePeerRegistry', custom:[automationEnabled:true])
   bean ('remoteFrontController', class:'org.jspresso.hrsample.ext.frontend.remote.CustomRemoteController', parent:'abstractFrontController')
   bean ('remoteViewFactory', class:'org.jspresso.framework.ext.view.remote.EnhancedRemoteViewFactory', parent:'viewFactoryBase')
+  bean('iconFactoryBase', parent:'abstractIconFactory') {
+      bean('largeIconSize', class:'org.jspresso.framework.util.gui.Dimension', custom: [width: 32, height: 32])
+      bean('mediumIconSize', class: 'org.jspresso.framework.util.gui.Dimension', custom: [width: 28, height: 28])
+      bean('smallIconSize', class: 'org.jspresso.framework.util.gui.Dimension', custom: [width: 22, height: 22])
+      bean('tinyIconSize', class: 'org.jspresso.framework.util.gui.Dimension', custom: [width: 16, height: 16])
+  }
 }
 
 spec('swing') {
