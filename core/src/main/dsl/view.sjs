@@ -65,7 +65,7 @@ actionMap ('beanModuleActionMap') {
 }
 
 /**
- * OVERRIDE JSPRESSO DEFAULT ACTION MAP
+ * OVERRIDE JSPRESSO DEFAULT ACTION MAP AND ACTIONS
  */
 actionMap('beanCollectionModuleActionMap') {
   actionList('FILE', renderingOptions:'ICON'){
@@ -97,6 +97,19 @@ actionMap('beanCollectionModuleActionMap') {
   actionList ('PERMALINK', collapsable:true) {
     action parent:'createPermalinkAndCopyToClipboardFrontAction', custom:[tinyURL:false]
     action parent:'createPermalinkAndMailToFrontAction', custom:[tinyURL:false]
+  }
+}
+
+actionMap('masterDetailActionMap') {
+  actionList('ACTION', renderingOptions:'ICON') {
+    action(ref:'addToMasterFrontAction')
+    action(ref:'cloneEntityCollectionFrontAction')
+    action(ref:'removeEntityCollectionFromMasterFrontAction')
+  }
+  actionList('EDIT', collapsable:true) {
+    action(ref:'copyCollectionFrontAction')
+    action(ref:'cutCollectionFrontAction')
+    action(ref:'pasteCollectionFrontAction')
   }
 }
 
