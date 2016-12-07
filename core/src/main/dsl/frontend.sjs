@@ -1,5 +1,5 @@
 bean ('viewFactoryBase', parent:'abstractViewFactory',
-  custom: [defaultActionMapRenderingOptions:'ICON',
+  custom: [defaultActionMapRenderingOptions:'LABEL_ICON',
   defaultTabRenderingOptions:'LABEL'])
 
 spec('remote') {

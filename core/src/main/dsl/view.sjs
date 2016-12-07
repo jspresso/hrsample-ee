@@ -50,7 +50,7 @@ form ('Tracking.filter.view', borderType:'NONE', columnCount:3, model:'IHRModifi
 
 // OVERRIDE JSPRESSO DEFAULT ACTION MAPS
 actionMap ('beanModuleActionMap') {
-  actionList('SAVE'){
+  actionList('SAVE', renderingOptions:'ICON'){
     action ref:'saveModuleObjectFrontAction'
     action ref:'reloadModuleObjectFrontAction'
     action ref:'removeModuleObjectFrontAction'
@@ -68,7 +68,7 @@ actionMap ('beanModuleActionMap') {
  * OVERRIDE JSPRESSO DEFAULT ACTION MAP
  */
 actionMap('beanCollectionModuleActionMap') {
-  actionList('FILE'){
+  actionList('FILE', renderingOptions:'ICON'){
     action ref:'queryModuleFilterAction'
     action ref:'addAsChildModuleFrontAction'
     action ref:'saveModuleObjectFrontAction'
@@ -77,7 +77,7 @@ actionMap('beanCollectionModuleActionMap') {
 //  actionList('PIN', renderingOptions:'ICON') {
 //    action ref:'pinQueryCriteriasFrontAction'
 //  }
-  actionList('ADD_REMOVE') {
+  actionList('ADD_REMOVE', renderingOptions:'ICON') {
     action ref:'addToMasterFrontAction'
     action ref:'cloneEntityCollectionFrontAction'
     action ref:'removeFromModuleObjectsFrontAction'
@@ -104,7 +104,7 @@ border ('Employee.test.view', cascadingModels:true, borderType:'TITLED', name:'e
   center {
     table {
        actionMap {
-        actionList('FILE'){
+        actionList('FILE', renderingOptions:'ICON'){
           action ref:'queryModuleFilterAction'
           //action ref:'addAsChildModuleFrontAction'
           action parent:'navigateToModuleFrontAction', permId:'Employee.test.view--table--actionMap',
