@@ -13,7 +13,7 @@ tabs('Furniture.detail.view', actionMap:'beanModuleActionMap') {
         form (model:'Furniture')
       }
       center {
-        
+
         table (model:'Furniture-previous') {
           actionMap {
             actionList('ALL') {
@@ -22,21 +22,21 @@ tabs('Furniture.detail.view', actionMap:'beanModuleActionMap') {
             }
           }
         }
-        
+
       }
     }
 
     // translation
     table(parent:'ITranslatable-translations.table')
-    
+
     // tracking
     border (parent:'Tracking.view', model:'Furniture')
-    
+
   }
 }
 
 // OVERRIDE HRSample property views
-propertyView('Employee-fullname.property', actionMap:'navigateToModuleActionMap') 
+propertyView('Employee-fullname.property', actionMap:'navigateToModuleActionMap')
 propertyView('OrganizationalUnit-manager.property', actionMap:'navigateToModuleActionMap')
 
 // OVERRIDE default tracking filter vies
@@ -50,12 +50,12 @@ form ('Tracking.filter.view', borderType:'NONE', columnCount:3, model:'IHRModifi
 
 // OVERRIDE JSPRESSO DEFAULT ACTION MAPS
 actionMap ('beanModuleActionMap') {
-  actionList('SAVE', collapsable:true){
+  actionList('SAVE'){
     action ref:'saveModuleObjectFrontAction'
     action ref:'reloadModuleObjectFrontAction'
+    action ref:'removeModuleObjectFrontAction'
   }
   actionList('FILE') {
-    action ref:'removeModuleObjectFrontAction'
     action ref:'parentModuleConnectorSelectionFrontAction'
   }
   actionList ('PERMALINK', collapsable:true) {
@@ -68,32 +68,25 @@ actionMap ('beanModuleActionMap') {
  * OVERRIDE JSPRESSO DEFAULT ACTION MAP
  */
 actionMap('beanCollectionModuleActionMap') {
-  actionList('SAVE', collapsable:true){
+  actionList('FILE'){
+    action ref:'queryModuleFilterAction'
+    action ref:'addAsChildModuleFrontAction'
     action ref:'saveModuleObjectFrontAction'
     action ref:'reloadModuleObjectFrontAction'
-    action ref:'restartModuleWithConfirmationFrontAction'
-  }
-  actionList('FILE') {
-    action ref:'queryModuleFilterAction'
   }
 //  actionList('PIN', renderingOptions:'ICON') {
 //    action ref:'pinQueryCriteriasFrontAction'
 //  }
-  actionList('MY_REQUEST') {
-    action ref:'chooseQueryCriteriasFrontAction'
-  }
-
-  actionList('SERVICE') {
-    action ref:'addAsChildModuleFrontAction'
-  }
-  actionList('ADD', collapsable:true) {
+  actionList('ADD_REMOVE') {
     action ref:'addToMasterFrontAction'
     action ref:'cloneEntityCollectionFrontAction'
-  }
-  actionList('REMOVE') {
     action ref:'removeFromModuleObjectsFrontAction'
   }
-  actionList('EXPORT') {
+  actionList('CRITERIA') {
+    action ref:'chooseQueryCriteriasFrontAction'
+    action ref:'restartModuleWithConfirmationFrontAction'
+  }
+  actionList('EXPORT', collapsable:true) {
     action ref:'exportFilterModuleResultToHtmlAction'
     action ref:'importBoxAction'
   }
@@ -107,20 +100,20 @@ actionMap('beanCollectionModuleActionMap') {
   }
 }
 
-border ('Employee.test.view', cascadingModels:true) {
+border ('Employee.test.view', cascadingModels:true, borderType:'TITLED', name:'employees.module') {
   center {
     table {
        actionMap {
-        actionList('SAVE', collapsable:true) {
+        actionList('FILE'){
+          action ref:'queryModuleFilterAction'
+          //action ref:'addAsChildModuleFrontAction'
+          action parent:'navigateToModuleFrontAction', permId:'Employee.test.view--table--actionMap',
+                 icon:'classpath:/org/jspresso/framework/application/images/view-48x48.png'
           action ref:'saveModuleObjectFrontAction'
           action ref:'reloadModuleObjectFrontAction'
         }
-        actionList('FILE') {
-          action parent:'queryModuleFilterAction', permId:'Employee.test.view--actionMap--queryModuleFilterAction'
+        actionList('CRITERIA') {
           action ref:'pinQueryCriteriasFrontAction'
-        }
-        actionList('SERVICE', collapsable:true) {
-          action parent:'navigateToModuleFrontAction', permId:'Employee.test.view--table--actionMap'
         }
         actionList('EXPORT') {
           action parent:'exportFilterModuleResultToHtmlAction',
@@ -133,10 +126,10 @@ border ('Employee.test.view', cascadingModels:true) {
           action ref:'exportTableToTmarAction'
         }
       }
-    
+
       columns {
         propertyView name:'company', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employee.test.view--table--company'
-        propertyView name:'company.workforce', readOnly:true 
+        propertyView name:'company.workforce', readOnly:true
         propertyView name:'name', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employee.test.view--table--name'
         propertyView name:'firstName', readOnly:true
         propertyView name:'gender', readOnly:true
@@ -145,16 +138,16 @@ border ('Employee.test.view', cascadingModels:true) {
         propertyView name:'contact.city', readOnly:true
         propertyView name:'contact.phone', readOnly:true
         propertyView name:'contact.phone', readOnly:true
-        
+
         // FOR UNIT TEST ONLY : @See JspressoNavigationToModuleTest
         propertyView name:'name', actionMap:'navigateToModuleActionMap', permId:'Employee.test.view--table--name.actionMap', grantedRoles:['test']
         propertyView name:'company', actionMap:'navigateToModuleActionMap', permId:'Employee.test.view--table--company.actionMap', grantedRoles:['test']
-        
+
       }
     }
   }
   east {
-    
+
     // FOR UNIT TEST ONLY : @See JspressoNavigationToModuleTest
     border (grantedRoles:['test']) {
       north {
@@ -167,18 +160,18 @@ border ('Employee.test.view', cascadingModels:true) {
           fields {
             propertyView name:'firstName', width:2
             propertyView name:'birthDate', width:2
-            
+
             propertyView name:'company', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employee.test.view--east--company'
             propertyView name:'company', actionMap:'navigateToModuleActionMap', permId:'Employee.test.view--east--company.actionMap', preferredWidth:120
-            
+
             propertyView name:'company.workforce', readOnly:true, horizontalAlignment:'LEFT', width:2
-            
+
             propertyView name:'name', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employee.test.view--east--name'
             propertyView name:'name', actionMap:'navigateToModuleActionMap', permId:'Employee.test.view--east--name.actionMap', preferredWidth:120
-            
+
             propertyView name:'company.contact.city', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employee.test.view--east--company.contact.city'
             propertyView name:'company.contact.city.name', action:'navigateToModuleFrontAction', readOnly:true, i18nNameKey:'org.jspresso.hrsample.model.City', permId:'Employee.test.view--east--company.contact.city.name'
-            
+
           }
         }
       }
@@ -192,10 +185,10 @@ border ('Employee.test.view', cascadingModels:true) {
           }
           columns {
             propertyView name:'login', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employee.test.view--east-table--login'
-            
+
             propertyView name:'mainRole.roleId', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employee.test.view--east-table--mainRole.roleId'
             propertyView name:'mainRole.roleId', actionMap:'navigateToModuleActionMap'
-            
+
             propertyView name:'mainRole', action:'navigateToModuleFrontAction', readOnly:true
           }
         }
@@ -221,16 +214,16 @@ bean ('importEmployeeFactoryBean',
   class:'org.jspresso.hrsample.ext.frontend.ImportEmployeeFactoryBean')
 
 
-actionMap ('eventsTableActionMap', 
+actionMap ('eventsTableActionMap',
   parents:['masterDetailActionMap']) {
- 
+
   actionList ('EXPORT') {
     action ref:'exportTableToHtmlAction'
-  } 
+  }
 }
 
 
-/** 
+/**
  * navigate to module
  */
 action ('navigateToModuleFrontAction',
@@ -238,16 +231,16 @@ action ('navigateToModuleFrontAction',
   custom:[models2Module:[
     'org.jspresso.hrsample.model.Employee':'employees.workspace/employees.module',
     'org.jspresso.hrsample.model.Employee/name':'employees.workspace/employees.module',
- 
+
     'org.jspresso.hrsample.model.Company':'organization.workspace/companies.module',
     'org.jspresso.hrsample.model.Company.name':'organization.workspace/companies.module',
-   
+
     'org.jspresso.hrsample.model.City':'masterdata.workspace/masterdata.cities.module',
     'org.jspresso.hrsample.model.City/name':'masterdata.workspace/masterdata.cities.module',
-   
+
     'org.jspresso.hrsample.model.Role':'administration.workspace/roles.admin.module',
     'org.jspresso.hrsample.model.Role/roleId':'administration.workspace/roles.admin.module',
-   
+
     'org.jspresso.hrsample.model.User/login':'administration.workspace/users.admin.module',
     'org.jspresso.hrsample.model.User':'administration.workspace/users.admin.module']])
 
