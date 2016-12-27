@@ -28,19 +28,19 @@ qx.Class.define("org.jspresso.hrsample.ext.startup.qooxdoo.Application",
     start : function() {
       var remoteController;
       if (qx.core.Environment.get("qx.debug")) {
-        remoteController = new qx.io.remote.Rpc(
+        remoteController = new org.jspresso.framework.io.Rpc(
             "http://localhost:8080/hrsample-ext-webapp/.qxrpc",
             "org.jspresso.hrsample.ext.startup.remote.RemoteApplicationStartup"
         );
         remoteController.setCrossDomain(true);
       } else {
-        remoteController = new qx.io.remote.Rpc(
-            qx.io.remote.Rpc.makeServerURL(),
+        remoteController = new org.jspresso.framework.io.Rpc(
+            org.jspresso.framework.io.Rpc.makeServerURL(),
             "org.jspresso.hrsample.ext.startup.remote.RemoteApplicationStartup"
         );
       }
       remoteController.setTimeout(600000);
-      
+
       this.startController(remoteController);
     }
   }
