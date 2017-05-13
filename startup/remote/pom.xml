@@ -9,7 +9,7 @@
   </parent>
   <artifactId>hrsample-ext-startup-remote</artifactId>
   <packaging>jar</packaging>
-  <name>Jspresso HR Sample Application - Extension - Startup - Remote</name>
+  <name>HR Sample EE - Startup Remote</name>
   <dependencies>
     <dependency>
       <groupId>org.jspresso.hrsample</groupId>

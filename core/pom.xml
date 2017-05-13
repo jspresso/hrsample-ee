@@ -11,7 +11,7 @@
 	</parent>
 	<artifactId>hrsample-ext-core</artifactId>
 	<packaging>jar</packaging>
-	<name>Jspresso HR Sample Application - Extension - Core</name>
+	<name>HR Sample EE - Core</name>
 	<dependencies>
 		<dependency>
 			<groupId>org.jspresso.framework</groupId>
@@ -78,7 +78,7 @@
     <dependency>
       <groupId>com.google.code.maven-play-plugin.org.playframework</groupId>
       <artifactId>jj-simplecaptcha</artifactId>
-    </dependency>    
+    </dependency>
 <!--     <dependency> -->
 <!--       <groupId>nl.captcha</groupId> -->
 <!--       <artifactId>simple-captcha</artifactId> -->

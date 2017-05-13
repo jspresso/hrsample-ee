@@ -9,7 +9,7 @@
   </parent>
   <artifactId>hrsample-ext-startup-flex-config</artifactId>
   <packaging>jar</packaging>
-  <name>Jspresso HR Sample Application - Extension - Startup - Flex - Config</name>
+  <name>HR Sample EE - Startup Flex Config</name>
 
   <build>
     <resources>

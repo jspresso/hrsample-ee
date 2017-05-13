@@ -10,7 +10,7 @@
   </parent>
   <artifactId>hrsample-ext-startup-qooxdoo</artifactId>
   <packaging>pom</packaging>
-  <name>Jspresso HR Sample Application - Extension - Startup - Qooxdoo</name>
+  <name>HR Sample EE - Startup Qooxdoo</name>
   <modules>
     <module>client</module>
   </modules>

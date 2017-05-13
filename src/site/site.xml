@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <project name="Maven">
   <bannerLeft>
-    <name>Jspresso HR Sample Application - Extension</name>
+    <name>HR Sample EE</name>
     <src>images/logo.jpg</src>
     <href>http://www.jspresso.orh</href>
   </bannerLeft>

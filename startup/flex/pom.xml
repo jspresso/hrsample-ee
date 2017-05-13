@@ -9,7 +9,7 @@
   </parent>
   <artifactId>hrsample-ext-startup-flex</artifactId>
   <packaging>pom</packaging>
-  <name>Jspresso HR Sample Application - Extension - Startup - Flex</name>
+  <name>HR Sample EE - Startup Flex</name>
   <modules>
     <module>config</module>
     <module>client</module>

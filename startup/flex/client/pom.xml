@@ -9,7 +9,7 @@
   </parent>
   <artifactId>hrsample-ext-startup-flex-client</artifactId>
   <packaging>swf</packaging>
-  <name>Jspresso HR Sample Application - Extension - Startup - Flex - Client</name>
+  <name>HR Sample EE - Startup Flex Client</name>
 
   <dependencies>
     <dependency>

@@ -9,7 +9,7 @@
   </parent>
   <artifactId>hrsample-ext-webservices</artifactId>
   <packaging>jar</packaging>
-  <name>Jspresso HR Sample Application - Extension - Webservices</name>
+  <name>HR Sample EE - Webservices</name>
   <dependencies>
     <dependency>
       <groupId>org.jspresso.framework</groupId>

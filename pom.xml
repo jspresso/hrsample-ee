@@ -22,7 +22,7 @@
     <nl.captcha.version>1.1</nl.captcha.version>
   </properties>
 
-  <name>Jspresso HR Sample Application - Extension</name>
+  <name>HR Sample EE</name>
   <description>Jspresso HR Sample Application - Extension</description>
   <url>http://www.jspresso.org</url>
   <organization>
