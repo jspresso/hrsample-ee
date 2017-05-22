@@ -85,6 +85,9 @@
   {
     "common" :
     {
+      "extend": [
+        "jspresso-ext-qooxdoo::common"
+      ],
       "cache" :
       {
         "compile"     : "${TARGET}/cache",
