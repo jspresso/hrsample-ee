@@ -12,6 +12,7 @@
 	<artifactId>hrsample-ext-core</artifactId>
 	<packaging>jar</packaging>
 	<name>HR Sample EE - Core</name>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.jspresso.framework</groupId>
@@ -217,6 +218,12 @@
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
+			</resource>
+			<resource>
+				<directory>${project.build.directory}/generated-resources/dsl</directory>
+			</resource>
+			<resource>
+				<directory>${project.build.directory}/generated-resources/xdoclet</directory>
 			</resource>
 			<resource>
 				<directory>${project.build.directory}/generated-resources/jasperreports</directory>
