@@ -19,7 +19,7 @@ Component('Registration') {
   string_32 'name'
 }
 
-Entity('Furniture', 
+Entity('Furniture',
   extend:['Traceable', 'ITranslatable', 'IHRModificationTracker'], 
   icon:'furniture.png',
   toString:'name',
@@ -44,5 +44,8 @@ Interface ('IHRModificationTracker',
   services:['org.jspresso.contrib.model.tracking.service.IModificationTrackerService':'HRTrackerServiceDelegate']) {
   
   reference 'trackingFilterUser', ref:'User', computed:true, delegateWritable:true, i18nNameKey:'tracking.updatedBy'
+
+  color 'priceBackground', computed: true, cacheable: true
+  html 'priceTooltip', computed: true, cacheable: true
   
 }

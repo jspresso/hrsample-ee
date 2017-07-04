@@ -1,9 +1,5 @@
 package org.jspresso.hrsample.ext.model.service;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
-
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.jspresso.contrib.model.tracking.IModificationTracker;
@@ -14,6 +10,10 @@ import org.jspresso.framework.application.backend.session.EMergeMode;
 import org.jspresso.hrsample.ext.model.Furniture;
 import org.jspresso.hrsample.model.Traceable;
 import org.jspresso.hrsample.model.User;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * ILeaseModificationTracker services delegate.
@@ -65,5 +65,5 @@ public class HRTrackerServiceDelegate extends IModificationTrackerServiceDelegat
     
     return super.translateLogin(login);
   }
-        
+
 }

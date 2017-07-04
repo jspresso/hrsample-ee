@@ -10,7 +10,16 @@ tabs('Furniture.detail.view', actionMap:'beanModuleActionMap') {
   views {
     border {
       north {
-        form (model:'Furniture')
+        form (model:'Furniture') {
+          fields {
+            propertyView name: 'name'
+            propertyView name: 'price', background: 'priceBackground', description: 'priceTooltip'
+            propertyView name: 'discount'
+            propertyView name: 'rawLabel'
+            propertyView name: 'nlsLabel'
+            propertyView name: 'nlsOrRawLabel'
+          }
+        }
       }
       center {
 
