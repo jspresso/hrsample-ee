@@ -17,9 +17,13 @@ First of all, let's check that table contains the appropriate number of lines :
  | COUNT     | City       | 3      |  
  | COUNT     | Team       | 4      |  
  | COUNT     | Company    | 1      |  
- | COUNT     | Department | 2      |  
-NB : events are also automatically created when employees are created, then we should have the same result :
- | COUNT     | Event      | 6      |  
+ | COUNT     | Department | 2      |
+
+ NB : events are also automatically created when employees are created, then we should have the same result :
+ /inline
+ When using [ operation ] COUNT |
+ on [ table name ] Employee |
+ then [ size ? ] 6 | of course !
 
 Now let's that some objects are found :
  /sequence
@@ -37,4 +41,4 @@ Let's check that fields are correctly set according to master data :
  | CHECK     | Company    | CO0        | contact.address | 123 avenue de la Liberté | 
  | CHECK     | Employee   | 2256725396 | contact.address | 104 square des Bégonias  | 
 
- 
+
