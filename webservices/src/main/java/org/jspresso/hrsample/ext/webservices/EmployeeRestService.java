@@ -18,11 +18,18 @@
  */
 package org.jspresso.hrsample.ext.webservices;
 
+import javax.ws.rs.NotAuthorizedException;
+import javax.ws.rs.NotFoundException;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
+
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
+
 import org.jspresso.framework.application.backend.persistence.hibernate.HibernateBackendController;
 import org.jspresso.framework.application.backend.session.EMergeMode;
 import org.jspresso.framework.model.persistence.hibernate.criterion.EnhancedDetachedCriteria;
+
 import org.jspresso.hrsample.model.Employee;
 
 /**
@@ -39,15 +46,20 @@ public class EmployeeRestService extends AbstractService implements
    * {@inheritDoc}
    */
   @Override
-  public EmployeeDto getEmployee(String name) {
-    DetachedCriteria crit = EnhancedDetachedCriteria.forClass(Employee.class);
-    crit.add(Restrictions.eq("name", name));
-    Employee e = ((HibernateBackendController) getBackendController())
-        .findFirstByCriteria(crit, EMergeMode.MERGE_KEEP, Employee.class);
-    if (e != null) {
-      return new EmployeeDto(e);
+  public EmployeeDto getEmployee(String name, String user, String password) {
+    HibernateBackendController backendController = (HibernateBackendController) getBackendController();
+    if (backendController.performLogin(user, password)) {
+      DetachedCriteria crit = EnhancedDetachedCriteria.forClass(Employee.class);
+      crit.add(Restrictions.eq("name", name));
+      Employee e = backendController.findFirstByCriteria(crit, EMergeMode.MERGE_KEEP, Employee.class);
+      if (e != null) {
+        return new EmployeeDto(e);
+      } else {
+        throw new NotFoundException("Employee " + name + " not found");
+      }
+    } else {
+      throw new NotAuthorizedException("Authentication failed for [" + user + "] to access Employee REST service");
     }
-    return null;
   }
 
 }

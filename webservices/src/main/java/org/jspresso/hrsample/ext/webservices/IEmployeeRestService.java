@@ -25,6 +25,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -50,15 +51,14 @@ public interface IEmployeeRestService {
    * Retrieves an employee by its name.
    *
    * @param name
-   *          the name of the employee to retrieve.
+   *     the name of the employee to retrieve.
    * @return the employee simplified DTO.
    */
   @GET
   @Path("/employee/{name}")
-  @Produces({
-      MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML
-  })
-  EmployeeDto getEmployee(@PathParam("name") String name);
+  @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+  EmployeeDto getEmployee(@PathParam("name") String name, @QueryParam("user") String user,
+                          @QueryParam("password") String password);
 
 
   // //////////////////////////////////////////////////
@@ -75,19 +75,19 @@ public interface IEmployeeRestService {
     /**
      * <code>name</code>.
      */
-    public String         name;
+    public String     name;
     /**
      * <code>firstName</code>.
      */
-    public String         firstName;
+    public String     firstName;
     /**
      * <code>age</code>.
      */
-    public Integer        age;
+    public Integer    age;
     /**
      * <code>address</code>.
      */
-    public AddressDto     address;
+    public AddressDto address;
 
     /**
      * <code>events</code>.
@@ -107,7 +107,7 @@ public interface IEmployeeRestService {
      * Constructs a new <code>EmployeeDto</code> instance.
      *
      * @param employee
-     *          the employee to create the DTO for.
+     *     the employee to create the DTO for.
      */
     public EmployeeDto(Employee employee) {
       this.name = employee.getName();
@@ -152,7 +152,7 @@ public interface IEmployeeRestService {
      * Constructs a new <code>AddressDto</code> instance.
      *
      * @param contact
-     *          the contact to create the DTO for.
+     *     the contact to create the DTO for.
      */
     public AddressDto(ContactInfo contact) {
       this.address = contact.getAddress();
@@ -185,7 +185,7 @@ public interface IEmployeeRestService {
      * Constructs a new <code>EventDto</code> instance.
      *
      * @param event
-     *          the event to create the DTO for.
+     *     the event to create the DTO for.
      */
     public EventDto(Event event) {
       this.text = event.getText();

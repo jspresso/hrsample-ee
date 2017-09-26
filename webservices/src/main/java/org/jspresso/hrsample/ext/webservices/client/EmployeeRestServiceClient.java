@@ -47,8 +47,8 @@ public class EmployeeRestServiceClient {
     RegisterBuiltin.register(ResteasyProviderFactory.getInstance());
 
     IEmployeeRestService client = ProxyFactory.create(
-        IEmployeeRestService.class, "http://localhost:8080/hrsample-ext-webapp/rest");
-    EmployeeDto employee = client.getEmployee("Berlutti");
+        IEmployeeRestService.class, "http://localhost:8080/rest");
+    EmployeeDto employee = client.getEmployee("Berlutti", "demo", "demi");
 
     System.out.println(employee);
   }
