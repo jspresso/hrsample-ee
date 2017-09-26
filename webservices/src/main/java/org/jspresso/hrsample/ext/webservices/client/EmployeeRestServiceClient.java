@@ -48,7 +48,7 @@ public class EmployeeRestServiceClient {
 
     IEmployeeRestService client = ProxyFactory.create(
         IEmployeeRestService.class, "http://localhost:8080/rest");
-    EmployeeDto employee = client.getEmployee("Berlutti", "demo", "demi");
+    EmployeeDto employee = client.getEmployee("Berlutti", "demo", "demo");
 
     System.out.println(employee);
   }
