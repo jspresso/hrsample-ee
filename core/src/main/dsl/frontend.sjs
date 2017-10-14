@@ -71,6 +71,8 @@ workspace('statistics.workspace', icon:'tools.png') {
     measures:['ssn@count',
               'salary@sum',
               'salary@percentile90',
+              'bonus.encryptedValue@sum',
+              'company.budget.encryptedValue@sum',
               'salary@average/managedOu.ouId'],
     refiner:'employeePivotRefiner',
     component:'Employee')

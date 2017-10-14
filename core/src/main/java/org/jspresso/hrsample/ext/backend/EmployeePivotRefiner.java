@@ -18,11 +18,7 @@
  */
 package org.jspresso.hrsample.ext.backend;
 
-import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import org.hibernate.criterion.Projection;
 import org.jspresso.contrib.backend.pivot.ExtendedPivotRefiner;
 import org.jspresso.framework.ext.pivot.backend.IPivotRefiner;
 import org.jspresso.framework.ext.pivot.backend.IPivotRefinerField;
@@ -30,7 +26,13 @@ import org.jspresso.framework.ext.pivot.backend.IPivotStyles;
 import org.jspresso.framework.ext.pivot.backend.SimplePivotRefinerField;
 import org.jspresso.framework.ext.pivot.model.IStyle;
 import org.jspresso.framework.ext.pivot.model.Style;
+import org.jspresso.framework.model.persistence.hibernate.criterion.EnhancedDetachedCriteria;
 import org.jspresso.hrsample.model.Employee;
+
+import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Maxime HAMM
@@ -39,11 +41,50 @@ public class EmployeePivotRefiner extends ExtendedPivotRefiner<Employee> {
 
   @Override
   protected IPivotRefinerField<Employee, ?> createRefinerField(String field) {
+
     if ("salary".equals(field))
       return new SalaryField(this);
+
+    if (field.endsWith("encryptedValue"))
+      return new EncryptedField(this, field);
+
     return super.createRefinerField(field);
   }
 
+  /*********************
+   * EncryptedField
+   */
+  private class EncryptedField extends SimplePivotRefinerField<Employee, Object> {
+
+    public EncryptedField(IPivotRefiner<Employee> refiner, String name) {
+      super(refiner, name);
+    }
+
+    @Override
+    public void evaluate(Object... line) {
+
+      int index = getIndexForField(getName());
+      if (index >= 0) {
+        byte[] encryptedValue = (byte[]) line[index];
+        if (encryptedValue !=null) {
+          Double decryptedValue = new Double(new String(encryptedValue));
+          line[index] = decryptedValue;
+        }
+      }
+      else {
+        super.evaluate(line);
+      }
+    }
+
+    @Override
+    public Projection getProjection(EnhancedDetachedCriteria criteria) {
+      return super.getProjection(criteria);
+    }
+  }
+
+  /*********************
+   * SalaryField
+   */
   private class SalaryField extends SimplePivotRefinerField<Employee, BigDecimal> {
     
     public SalaryField(IPivotRefiner<Employee> refiner) {

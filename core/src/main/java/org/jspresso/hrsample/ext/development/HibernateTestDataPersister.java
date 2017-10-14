@@ -18,17 +18,6 @@
  */
 package org.jspresso.hrsample.ext.development;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-
 import org.jspresso.contrib.backend.pivot.ExtendedPivotRefiner;
 import org.jspresso.contrib.backend.query.IUserQueriesHelper;
 import org.jspresso.contrib.crossitems.core.DateShortcut;
@@ -62,6 +51,9 @@ import org.jspresso.hrsample.model.Employee;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanFactory;
+
+import java.io.IOException;
+import java.util.*;
 
 /**
  * Persists some test data for the application.
@@ -159,6 +151,12 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     //
     // Pivots module saved criteria
     try {
+
+      createPivotFilter(false, "demo", "statistics.workspace", "employee.statistics.module", "Salary & Bonus per age",
+              new String[]{"age(30, 40)"},
+              new String[]{},
+              new String[]{"salary@sum", "bonus.encryptedValue@sum", "company.budget.encryptedValue@average"});
+
       createPivotFilter(false, "demo", "statistics.workspace", "employee.statistics.module", "Salary per age group",
           new String[]{"gender"},
           new String[]{"age(30, 40)"},
@@ -226,8 +224,10 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
         "contact.city.neighbours");
     pivotSetup.setAvailableMeasures(
         "ssn@count\n" + 
-        "salary@sum\n" + 
-        "salary@percentile90\n" + 
+        "salary@sum\n" +
+        "bonus.encryptedValue@sum\n" +
+        "company.budget.encryptedValue@average\n" +
+        "salary@percentile90\n" +
         "salary@average/managedOu.ouId\n" + 
         "managedOu.teamCount@sum\n" + 
         "%salary@sum/managedOu.teamCount@sum\n" +
@@ -467,8 +467,8 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
   /**
    * 
    * @param name
-   * @param price
-   * @param discount
+   * @param style
+   * @param parent
    * @return
    */
   private PivotStyleSet createPivotStyleSet(String name, String style, PivotStyleSet parent) {
