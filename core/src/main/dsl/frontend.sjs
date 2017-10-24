@@ -61,6 +61,7 @@ action ('manageAnyModuleEnterFrontAction',
 workspace('statistics.workspace', icon:'tools.png') {
 
   pivotModule ('employee.statistics.module',
+
     dimensions:['salary(40, 80, 100)',
               'age(30, 40)',
               'gender',

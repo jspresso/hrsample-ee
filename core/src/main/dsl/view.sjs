@@ -277,15 +277,35 @@ bean ('targetActionsConfigurator',
 bean ('applicationContextFactoryBean',
   class:'org.jspresso.framework.util.spring.ThisApplicationContextFactoryBean')
 
-//action ('openEmployeeFrontAction',
-//  parent:'addAsChildModuleFrontAction',
-//  custom:[parentWorkspaceName:'employees.workspace', parentModuleName:'employees.module'])
+// Export to CSV
+action ('exportTableToCsvAction', parent:'abstractExportTableAction', icon: '',
+        custom:[exportActiveResource_ref:'exportCsvActiveResourceProviderBean'])
 
-//action ('openEmployeeCompanyFrontAction',
-//  parent:'addAsChildModuleFrontAction',
-//  custom:[parentWorkspaceName:'organization.workspace', parentModuleName:'companies.module', referencePath:'company'])
+action ('exportFilterModuleResultToCsvAction', parent:'abstractExportFilterModuleResultAction',
+        custom:[exportActiveResource_ref:'exportCsvActiveResourceProviderBean'],)
 
-//action ('openEmployeeCompanyWorkforceFrontAction',
-//  parent:'addAsChildModuleFrontAction',
-//  custom:[parentWorkspaceName:'employees.workspace', parentModuleName:'employees.module',
-  //      referencePath:'company.employees'])
+action ('exportPivotModuleResultToCsvAction',
+        parent:'abstractExportPivotModuleResultAction',
+        booleanActionabilityGates:['moduleObjects'],
+        name: 'export.csv',
+        custom:[exportActiveResource_ref:'exportCsvActiveResourceProviderBean'])
+
+bean ('exportCsvActiveResourceProviderBean',
+        class:'org.jspresso.hrsample.ext.frontend.export.ExportCsvActiveResourceProviderBean',
+        custom:[mimeType:'text/csv', fileExtension:'csv', separator:','])
+
+
+//
+// Override pivot module table's action map
+actionMap('pivotModuleTableActionMap') {
+  actionList ('ADD') {
+    action parent:'checkAllLinesAction', booleanActionabilityGates:['moduleObjects']
+    action parent:'uncheckAllLinesAction', booleanActionabilityGates:['moduleObjects']
+    action ref:'addAsChildModuleFrontAction'
+  }
+  actionList ('EXPORT', collapsable: true) {
+    action ref:'exportPivotModuleResultToHtmlAction'
+    action ref:'exportPivotModuleResultToCsvAction'
+  }
+}
+
