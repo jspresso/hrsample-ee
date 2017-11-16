@@ -266,7 +266,6 @@ action ('navigateToModuleFrontAction',
     'org.jspresso.hrsample.model.User/login':'administration.workspace/users.admin.module',
     'org.jspresso.hrsample.model.User':'administration.workspace/users.admin.module']])
 
-
 /**
  * target factory
  */

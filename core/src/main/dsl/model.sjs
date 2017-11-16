@@ -2,6 +2,7 @@
 external id:['loginModelDescriptor']
 
 namespace('security') {
+
   Component('CaptchaUsernamePasswordHandler', 
     extend:['loginModelDescriptor']) {
     

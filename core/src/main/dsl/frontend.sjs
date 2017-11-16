@@ -88,12 +88,14 @@ workspace('administration.workspace', icon:'classpath:org/jspresso/framework/app
   filterModule('roles.admin.module',
     component:'Role')
 
-  module ('userqueries.admin.module',
+  beanModule ('userqueries.admin.module',
     parent:'userqueries.admin.module')
 
-  module ('pivot.admin.module',
+  beanModule ('pivot.admin.module',
     parent:'pivot.admin.module')
 
+  beanModule ('autodoc.admin.module',
+          parent:'autodoc.admin.module')
 }
 
 workspace('tools.workspace', icon:'tools.png') {
