@@ -19,11 +19,15 @@
 package org.jspresso.hrsample.ext.development;
 
 import org.jspresso.contrib.backend.pivot.ExtendedPivotRefiner;
+import org.jspresso.contrib.frontend.autodoc.LoadAutoDocIndexFrontAction;
 import org.jspresso.contrib.model.TestDataHelper;
+import org.jspresso.contrib.model.autodoc.*;
 import org.jspresso.contrib.model.pivot.PivotSetup;
 import org.jspresso.contrib.model.pivot.PivotSetupField;
 import org.jspresso.contrib.model.pivot.PivotStyleSet;
 import org.jspresso.contrib.usage.model.ModuleUsage;
+import org.jspresso.framework.application.backend.session.IApplicationSession;
+import org.jspresso.framework.application.frontend.IFrontendController;
 import org.jspresso.framework.ext.pivot.model.PivotFilterableBeanCollectionModule;
 import org.jspresso.framework.model.entity.IEntity;
 import org.jspresso.framework.model.entity.IEntityFactory;
@@ -164,7 +168,11 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
       // In no way the test data persister should make the application
       // startup fail.
     }
-    
+
+    //
+    // Create application doc
+    createAutoDocGraph("All entities and components", null, null);
+    createAutoDocGraph("All entities", null, AutoDocFilter.TYPE_ENTITY);
   }
   
   @SuppressWarnings("unused")
@@ -327,6 +335,33 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     saveOrUpdate(furniture);
     return furniture;
   }
+
+  private AutoDocGraph createAutoDocGraph(String label, String filterName, String filterType) {
+
+    AutoDocGraph graph = createEntityInstance(AutoDocGraph.class);
+    graph.setLabel(label);
+
+    AutoDocFilter filter = createComponentInstance(AutoDocFilter.class);
+    filter.setName(filterName);
+    filter.setType(filterType);
+
+    AutoDocIndex instance = AutoDocIndex.getInstance();
+    if (instance == null) {
+
+      IFrontendController frontendController = (IFrontendController) beanFactory.getBean("applicationFrontController");
+      instance = LoadAutoDocIndexFrontAction.loadMeta(frontendController);
+
+      IApplicationSession session = frontendController.getApplicationSession();
+      session.putCustomValue(AutoDocIndex.AUTODOC_INDEX, instance);
+    }
+
+    Set<MetaComponent> components = instance.findComponents(filter);
+    graph.setComponents(new ArrayList<>(components));
+
+    saveOrUpdate(graph);
+    return graph;
+  }
+
 
   /**
    * create a set of Module usage for module <i>moduleId</i> from <i>formDaysAgo</i>

@@ -270,8 +270,9 @@
 										**/contrib/usage/model/*.java,
 										**/contrib/batch/model/*.java,
 										**/contrib/model/i18n/*.java,
+										**/contrib/model/autodoc/*.java,
 										**/contrib/model/query/*.java,
-                    **/contrib/model/tracking/*.java,
+                   						**/contrib/model/tracking/*.java,
 										**/contrib/model/pivot/*.java
 									</includes>
 								</config>
