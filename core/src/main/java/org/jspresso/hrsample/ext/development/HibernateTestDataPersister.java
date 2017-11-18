@@ -32,8 +32,7 @@ import org.jspresso.framework.ext.pivot.model.PivotFilterableBeanCollectionModul
 import org.jspresso.framework.model.entity.IEntity;
 import org.jspresso.framework.model.entity.IEntityFactory;
 import org.jspresso.hrsample.ext.model.Furniture;
-import org.jspresso.hrsample.model.ContactInfo;
-import org.jspresso.hrsample.model.Employee;
+import org.jspresso.hrsample.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanFactory;
@@ -171,8 +170,36 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
 
     //
     // Create application doc
-    createAutoDocGraph("All entities and components", null, null);
-    createAutoDocGraph("All entities", null, AutoDocFilter.TYPE_ENTITY);
+    createAutoDocGraph("Main entities", null,
+            Employee.class.getSimpleName(),
+            User.class.getSimpleName(),
+            Team.class.getSimpleName(),
+            Department.class.getSimpleName(),
+            Company.class.getSimpleName());
+
+    createAutoDocGraph("Main entities 2", null,
+            Employee.class.getSimpleName(),
+            User.class.getSimpleName(),
+            Team.class.getSimpleName(),
+            Department.class.getSimpleName(),
+            Company.class.getSimpleName());
+
+    createAutoDocGraph("Main entities 3", null,
+            Employee.class.getSimpleName(),
+            User.class.getSimpleName(),
+            Team.class.getSimpleName(),
+            Department.class.getSimpleName(),
+            Company.class.getSimpleName());
+
+    createAutoDocGraph("Main entities 4", null,
+            Employee.class.getSimpleName(),
+            User.class.getSimpleName(),
+            Team.class.getSimpleName(),
+            Department.class.getSimpleName(),
+            Company.class.getSimpleName());
+
+//    createAutoDocGraph("All entities and components", null);
+//    createAutoDocGraph("All entities", AutoDocFilter.TYPE_ENTITY);
   }
   
   @SuppressWarnings("unused")
@@ -244,8 +271,6 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     module.getPivot();
     module.reloadPivotCriteria();
   }
-
-
 
   private PivotSetupField createPivotSetupField(PivotSetup pivotSetup, String fieldId, String fieldLabel, String frenchLabel, String customStyle, PivotStyleSet... parentStyles) {
 
@@ -336,14 +361,10 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     return furniture;
   }
 
-  private AutoDocGraph createAutoDocGraph(String label, String filterName, String filterType) {
+  private AutoDocGraph createAutoDocGraph(String label, String filterType, String... filterNames) {
 
     AutoDocGraph graph = createEntityInstance(AutoDocGraph.class);
     graph.setLabel(label);
-
-    AutoDocFilter filter = createComponentInstance(AutoDocFilter.class);
-    filter.setName(filterName);
-    filter.setType(filterType);
 
     AutoDocIndex instance = AutoDocIndex.getInstance();
     if (instance == null) {
@@ -355,8 +376,17 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
       session.putCustomValue(AutoDocIndex.AUTODOC_INDEX, instance);
     }
 
-    Set<MetaComponent> components = instance.findComponents(filter);
-    graph.setComponents(new ArrayList<>(components));
+    List<MetaComponent> components = new ArrayList<>();
+    AutoDocFilter filter = createComponentInstance(AutoDocFilter.class);
+    filter.setType(filterType);
+
+    for (String filterName : filterNames) {
+
+      filter.setName(filterName);
+      components.addAll(instance.findComponents(filter));
+    }
+
+    graph.setComponents(components);
 
     saveOrUpdate(graph);
     return graph;
