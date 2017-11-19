@@ -350,6 +350,7 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     graph.setLabel(label);
     graph.setMergeReverse(true);
     graph.setDisplayInheritence(true);
+    graph.setDisplayComputed(true);
 
     AutoDocIndex instance = AutoDocIndex.getInstance();
     if (instance == null) {
