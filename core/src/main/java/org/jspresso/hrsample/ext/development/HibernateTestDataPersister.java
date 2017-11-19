@@ -170,36 +170,19 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
 
     //
     // Create application doc
-    createAutoDocGraph("Main entities", null,
-            Employee.class.getSimpleName(),
-            User.class.getSimpleName(),
-            Team.class.getSimpleName(),
+    createAutoDocGraph("Company's organization", null,
+            Company.class.getSimpleName(),
+            OrganizationalUnit.class.getSimpleName(),
             Department.class.getSimpleName(),
-            Company.class.getSimpleName());
-
-    createAutoDocGraph("Main entities 2", null,
             Employee.class.getSimpleName(),
-            User.class.getSimpleName(),
-            Team.class.getSimpleName(),
-            Department.class.getSimpleName(),
-            Company.class.getSimpleName());
+            Team.class.getSimpleName());
 
-    createAutoDocGraph("Main entities 3", null,
-            Employee.class.getSimpleName(),
+    createAutoDocGraph("Admin", null,
             User.class.getSimpleName(),
-            Team.class.getSimpleName(),
-            Department.class.getSimpleName(),
-            Company.class.getSimpleName());
+            Role.class.getSimpleName(),
+            Employee.class.getSimpleName());
 
-    createAutoDocGraph("Main entities 4", null,
-            Employee.class.getSimpleName(),
-            User.class.getSimpleName(),
-            Team.class.getSimpleName(),
-            Department.class.getSimpleName(),
-            Company.class.getSimpleName());
-
-//    createAutoDocGraph("All entities and components", null);
-//    createAutoDocGraph("All entities", AutoDocFilter.TYPE_ENTITY);
+    createAutoDocGraph("All entities", AutoDocFilter.TYPE_ENTITY);
   }
   
   @SuppressWarnings("unused")
