@@ -308,3 +308,5 @@ actionMap('pivotModuleTableActionMap') {
   }
 }
 
+tabs('MyFilter.view', background: '0xFFC080C0',
+        parent: 'MyFilter.view.base')
