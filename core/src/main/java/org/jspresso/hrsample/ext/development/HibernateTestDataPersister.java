@@ -173,19 +173,19 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
 
     //
     // Create application doc
-    createAutoDocGraph("Company's organization", null,
+    createAutoDocGraph("Company's organization", true, null,
             Company.class.getSimpleName(),
             OrganizationalUnit.class.getSimpleName(),
             Department.class.getSimpleName(),
             Employee.class.getSimpleName(),
             Team.class.getSimpleName());
 
-    createAutoDocGraph("Admin", null,
+    createAutoDocGraph("Admin", true, null,
             User.class.getSimpleName(),
             Role.class.getSimpleName(),
             Employee.class.getSimpleName());
 
-    createAutoDocGraph("All entities", AutoDocFilter.TYPE_ENTITY);
+    createAutoDocGraph("All entities", false, AutoDocFilter.TYPE_ENTITY);
   }
   
   @SuppressWarnings("unused")
@@ -347,13 +347,13 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     return furniture;
   }
 
-  private AutoDocGraph createAutoDocGraph(String label, String filterType, String... filterNames) {
+  private AutoDocGraph createAutoDocGraph(String label, boolean displayComputed, String filterType, String... filterNames) {
 
     AutoDocGraph graph = createEntityInstance(AutoDocGraph.class);
     graph.setLabel(label);
     graph.setMergeReverse(true);
     graph.setDisplayInheritence(true);
-    graph.setDisplayComputed(true);
+    graph.setDisplayComputed(displayComputed);
 
     AutoDocIndex instance = AutoDocIndex.getInstance();
     if (instance == null) {
@@ -367,13 +367,19 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
 
     List<MetaComponent> components = new ArrayList<>();
     AutoDocFilter filter = createComponentInstance(AutoDocFilter.class);
-    filter.setType(filterType);
 
-    for (String filterName : filterNames) {
+    if (filterNames.length==0) {
 
-      filter.setName(filterName);
+      filter.setType(filterType);
       components.addAll(instance.findComponents(filter));
-    }                        
+    }
+    else {
+      for (String filterName : filterNames) {
+
+        filter.setName(filterName);
+        components.addAll(instance.findComponents(filter));
+      }
+    }
 
     graph.setComponents(components);
 
