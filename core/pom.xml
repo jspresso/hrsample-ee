@@ -57,11 +57,11 @@
 			<artifactId>hrsample-core</artifactId>
 		</dependency>
 
-    <!-- Jspresso pivot dependencies -->
-    <dependency>
-      <groupId>org.jspresso.framework</groupId>
-      <artifactId>jspresso-ext-pivot</artifactId>
-    </dependency>
+		<!-- Jspresso pivot dependencies -->
+		<dependency>
+		  <groupId>org.jspresso.framework</groupId>
+		  <artifactId>jspresso-ext-pivot</artifactId>
+		</dependency>
 
 		<!-- Jspresso-extensions dependencies -->
 		<dependency>
@@ -75,11 +75,17 @@
 			<artifactId>jspresso-usage-core</artifactId>
 		</dependency>
 
-    <!-- Captcha -->
-    <dependency>
-      <groupId>com.google.code.maven-play-plugin.org.playframework</groupId>
-      <artifactId>jj-simplecaptcha</artifactId>
-    </dependency>
+		<!-- Jspresso-autodoc dependencies -->
+		<dependency>
+			<groupId>org.jspresso.contrib</groupId>
+			<artifactId>jspresso-autodoc-core</artifactId>
+		</dependency>
+		
+		<!-- Captcha -->
+		<dependency>
+		  <groupId>com.google.code.maven-play-plugin.org.playframework</groupId>
+		  <artifactId>jj-simplecaptcha</artifactId>
+		</dependency>
 <!--     <dependency> -->
 <!--       <groupId>nl.captcha</groupId> -->
 <!--       <artifactId>simple-captcha</artifactId> -->
@@ -267,10 +273,10 @@
 									</components>
 									<includes>**/model/Traceable.java,
 										**/ext/model/*.java,
+										**/contrib/autodoc/model/*.java,
 										**/contrib/usage/model/*.java,
 										**/contrib/batch/model/*.java,
 										**/contrib/model/i18n/*.java,
-										**/contrib/model/autodoc/*.java,
 										**/contrib/model/query/*.java,
                    						**/contrib/model/tracking/*.java,
 										**/contrib/model/pivot/*.java
@@ -280,6 +286,7 @@
 							<sourceArtifacts>org.jspresso.hrsample:hrsample-core,
 								org.jspresso.contrib:jspresso-extensions-core,
 								org.jspresso.contrib:jspresso-usage-core,
+								org.jspresso.contrib:jspresso-autodoc-core,
 								org.jspresso.contrib:jspresso-batch-core</sourceArtifacts>
 						</configuration>
 					</execution>

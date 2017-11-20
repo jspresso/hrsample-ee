@@ -17,6 +17,7 @@
     <jspresso-extensions.version>4.0.0-SNAPSHOT</jspresso-extensions.version>
     <jspresso-crossitems.version>1.5-SNAPSHOT</jspresso-crossitems.version>
     <jspresso-usage.version>4.0.0-SNAPSHOT</jspresso-usage.version>
+    <jspresso-autodoc.version>4.0.0-SNAPSHOT</jspresso-autodoc.version>
     <groovy.version>2.3.7</groovy.version>
     <jspresso-tmar.version>1.10-SNAPSHOT</jspresso-tmar.version>
     <nl.captcha.version>1.1</nl.captcha.version>
@@ -160,6 +161,13 @@
         <groupId>org.jspresso.contrib</groupId>
         <artifactId>jspresso-usage-core</artifactId>
         <version>${jspresso-usage.version}</version>
+      </dependency>
+
+      <!-- Jspresso-autodoc dependencies -->
+      <dependency>
+        <groupId>org.jspresso.contrib</groupId>
+        <artifactId>jspresso-autodoc-core</artifactId>
+        <version>${jspresso-autodoc.version}</version>
       </dependency>
 
        <!-- Captcha -->

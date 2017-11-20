@@ -19,9 +19,8 @@
 package org.jspresso.hrsample.ext.webapp;
 
 import org.jspresso.framework.application.startup.development.AbstractTestDataContextListener;
-import org.springframework.beans.factory.BeanFactory;
-
 import org.jspresso.hrsample.ext.development.HibernateTestDataPersister;
+import org.springframework.beans.factory.BeanFactory;
 
 /**
  * A simple listener to hook in webapp startup and persist sample data.

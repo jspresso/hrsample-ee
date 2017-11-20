@@ -50,9 +50,10 @@
     <property
       name="basenames">
       <list>
-        <value>org.jspresso.contrib.usage.i18n.Messages</value>
         <value>org.jspresso.framework.ext.pivot.i18n.Messages</value>
         <value>org.jspresso.contrib.i18n.Messages</value>
+        <value>org.jspresso.contrib.usage.i18n.Messages</value>
+        <value>org.jspresso.contrib.autodoc.i18n.Messages</value>
         <value>org.jspresso.hrsample.i18n.Messages</value>
         <value>org.jspresso.hrsample.ext.i18n.Messages</value>
       </list>

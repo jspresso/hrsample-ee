@@ -18,10 +18,13 @@
  */
 package org.jspresso.hrsample.ext.development;
 
+import org.jspresso.contrib.autodoc.frontend.LoadAutoDocIndexFrontAction;
+import org.jspresso.contrib.autodoc.model.AutoDocFilter;
+import org.jspresso.contrib.autodoc.model.AutoDocGraph;
+import org.jspresso.contrib.autodoc.model.AutoDocIndex;
+import org.jspresso.contrib.autodoc.model.MetaComponent;
 import org.jspresso.contrib.backend.pivot.ExtendedPivotRefiner;
-import org.jspresso.contrib.frontend.autodoc.LoadAutoDocIndexFrontAction;
 import org.jspresso.contrib.model.TestDataHelper;
-import org.jspresso.contrib.model.autodoc.*;
 import org.jspresso.contrib.model.pivot.PivotSetup;
 import org.jspresso.contrib.model.pivot.PivotSetupField;
 import org.jspresso.contrib.model.pivot.PivotStyleSet;
@@ -370,7 +373,7 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
 
       filter.setName(filterName);
       components.addAll(instance.findComponents(filter));
-    }
+    }                        
 
     graph.setComponents(components);
 
