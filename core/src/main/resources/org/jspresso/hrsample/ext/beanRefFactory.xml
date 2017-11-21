@@ -123,8 +123,8 @@
 
         <value>org/jspresso/contrib/autodoc/model/dsl-model.xml</value>
         <value>org/jspresso/contrib/autodoc/model/model.xml</value>
-        <value>org/jspresso/contrib/autodoc/view/dsl-view.xml</value>
-        <value>org/jspresso/contrib/autodoc/view/view.xml</value>
+        <value>org/jspresso/contrib/autodoc/backend/dsl-backend.xml</value>
+        <value>org/jspresso/contrib/autodoc/backend/backend.xml</value>
 
         <value>org/jspresso/hrsample/model/dsl-model.xml</value>
         <value>org/jspresso/hrsample/model/model.xml</value>
