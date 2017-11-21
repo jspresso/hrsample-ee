@@ -173,7 +173,7 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
 
     //
     // Create application doc
-    createAutoDocGraph("Company's organization", true, null,
+    createAutoDocGraph("Company's organization", false, null,
             Company.class.getSimpleName(),
             OrganizationalUnit.class.getSimpleName(),
             Department.class.getSimpleName(),
