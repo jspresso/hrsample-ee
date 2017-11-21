@@ -17,7 +17,7 @@
     <jspresso-extensions.version>4.0.0-SNAPSHOT</jspresso-extensions.version>
     <jspresso-crossitems.version>1.5-SNAPSHOT</jspresso-crossitems.version>
     <jspresso-usage.version>4.0.0-SNAPSHOT</jspresso-usage.version>
-    <jspresso-autodoc.version>4.0.0-SNAPSHOT</jspresso-autodoc.version>
+    <jspresso-autodoc.version>1.0.0-SNAPSHOT</jspresso-autodoc.version>
     <groovy.version>2.3.7</groovy.version>
     <jspresso-tmar.version>1.10-SNAPSHOT</jspresso-tmar.version>
     <nl.captcha.version>1.1</nl.captcha.version>
