@@ -58,25 +58,25 @@ action ('manageAnyModuleEnterFrontAction',
 /*
  * Workspaces
  */
-workspace('statistics.workspace', icon:'tools.png') {
+workspace('statistics.workspace', icon: 'tools.png') {
 
-  pivotModule ('employee.statistics.module',
-
-    dimensions:['salary(40, 80, 100)',
-              'age(30, 40)',
-              'gender',
-              'managedOu.ouId',
-              //'managedOu.manager.name',
-              //'company.name',
-              'company.departments'],
-    measures:['ssn@count',
-              'salary@sum',
-              'salary@percentile90',
-              'bonus.encryptedValue@sum',
-              'company.budget.encryptedValue@sum',
-              'salary@average/managedOu.ouId'],
-    refiner:'employeePivotRefiner',
-    component:'Employee')
+  pivotModule('employee.statistics.module',
+          dimensions: ['salary(40, 80, 100)',
+                       'age(30, 40)',
+                       'gender',
+                       'managedOu.ouId',
+                       //'managedOu.manager.name',
+                       //'company.name',
+                       'company.departments'],
+          measures: ['ssn@count',
+                     'salary@sum',
+                     'salary@percentile90',
+                     'bonus.encryptedValue@sum',
+                     'company.budget.encryptedValue@sum',
+                     'salary@average/managedOu.ouId'],
+          refiner: 'employeePivotRefiner',
+          moduleView: 'employee.statistics.module.view',
+          component: 'Employee')
 
 }
 

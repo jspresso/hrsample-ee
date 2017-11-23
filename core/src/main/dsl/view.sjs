@@ -310,3 +310,34 @@ actionMap('pivotModuleTableActionMap') {
 
 tabs('MyFilter.view', background: '0xFFC080C0',
         parent: 'MyFilter.view.base')
+
+
+tabs('employee.statistics.module.view',
+        actionMap: 'pivotModuleActionMap') {
+
+  views {
+
+    pivotTable(cellAction: 'pivotCellSelectionToModuleListFrontAction')
+
+    table(parent: 'pivotBeanCollectionModuleView',
+            selectionMode: 'MULTIPLE_INTERVAL_CUMULATIVE_SELECTION', borderType: 'NONE',
+            rowAction: 'addEmployeesAsChildModuleFrontAction') {
+      actionMap {
+        actionList('ADD') {
+          action parent: 'checkAllLinesAction', booleanActionabilityGates: ['moduleObjects']
+          action parent: 'uncheckAllLinesAction', booleanActionabilityGates: ['moduleObjects']
+          action ref: 'addEmployeesAsChildModuleFrontAction'
+        }
+        actionList('EXPORT', collapsable: true) {
+          action ref: 'exportPivotModuleResultToHtmlAction'
+          action ref: 'exportPivotModuleResultToCsvAction'
+        }
+      }
+    }
+  }
+}
+
+action('addEmployeesAsChildModuleFrontAction',
+        parent: 'addAsChildModuleFrontAction',
+      custom: [parentWorkspaceName: 'employees.workspace',
+               parentModuleName:'employees.module'])
