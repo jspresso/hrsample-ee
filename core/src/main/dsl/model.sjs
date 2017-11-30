@@ -50,3 +50,15 @@ Interface ('IHRModificationTracker',
   html 'priceTooltip', computed: true, cacheable: true
   
 }
+
+namespace('userquery') {
+    
+  Component('UserSharingList',
+      processor: 'UserSharingListProcessor', 
+      services: ['UserSharingListService': 'UserSharingListServiceDelegate']) {
+  
+    list 'users', ref: 'User'
+    reference 'query', ref: 'UserQuery', processors: ['QueryProcessor']
+  }
+
+}

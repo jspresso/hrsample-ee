@@ -341,3 +341,46 @@ action('addEmployeesAsChildModuleFrontAction',
         parent: 'addAsChildModuleFrontAction',
       custom: [parentWorkspaceName: 'employees.workspace',
                parentModuleName:'employees.module'])
+
+actionMap('UserQueries.secondaryActionMap',
+        parents: ['UserQueries.secondaryActionMap.base']) {
+
+  actionList {
+    action ref:'editUserSharingListAction'
+  }
+}
+
+action('editUserSharingListAction',
+        parent: 'editComponentAction',
+        class: 'org.jspresso.hrsample.ext.frontend.userquery.EditUserSharingListAction',
+        collectionBased: true,
+        name:'editUserSharingListAction.name', description:'', icon: 'classpath:org/jspresso/hrsample/images/employees.png',
+        custom:[okAction_ref:'editUserSharingListOkAction',
+                viewDescriptor_ref:'UserSharingList.view'])
+
+border('UserSharingList.view') {
+  center {
+    table (model: 'UserSharingList-users') {
+      actionMap {
+        actionList {
+          action parent:'chooseEntityFrontAction', 
+                  custom:[selectionMode: 'MULTIPLE_INTERVAL_CUMULATIVE_SELECTION',
+                          createQueryComponentAction_ref: 'selectUsersForQuerySharingCreateQueryAction']
+          action ref: 'removeEntityCollectionFromMasterFrontAction'
+        }
+      }
+    }
+  }
+}
+
+action('editUserSharingListOkAction',
+  class: 'org.jspresso.hrsample.ext.frontend.userquery.EditUserSharingListOkAction',
+  name: 'ok', icon: 'classpath:org/jspresso/framework/application/images/ok-48x48.svg',
+  wrapped: 'closeDialogAction')
+
+action('selectUsersForQuerySharingCreateQueryAction',
+  class: 'org.jspresso.hrsample.ext.frontend.userquery.SelectUsersForQuerySharingCreateQueryAction')
+
+action('userQuerySharingCheckAction',
+  class: 'org.jspresso.hrsample.ext.frontend.userquery.UserQuerySharingCheckAction',
+  wrapped: 'editUserSharingListAction')
