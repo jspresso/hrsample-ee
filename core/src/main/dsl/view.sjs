@@ -363,18 +363,33 @@ action('editUserSharingListAction',
 
 border('UserSharingList.view') {
   center {
-    table (model: 'UserSharingList-users') {
+    table (model: 'UserSharingList-users', readOnly: true) {
       actionMap {
         actionList {
           action parent:'chooseEntityFrontAction',
+                  booleanActionabilityGates: ['query.mine'],
                   custom:[selectionMode: 'MULTIPLE_INTERVAL_CUMULATIVE_SELECTION',
-                          createQueryComponentAction_ref: 'selectUsersForQuerySharingCreateQueryAction']
-          action ref: 'removeEntityCollectionFromMasterFrontAction'
+                          createQueryComponentAction_ref: 'selectUsersForQuerySharingCreateQueryAction',
+                          findAction_ref:'sharingUserQueryFrontAction']
+          action parent: 'removeEntityCollectionFromMasterFrontAction',
+                  booleanActionabilityGates: ['query.mine']
         }
       }
     }
   }
 }
+
+action('sharingUserQueryFrontAction',
+        parent:'lovFindFrontAction') {
+  wrapped parent: 'lovFindBackAction', custom: ['queryAction_ref': 'sharingUserQueryBackAction']
+}
+
+action('sharingUserQueryBackAction',
+        parent: 'queryEntitiesBackAction',
+        custom: ['mergeMode': null, 'criteriaRefiner_ref':'sharingUserQueryRefiner'])
+
+bean('sharingUserQueryRefiner',
+        class:'org.jspresso.hrsample.ext.frontend.userquery.SharingUserQueryRefiner')
 
 action('editUserSharingListOkAction',
   class: 'org.jspresso.hrsample.ext.frontend.userquery.EditUserSharingListOkAction',
@@ -382,7 +397,7 @@ action('editUserSharingListOkAction',
   wrapped: 'closeDialogAction')
 
 action('selectUsersForQuerySharingCreateQueryAction',
-  class: 'org.jspresso.hrsample.ext.backend.SelectUsersForQuerySharingCreateQueryAction')
+  class: 'org.jspresso.hrsample.ext.backend.userquery.SelectUsersForQuerySharingCreateQueryAction')
 
 action('userQuerySharingCheckAction',
   class: 'org.jspresso.hrsample.ext.frontend.userquery.UserQuerySharingCheckAction',

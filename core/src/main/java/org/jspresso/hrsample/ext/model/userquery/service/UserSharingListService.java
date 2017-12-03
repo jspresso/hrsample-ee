@@ -10,7 +10,7 @@ public interface UserSharingListService {
     /**
      * SEPARATOR
      */
-    String SEP = "\n";
+    String SEP = " - ";
 
     /**
      * Update query from sharing string

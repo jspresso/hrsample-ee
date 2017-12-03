@@ -1,4 +1,4 @@
-package org.jspresso.hrsample.ext.backend;
+package org.jspresso.hrsample.ext.backend.userquery;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
@@ -52,7 +52,7 @@ public class SelectUsersForQuerySharingCreateQueryAction extends CreateQueryComp
         if (company == null)
             return;
 
-        queryComponent.put(Employee.COMPANY, company);
+        queryComponent.put(User.EMPLOYEE + '.' + Employee.COMPANY, company);
         super.completeQueryComponent(queryComponent, erqDescriptor, context);
     }
 

@@ -16,9 +16,10 @@
  *  You should have received a copy of the GNU Lesser General Public License
  *  along with Jspresso.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.jspresso.hrsample.ext.backend;
+package org.jspresso.hrsample.ext.backend.userquery;
 
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.jspresso.contrib.backend.query.UserQueriesHelper;
 import org.jspresso.contrib.model.query.UserQuery;
@@ -35,7 +36,7 @@ import static org.jspresso.hrsample.ext.model.userquery.service.UserSharingListS
 
 /**
  * User query helper implementation.
- * 
+ *
  *
  * @author Maxime HAMM
  */
@@ -65,7 +66,7 @@ public class UserQueriesPerUserHelper extends UserQueriesHelper {
     Subject subject = controller.getSubject();
     String mySharedGroup = getMySharedGroup(subject);
 
-    criteria.add(Restrictions.like(UserQuery.SHARED_STRING, "%" + SEP + mySharedGroup + SEP + "%"));
+    criteria.add(Restrictions.like(UserQuery.SHARED_STRING, SEP + mySharedGroup + SEP, MatchMode.ANYWHERE));
   }
 
 }

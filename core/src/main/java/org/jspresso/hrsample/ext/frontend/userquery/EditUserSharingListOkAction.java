@@ -23,7 +23,9 @@ public class EditUserSharingListOkAction<E, F, G> extends FrontendAction<E, F, G
         if (model instanceof UserSharingList) {
 
             UserSharingList sharingList = (UserSharingList) model;
-            sharingList.udpateQuery();
+
+            if (sharingList.getQuery().isMine())
+                sharingList.udpateQuery();
         }
 
         return super.execute(actionHandler, context);

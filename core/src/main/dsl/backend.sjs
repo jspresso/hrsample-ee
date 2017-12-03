@@ -15,10 +15,11 @@ external id:['pivotRefiner']
 bean('employeePivotRefiner', 
   parent:'pivotRefiner',
   class:'org.jspresso.hrsample.ext.backend.EmployeePivotRefiner') 
- 
+
+
 bean('userQueriesHelper', 
   parent:'userQueriesHelperBase', 
-  class:'org.jspresso.hrsample.ext.backend.UserQueriesPerUserHelper')
+  class:'org.jspresso.hrsample.ext.backend.userquery.UserQueriesPerUserHelper')
 
 bean('userQueriesPerOrganisationUnitHelper',
         parent:'userQueriesHelperBase',
