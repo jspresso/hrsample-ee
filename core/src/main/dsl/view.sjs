@@ -342,6 +342,9 @@ action('addEmployeesAsChildModuleFrontAction',
       custom: [parentWorkspaceName: 'employees.workspace',
                parentModuleName:'employees.module'])
 
+/***********************************************
+ * Manage User queries
+ */
 actionMap('UserQueries.secondaryActionMap',
         parents: ['UserQueries.secondaryActionMap.base']) {
 
@@ -363,7 +366,7 @@ border('UserSharingList.view') {
     table (model: 'UserSharingList-users') {
       actionMap {
         actionList {
-          action parent:'chooseEntityFrontAction', 
+          action parent:'chooseEntityFrontAction',
                   custom:[selectionMode: 'MULTIPLE_INTERVAL_CUMULATIVE_SELECTION',
                           createQueryComponentAction_ref: 'selectUsersForQuerySharingCreateQueryAction']
           action ref: 'removeEntityCollectionFromMasterFrontAction'
@@ -379,7 +382,7 @@ action('editUserSharingListOkAction',
   wrapped: 'closeDialogAction')
 
 action('selectUsersForQuerySharingCreateQueryAction',
-  class: 'org.jspresso.hrsample.ext.frontend.userquery.SelectUsersForQuerySharingCreateQueryAction')
+  class: 'org.jspresso.hrsample.ext.backend.SelectUsersForQuerySharingCreateQueryAction')
 
 action('userQuerySharingCheckAction',
   class: 'org.jspresso.hrsample.ext.frontend.userquery.UserQuerySharingCheckAction',

@@ -18,13 +18,6 @@
  */
 package org.jspresso.hrsample.ext.backend;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
-import javax.security.auth.Subject;
-
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -37,13 +30,19 @@ import org.jspresso.hrsample.model.Department;
 import org.jspresso.hrsample.model.Employee;
 import org.jspresso.hrsample.model.Team;
 
+import javax.security.auth.Subject;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
 /**
  * User query helper implementation.
  * Uses companies and organisation units.
  *
  * @author Maxime HAMM
  */
-public class UserQueriesHelper extends AbstractUserQueriesMatchingGroupsHelper {
+public class UserQueriesPerOrganisationUnitHelper extends AbstractUserQueriesMatchingGroupsHelper {
 
   /**
    * {@inheritDoc}

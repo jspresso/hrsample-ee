@@ -25,7 +25,6 @@
 
   <!--
     Application backend configuration.
-  -->
   <bean
     id="dataSource"
     class="org.apache.commons.dbcp2.BasicDataSource"
@@ -42,6 +41,11 @@
     <property
       name="password"
       value="" />
+  </bean>
+  -->
+
+  <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+    <property name="jndiName" value="java:comp/env/jdbc/hrsampleDS"/>
   </bean>
 
   <bean

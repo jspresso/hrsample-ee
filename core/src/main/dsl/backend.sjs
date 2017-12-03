@@ -18,7 +18,11 @@ bean('employeePivotRefiner',
  
 bean('userQueriesHelper', 
   parent:'userQueriesHelperBase', 
-  class:'org.jspresso.hrsample.ext.backend.UserQueriesHelper')
+  class:'org.jspresso.hrsample.ext.backend.UserQueriesPerUserHelper')
+
+bean('userQueriesPerOrganisationUnitHelper',
+        parent:'userQueriesHelperBase',
+        class:'org.jspresso.hrsample.ext.backend.UserQueriesPerOrganisationUnitHelper')
 
 bean('rememberMePropertyDescriptor',    
   class:'org.jspresso.framework.model.descriptor.basic.BasicBooleanPropertyDescriptor',

@@ -19,8 +19,12 @@ public class EditUserSharingListOkAction<E, F, G> extends FrontendAction<E, F, G
     @Override
     public boolean execute(IActionHandler actionHandler, Map<String, Object> context) {
 
-        UserSharingList sharingList = getModel(context);
-        sharingList.udpateQuery();
+        Object model = getModel(context);
+        if (model instanceof UserSharingList) {
+
+            UserSharingList sharingList = (UserSharingList) model;
+            sharingList.udpateQuery();
+        }
 
         return super.execute(actionHandler, context);
     }

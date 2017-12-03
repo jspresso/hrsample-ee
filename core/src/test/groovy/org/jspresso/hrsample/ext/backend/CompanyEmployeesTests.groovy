@@ -3,8 +3,7 @@ package org.jspresso.hrsample.ext.backend
 import org.hibernate.criterion.DetachedCriteria
 import org.hibernate.criterion.Restrictions
 import org.jspresso.contrib.backend.tmar.TmarParameters
-import org.jspresso.contrib.frontend.ImportExportUtils;
-import org.jspresso.contrib.test.backend.tmar.TmarPlus
+import org.jspresso.contrib.frontend.ImportExportUtils
 import org.jspresso.framework.application.backend.BackendControllerHolder
 import org.jspresso.framework.application.backend.session.EMergeMode
 import org.jspresso.framework.model.descriptor.IComponentDescriptor
@@ -12,13 +11,10 @@ import org.jspresso.framework.model.entity.IEntity
 import org.jspresso.framework.util.accessor.IAccessor
 import org.jspresso.framework.util.accessor.IAccessorFactory
 import org.jspresso.framework.util.uid.ByteArray
-import org.jspresso.hrsample.model.City;
-import org.jspresso.hrsample.model.Company;
-import org.jspresso.hrsample.model.Department;
-import org.jspresso.hrsample.model.Employee;
-import org.jspresso.hrsample.model.Team;
-import org.junit.After;
-import org.junit.Test;
+import org.jspresso.hrsample.model.City
+import org.jspresso.hrsample.model.Company
+import org.junit.After
+import org.junit.Test
 
 class CompanyEmployeesTests extends TmarBackendStartup {
 

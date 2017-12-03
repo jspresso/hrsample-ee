@@ -30,10 +30,10 @@ public class UserSharingListServiceDelegate extends AbstractComponentServiceDele
 
         StringBuilder sb = new StringBuilder();
         for (User user : users) {
-            if (sb.length()>0)
-                sb.append(SEP);
+            sb.append(SEP);
             sb.append(user.getLogin());
         }
+        sb.append(SEP);
 
         sharingList.getQuery().setSharedString(sb.toString());
     }

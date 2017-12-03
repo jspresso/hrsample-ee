@@ -1,4 +1,4 @@
-package org.jspresso.hrsample.ext.frontend.userquery;
+package org.jspresso.hrsample.ext.backend;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
