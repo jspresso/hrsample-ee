@@ -6,6 +6,7 @@ import org.jspresso.contrib.backend.pivot.ExtendedPivotRefiner;
 import org.jspresso.contrib.model.pivot.PivotSetup
 import org.jspresso.contrib.model.pivot.PivotSetupField
 import org.jspresso.contrib.model.pivot.PivotStyleSet
+import org.jspresso.contrib.test.backend.tmar.TmarValidation
 import org.jspresso.contrib.tmar.core.TmarDataSequence
 import org.jspresso.framework.application.backend.BackendControllerHolder
 import org.jspresso.framework.application.backend.persistence.hibernate.HibernateBackendController
@@ -37,7 +38,7 @@ class PivotAdmin extends TmarBackendStartup {
   
       if (l == 1)
         loadStyles(tmar)
-      
+
       // create and load pivot setup
       PivotSetup pivotSetup = createPivotSetup(tmar)
 
@@ -47,8 +48,9 @@ class PivotAdmin extends TmarBackendStartup {
       // prepare assertions
       tmar.globalFullStyle = PivotHelper.stylesMapToString(pivotSetup.getFullStyleAsMap())
       if (tmar.measure !=null) {
-        
-        Map<String, String> styles = module.getPivotRefiner().getCrossItems().getMeasureStyleAsMapAttributes(tmar.measure)
+
+        def measure2 = PivotHelper.formatField4CrossItems(tmar.measure)
+        Map<String, String> styles = module.getPivotRefiner().getCrossItems().getMeasureStyleAsMapAttributes(measure2)
         if (styles!=null)
           tmar.crossItemsStyle = PivotHelper.stylesMapToString(styles)
       }
@@ -82,6 +84,7 @@ class PivotAdmin extends TmarBackendStartup {
   protected PivotSetup createPivotSetup(tmar) {
     return createPivotSetup(tmar, true, true, true)
   }
+  @TmarValidation('test')
   protected PivotSetup createPivotSetup(tmar, boolean useGlobalParent, boolean useGlobalCustom, boolean useCustom) {
     
     // create entity
