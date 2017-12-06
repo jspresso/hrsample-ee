@@ -18,24 +18,24 @@
 <!-- The contents of this file will be loaded for each web application -->
 <Context>
 
-    <!-- Default set of monitored resources -->
-    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+  <!-- Default set of monitored resources -->
+  <WatchedResource>WEB-INF/web.xml</WatchedResource>
 
-    <!-- Uncomment this to disable session persistence across Tomcat restarts -->
-    <!--
-    <Manager pathname="" />
-    -->
+  <!-- Uncomment this to disable session persistence across Tomcat restarts -->
+  <!--
+  <Manager pathname="" />
+  -->
 
-    <!-- Uncomment this to enable Comet connection tacking (provides events
-         on session expiration as well as webapp lifecycle) -->
-    <!--
-    <Valve className="org.apache.catalina.valves.CometConnectionManagerValve" />
-    -->
-    
-    <Resource name="jdbc/hrsampleDS" auth="Container" type="javax.sql.DataSource"
-       maxActive="100" maxIdle="30" maxWait="10000"
-       username="sa" password="sa" driverClassName="org.hsqldb.jdbcDriver"
-       url="jdbc:hsqldb:mem:hrsample"/>
+  <!-- Uncomment this to enable Comet connection tacking (provides events
+       on session expiration as well as webapp lifecycle) -->
+  <!--
+  <Valve className="org.apache.catalina.valves.CometConnectionManagerValve" />
+  -->
+
+  <Resource name="jdbc/hrsampleDS" auth="Container" type="javax.sql.DataSource"
+            maxTotal="100" maxIdle="30" maxWaitMillis="10000"
+            username="sa" password="sa" driverClassName="org.hsqldb.jdbcDriver"
+            url="jdbc:hsqldb:mem:hrsample"/>
 
 
 </Context>
