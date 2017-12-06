@@ -71,7 +71,7 @@ public class JspressoNavigationToModuleTest extends FrontTestStartup {
     context.originModuleId = "Employee.test.module";
     context.originPermId = "Employee.test.view--east--name";
     
-    doNavigationModuleAction(context, "employees.module", "Berlutti Graziella");
+    doNavigationModuleAction(context, "employees.module", "Acme1 Acme1");
 
   }
   
@@ -116,7 +116,7 @@ public class JspressoNavigationToModuleTest extends FrontTestStartup {
     context.originModuleId = "Employee.test.module";
     context.originPermId = "Employee.test.view--east--name.actionMap";
     
-    doNavigationModuleAction(context, "employees.module", "Berlutti Graziella");
+    doNavigationModuleAction(context, "employees.module", "Acme1 Acme1");
 
   }
   
@@ -131,7 +131,7 @@ public class JspressoNavigationToModuleTest extends FrontTestStartup {
     helper.originModuleId = "Employee.test.module";
     helper.originPermId = "Employee.test.view--east--company";
     
-    doNavigationModuleAction(helper, "companies.module", "Design2See");
+    doNavigationModuleAction(helper, "companies.module", "Acme");
 
   }
   
@@ -146,7 +146,7 @@ public class JspressoNavigationToModuleTest extends FrontTestStartup {
     helper.originModuleId = "Employee.test.module";
     helper.originPermId = "Employee.test.view--east--company.actionMap";
     
-    doNavigationModuleAction(helper, "companies.module", "Design2See");
+    doNavigationModuleAction(helper, "companies.module", "Acme");
 
   }
   
@@ -161,7 +161,7 @@ public class JspressoNavigationToModuleTest extends FrontTestStartup {
     helper.originModuleId = "Employee.test.module";
     helper.originPermId = "Employee.test.view--east--actionMap";
     
-    doNavigationModuleAction(helper, "employees.module", "Berlutti Graziella");
+    doNavigationModuleAction(helper, "employees.module", "Acme1 Acme1");
   }
 
   /**
