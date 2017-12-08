@@ -142,22 +142,22 @@ public class FrontTestStartup extends RemoteStartup {
   }
 
   /**
-   * Returns the "hrsample-remote-context" value.
+   * Returns the "hrsample-remote-test-context" value.
    * <p>
    * {@inheritDoc}
    */
   @Override
   protected String getApplicationContextKey() {
-    return "hrsample-ext-remote-context";
+    return "hrsample-ext-frontend-test-context";
   }
 
   /**
-   * Returns "org/jspresso/hrsample/beanRefFactory.xml".
+   * Returns "org/jspresso/hrsample/ext/beanRefFactoryTest.xml".
    * <p>
    * {@inheritDoc}
    */
   @Override
   protected String getBeanFactorySelector() {
-    return "org/jspresso/hrsample/ext/beanRefFactory.xml";
+    return "org/jspresso/hrsample/ext/beanRefFactoryTest.xml";
   }
 }

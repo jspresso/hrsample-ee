@@ -38,17 +38,17 @@ public class TmarBackendStartup extends AbstractTmar4JUnitBackendStartup {
    */
   @Override
   protected String getApplicationContextKey() {
-    return "hrsample-ext-backend-context";
+    return "hrsample-ext-backend-test-context";
   }
 
   /**
-   * Returns "org/jspresso/hrsample/ext/beanRefFactory.xml".
+   * Returns "org/jspresso/hrsample/ext/beanRefFactoryTest.xml".
    * <p>
    * {@inheritDoc}
    */
   @Override
   protected String getBeanFactorySelector() {
-    return "org/jspresso/hrsample/ext/beanRefFactory.xml";
+    return "org/jspresso/hrsample/ext/beanRefFactoryTest.xml";
   }
   
   /**

@@ -23,8 +23,25 @@
   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
   default-lazy-init="true">
 
-  <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-    <property name="jndiName" value="java:comp/env/jdbc/hrsampleDS"/>
+  <!--
+    Application backend configuration.
+  -->
+  <bean
+    id="dataSource"
+    class="org.apache.commons.dbcp2.BasicDataSource"
+    destroy-method="close">
+    <property
+      name="driverClassName"
+      value="org.hsqldb.jdbcDriver" />
+    <property
+      name="url"
+      value="jdbc:hsqldb:mem:hrsample-ext" />
+    <property
+      name="username"
+      value="sa" />
+    <property
+      name="password"
+      value="" />
   </bean>
 
   <bean
