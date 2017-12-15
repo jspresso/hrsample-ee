@@ -51,6 +51,7 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
   private static final Logger LOGGER = LoggerFactory.getLogger(HibernateTestDataPersister.class);
 
   private BeanFactory beanFactory = null;
+  private Random random = new Random();
 
   /**
    * Constructs a new <code>TestDataPersister</code> instance.
@@ -81,25 +82,27 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     }
 
     try {
+      int more = 1;
+
       // furniture workspace
-      createModuleUsages("furniture.module", "Tom", 365, 45, 30);
-      createModuleUsages("furniture.module", "Bob", 230, 20, 10);
-      createModuleUsages("furniture.module", "Alice", 30, 0, 20);
+      createModuleUsages("tools.workspace/furniture.module", "Tom", 365, 5, 30*more);
+      createModuleUsages("tools.workspace/furniture.module", "Bob", 130, 2, 10*more);
+      createModuleUsages("tools.workspace/furniture.module", "Alice", 30, 0, 20*more);
 
       // organization workspace
-      createModuleUsages("companies.module", "Tom", 365, 3, 10);
-      createModuleUsages("companies.module", "Bob", 365, 0, 15);
-      createModuleUsages("companies.module", "Alice", 2, 0, 20);
+      createModuleUsages("organization.workspace/companies.module", "Tom", 180, 3, 10*more);
+      createModuleUsages("organization.workspace/companies.module", "Bob", 90, 0, 15*more);
+      createModuleUsages("organization.workspace/companies.module", "Alice", 2, 0, 20*more);
 
       // employees workspace
-      createModuleUsages("employees.module", "Tom", 365, 0, 15);
-      createModuleUsages("employees.module", "Bob", 2, 0, 20);
-      createModuleUsages("employees.module", "Alice", 120, 60, 15);
+      createModuleUsages("employees.workspace/employees.module", "Tom", 100, 0, 15*more);
+      createModuleUsages("employees.workspace/employees.module", "Bob", 2, 0, 20*more);
+      createModuleUsages("employees.workspace/employees.module", "Alice", 120, 60, 15*more);
 
       // masterdata workspace
-      createModuleUsages("masterdata.cities.module", "Tom", 30, 3, 16);
-      createModuleUsages("masterdata.cities.module", "Bob", 40, 8, 10);
-      createModuleUsages("masterdata.cities.module", "Alice", 2, 0, 10);
+      createModuleUsages("masterdata.workspace/masterdata.cities.module", "Tom", 20, 3, 16*more);
+      createModuleUsages("masterdata.workspace/masterdata.cities.module", "Bob", 40, 8, 10*more);
+      createModuleUsages("masterdata.workspace/masterdata.cities.module", "Alice", 2, 0, 10*more);
 
     } catch (Throwable ex) {
       // In no way the test data persister should make the application
@@ -401,13 +404,14 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     for (IEntity entity : entities)
       saveOrUpdate(entity);
   }
-  private static List<IEntity> createModuleUsages(String moduleId, String accessBy, int fromDaysAgo, int toDaysAgo, int accessCount, IEntityFactory entityFactory) {
+
+  private List<IEntity> createModuleUsages(String moduleId, String accessBy, int fromDaysAgo, int toDaysAgo, int accessCount, IEntityFactory entityFactory) {
 
     List<IEntity> entities = new ArrayList<>();
-    for (int i = 0; i < accessCount; i++) {
+     for (int i = 0; i < accessCount; i++) {
       Calendar cal = Calendar.getInstance();
       cal.add(Calendar.DAY_OF_YEAR,
-          -new Random().nextInt(fromDaysAgo - toDaysAgo) - toDaysAgo);
+          -random.nextInt(fromDaysAgo - toDaysAgo) - toDaysAgo);
 
       ModuleUsage mu = entityFactory.createEntityInstance(ModuleUsage.class);
       mu.setModuleId(moduleId);
