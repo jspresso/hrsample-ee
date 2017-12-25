@@ -62,3 +62,12 @@ namespace('userquery') {
   }
 
 }
+
+Component('ModuleUsageExt',
+        extend: ['IModuleUsage']) {
+
+  reference 'user', ref:'User'
+  reference 'workspace', ref:'MUWorkspace'
+  reference 'module', ref:'MUModule'
+
+}

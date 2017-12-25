@@ -402,3 +402,11 @@ action('selectUsersForQuerySharingCreateQueryAction',
 action('userQuerySharingCheckAction',
   class: 'org.jspresso.hrsample.ext.frontend.userquery.UserQuerySharingCheckAction',
   wrapped: 'editUserSharingListAction')
+
+action ('muExportAllDataProcessFrontAction',
+        parent: 'muExportAllDataProcessBaseFrontAction',
+        class: 'org.jspresso.hrsample.ext.frontend.MuExportAllDataProcessExtFrontAction',
+        custom: [descriptor_ref:'ModuleUsageExt',
+                 fields:['moduleId', 'accessDate', 'accessBy',
+                         'user.employee.name', 'user.employee.firstName',
+                         'workspace.label', 'module.label' ]])
