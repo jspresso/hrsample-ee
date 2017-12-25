@@ -85,24 +85,24 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
       int more = 1;
 
       // furniture workspace
-      createModuleUsages("tools.workspace/furniture.module", "Tom", 365, 5, 30*more);
-      createModuleUsages("tools.workspace/furniture.module", "Bob", 130, 2, 10*more);
-      createModuleUsages("tools.workspace/furniture.module", "Alice", 30, 0, 20*more);
+      createModuleUsages("tools.workspace/furniture.module", "demo", 365, 5, 30*more);
+      createModuleUsages("tools.workspace/furniture.module", "doepass", 130, 2, 10*more);
+      createModuleUsages("tools.workspace/furniture.module", "denpass", 30, 0, 20*more);
 
       // organization workspace
-      createModuleUsages("organization.workspace/companies.module", "Tom", 180, 3, 10*more);
-      createModuleUsages("organization.workspace/companies.module", "Bob", 90, 0, 15*more);
-      createModuleUsages("organization.workspace/companies.module", "Alice", 2, 0, 20*more);
+      createModuleUsages("organization.workspace/companies.module", "demo", 180, 3, 10*more);
+      createModuleUsages("organization.workspace/companies.module", "doepass", 90, 0, 15*more);
+      createModuleUsages("organization.workspace/companies.module", "denpass", 2, 0, 20*more);
 
       // employees workspace
       createModuleUsages("employees.workspace/employees.module", "Tom", 100, 0, 15*more);
-      createModuleUsages("employees.workspace/employees.module", "Bob", 2, 0, 20*more);
-      createModuleUsages("employees.workspace/employees.module", "Alice", 120, 60, 15*more);
+      createModuleUsages("employees.workspace/employees.module", "doepass", 2, 0, 20*more);
+      createModuleUsages("employees.workspace/employees.module", "denpass", 120, 60, 15*more);
 
       // masterdata workspace
-      createModuleUsages("masterdata.workspace/masterdata.cities.module", "Tom", 20, 3, 16*more);
-      createModuleUsages("masterdata.workspace/masterdata.cities.module", "Bob", 40, 8, 10*more);
-      createModuleUsages("masterdata.workspace/masterdata.cities.module", "Alice", 2, 0, 10*more);
+      createModuleUsages("masterdata.workspace/masterdata.geography.module/masterdata.cities.module", "demo", 20, 3, 16*more);
+      createModuleUsages("masterdata.workspace/masterdata.geography.module/masterdata.cities.module", "doepass", 40, 8, 10*more);
+      createModuleUsages("masterdata.workspace/masterdata.geography.module/masterdata.cities.module", "denpass", 2, 0, 10*more);
 
     } catch (Throwable ex) {
       // In no way the test data persister should make the application
