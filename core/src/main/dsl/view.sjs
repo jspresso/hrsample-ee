@@ -159,7 +159,6 @@ border ('Employee.test.view', cascadingModels:true, borderType:'TITLED', name:'e
         propertyView name:'contact.address', readOnly:true
         propertyView name:'contact.city', readOnly:true
         propertyView name:'contact.phone', readOnly:true
-        propertyView name:'contact.phone', readOnly:true
 
         // FOR UNIT TEST ONLY : @See JspressoNavigationToModuleTest
         propertyView name:'name', actionMap:'navigateToModuleActionMap', permId:'Employee.test.view--table--name.actionMap', grantedRoles:['test']
