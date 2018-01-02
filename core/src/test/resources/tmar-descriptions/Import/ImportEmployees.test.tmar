@@ -1,0 +1,50 @@
+Import Employees
+
+Import
+
+/sequence
+
+_Step 1 : Check user doesn't exists yet
+    /inline
+    [ Employee name ] Jobs |
+    [ Employee first name ] Steve |
+
+    [ Employee exists ? ] false |
+    /endInline
+
+_Step 2 : Import a CVS file and check user exists and correctly initialized
+
+    /inline
+        [ import file ] """
+        Employee;;;;;;;;;
+        Company;Name;First name;Gender;Birth date;Localisation - Address;Localisation - City;Localisation - Phone;Teams;Zip code
+        Apple;Jobs;Steve;Male;1955/02/24 00:00;Alta Mesa Memorial Park;Palo Alto;+001 404 404 404;One more thing;9000
+        """ |
+
+    Assert employee exists :
+
+        [ Employee name ] Jobs |
+        [ Employee first name ] Steve |
+        [ Employee exists ? ] true |
+
+    Assert employee properties well initialized :
+        [ Employee gender ? ] Male |
+        [ Employee birthdate ? ] 1955/02/24 |
+
+    Assert address created and check that the newly created user uses this address :
+
+        [ Employee address ? ] Palo Alto - Alta Mesa Memorial Park - 9000 - +001 404 404 404 \
+
+    Assert the new user is member of team expected team :
+        [ Employee teams ? ] One more thing |
+
+    /endInline
+
+That's it
+
+
+
+
+
+
+
