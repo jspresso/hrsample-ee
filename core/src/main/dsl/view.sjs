@@ -125,7 +125,7 @@ actionMap('masterDetailActionMap') {
 border ('Employee.test.view', cascadingModels:true, borderType:'TITLED', name:'employees.module') {
   center {
     table {
-       actionMap {
+       actionMap (permId: 'Employee.test.view--actionMap'){
         actionList('FILE', renderingOptions:'ICON'){
           action ref:'queryModuleFilterAction'
           //action ref:'addAsChildModuleFrontAction'
@@ -140,8 +140,7 @@ border ('Employee.test.view', cascadingModels:true, borderType:'TITLED', name:'e
         actionList('EXPORT') {
           action parent:'exportFilterModuleResultToHtmlAction',
                     custom:[hideMyExportPopup:false, hideMoreColumnsPopup:false, moreColumnsOneToManyDepth:4]
-          action parent:'importEmployeeBoxAction',
-                    custom:[mergeFields:['name', 'firstName'], extraColumns:['zip'], additionalFields:['teams']]
+          action ref: 'importEmployeesBoxAction'
         }
         actionList('TMAR', collapsable:true) {
           action ref:'exportAllToTmarRecursivelyAction'
@@ -218,9 +217,11 @@ border ('Employee.test.view', cascadingModels:true, borderType:'TITLED', name:'e
   }
 }
 
-action ('importEmployeeBoxAction',
-  parent:'importBoxAction',
-  custom:[okAction_ref:'importEmployeeBoxOkAction'])
+action('importEmployeesBoxAction', parent: 'importBoxAction',
+        custom: [mergeFields: ['name', 'firstName'],
+                 extraColumns: ['zip'],
+                 additionalFields: ['teams'],
+                 okAction_ref:'importEmployeeBoxOkAction'])
 
 action ('importEmployeeBoxOkAction',
   parent:'importBoxOkAction',
@@ -409,3 +410,8 @@ action ('muExportAllDataProcessFrontAction',
                  fields:['moduleId', 'accessDate', 'accessBy',
                          'user.employee.name', 'user.employee.firstName',
                          'workspace.label', 'module.label' ]])
+
+/**
+ * For tests only
+ */
+

@@ -37,6 +37,7 @@ import org.jspresso.framework.util.spring.ThisApplicationContextFactoryBean;
 import org.jspresso.framework.view.IView;
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.context.ApplicationContext;
 
@@ -358,7 +359,7 @@ public class JspressoNavigationToModuleTest extends FrontTestStartup {
     // load app'
     IFrontendController<RComponent, RIcon, RAction> frontendController = getFrontendController();
     
-    // find test module 
+    // find module
     FactoryBean<ApplicationContext> refContext = getApplicationContext().getBean(ThisApplicationContextFactoryBean.class);
     ApplicationContext context;
     try {
