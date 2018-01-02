@@ -3,12 +3,18 @@ package org.jspresso.hrsample.ext.frontend
 import org.hibernate.criterion.DetachedCriteria
 import org.hibernate.criterion.Restrictions
 import org.jspresso.contrib.frontend.ImportBoxFrontAction
+import org.jspresso.contrib.frontend.ImportBoxOkFrontAction
+import org.jspresso.contrib.frontend.ImportEntitiesFactoryBean
 import org.jspresso.contrib.model.ModuleUtils
 import org.jspresso.contrib.test.frontend.FrontendTestHelper
 import org.jspresso.contrib.tmar.core.Tmar4JUnit
 import org.jspresso.framework.action.IAction
+import org.jspresso.framework.action.IActionHandler
 import org.jspresso.framework.application.backend.session.EMergeMode
 import org.jspresso.framework.application.frontend.IFrontendController
+import org.jspresso.framework.application.frontend.action.FrontendAction
+import org.jspresso.framework.application.frontend.action.swing.file.OpenFileAction
+import org.jspresso.framework.application.frontend.file.IFileOpenCallback
 import org.jspresso.framework.application.model.FilterableBeanCollectionModule
 import org.jspresso.framework.application.model.Module
 import org.jspresso.framework.gui.remote.RAction
@@ -57,6 +63,8 @@ class ImportEmployees extends TmarFrontendStartup {
         // clean up blank at begining
         StringBuilder sb = new StringBuilder();
         for (String line : fileContent.split("\\n")) {
+            if (sb.size()>0)
+                sb.append('\n');
             sb.append(line.trim());
         }
         fileContent = sb.toString();
@@ -91,23 +99,24 @@ class ImportEmployees extends TmarFrontendStartup {
         focused = helper.findComponent(currentModuleView, "importEmployeesBoxAction");
         helper.executeAction(focused.peer, focused, frontendController);
 
-        // adapt import to use string content instead of file content
-        IAction importOkAction = getApplicationContext().getBean("importEmployeeBoxOkAction");
-        currentModuleView = frontendController.getInitialActionContext().get("DIALOG_VIEW")
-//        focused = helper.findComponent(currentModuleView, "importEmployeesBoxAction");
-//        helper.executeAction(importOkAction, focused, frontendController);
+        // trick the 'ok' button
+        ImportBoxOkFrontAction importOkAction = getApplicationContext().getBean("importEmployeeBoxOkAction");
+        ImportEntitiesFactoryBean openCallback = importOkAction.getNextAction(null).fileOpenCallbackAction.fileOpenCallback
+        IAction tricky = new FrontendAction() {
+            @Override
+            boolean execute(IActionHandler actionHandler, Map<String, Object> ctxt) {
 
+                InputStream inputStream = new ByteArrayInputStream(fileContent.getBytes("UTF8"))
+                openCallback.fileChosen("Nop", inputStream, actionHandler, ctxt)
+            }
+        }
+        importOkAction.setNextAction(tricky);
+
+        // click to 'ok' button
         IRemotePeerRegistry remotePeerRegistry = (IRemotePeerRegistry)frontendController;
         RAction raction = (RAction) remotePeerRegistry.getRegisteredForPermId(importOkAction.getPermId());
 
         raction.actionPerformed(new RActionEvent(), null);
-
-        // do import
-        // raise action
-//        focused = helper.findComponent(currentModuleView, "importEmployeesBoxAction");
-//        helper.executeAction((RAction)focused.peer, focused, frontendController);
-
-//        getFrontendController().execute(importAction, getFrontendController().getInitialActionContext());
 
     }
     private Employee findEmployee(String name, String firstName) {
