@@ -1,10 +1,28 @@
 Import Employees
 
-Import
+#Import a CSV file to create
+  * A new user 'Steve Jobs'
+  * Create the 'Palo Alto' city at the same time
+  * Add Steve Jobs to 'Lisa' and 'Macintosh' teams
 
-/sequence
+#Prepare master data
 
-_Step 1 : Check user doesn't exists yet
+   /table company
+    [ @id  | name  |
+    | AAPL | Apple |
+
+   /table department
+    [ @ou id | name         | @company |
+    | MI-000 | Micro systems| AAPL     |
+
+   /table team
+    [ @ou id  | name      | @department |
+    | LI-000  | Lisa      | MI-000      |
+    | MC-000  | Macintosh | MI-000      |
+
+#Step 1 : Check user doesn't exists yet
+
+    /sequence
     /inline
     [ Employee name ] Jobs |
     [ Employee first name ] Steve |
@@ -12,18 +30,13 @@ _Step 1 : Check user doesn't exists yet
     [ Employee exists ? ] false |
     /endInline
 
-_Step 2 : Import a CVS file and check user exists and correctly initialized
+#Step 2 : Import a CVS file and check user exists and correctly initialized
 
     /inline
-//        [ import file ] """
-//        Employee;;;;;;;;;
-//        Company;Name;First name;Gender;Birth date;Localisation - Address;Localisation - City;Localisation - Phone;Teams;Zip code
-//        Apple;Jobs;Steve;Male;1955/02/24 00:00;Alta Mesa Memorial Park;Palo Alto;+001 404 404 404;One more thing;9000
-//        """ |
         [ import file ] """
         Employee;;;;;;;;;
         Company;Name;First name;Gender;Birth date;Localisation - Address;Localisation - City;Localisation - Phone;Teams;Zip code
-        Apple;Jobs;Steve;Male;1955/02/24 00:00;Alta Mesa Memorial Park;Palo Alto;+001 404 404 404;;9000
+        Apple;Jobs;Steve;Male;1955/02/24 00:00;Alta Mesa Memorial Park;Palo Alto;+001 404 404 404;LI-000;9000
         """ |
 
     Assert employee exists :
@@ -41,11 +54,11 @@ _Step 2 : Import a CVS file and check user exists and correctly initialized
         [ Employee address ? ] Palo Alto - Alta Mesa Memorial Park - 9000 - +001 404 404 404 |
 
     Assert the new user is member of team expected team :
-        [ Employee teams ? ] One more thing |
+        [ Employee teams ? ] Lisa |
 
     /endInline
 
-That's it
+That's it !
 
 
 

@@ -22,6 +22,7 @@ import org.jspresso.framework.util.spring.ThisApplicationContextFactoryBean
 import org.jspresso.framework.view.IView
 import org.jspresso.hrsample.model.ContactInfo
 import org.jspresso.hrsample.model.Employee
+import org.jspresso.hrsample.model.Team
 import org.junit.Test
 import org.springframework.beans.factory.FactoryBean
 import org.springframework.context.ApplicationContext
@@ -33,7 +34,16 @@ class ImportEmployees extends TmarFrontendStartup {
     @Test
     void test() {
 
-        eachIteration('test') { tmar ->
+        eachIterationWithIndex('test') { tmar, iterationNumber ->
+
+            // Create master data
+            if (iterationNumber == 1) {
+                createEntities(
+                        [Company: tmar.table.company,
+                         Department: tmar.table.department,
+                         Team: tmar.table.team])
+
+            }
 
             // import csv
             if (tmar.importFile != null) {
@@ -50,11 +60,10 @@ class ImportEmployees extends TmarFrontendStartup {
                 tmar.employeeGender = "M".equals(employee.getGender()) ? "Male" : "Female"
                 tmar.employeeBirthdate = formatDate(employee.getBirthDate())
                 tmar.employeeAddress = formatContact(employee.getContact())
-                tmar.employeeTeams = employee.getTeams()
+                tmar.employeeTeams = formatTeams(employee.getTeams())
             }
         }
     }
-
 
 
 
@@ -147,4 +156,15 @@ class ImportEmployees extends TmarFrontendStartup {
           .append(contact.phone)
         return sb.toString()
     }
+
+    private static String formatTeams(Set<Team> teams) {
+        StringBuilder sb = new StringBuilder()
+        for (Team team : teams) {
+            if (sb.size()>0)
+                sb.append(', ')
+            sb.append(team.name)
+        }
+        return sb.toString()
+    }
+
 }
