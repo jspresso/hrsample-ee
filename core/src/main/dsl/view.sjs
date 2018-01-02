@@ -131,7 +131,7 @@ border ('Employee.test.view', cascadingModels:true, borderType:'TITLED', name:'e
           //action ref:'addAsChildModuleFrontAction'
           action parent:'navigateToModuleFrontAction', permId:'Employee.test.view--table--actionMap',
                  icon:'classpath:/org/jspresso/framework/application/images/view-48x48.png'
-          action ref:'saveModuleObjectFrontAction'
+          action parent:'saveModuleObjectFrontAction', permId: 'Employee.test.view--saveModuleObjectFrontAction'
           action ref:'reloadModuleObjectFrontAction'
         }
         actionList('CRITERIA') {

@@ -15,10 +15,15 @@ _Step 1 : Check user doesn't exists yet
 _Step 2 : Import a CVS file and check user exists and correctly initialized
 
     /inline
+//        [ import file ] """
+//        Employee;;;;;;;;;
+//        Company;Name;First name;Gender;Birth date;Localisation - Address;Localisation - City;Localisation - Phone;Teams;Zip code
+//        Apple;Jobs;Steve;Male;1955/02/24 00:00;Alta Mesa Memorial Park;Palo Alto;+001 404 404 404;One more thing;9000
+//        """ |
         [ import file ] """
         Employee;;;;;;;;;
         Company;Name;First name;Gender;Birth date;Localisation - Address;Localisation - City;Localisation - Phone;Teams;Zip code
-        Apple;Jobs;Steve;Male;1955/02/24 00:00;Alta Mesa Memorial Park;Palo Alto;+001 404 404 404;One more thing;9000
+        Apple;Jobs;Steve;Male;1955/02/24 00:00;Alta Mesa Memorial Park;Palo Alto;+001 404 404 404;;9000
         """ |
 
     Assert employee exists :

@@ -95,7 +95,6 @@ class ImportEmployees extends TmarFrontendStartup {
         frontendController.focus((RComponent) focused.peer);
 
         // open import popup
-        ImportBoxFrontAction importAction = getApplicationContext().getBean("importEmployeesBoxAction");
         focused = helper.findComponent(currentModuleView, "importEmployeesBoxAction");
         helper.executeAction(focused.peer, focused, frontendController);
 
@@ -117,6 +116,10 @@ class ImportEmployees extends TmarFrontendStartup {
         RAction raction = (RAction) remotePeerRegistry.getRegisteredForPermId(importOkAction.getPermId());
 
         raction.actionPerformed(new RActionEvent(), null);
+
+        // click to 'save' button
+        focused = helper.findComponent(currentModuleView, "Employee.test.view--saveModuleObjectFrontAction");
+        helper.executeAction(focused.peer, focused, frontendController);
 
     }
     private Employee findEmployee(String name, String firstName) {
