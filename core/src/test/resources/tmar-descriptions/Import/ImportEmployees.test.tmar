@@ -34,11 +34,11 @@ _Step 2 : Import a CVS file and check user exists and correctly initialized
 
     Assert employee properties well initialized :
         [ Employee gender ? ] Male |
-        [ Employee birthdate ? ] 1955/02/24 |
+        [ Employee birthdate ? ] 1955/02/55 |
 
     Assert address created and check that the newly created user uses this address :
 
-        [ Employee address ? ] Palo Alto - Alta Mesa Memorial Park - 9000 - +001 404 404 404 \
+        [ Employee address ? ] Palo Alto - Alta Mesa Memorial Park - 9000 - +001 404 404 404 |
 
     Assert the new user is member of team expected team :
         [ Employee teams ? ] One more thing |
