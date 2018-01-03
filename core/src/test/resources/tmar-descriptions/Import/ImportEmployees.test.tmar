@@ -3,7 +3,7 @@ Import Employees
 #Import a CSV file to create
   * A new user 'Steve Jobs'
   * Create the 'Palo Alto' city at the same time
-  * Add Steve Jobs to 'Lisa' and 'Macintosh' teams
+  * Add Steve Jobs to 'Lisa' team
 
 #Prepare master data
 
@@ -18,7 +18,6 @@ Import Employees
    /table team
     [ @ou id  | name      | @department |
     | LI-000  | Lisa      | MI-000      |
-    | MC-000  | Macintosh | MI-000      |
 
 #Step 1 : Check user doesn't exists yet
 
