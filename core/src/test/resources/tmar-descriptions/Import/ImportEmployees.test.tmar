@@ -1,11 +1,15 @@
 Import Employees
 
-#Import CSV file tests to :
+#This test will check the 'Employees' import action
+
+The import of the CSV file bellow should :
   * Create a new user 'Steve Jobs'
   * Create the 'Palo Alto' city at the same time
   * Add Steve Jobs to 'Lisa' team
 
-#Prepare master data
+This action is available at workspace 'Tools' and module 'Employees'
+
+#Before processing : initialize master data
     /hide
    /table company
     [ @id  | name  |
