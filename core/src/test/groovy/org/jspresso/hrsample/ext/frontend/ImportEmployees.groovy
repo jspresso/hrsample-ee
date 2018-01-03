@@ -20,6 +20,7 @@ import org.jspresso.framework.model.persistence.hibernate.criterion.EnhancedDeta
 import org.jspresso.framework.util.remote.registry.IRemotePeerRegistry
 import org.jspresso.framework.util.spring.ThisApplicationContextFactoryBean
 import org.jspresso.framework.view.IView
+import org.jspresso.hrsample.model.City
 import org.jspresso.hrsample.model.ContactInfo
 import org.jspresso.hrsample.model.Employee
 import org.jspresso.hrsample.model.Team
@@ -53,6 +54,10 @@ class ImportEmployees extends TmarFrontendStartup {
             // Check if employee exists
             Employee employee = findEmployee(tmar.employeeName, tmar.employeeFirstName);
             tmar.employeeExists = employee!=null
+
+            // Check if employee exists
+            City city = findCity(tmar.city);
+            tmar.cityExists = city!=null
 
             // Check employee properties
             if (employee!=null) {
@@ -142,6 +147,17 @@ class ImportEmployees extends TmarFrontendStartup {
 
         return employee;
     }
+
+    private City findCity(String name) {
+
+        EnhancedDetachedCriteria criteria = EnhancedDetachedCriteria.forClass(City.class);
+        criteria.add(Restrictions.eq(City.NAME, name))
+
+        City city = getBackendController().findFirstByCriteria(criteria, EMergeMode.MERGE_KEEP, City.class);
+
+        return city;
+    }
+
 
     private static String formatDate(Date date) {
         SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/DD");
