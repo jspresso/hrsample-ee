@@ -386,7 +386,7 @@ action('sharingUserQueryFrontAction',
 
 action('sharingUserQueryBackAction',
         parent: 'queryEntitiesBackAction',
-        custom: ['mergeMode': null, 'criteriaRefiner_ref':'sharingUserQueryRefiner'])
+        custom: [criteriaRefiner_ref:'sharingUserQueryRefiner'])
 
 bean('sharingUserQueryRefiner',
         class:'org.jspresso.hrsample.ext.frontend.userquery.SharingUserQueryRefiner')
