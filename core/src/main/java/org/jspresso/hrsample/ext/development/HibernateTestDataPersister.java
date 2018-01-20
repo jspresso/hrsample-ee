@@ -19,10 +19,9 @@
 package org.jspresso.hrsample.ext.development;
 
 import org.jspresso.contrib.autodoc.frontend.LoadAutoDocIndexFrontAction;
-import org.jspresso.contrib.autodoc.model.AutoDocFilter;
-import org.jspresso.contrib.autodoc.model.AutoDocGraph;
-import org.jspresso.contrib.autodoc.model.AutoDocIndex;
-import org.jspresso.contrib.autodoc.model.MetaComponent;
+import org.jspresso.contrib.autodoc.model.*;
+import org.jspresso.contrib.backend.HtmlToStream;
+import org.jspresso.contrib.backend.HtmlUtil;
 import org.jspresso.contrib.backend.pivot.ExtendedPivotRefiner;
 import org.jspresso.contrib.model.TestDataHelper;
 import org.jspresso.contrib.model.pivot.PivotSetup;
@@ -175,7 +174,7 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     }
 
     //
-    // Create application doc
+    // Create application doc graph
     createAutoDocGraph("Company's organization", false, null,
             Company.class.getSimpleName(),
             OrganizationalUnit.class.getSimpleName(),
@@ -189,11 +188,54 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
             Employee.class.getSimpleName());
 
     createAutoDocGraph("All entities", false, AutoDocFilter.TYPE_ENTITY);
+
+    //
+    // Create applicaton doc pages
+    createDocPage("Organisation.company",
+            "EN:Company management\nThis is the documentantion about Company management.",
+            "FR:Gestion des sociétés\nCeci est la documentantion à propos de la gestion des sociétés.");
+
+    createDocPage("Organisation.employees.stats",
+            "EN:Employees statistics\nThis is the documentantion about Employees statistics.",
+            "FR:Statistiques employés\nCeci est la documentantion sur les statistiques des employés.");
   }
-  
+
+  private void createDocPage(String pageId, String... translations) {
+
+    Set<AutoDocTranslatedPage> translatedPages = new HashSet<>();
+    Set<AutoDocPage.Translation> translationSet = new HashSet<>();
+    for (String translation : translations) {
+
+      String language = translation.substring(0, 2).toLowerCase();
+      String title = translation.substring(3, translation.indexOf('\n'));
+      String text = translation.substring(translation.indexOf('\n')+1);
+
+      AutoDocPage.Translation t = createComponentInstance(AutoDocPage.Translation.class);
+      t.setLanguage(language);
+      t.setPropertyName(AutoDocPage.TITLE);
+      t.setTranslatedValue(title);
+      translationSet.add(t);
+
+      AutoDocTranslatedPage tp = createEntityInstance(AutoDocTranslatedPage.class);
+      tp.setLanguage(language);
+      tp.setContent("<html>" +
+                    HtmlToStream.escapeForHTML(text.replaceAll("\n", "<br/>")) +
+                    "</html>");
+      translatedPages.add(tp);
+    }
+
+    AutoDocPage page = createEntityInstance(AutoDocPage.class);
+    page.setPageId(pageId);
+    page.setTitleRaw(translationSet.iterator().next().getTranslatedValue());
+    page.setPropertyTranslations(translationSet);
+    page.setTranslations(translatedPages);
+
+    saveOrUpdate(page);
+  }
+
   @SuppressWarnings("unused")
   private void createPivotSetup() {
-    
+
     // load style sets
     PivotStyleSet styleMain = createPivotStyleSet("main", "decimal-separator='.',\nthousand-separator='\\,',\ntext-align='center'", null);
     PivotStyleSet styleMain2 = createPivotStyleSet("main2", "color='#ABABAB'", null);
