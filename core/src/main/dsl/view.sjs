@@ -73,6 +73,7 @@ actionMap ('beanModuleActionMap') {
   }
   actionList ('DOC') {
     action ref: 'displayModuleDocumentationAction'
+    action ref: 'displayModuleDocumentationNoneAction'
   }
 }
 
@@ -112,6 +113,7 @@ actionMap('beanCollectionModuleActionMap') {
   }
   actionList ('DOC') {
     action ref: 'displayModuleDocumentationAction'
+    action ref: 'displayModuleDocumentationNoneAction'
   }
 }
 
@@ -318,8 +320,13 @@ tabs('MyFilter.view', borderType: 'TITLED', name: 'filter',
     parent: 'MyFilter.view.base')
 
 
-tabs('employee.statistics.module.view',
-        actionMap: 'pivotModuleActionMap') {
+tabs('employee.statistics.module.view') {
+  actionMap (parents: ['pivotModuleActionMap']){
+    actionList ('DOC') {
+      action ref: 'displayModuleDocumentationAction'
+      action ref: 'displayModuleDocumentationNoneAction'
+    }
+  }
 
   views {
 
@@ -337,9 +344,6 @@ tabs('employee.statistics.module.view',
         actionList('EXPORT', collapsable: true) {
           action ref: 'exportPivotModuleResultToHtmlAction'
           action ref: 'exportPivotModuleResultToCsvAction'
-        }
-        actionList ('DOC') {
-          action ref: 'displayModuleDocumentationAction'
         }
       }
     }
