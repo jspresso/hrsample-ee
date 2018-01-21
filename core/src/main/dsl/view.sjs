@@ -71,6 +71,9 @@ actionMap ('beanModuleActionMap') {
     action parent:'createPermalinkAndCopyToClipboardFrontAction', custom:[tinyURL:false]
     action parent:'createPermalinkAndMailToFrontAction', custom:[tinyURL:false]
   }
+  actionList ('DOC') {
+    action ref: 'displayModuleDocumentationAction'
+  }
 }
 
 /**
@@ -106,6 +109,9 @@ actionMap('beanCollectionModuleActionMap') {
   actionList ('PERMALINK', collapsable:true) {
     action parent:'createPermalinkAndCopyToClipboardFrontAction', custom:[tinyURL:false]
     action parent:'createPermalinkAndMailToFrontAction', custom:[tinyURL:false]
+  }
+  actionList ('DOC') {
+    action ref: 'displayModuleDocumentationAction'
   }
 }
 
@@ -331,6 +337,9 @@ tabs('employee.statistics.module.view',
         actionList('EXPORT', collapsable: true) {
           action ref: 'exportPivotModuleResultToHtmlAction'
           action ref: 'exportPivotModuleResultToCsvAction'
+        }
+        actionList ('DOC') {
+          action ref: 'displayModuleDocumentationAction'
         }
       }
     }

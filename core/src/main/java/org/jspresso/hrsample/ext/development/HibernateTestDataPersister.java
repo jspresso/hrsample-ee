@@ -191,16 +191,18 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
 
     //
     // Create applicaton doc pages
-    createDocPage("Organisation.company",
+    createDocPage("companies.module",
             "EN:Company management\nThis is the documentantion about Company management.",
             "FR:Gestion des sociétés\nCeci est la documentantion à propos de la gestion des sociétés.");
 
-    createDocPage("Organisation.employees.stats",
+    createDocPage("employee.statistics.module",
             "EN:Employees statistics\nThis is the documentantion about Employees statistics.",
             "FR:Statistiques employés\nCeci est la documentantion sur les statistiques des employés.");
   }
 
-  private void createDocPage(String pageId, String... translations) {
+  private void createDocPage(String pageId,
+
+                             String... translations) {
 
     Set<AutoDocTranslatedPage> translatedPages = new HashSet<>();
     Set<AutoDocPage.Translation> translationSet = new HashSet<>();
