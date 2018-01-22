@@ -89,13 +89,13 @@ workspace('administration.workspace', icon:'classpath:org/jspresso/framework/app
     component:'Role')
 
   beanModule ('userqueries.admin.module',
-    parent:'userqueries.admin.module')
+    ref:'userqueries.admin.module')
 
   beanModule ('pivot.admin.module',
-    parent:'pivot.admin.module')
+    ref:'pivot.admin.module')
 
   nodeModule ('autodoc.admin.module',
-    parent:'autodoc.admin.module')
+    ref:'autodoc.admin.module')
 }
 
 workspace('tools.workspace', icon:'tools.png') {
@@ -218,4 +218,6 @@ action ('furnitureModuleInitFrontAction',
  */
 action('displayDocumentationBaseAction',
   parent: 'displayDocumentationRootAction',
-  custom: [autoDocWorkspaceName: 'administration.workspace/autodoc.admin.module/autodoc.page.module'])
+  custom: [autoDocWorkspaceName: 'administration.workspace'])
+
+//custom: [autoDocWorkspaceName: 'administration.workspace/autodoc.admin.module/autodoc.page.module'])
