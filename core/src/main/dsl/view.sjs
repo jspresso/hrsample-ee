@@ -72,8 +72,8 @@ actionMap ('beanModuleActionMap') {
     action parent:'createPermalinkAndMailToFrontAction', custom:[tinyURL:false]
   }
   actionList ('DOC') {
-    action ref: 'displayModuleDocumentationAction'
-    action ref: 'displayModuleDocumentationNoneAction'
+    action ref: 'displayDocumentationAction'
+    action ref: 'displayDocumentationNoneAction'
   }
 }
 
@@ -112,8 +112,8 @@ actionMap('beanCollectionModuleActionMap') {
     action parent:'createPermalinkAndMailToFrontAction', custom:[tinyURL:false]
   }
   actionList ('DOC') {
-    action ref: 'displayModuleDocumentationAction'
-    action ref: 'displayModuleDocumentationNoneAction'
+    action ref: 'displayDocumentationAction'
+    action ref: 'displayDocumentationNoneAction'
   }
 }
 
@@ -323,8 +323,8 @@ tabs('MyFilter.view', borderType: 'TITLED', name: 'filter',
 tabs('employee.statistics.module.view') {
   actionMap (parents: ['pivotModuleActionMap']){
     actionList ('DOC') {
-      action ref: 'displayModuleDocumentationAction'
-      action ref: 'displayModuleDocumentationNoneAction'
+      action ref: 'displayDocumentationAction'
+      action ref: 'displayDocumentationNoneAction'
     }
   }
 

@@ -94,8 +94,8 @@ workspace('administration.workspace', icon:'classpath:org/jspresso/framework/app
   beanModule ('pivot.admin.module',
     parent:'pivot.admin.module')
 
-  beanModule ('autodoc.admin.module',
-          parent:'autodoc.admin.module')
+  nodeModule ('autodoc.admin.module',
+    parent:'autodoc.admin.module')
 }
 
 workspace('tools.workspace', icon:'tools.png') {
@@ -213,3 +213,9 @@ action ('furnitureModuleInitFrontAction',
   next class:'org.jspresso.hrsample.ext.frontend.FurnitureModuleInitFrontAction'
 }
 
+/*
+ * Documentation
+ */
+action('displayDocumentationBaseAction',
+  parent: 'displayDocumentationRootAction',
+  custom: [autoDocWorkspaceName: 'administration.workspace/autodoc.admin.module/autodoc.page.module'])
