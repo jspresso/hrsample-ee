@@ -12,9 +12,9 @@ tabs('Furniture.detail.view', actionMap:'beanModuleActionMap') {
       north {
         form (model:'Furniture') {
           fields {
-            propertyView name: 'name'
-            propertyView name: 'price', background: 'priceBackground', description: 'priceTooltip'
-            propertyView name: 'discount'
+            propertyView name: 'name', actionMap: 'displayPropertyDocumentationActionMap'
+            propertyView name: 'price', background: 'priceBackground', description: 'priceTooltip', actionMap: 'displayPropertyDocumentationActionMap'
+            propertyView name: 'discount', actionMap: 'displayPropertyDocumentationActionMap'
             propertyView name: 'rawLabel'
             propertyView name: 'nlsLabel'
             propertyView name: 'nlsOrRawLabel'
@@ -72,8 +72,8 @@ actionMap ('beanModuleActionMap') {
     action parent:'createPermalinkAndMailToFrontAction', custom:[tinyURL:false]
   }
   actionList ('DOC') {
-    action ref: 'displayDocumentationAction'
-    action ref: 'displayDocumentationNoneAction'
+    action ref: 'displayModuleDocumentationAction'
+    action ref: 'displayModuleDocumentationNoneAction'
   }
 }
 
@@ -112,8 +112,8 @@ actionMap('beanCollectionModuleActionMap') {
     action parent:'createPermalinkAndMailToFrontAction', custom:[tinyURL:false]
   }
   actionList ('DOC') {
-    action ref: 'displayDocumentationAction'
-    action ref: 'displayDocumentationNoneAction'
+    action ref: 'displayModuleDocumentationAction'
+    action ref: 'displayModuleDocumentationNoneAction'
   }
 }
 
@@ -323,8 +323,8 @@ tabs('MyFilter.view', borderType: 'TITLED', name: 'filter',
 tabs('employee.statistics.module.view') {
   actionMap (parents: ['pivotModuleActionMap']){
     actionList ('DOC') {
-      action ref: 'displayDocumentationAction'
-      action ref: 'displayDocumentationNoneAction'
+      action ref: 'displayModuleDocumentationAction'
+      action ref: 'displayModuleDocumentationNoneAction'
     }
   }
 

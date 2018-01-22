@@ -216,8 +216,6 @@ action ('furnitureModuleInitFrontAction',
 /*
  * Documentation
  */
-action('displayDocumentationBaseAction',
-  parent: 'displayDocumentationRootAction',
-  custom: [autoDocWorkspaceName: 'administration.workspace'])
-
-//custom: [autoDocWorkspaceName: 'administration.workspace/autodoc.admin.module/autodoc.page.module'])
+action('displayDocumentationRootAction',
+        parent: 'abstractDisplayDocumentationRootAction',
+        custom: [autoDocWorkspaceName: 'administration.workspace'])
