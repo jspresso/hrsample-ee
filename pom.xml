@@ -14,6 +14,7 @@
   <version>6.0.0-SNAPSHOT</version>
 
   <properties>
+    <sjs.version>4.0.0-SNAPSHOT</sjs.version>
     <jspresso-extensions.version>4.0.0-SNAPSHOT</jspresso-extensions.version>
     <jspresso-crossitems.version>1.5-SNAPSHOT</jspresso-crossitems.version>
     <jspresso-usage.version>4.0.0-SNAPSHOT</jspresso-usage.version>
