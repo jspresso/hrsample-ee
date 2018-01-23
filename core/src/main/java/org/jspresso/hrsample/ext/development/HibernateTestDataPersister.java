@@ -191,13 +191,22 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
 
     //
     // Create applicaton doc pages
-    createDocPage("companies.module",
-            "EN:Company management\nThis is the documentantion about Company management.",
-            "FR:Gestion des sociétés\nCeci est la documentantion à propos de la gestion des sociétés.");
+    createDocPage("module.companies.module",
+            "EN:Company management\nThis is the documentation about Company management.",
+            "FR:Gestion des sociétés\nCeci est la documentation à propos de la gestion des sociétés.");
 
-    createDocPage("employee.statistics.module",
-            "EN:Employees statistics\nThis is the documentantion about Employees statistics.",
-            "FR:Statistiques employés\nCeci est la documentantion sur les statistiques des employés.");
+    createDocPage("module.employee.statistics.module",
+            "EN:Employees statistics\nThis is the documentation about Employees statistics.",
+            "FR:Statistiques employés\nCeci est la documentation sur les statistiques des employés.");
+
+    createDocPage("property.furniture.name",
+            "EN:Furniture name\nThis is the documentation about property Furniture name",
+            "FR:Nom de foourniture\nCeci est la documentation à propos des noms de fourniture.");
+
+    createDocPage("property.furniture.price",
+            "EN:Furniture price\nThis is the documentation about property Furniture price",
+            "FR:Prix de foourniture\nCeci est la documentation à propos des prix de fourniture.");
+
   }
 
   private void createDocPage(String pageId,
