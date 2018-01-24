@@ -330,7 +330,7 @@ tabs('employee.statistics.module.view') {
 
   views {
 
-    pivotTable(cellAction: 'pivotCellSelectionToModuleListFrontAction')
+    pivotTable(cellSelectionAction: 'pivotCellSelectionToModuleListFrontAction')
 
     table(parent: 'pivotBeanCollectionModuleView',
             selectionMode: 'MULTIPLE_INTERVAL_CUMULATIVE_SELECTION', borderType: 'NONE',
