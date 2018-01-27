@@ -6,7 +6,7 @@ external id:['restartModuleWithConfirmationFrontAction',
 /*
  * Furnitures
  */
-tabs('Furniture.detail.view', actionMap:'beanModuleActionMap', name: 'administration.workspace') {
+tabs('Furniture.detail.view', actionMap:'beanModuleActionMap') {
   views {
     border {
       north {

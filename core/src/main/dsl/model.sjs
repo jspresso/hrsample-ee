@@ -48,9 +48,6 @@ Interface ('IHRModificationTracker',
 
   color 'priceBackground', computed: true, cacheable: true
   html 'priceTooltip', computed: true, cacheable: true
-
-
-  integer 'toto'
   
 }
 
