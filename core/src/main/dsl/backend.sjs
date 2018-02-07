@@ -14,7 +14,8 @@ external id:['pivotRefiner']
 
 bean('employeePivotRefiner', 
   parent:'pivotRefiner',
-  class:'org.jspresso.hrsample.ext.backend.EmployeePivotRefiner') 
+  class:'org.jspresso.hrsample.ext.backend.EmployeePivotRefiner',
+  custom: ['title': 'employe.pivot.export.title'])
 
 
 bean('userQueriesHelper', 
