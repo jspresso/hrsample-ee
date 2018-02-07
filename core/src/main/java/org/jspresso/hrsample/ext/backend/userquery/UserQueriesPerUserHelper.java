@@ -26,6 +26,7 @@ import org.jspresso.contrib.model.query.UserQuery;
 import org.jspresso.framework.action.ActionContextConstants;
 import org.jspresso.framework.application.backend.persistence.hibernate.HibernateBackendController;
 import org.jspresso.framework.security.UserPrincipal;
+import org.jspresso.hrsample.ext.model.userquery.service.UserSharingListService;
 
 import javax.security.auth.Subject;
 import java.security.Principal;
@@ -37,36 +38,37 @@ import static org.jspresso.hrsample.ext.model.userquery.service.UserSharingListS
 /**
  * User query helper implementation.
  *
- *
  * @author Maxime HAMM
  */
 public class UserQueriesPerUserHelper extends UserQueriesHelper {
 
-  @Override
-  public String getMySharedGroup(Subject subject) {
-
-    for (Principal principal : subject.getPrincipals()) {
-      if (principal instanceof UserPrincipal) {
-        return principal.getName();
-      }
+    @Override
+    public String getMySharedGroup(Subject subject) {
+        return UserSharingListService.ALL;
     }
 
-    return null;
-  }
+    @Override
+    public List<String> getAllGroups(Map<String, Object> context) {
+        throw new RuntimeException("Method use not allowed");
+    }
 
-  @Override
-  public List<String> getAllGroups(Map<String, Object> context) {
-    throw new RuntimeException("Method use not allowed");
-  }
+    @Override
+    protected void completeSharedQueriesCriteria(DetachedCriteria criteria, Map<String, Object> context) {
 
-  @Override
-  protected void completeSharedQueriesCriteria(DetachedCriteria criteria, Map<String, Object> context) {
+        // Get user login
+        String me = null;
+        HibernateBackendController controller = (HibernateBackendController) context.get(ActionContextConstants.BACK_CONTROLLER);
+        for (Principal principal : controller.getSubject().getPrincipals()) {
+            if (principal instanceof UserPrincipal) {
+                me = principal.getName();
+                break;
+            }
+        }
 
-    HibernateBackendController controller = (HibernateBackendController) context.get(ActionContextConstants.BACK_CONTROLLER);
-    Subject subject = controller.getSubject();
-    String mySharedGroup = getMySharedGroup(subject);
-
-    criteria.add(Restrictions.like(UserQuery.SHARED_STRING, SEP + mySharedGroup + SEP, MatchMode.ANYWHERE));
-  }
+        criteria.add(
+                Restrictions.or(
+                        Restrictions.eq(UserQuery.SHARED_STRING, UserSharingListService.ALL),
+                        Restrictions.like(UserQuery.SHARED_STRING, SEP + me + SEP, MatchMode.ANYWHERE)));
+    }
 
 }

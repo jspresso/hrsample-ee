@@ -13,7 +13,29 @@ public interface UserSharingListService {
     String SEP = " - ";
 
     /**
-     * Update query from sharing string
+     * SHARE WITH ALL MARK
      */
-    void udpateQuery();
+    String ALL = "#";
+
+    /**
+     * Update query sharing string using users list
+     */
+    void shareWithUserList();
+
+    /**
+     * Share query with all users
+     */
+    void shareWithAll();
+
+    /**
+     * Is shared with all
+     * @return
+     */
+    boolean isSharedWithUsers();
+
+    /**
+     * Stop sharing
+     */
+    void stopSharing();
+
 }

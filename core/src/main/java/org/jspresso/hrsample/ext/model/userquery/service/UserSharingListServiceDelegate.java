@@ -17,7 +17,7 @@ public class UserSharingListServiceDelegate extends AbstractComponentServiceDele
      * {@inheritDoc}
      */
     @Override
-    public void udpateQuery() {
+    public void shareWithUserList() {
 
         UserSharingList sharingList = getComponent();
 
@@ -36,5 +36,29 @@ public class UserSharingListServiceDelegate extends AbstractComponentServiceDele
         sb.append(SEP);
 
         sharingList.getQuery().setSharedString(sb.toString());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isSharedWithUsers() {
+
+        // If no user at all it is not shared
+        return UserSharingListService.ALL.equalsIgnoreCase(getComponent().getQuery().getSharedString());
+    }
+
+    @Override
+    public void stopSharing() {
+
+        UserSharingList sharingList = getComponent();
+        sharingList.setUsers(null);
+    }
+
+    @Override
+    public void shareWithAll() {
+
+        UserSharingList sharingList = getComponent();
+        sharingList.setUsers(null);
     }
 }
