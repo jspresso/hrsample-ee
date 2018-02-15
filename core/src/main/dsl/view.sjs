@@ -23,7 +23,7 @@ tabs('Furniture.detail.view', actionMap:'beanModuleActionMap') {
       }
       center {
 
-        table (model:'Furniture-previous') {
+        table(model: 'Furniture-previous', permId: 'previousFurnitures.table') {
           actionMap {
             actionList('ALL', renderingOptions:'ICON') {
               action parent:'chooseEntityFrontAction', custom:[selectionMode:'MULTIPLE_INTERVAL_CUMULATIVE_SELECTION']
@@ -130,16 +130,16 @@ actionMap('masterDetailActionMap') {
   }
 }
 
-border ('Employee.test.view', cascadingModels:true, borderType:'TITLED', name:'employees.module') {
+border ('Employees.module.test.view', cascadingModels:true, borderType:'TITLED', name:'employees.module') {
   center {
-    table {
-       actionMap (permId: 'Employee.test.view--actionMap'){
+    table(permId: 'employee.test.table', parent: 'filterableBeanCollectionModuleView', validationModel: 'Employee') {
+       actionMap (permId: 'Employees.module.test.view--actionMap'){
         actionList('FILE', renderingOptions:'ICON'){
           action ref:'queryModuleFilterAction'
           //action ref:'addAsChildModuleFrontAction'
-          action parent:'navigateToModuleFrontAction', permId:'Employee.test.view--table--actionMap',
+          action parent:'navigateToModuleFrontAction', permId:'Employees.module.test.view--table--actionMap',
                  icon:'classpath:/org/jspresso/framework/application/images/view-48x48.png'
-          action parent:'saveModuleObjectFrontAction', permId: 'Employee.test.view--saveModuleObjectFrontAction'
+          action parent:'saveModuleObjectFrontAction', permId: 'Employees.module.test.view--saveModuleObjectFrontAction'
           action ref:'reloadModuleObjectFrontAction'
         }
         actionList('CRITERIA') {
@@ -157,9 +157,9 @@ border ('Employee.test.view', cascadingModels:true, borderType:'TITLED', name:'e
       }
 
       columns {
-        propertyView name:'company', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employee.test.view--table--company'
+        propertyView name:'company', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employees.module.test.view--table--company'
         propertyView name:'company.workforce', readOnly:true
-        propertyView name:'name', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employee.test.view--table--name'
+        propertyView name:'name', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employees.module.test.view--table--name'
         propertyView name:'firstName', readOnly:true
         propertyView name:'gender', readOnly:true
         propertyView name:'birthDate', readOnly:true
@@ -168,8 +168,8 @@ border ('Employee.test.view', cascadingModels:true, borderType:'TITLED', name:'e
         propertyView name:'contact.phone', readOnly:true
 
         // FOR UNIT TEST ONLY : @See JspressoNavigationToModuleTest
-        propertyView name:'name', actionMap:'navigateToModuleActionMap', permId:'Employee.test.view--table--name.actionMap', grantedRoles:['test']
-        propertyView name:'company', actionMap:'navigateToModuleActionMap', permId:'Employee.test.view--table--company.actionMap', grantedRoles:['test']
+        propertyView name:'name', actionMap:'navigateToModuleActionMap', permId:'Employees.module.test.view--table--name.actionMap', grantedRoles:['test']
+        propertyView name:'company', actionMap:'navigateToModuleActionMap', permId:'Employees.module.test.view--table--company.actionMap', grantedRoles:['test']
 
       }
     }
@@ -177,44 +177,44 @@ border ('Employee.test.view', cascadingModels:true, borderType:'TITLED', name:'e
   east {
 
     // FOR UNIT TEST ONLY : @See JspressoNavigationToModuleTest
-    border (grantedRoles:['test']) {
+    border (grantedRoles:['test'], validationModel: 'Employee') {
       north {
         form (columnCount:2) {
           actionMap {
             actionList('SERVICE') {
-              action parent:'navigateToModuleFrontAction', permId:'Employee.test.view--east--actionMap'
+              action parent:'navigateToModuleFrontAction', permId:'Employees.module.test.view--east--actionMap'
             }
           }
           fields {
             propertyView name:'firstName', width:2
             propertyView name:'birthDate', width:2
 
-            propertyView name:'company', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employee.test.view--east--company'
-            propertyView name:'company', actionMap:'navigateToModuleActionMap', permId:'Employee.test.view--east--company.actionMap', preferredWidth:120
+            propertyView name:'company', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employees.module.test.view--east--company'
+            propertyView name:'company', actionMap:'navigateToModuleActionMap', permId:'Employees.module.test.view--east--company.actionMap', preferredWidth:120
 
             propertyView name:'company.workforce', readOnly:true, horizontalAlignment:'LEFT', width:2
 
-            propertyView name:'name', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employee.test.view--east--name'
-            propertyView name:'name', actionMap:'navigateToModuleActionMap', permId:'Employee.test.view--east--name.actionMap', preferredWidth:120
+            propertyView name:'name', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employees.module.test.view--east--name'
+            propertyView name:'name', actionMap:'navigateToModuleActionMap', permId:'Employees.module.test.view--east--name.actionMap', preferredWidth:120
 
-            propertyView name:'company.contact.city', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employee.test.view--east--company.contact.city'
-            propertyView name:'company.contact.city.name', action:'navigateToModuleFrontAction', readOnly:true, i18nNameKey:'org.jspresso.hrsample.model.City', permId:'Employee.test.view--east--company.contact.city.name'
+            propertyView name:'company.contact.city', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employees.module.test.view--east--company.contact.city'
+            propertyView name:'company.contact.city.name', action:'navigateToModuleFrontAction', readOnly:true, i18nNameKey:'org.jspresso.hrsample.model.City', permId:'Employees.module.test.view--east--company.contact.city.name'
 
           }
         }
       }
       center {
-        table (model:'Employee-users') {
+        table(model: 'Employee-users', permId: 'users.table') {
           actionMap {
             actionList('SERVICE') {
-              action parent:'navigateToModuleFrontAction', permId:'Employee.test.view--east-table--actionMap'
-              action parent:'navigateToModuleFrontAction', permId:'Employee.test.view--east-table--actionMap.notCollectionBased', collectionBased:false
+              action parent:'navigateToModuleFrontAction', permId:'Employees.module.test.view--east-table--actionMap'
+              action parent:'navigateToModuleFrontAction', permId:'Employees.module.test.view--east-table--actionMap.notCollectionBased', collectionBased:false
             }
           }
           columns {
-            propertyView name:'login', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employee.test.view--east-table--login'
+            propertyView name:'login', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employees.module.test.view--east-table--login'
 
-            propertyView name:'mainRole.roleId', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employee.test.view--east-table--mainRole.roleId'
+            propertyView name:'mainRole.roleId', action:'navigateToModuleFrontAction', readOnly:true, permId:'Employees.module.test.view--east-table--mainRole.roleId'
             propertyView name:'mainRole.roleId', actionMap:'navigateToModuleActionMap'
 
             propertyView name:'mainRole', action:'navigateToModuleFrontAction', readOnly:true
@@ -376,7 +376,7 @@ action('editUserSharingListAction',
 
 border('UserSharingList.view') {
   center {
-    table (model: 'UserSharingList-users', readOnly: true) {
+    table(model: 'UserSharingList-users', readOnly: true, permId: 'sharingUsers.table') {
       actionMap {
         actionList {
           action parent:'chooseEntityFrontAction',

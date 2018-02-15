@@ -87,7 +87,7 @@ class ImportEmployees extends TmarFrontendStartup {
         FrontendTestHelper helper = new FrontendTestHelper();
         helper.originWorkspaceId = "tools.workspace";
         helper.originModuleId = "Employee.test.module";
-        helper.originPermId = "Employee.test.view--table--name";
+        helper.originPermId = "Employees.module.test.view--table--name";
 
         IFrontendController<RComponent, RIcon, RAction> frontendController = getFrontendController();
         FactoryBean<ApplicationContext> refContext = getApplicationContext().getBean(ThisApplicationContextFactoryBean.class);
@@ -97,7 +97,7 @@ class ImportEmployees extends TmarFrontendStartup {
         } catch (Exception e) {
           throw new RuntimeException(e);
         }
-        Module module = ModuleUtils.findModule("tools.workspace", "Employee.test.module", FilterableBeanCollectionModule.class, context);
+        Module module = ModuleUtils.findModule("tools.workspace", "Employee.test.module", FilterableBeanCollectionModule.class, frontendController);
 
         // navigate to test filter module
         frontendController.displayWorkspace(helper.originWorkspaceId);
@@ -132,7 +132,7 @@ class ImportEmployees extends TmarFrontendStartup {
         raction.actionPerformed(new RActionEvent(), null);
 
         // click to 'save' button
-        focused = helper.findComponent(currentModuleView, "Employee.test.view--saveModuleObjectFrontAction");
+        focused = helper.findComponent(currentModuleView, "Employees.module.test.view--saveModuleObjectFrontAction");
         helper.executeAction(focused.peer, focused, frontendController);
 
     }

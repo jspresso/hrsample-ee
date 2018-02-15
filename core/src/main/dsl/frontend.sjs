@@ -108,7 +108,7 @@ workspace('tools.workspace', icon:'tools.png') {
 
   filterModule ('Employee.test.module',
     component:'Employee',
-    moduleView:'Employee.test.view')
+    moduleView:'Employees.module.test.view')
 }
 
 

@@ -71,7 +71,7 @@ public class JspressoNavigationToModuleTest extends FrontTestStartup {
     FrontendTestHelper context = new FrontendTestHelper();
     context.originWorkspaceId = "tools.workspace";
     context.originModuleId = "Employee.test.module";
-    context.originPermId = "Employee.test.view--east--name";
+    context.originPermId = "Employees.module.test.view--east--name";
 
     doNavigationModuleAction(context, "employees.module", "Acme1 Acme1");
 
@@ -86,7 +86,7 @@ public class JspressoNavigationToModuleTest extends FrontTestStartup {
     FrontendTestHelper context = new FrontendTestHelper();
     context.originWorkspaceId = "tools.workspace";
     context.originModuleId = "Employee.test.module";
-    context.originPermId = "Employee.test.view--east--company.contact.city";
+    context.originPermId = "Employees.module.test.view--east--company.contact.city";
 
     doNavigationModuleAction(context, "masterdata.cities.module", "Paris I");
 
@@ -101,7 +101,7 @@ public class JspressoNavigationToModuleTest extends FrontTestStartup {
     FrontendTestHelper context = new FrontendTestHelper();
     context.originWorkspaceId = "tools.workspace";
     context.originModuleId = "Employee.test.module";
-    context.originPermId = "Employee.test.view--east--company.contact.city.name";
+    context.originPermId = "Employees.module.test.view--east--company.contact.city.name";
 
     doNavigationModuleAction(context, "masterdata.cities.module", "Paris I");
 
@@ -116,7 +116,7 @@ public class JspressoNavigationToModuleTest extends FrontTestStartup {
     FrontendTestHelper context = new FrontendTestHelper();
     context.originWorkspaceId = "tools.workspace";
     context.originModuleId = "Employee.test.module";
-    context.originPermId = "Employee.test.view--east--name.actionMap";
+    context.originPermId = "Employees.module.test.view--east--name.actionMap";
 
     doNavigationModuleAction(context, "employees.module", "Acme1 Acme1");
 
@@ -131,7 +131,7 @@ public class JspressoNavigationToModuleTest extends FrontTestStartup {
     FrontendTestHelper helper = new FrontendTestHelper();
     helper.originWorkspaceId = "tools.workspace";
     helper.originModuleId = "Employee.test.module";
-    helper.originPermId = "Employee.test.view--east--company";
+    helper.originPermId = "Employees.module.test.view--east--company";
 
     doNavigationModuleAction(helper, "companies.module", "Acme");
 
@@ -146,7 +146,7 @@ public class JspressoNavigationToModuleTest extends FrontTestStartup {
     FrontendTestHelper helper = new FrontendTestHelper();
     helper.originWorkspaceId = "tools.workspace";
     helper.originModuleId = "Employee.test.module";
-    helper.originPermId = "Employee.test.view--east--company.actionMap";
+    helper.originPermId = "Employees.module.test.view--east--company.actionMap";
 
     doNavigationModuleAction(helper, "companies.module", "Acme");
 
@@ -161,7 +161,7 @@ public class JspressoNavigationToModuleTest extends FrontTestStartup {
     FrontendTestHelper helper = new FrontendTestHelper();
     helper.originWorkspaceId = "tools.workspace";
     helper.originModuleId = "Employee.test.module";
-    helper.originPermId = "Employee.test.view--east--actionMap";
+    helper.originPermId = "Employees.module.test.view--east--actionMap";
 
     doNavigationModuleAction(helper, "employees.module", "Acme1 Acme1");
   }
@@ -175,7 +175,7 @@ public class JspressoNavigationToModuleTest extends FrontTestStartup {
     FrontendTestHelper helper = new FrontendTestHelper();
     helper.originWorkspaceId = "tools.workspace";
     helper.originModuleId = "Employee.test.module";
-    helper.originPermId = "Employee.test.view--table--name";
+    helper.originPermId = "Employees.module.test.view--table--name";
     helper.originComponentToString = "Den Mike";
 
     doNavigationModuleAction(helper, "employees.module", "Den Mike");
@@ -191,7 +191,7 @@ public class JspressoNavigationToModuleTest extends FrontTestStartup {
     FrontendTestHelper helper = new FrontendTestHelper();
     helper.originWorkspaceId = "tools.workspace";
     helper.originModuleId = "Employee.test.module";
-    helper.originPermId = "Employee.test.view--table--name.actionMap";
+    helper.originPermId = "Employees.module.test.view--table--name.actionMap";
     helper.originComponentToString = "Den Mike";
 
     doNavigationModuleAction(helper, "employees.module", "Den Mike");
@@ -210,11 +210,11 @@ public class JspressoNavigationToModuleTest extends FrontTestStartup {
 
     doLoadModule(helper);
 
-    helper.originPermId = "Employee.test.view--table--name";
+    helper.originPermId = "Employees.module.test.view--table--name";
     helper.originComponentToString = "Demo Demo";
     doSetFocus(helper);
 
-    helper.originPermId = "Employee.test.view--east-table--login";
+    helper.originPermId = "Employees.module.test.view--east-table--login";
     helper.originComponentToString = "demo";
     doSetFocus(helper);
 
@@ -231,7 +231,7 @@ public class JspressoNavigationToModuleTest extends FrontTestStartup {
     FrontendTestHelper helper = new FrontendTestHelper();
     helper.originWorkspaceId = "tools.workspace";
     helper.originModuleId = "Employee.test.module";
-    helper.originPermId = "Employee.test.view--table--company";
+    helper.originPermId = "Employees.module.test.view--table--company";
     helper.originComponentToString = "Den Mike";
 
     doNavigationModuleAction(helper, "companies.module", "Design2See");
@@ -247,7 +247,7 @@ public class JspressoNavigationToModuleTest extends FrontTestStartup {
     FrontendTestHelper helper = new FrontendTestHelper();
     helper.originWorkspaceId = "tools.workspace";
     helper.originModuleId = "Employee.test.module";
-    helper.originPermId = "Employee.test.view--table--company.actionMap";
+    helper.originPermId = "Employees.module.test.view--table--company.actionMap";
     helper.originComponentToString = "Den Mike";
 
     doNavigationModuleAction(helper, "companies.module", "Design2See");
@@ -263,7 +263,7 @@ public class JspressoNavigationToModuleTest extends FrontTestStartup {
     FrontendTestHelper helper = new FrontendTestHelper();
     helper.originWorkspaceId = "tools.workspace";
     helper.originModuleId = "Employee.test.module";
-    helper.originPermId = "Employee.test.view--table--actionMap";
+    helper.originPermId = "Employees.module.test.view--table--actionMap";
 
     helper.originComponentToString = "Den Mike";
 
@@ -282,15 +282,15 @@ public class JspressoNavigationToModuleTest extends FrontTestStartup {
 
     doLoadModule(helper);
 
-    helper.originPermId = "Employee.test.view--table--name";
+    helper.originPermId = "Employees.module.test.view--table--name";
     helper.originComponentToString = "Demo Demo";
     doSetFocus(helper);
 
-    helper.originPermId = "Employee.test.view--east-table--login";
+    helper.originPermId = "Employees.module.test.view--east-table--login";
     helper.originComponentToString = "demo";
     doSetFocus(helper);
 
-    helper.originPermId = "Employee.test.view--east-table--actionMap";
+    helper.originPermId = "Employees.module.test.view--east-table--actionMap";
     doSetFocus(helper);
 
     doNavigateAndCheck(helper, "users.admin.module", "demo");
@@ -309,11 +309,11 @@ public class JspressoNavigationToModuleTest extends FrontTestStartup {
 
     doLoadModule(helper);
 
-    helper.originPermId = "Employee.test.view--table--name";
+    helper.originPermId = "Employees.module.test.view--table--name";
     helper.originComponentToString = "Den Mike";
     doSetFocus(helper);
 
-    helper.originPermId = "Employee.test.view--east-table--mainRole.roleId";
+    helper.originPermId = "Employees.module.test.view--east-table--mainRole.roleId";
     helper.originComponentToString = "denpass";
     doSetFocus(helper);
 
@@ -335,15 +335,15 @@ public class JspressoNavigationToModuleTest extends FrontTestStartup {
 
     doLoadModule(helper);
 
-    helper.originPermId = "Employee.test.view--table--name";
+    helper.originPermId = "Employees.module.test.view--table--name";
     helper.originComponentToString = "Demo Demo";
     doSetFocus(helper);
 
-    helper.originPermId = "Employee.test.view--east-table--login";
+    helper.originPermId = "Employees.module.test.view--east-table--login";
     helper.originComponentToString = "demo";
     doSetFocus(helper);
 
-    helper.originPermId = "Employee.test.view--east-table--actionMap.notCollectionBased";
+    helper.originPermId = "Employees.module.test.view--east-table--actionMap.notCollectionBased";
     doSetFocus(helper);
 
     doNavigateAndCheck(helper, "employees.module", "Demo Demo");
