@@ -36,6 +36,9 @@ public class UserSharingListProcessor {
             if (sharedString == null)
                 return;
 
+            if (sharedString.equals(newUserQuery.getLogin()))
+                return;
+
             String[] logins = sharedString.split(SEP);
             HibernateBackendController controller = (HibernateBackendController) BackendControllerHolder.getCurrentBackendController();
 

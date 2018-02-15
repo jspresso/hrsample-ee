@@ -11,6 +11,7 @@ import org.jspresso.hrsample.ext.model.userquery.UserSharingList;
 import org.jspresso.hrsample.model.User;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -33,9 +34,12 @@ public class SharingUserQueryRefiner extends GlobalCriteriaRefiner {
         logins.add(principal.getName());
         
         UserSharingList userSharingList = (UserSharingList) context.get(ActionContextConstants.MASTER_COMPONENT);
-        for (User u : userSharingList.getUsers()) {
-            if (u.getLogin()!=null)
-                logins.add(u.getLogin());
+        List<User> users = userSharingList.getUsers();
+        if (users !=null) {
+            for (User u : users) {
+                if (u.getLogin() != null)
+                    logins.add(u.getLogin());
+            }
         }
         
         criteria.add(

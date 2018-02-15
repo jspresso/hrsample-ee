@@ -399,32 +399,28 @@ action('sharingUserQueryFrontAction',
 
 action('sharingUserQueryBackAction',
         parent: 'queryEntitiesBackAction',
-        custom: [criteriaRefiner_ref:'sharingUserQueryRefiner'])
+        custom: [criteriaRefiner_ref: 'sharingUserQueryRefiner'])
 
 bean('sharingUserQueryRefiner',
-        class:'org.jspresso.hrsample.ext.frontend.userquery.SharingUserQueryRefiner')
+        class: 'org.jspresso.hrsample.ext.frontend.userquery.SharingUserQueryRefiner')
 
 action('editUserSharingListOkAction',
-  class: 'org.jspresso.hrsample.ext.frontend.userquery.EditUserSharingListOkAction',
-  name: 'ok', icon: 'classpath:org/jspresso/framework/application/images/ok-48x48.svg',
-  wrapped: 'closeDialogAction')
+        class: 'org.jspresso.hrsample.ext.frontend.userquery.EditUserSharingListOkAction',
+        name: 'ok', icon: 'classpath:org/jspresso/framework/application/images/ok-48x48.svg',
+        wrapped: 'closeDialogAction')
 
 action('selectUsersForQuerySharingCreateQueryAction',
-  class: 'org.jspresso.hrsample.ext.backend.userquery.SelectUsersForQuerySharingCreateQueryAction')
+        class: 'org.jspresso.hrsample.ext.backend.userquery.SelectUsersForQuerySharingCreateQueryAction')
 
 action('userQuerySharingCheckAction',
-  class: 'org.jspresso.hrsample.ext.frontend.userquery.UserQuerySharingCheckAction',
-  wrapped: 'editUserSharingListAction')
+        class: 'org.jspresso.hrsample.ext.frontend.userquery.UserQuerySharingCheckAction')
 
-action ('muExportAllDataProcessFrontAction',
+action('muExportAllDataProcessFrontAction',
         parent: 'muExportAllDataProcessBaseFrontAction',
         class: 'org.jspresso.hrsample.ext.frontend.MuExportAllDataProcessExtFrontAction',
-        custom: [descriptor_ref:'ModuleUsageExt',
-                 fields:['moduleId', 'accessDate', 'accessBy',
-                         'user.employee.name', 'user.employee.firstName',
-                         'workspace.label', 'module.label' ]])
+        custom: [descriptor_ref: 'ModuleUsageExt',
+                 fields        : ['moduleId', 'accessDate', 'accessBy',
+                                  'user.employee.name', 'user.employee.firstName',
+                                  'workspace.label', 'module.label']])
 
-/**
- * For tests only
- */
 
