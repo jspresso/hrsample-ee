@@ -17,7 +17,7 @@ import org.junit.Test
 import org.slf4j.LoggerFactory
 
 
-class Pivot extends TmarBackendStartup {
+class PivotTest extends TmarBackendStartup {
 
   @Test
   void test() {

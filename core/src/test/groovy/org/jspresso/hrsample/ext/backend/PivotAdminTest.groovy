@@ -14,6 +14,7 @@ import org.jspresso.framework.application.backend.session.EMergeMode
 import org.jspresso.framework.application.model.Module
 import org.jspresso.framework.application.model.Workspace
 import org.jspresso.framework.ext.pivot.backend.PivotHelper
+import org.jspresso.framework.ext.pivot.model.IStyle
 import org.jspresso.framework.ext.pivot.model.PivotFilterableBeanCollectionModule
 import org.jspresso.framework.model.entity.IEntity
 import org.junit.After;
@@ -21,7 +22,7 @@ import org.junit.Test
 import org.springframework.transaction.TransactionStatus
 import org.springframework.transaction.support.TransactionCallbackWithoutResult
 
-class PivotAdmin extends TmarBackendStartup {
+class PivotAdminTest extends TmarBackendStartup {
 
   /**
    * Test
@@ -47,6 +48,10 @@ class PivotAdmin extends TmarBackendStartup {
       
       // prepare assertions
       tmar.globalFullStyle = PivotHelper.stylesMapToString(pivotSetup.getFullStyleAsMap())
+      if (tmar.globalFullStyle == null) {
+        tmar.globalFullStyle = PivotHelper.stylesMapToString(module.getPivotRefiner().getDefaultStyles().toArray(new IStyle[0]));
+      }
+
       if (tmar.measure !=null) {
 
         def measure2 = PivotHelper.formatField4CrossItems(tmar.measure)
