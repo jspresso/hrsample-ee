@@ -132,7 +132,7 @@ actionMap('masterDetailActionMap') {
 
 border ('Employees.module.test.view', cascadingModels:true, borderType:'TITLED', name:'employees.module') {
   center {
-    table(permId: 'employee.test.table', parent: 'filterableBeanCollectionModuleView', validationModel: 'Employee') {
+    table(permId: 'employee.test.table', parent: 'filterableBeanCollectionModuleView', validationModel: 'Employee', borderType: 'NONE') {
        actionMap (permId: 'Employees.module.test.view--actionMap'){
         actionList('FILE', renderingOptions:'ICON'){
           action ref:'queryModuleFilterAction'
@@ -207,7 +207,7 @@ border ('Employees.module.test.view', cascadingModels:true, borderType:'TITLED',
         table(model: 'Employee-users', permId: 'users.table') {
           actionMap {
             actionList('SERVICE') {
-              action parent:'navigateToModuleFrontAction', permId:'Employees.module.test.view--east-table--actionMap'
+              action parent:'navigateToModuleFrontAction', permId:'Employees.module.test.view--east-table--actionMap', collectionBased:true
               action parent:'navigateToModuleFrontAction', permId:'Employees.module.test.view--east-table--actionMap.notCollectionBased', collectionBased:false
             }
           }
