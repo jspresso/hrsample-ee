@@ -16,7 +16,7 @@ import org.jspresso.hrsample.model.Company
 import org.junit.After
 import org.junit.Test
 
-class CompanyEmployeesTests extends TmarBackendStartup {
+class CompanyEmployeesTest extends TmarBackendStartup {
 
   /**
    * test1

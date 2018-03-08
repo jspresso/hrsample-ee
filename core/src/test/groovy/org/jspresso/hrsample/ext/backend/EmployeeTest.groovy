@@ -7,7 +7,7 @@ import org.jspresso.hrsample.model.Employee
 import org.junit.Before
 import org.junit.Test
 
-class EmployeeTests extends TmarBackendStartup {
+class EmployeeTest extends TmarBackendStartup {
 
 //  @Before
 //  def setupTest() {

@@ -30,7 +30,7 @@ import org.springframework.context.ApplicationContext
 
 import java.text.SimpleDateFormat
 
-class ImportEmployees extends TmarFrontendStartup {
+class ImportEmployeesTest extends TmarFrontendStartup {
 
     @Test
     void test() {
