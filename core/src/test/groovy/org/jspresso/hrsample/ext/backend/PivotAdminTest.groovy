@@ -89,7 +89,9 @@ class PivotAdminTest extends TmarBackendStartup {
   protected PivotSetup createPivotSetup(tmar) {
     return createPivotSetup(tmar, true, true, true)
   }
-  @TmarValidation('test')
+  @TmarValidation(['PivotAdminTest.test.tmar',
+                   'PivotAdminFindStyleReferencesTest.test.tmar',
+                   'PivotAdminDynamicStylesTest.test.tmar'])
   protected PivotSetup createPivotSetup(tmar, boolean useGlobalParent, boolean useGlobalCustom, boolean useCustom) {
     
     // create entity
