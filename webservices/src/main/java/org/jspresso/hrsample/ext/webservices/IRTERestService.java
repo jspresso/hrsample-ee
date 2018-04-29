@@ -18,12 +18,19 @@
  */
 package org.jspresso.hrsample.ext.webservices;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+
+import org.apache.commons.fileupload.FileItem;
+import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 /**
  * Employee REST service specification. Can be used on client side by RestEasy
@@ -34,20 +41,29 @@ import javax.xml.bind.annotation.XmlAccessorType;
 @Path("/rte")
 public interface IRTERestService {
 
-  /**
-   * Retrieves an employee by its name.
-   *
-   * @param name
-   *     the name of the employee to retrieve.
-   * @return the employee simplified DTO.
-   */
   @GET
   @Path("/templates")
   @Produces({MediaType.APPLICATION_JSON})
   TemplateDto[] getTemplates();
 
+  @POST
+  @Path("/uploadImage")
+  @Consumes("multipart/form-data")
+  @Produces({MediaType.APPLICATION_JSON})
+  ImageLocationDto uploadImage(MultipartFormDataInput input);
+
+  @GET
+  @Path("/image/{id}")
+  @Produces(MediaType.APPLICATION_OCTET_STREAM)
+  Response downloadImage(@PathParam("id") String id);
+
+  @GET
+  @Path("/listImages")
+  @Produces({MediaType.APPLICATION_JSON})
+  ImageListElementDto[] listImages();
+
   /**
-   * Employee DTO.
+   * The type Template dto.
    */
   @XmlAccessorType(XmlAccessType.FIELD)
   class TemplateDto {
@@ -66,5 +82,34 @@ public interface IRTERestService {
      * The Content.
      */
     public String content;
+  }
+
+  /**
+   * The type Image location dto.
+   */
+  @XmlAccessorType(XmlAccessType.FIELD)
+  class ImageLocationDto {
+
+    /**
+     * The Location.
+     */
+    public String location;
+  }
+
+  /**
+   * The type Image location dto.
+   */
+  @XmlAccessorType(XmlAccessType.FIELD)
+  class ImageListElementDto {
+
+    /**
+     * The Title.
+     */
+    public String title;
+
+    /**
+     * The Value.
+     */
+    public String value;
   }
 }
