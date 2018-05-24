@@ -39,7 +39,7 @@ import org.jspresso.framework.application.backend.session.EMergeMode;
 import org.jspresso.framework.model.persistence.hibernate.criterion.EnhancedDetachedCriteria;
 import org.jspresso.framework.util.exception.NestedRuntimeException;
 
-import org.jspresso.hrsample.ext.model.RTEImage;
+import org.jspresso.hrsample.ext.model.RTEMedia;
 
 /**
  * A sample web service for rich text editor backend callbacks.
@@ -84,29 +84,29 @@ public class RTERestService extends AbstractService implements IRTERestService {
     }
 
     final IBackendController backendController = getBackendController();
-    final RTEImage image = backendController.getEntityFactory().createEntityInstance(RTEImage.class);
-    image.setName(fileName);
-    image.setContent(content);
+    final RTEMedia media = backendController.getEntityFactory().createEntityInstance(RTEMedia.class);
+    media.setName(fileName);
+    media.setContent(content);
     backendController.getTransactionTemplate().execute(new TransactionCallbackWithoutResult() {
       @Override
       protected void doInTransactionWithoutResult(TransactionStatus status) {
-        backendController.registerForUpdate(backendController.cloneInUnitOfWork(image));
+        backendController.registerForUpdate(backendController.cloneInUnitOfWork(media));
       }
     });
-    ImageLocationDto imageLocation = new ImageLocationDto();
-    imageLocation.location = getDownloadUrl(image);
-    return imageLocation;
+    ImageLocationDto mediaLocation = new ImageLocationDto();
+    mediaLocation.location = getDownloadUrl(media);
+    return mediaLocation;
   }
 
   @Override
   public Response downloadImage(String id) {
     final IBackendController backendController = getBackendController();
     Response.ResponseBuilder response;
-    RTEImage image = ((HibernateBackendController) backendController).findById(id, EMergeMode.MERGE_LAZY,
-        RTEImage.class);
-    if (image != null && image.getContent() != null) {
-      response = Response.ok(image.getContent());
-      response.header("Content-Disposition", "attachment;filename=" + image.getName());
+    RTEMedia media = ((HibernateBackendController) backendController).findById(id, EMergeMode.MERGE_LAZY,
+        RTEMedia.class);
+    if (media != null && media.getContent() != null) {
+      response = Response.ok(media.getContent());
+      response.header("Content-Disposition", "attachment;filename=" + media.getName());
     } else {
       response = Response.status(Response.Status.NOT_FOUND);
     }
@@ -116,20 +116,20 @@ public class RTERestService extends AbstractService implements IRTERestService {
   @Override
   public ImageListElementDto[] listImages() {
     final IBackendController backendController = getBackendController();
-    List<ImageListElementDto> imageList = new ArrayList<>();
-    List<RTEImage> images = ((HibernateBackendController) backendController).findByCriteria(
-        EnhancedDetachedCriteria.forClass(RTEImage.class), EMergeMode.MERGE_LAZY, RTEImage.class);
-    for (RTEImage image : images) {
-      ImageListElementDto imageListElt = new ImageListElementDto();
-      imageListElt.title = image.getName();
-      imageListElt.value = getDownloadUrl(image);
-      imageList.add(imageListElt);
+    List<ImageListElementDto> mediaList = new ArrayList<>();
+    List<RTEMedia> medias = ((HibernateBackendController) backendController).findByCriteria(
+        EnhancedDetachedCriteria.forClass(RTEMedia.class), EMergeMode.MERGE_LAZY, RTEMedia.class);
+    for (RTEMedia media : medias) {
+      ImageListElementDto mediaListElt = new ImageListElementDto();
+      mediaListElt.title = media.getName();
+      mediaListElt.value = getDownloadUrl(media);
+      mediaList.add(mediaListElt);
     }
-    return imageList.toArray(new ImageListElementDto[0]);
+    return mediaList.toArray(new ImageListElementDto[0]);
   }
 
-  public String getDownloadUrl(RTEImage image) {
-    return "/rest/rte/image/" + image.getId();
+  public String getDownloadUrl(RTEMedia media) {
+    return "/rest/rte/media/" + media.getId();
   }
 
 }
