@@ -321,8 +321,24 @@ tabs('MyFilter.view', borderType: 'TITLED', name: 'filter',
 
 
 tabs('employee.statistics.module.view') {
-  actionMap (parents: ['pivotModuleActionMap']){
-    actionList ('DOC') {
+  actionMap(permId: 'pivotModuleActionMap') {
+    actionList('PIVOT_QUERY', collapsable: true,
+            renderingOptions: 'ICON') {
+      action ref: 'queryPivotModuleFilterFrontAction'
+      action ref: 'queryPivotModuleAndReloadFilterFrontAction'
+      action ref: 'restartPivotModuleFrontAction'
+      action ref: 'queryPivotModuleFilterFrontAction'
+      action ref: 'queryPivotModuleAndReloadFilterFrontAction'
+    }
+    actionList('EXTENSIONS') {
+      action ref: 'restartPivotModuleFrontAction'
+      action ref: 'chooseQueryCriteriasFrontAction'
+      action ref: 'createPermalinkAndCopyToClipboardFrontAction'
+    }
+    actionList('EXPORT') {
+      action parent: 'exportPivotToHtmlAction', custom: [fileName: 'Employee Pivot.xls']
+    }
+    actionList('DOC') {
       action ref: 'displayModuleDocumentationAction'
       action ref: 'displayModuleDocumentationNoneAction'
     }
