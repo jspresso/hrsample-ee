@@ -25,8 +25,8 @@ import java.util.Map;
 import org.jspresso.framework.action.ActionBusinessException;
 import org.jspresso.framework.model.entity.IEntity;
 
-import org.jspresso.contrib.frontend.ImportEntitiesFactoryBean;
-import org.jspresso.contrib.frontend.ImportReference;
+import org.jspresso.contrib.frontend.importing.ImportEntitiesFactoryBean;
+import org.jspresso.contrib.frontend.importing.ImportReference;
 import org.jspresso.hrsample.model.City;
 import org.jspresso.hrsample.model.Company;
 import org.jspresso.hrsample.model.ContactInfo;

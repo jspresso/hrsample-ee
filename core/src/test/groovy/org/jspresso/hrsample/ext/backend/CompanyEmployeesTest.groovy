@@ -3,7 +3,7 @@ package org.jspresso.hrsample.ext.backend
 import org.hibernate.criterion.DetachedCriteria
 import org.hibernate.criterion.Restrictions
 import org.jspresso.contrib.backend.tmar.TmarParameters
-import org.jspresso.contrib.frontend.ImportExportUtils
+import org.jspresso.contrib.frontend.exporting.ImportExportUtils
 import org.jspresso.framework.application.backend.BackendControllerHolder
 import org.jspresso.framework.application.backend.session.EMergeMode
 import org.jspresso.framework.model.descriptor.IComponentDescriptor

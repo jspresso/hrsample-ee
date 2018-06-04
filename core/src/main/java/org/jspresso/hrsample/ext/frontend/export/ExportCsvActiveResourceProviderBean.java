@@ -1,8 +1,8 @@
 package org.jspresso.hrsample.ext.frontend.export;
 
-import org.jspresso.contrib.frontend.AbstractExportActiveResourceProvider;
-import org.jspresso.contrib.frontend.ExportException;
-import org.jspresso.contrib.frontend.IExportActiveResource;
+import org.jspresso.contrib.frontend.exporting.AbstractExportActiveResourceProvider;
+import org.jspresso.contrib.frontend.exporting.ExportException;
+import org.jspresso.contrib.frontend.exporting.IExportActiveResource;
 import org.jspresso.contrib.model.bean.TableColumn;
 import org.jspresso.framework.action.ActionContextConstants;
 import org.jspresso.framework.application.backend.IBackendController;

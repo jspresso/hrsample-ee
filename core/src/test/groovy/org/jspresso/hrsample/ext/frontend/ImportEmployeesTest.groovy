@@ -1,8 +1,8 @@
 package org.jspresso.hrsample.ext.frontend
 
 import org.hibernate.criterion.Restrictions
-import org.jspresso.contrib.frontend.ImportBoxOkFrontAction
-import org.jspresso.contrib.frontend.ImportEntitiesFactoryBean
+import org.jspresso.contrib.frontend.importing.ImportBoxOkFrontAction
+import org.jspresso.contrib.frontend.importing.ImportEntitiesFactoryBean
 import org.jspresso.contrib.model.ModuleUtils
 import org.jspresso.contrib.test.frontend.FrontendTestHelper
 import org.jspresso.framework.action.IAction
