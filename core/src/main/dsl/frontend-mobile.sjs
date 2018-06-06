@@ -19,8 +19,9 @@ controller ('hrsample-ext.name',
   workspaces:[
     'organization.workspace',
     'employees.workspace',
+    'usage.mobile.workspace',
     'masterdata.workspace',
-    'parameters.mobile.workspace'  
+    'parameters.mobile.workspace'
   ])
 
 /*
@@ -32,26 +33,26 @@ bean ('loginViewDescriptor', parent:'loginViewDescriptorBase',
 
 external id:['basicLoginViewDescriptorBase']
 
-action ('applicationStartupFrontAction',  
+action ('applicationStartupFrontAction',
   class:'org.jspresso.hrsample.ext.frontend.ApplicationStartupFrontAction',
   next:'startupHRSampleAction')
 
 /*
 mobileCompositePage('basicLoginViewDescriptor',
   name:'login.name', description:'credentialMessage') {
-  
+
   sections {
-    
+
     mobileForm (parent:'basicLoginViewDescriptorBase',
       model:'CaptchaUsernamePasswordHandler') {
-    
+
       fields {
         propertyView parent:'username'
         propertyView parent:'password'
         propertyView parent:'rememberMe'
       }
     }
-      
+
     mobileForm (model:'CaptchaUsernamePasswordHandler', labelsPosition:'NONE') {
       fields {
         propertyView name:'captchaImageUrl'
@@ -62,30 +63,30 @@ mobileCompositePage('basicLoginViewDescriptor',
 }
 */
 
-mobileForm('basicLoginViewDescriptor', 
+mobileForm('basicLoginViewDescriptor',
   parent:'basicLoginViewDescriptorBase',
   model:'CaptchaUsernamePasswordHandler',
   name:'login.name', description:'credentialMessage') {
-  
+
   fields {
     propertyView parent:'username'
     propertyView parent:'password'
-    
+
     propertyView name:'captchaImage', action:'generateNewCaptchaAction'
     propertyView name:'captchaChallenge'
 
     propertyView parent:'rememberMe'
   }
 }
-  
-actionMap('secondaryLoginActionMap', 
+
+actionMap('secondaryLoginActionMap',
   parents:['secondaryLoginActionMapBase']) {
-  
+
   actionList {
-    action ref:'registerFrontAction' 
+    action ref:'registerFrontAction'
   }
 }
-  
+
 mobileForm('Registration.form', fields:['name', 'firstName']) {
   actionMap {
     actionList {

@@ -140,7 +140,7 @@
       </list>
     </constructor-arg>
   </bean>
-  
+
    <bean
     id="hrsample-ext-frontend-test-context"
     class="org.springframework.context.support.ClassPathXmlApplicationContext"
@@ -210,7 +210,7 @@
         <value>org/jspresso/hrsample/ext/core-config.xml</value>
       </list>
     </constructor-arg>
-  </bean> 
+  </bean>
 
   <bean
     id="hrsample-ext-swing-context"
@@ -249,7 +249,7 @@
         <value>org/jspresso/contrib/usage/view/view.xml</value>
         <value>org/jspresso/contrib/usage/frontend/dsl-frontend.xml</value>
         <value>org/jspresso/contrib/usage/frontend/frontend.xml</value>
-        
+
         <value>org/jspresso/contrib/autodoc/model/dsl-model.xml</value>
         <value>org/jspresso/contrib/autodoc/model/model.xml</value>
         <value>org/jspresso/contrib/autodoc/backend/dsl-backend.xml</value>
@@ -392,8 +392,11 @@
         <value>org/jspresso/contrib/usage/backend/backend.xml</value>
         <value>org/jspresso/contrib/usage/view/dsl-view.xml</value>
         <value>org/jspresso/contrib/usage/view/view.xml</value>
+        <value>org/jspresso/contrib/usage/spec/mobile-dsl-view.xml</value>
         <value>org/jspresso/contrib/usage/frontend/dsl-frontend.xml</value>
         <value>org/jspresso/contrib/usage/frontend/frontend.xml</value>
+        <value>org/jspresso/contrib/usage/spec/mobile-dsl-frontend.xml</value>
+        <value>org/jspresso/contrib/usage/frontend/mobile-frontend.xml</value>
 
         <value>org/jspresso/contrib/autodoc/model/dsl-model.xml</value>
         <value>org/jspresso/contrib/autodoc/model/model.xml</value>
