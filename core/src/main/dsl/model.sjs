@@ -15,9 +15,11 @@ namespace('security') {
   }
 }
 
-Component('Registration') {
+Component('Registration',
+    extension: 'RegistrationExtension') {
   string_32 'firstName'
   string_32 'name'
+  bool 'complete', computed: true
 }
 
 Entity('Furniture',

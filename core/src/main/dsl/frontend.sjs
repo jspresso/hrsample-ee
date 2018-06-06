@@ -190,7 +190,7 @@ action('switchToUIFrontAction',
 }
 
 action('performRegistrationFrontAction', parent:'staticInfoFrontAction', name:'doRegister',
-  custom:[messageCode:'register'])
+  custom:[messageCode:'register'], booleanActionabilityGates: ['complete'], hiddenWhenDisabled: true)
 
 action('changeRegistrationLanguageFrontAction',
     class:'org.jspresso.hrsample.ext.frontend.ChangeRegistrationLanguageFrontAction', next:'registerFrontAction')
