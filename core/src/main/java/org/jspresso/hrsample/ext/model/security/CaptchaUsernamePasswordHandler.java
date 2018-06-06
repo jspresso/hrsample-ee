@@ -43,7 +43,7 @@ import org.jspresso.framework.util.http.HttpRequestHolder;
  * @author Maxime Hamm
  */
 public class CaptchaUsernamePasswordHandler extends UsernamePasswordHandler {
-  
+
   private String captchaChallenge;
   private byte[] captchaImage;
   private String captchaAnswer;
@@ -59,7 +59,7 @@ public class CaptchaUsernamePasswordHandler extends UsernamePasswordHandler {
    * Generate new captcha.
    */
   public void generateCaptcha() {
-    Captcha captcha = 
+    Captcha captcha =
         new Captcha.Builder(150, 50)
           .addText()
           .gimp(new FishEyeGimpyRenderer(new Color(149, 199, 47), new Color(146, 201, 47)))
@@ -67,7 +67,7 @@ public class CaptchaUsernamePasswordHandler extends UsernamePasswordHandler {
           .build();
 
     this.captchaAnswer = captcha.getAnswer();
-    
+
     setCaptchaChallenge(null);
 
     try {
@@ -82,7 +82,7 @@ public class CaptchaUsernamePasswordHandler extends UsernamePasswordHandler {
       throw new NestedRuntimeException(e);
     }
   }
-  
+
   /**
    * Check captcha.
    * @return true if captcha answer is correct.
@@ -90,16 +90,16 @@ public class CaptchaUsernamePasswordHandler extends UsernamePasswordHandler {
   public boolean checkCaptcha() {
     return captchaChallenge != null && captchaChallenge.equalsIgnoreCase(captchaAnswer);
   }
-  
+
   /**
    * Gets the captchaChallenge image.
-   * 
+   *
    * @return the captchaChallenge image.
    */
   public byte[] getCaptchaImage() {
     return captchaImage;
   }
-  
+
   /**
    * Sets captcha image
    * @param captchaImage the captcha image.
@@ -166,14 +166,14 @@ public class CaptchaUsernamePasswordHandler extends UsernamePasswordHandler {
     if (bc == null) {
       return "...";
     }
-    
+
     String key;
     HttpServletRequest request = HttpRequestHolder.getServletRequest();
-    if (request.getRequestURI().contains(".qxrpc")) 
+    if (request.getRequestURI().contains(".qxrpc"))
       key = "swith.flex.action.name";
-    else 
+    else
       key = "swith.html5.action.name";
-    
+
     return bc.getTranslation(key, bc.getLocale());
   }
 
@@ -185,15 +185,15 @@ public class CaptchaUsernamePasswordHandler extends UsernamePasswordHandler {
     String oldValue = getUsername();
     if ("d".equalsIgnoreCase(username)) {
       username = "demo";
-      
+
       setPassword("demo");
       setCaptchaChallenge(captchaAnswer);
     }
-    
+
     super.setUsername(username);
     firePropertyChange("username", oldValue, username);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -203,12 +203,15 @@ public class CaptchaUsernamePasswordHandler extends UsernamePasswordHandler {
     super.setPassword(newPassword);
     firePropertyChange("password", oldPassword, newPassword);
   }
-  
+
   /**
-   * Do not clear all values
+   * Clear.
    */
   @Override
   public void clear() {
-    //
+    super.clear();
+    captchaChallenge = null;
+    captchaImage = null;
+    captchaAnswer = null;
   }
 }
