@@ -11,6 +11,9 @@
 /**
  * This is the main application class
  */
+/**
+ * @asset(tinymce/*)
+ */
 qx.Class.define("org.jspresso.hrsample.ext.startup.qooxdoo.Application",
 {
   extend : org.jspresso.framework.ext.application.frontend.EnhancedApplication,

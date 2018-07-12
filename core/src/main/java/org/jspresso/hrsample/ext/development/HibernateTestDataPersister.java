@@ -109,10 +109,10 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
       LOGGER.error("Data loading error", ex);
     }
 
-    // 
+    //
     // Pivot setup
     createPivotSetup();
-    
+
     //
     // Filter module saved criteria
     try {
@@ -161,7 +161,7 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
           new String[]{"gender", "managedOu.ouId"},
           new String[]{"salary(40, 80, 100)"},
           new String[]{"salary@sum", "ssn@count"});
-      
+
       createPivotFilter(true, "demo", "statistics.workspace", "employee.statistics.module", "Number of people per age & gender",
           new String[]{"contact.city.name", "managedOu.ouId"},
           new String[]{"salary(40, 80, 100)", "gender"},
@@ -213,7 +213,7 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
 
                              String... translations) {
 
-    Set<AutoDocTranslatedPage> translatedPages = new HashSet<>();
+    List<AutoDocTranslatedPage> translatedPages = new ArrayList<>();
     Set<AutoDocPage.Translation> translationSet = new HashSet<>();
     for (String translation : translations) {
 
@@ -253,61 +253,61 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     PivotStyleSet styleDecimal = createPivotStyleSet("decimal", "decimal=2,\ntext-align='right'", styleMain);
     PivotStyleSet styleCurrency = createPivotStyleSet("currency", "unit='$'", styleDecimal);
     PivotStyleSet styleSalary = createPivotStyleSet("salary", "decimal=0,\nunit='K$'", styleCurrency);
-     
+
     PivotStyleSet grey = createPivotStyleSet("grey", "background-color='#E6E6E6'", null);
     PivotStyleSet red = createPivotStyleSet("red", "color='#FF0000'", null);
     PivotStyleSet orange = createPivotStyleSet("orange", "color='#FF8000'", null);
     PivotStyleSet green = createPivotStyleSet("green", "color='#008000'", null);
-    
+
     PivotStyleSet styleSalaryWithColor = createPivotStyleSet("salary-colored", "default:'red',\ncomparator:'>',\n100:'orange',\n200:'green',\nempty:'grey'", styleSalary);
     PivotStyleSet styleEuro = createPivotStyleSet("euro", "unit='K€'", styleCurrency);
-    
+
     // find module
     PivotFilterableBeanCollectionModule module = TestDataHelper.findModule("statistics.workspace", "employee.statistics.module", beanFactory);
-    
+
     // pivot
     PivotSetup pivotSetup = createEntityInstance(PivotSetup.class);
     pivotSetup.init(module.getPivotRefiner());
-    
+
     // override it
     pivotSetup.setPivotId(module.getPermId());
     pivotSetup.setPivotName("Statistics - Employees");
     pivotSetup.setAvailableDimensions(
-        "salary(40, 80, 100)\n" + 
-        "age(30, 40)\n" + 
-        "gender\n" + 
-        "managedOu.ouId\n" + 
-        "company.departments\n" + 
+        "salary(40, 80, 100)\n" +
+        "age(30, 40)\n" +
+        "gender\n" +
+        "managedOu.ouId\n" +
+        "company.departments\n" +
         "contact.city.name\n" +
         "managedOu.contact.city.name\n" +
         "contact.city.neighbours");
     pivotSetup.setAvailableMeasures(
-        "ssn@count\n" + 
+        "ssn@count\n" +
         "salary@sum\n" +
         "bonus.encryptedValue@sum\n" +
         "company.budget.encryptedValue@average\n" +
         "salary@percentile90\n" +
-        "salary@average/managedOu.ouId\n" + 
-        "managedOu.teamCount@sum\n" + 
+        "salary@average/managedOu.ouId\n" +
+        "managedOu.teamCount@sum\n" +
         "%salary@sum/managedOu.teamCount@sum\n" +
         "company.departments@sum");
     pivotSetup.addToAscendantStyles(styleMain);
-   
+
     saveOrUpdate(pivotSetup);
-        
+
     // dimension
     List<PivotSetupField> fields = new ArrayList<>();
     fields.add(createPivotSetupField(pivotSetup, "managedOu.teamCount", "Nb managed people", "Nb collaborateurs", null));
     fields.add(createPivotSetupField(pivotSetup, "contact.city.name", "City", "Ville", null));
     fields.add(createPivotSetupField(pivotSetup, "managedOu.contact.city.name", "Workplace", "Lieu de travail", null));
     fields.add(createPivotSetupField(pivotSetup, "contact.city.neighbours", "City size", "Importante de la ville", null));
-    
+
     // measures
     fields.add(createPivotSetupField(pivotSetup, "ssn@count", "Nb persons", "Nb personnes", "unit='P'", styleMain));
     fields.add(createPivotSetupField(pivotSetup, "salary@sum", null, null, null, styleEuro, styleSalaryWithColor));
     fields.add(createPivotSetupField(pivotSetup, "salary@percentile90", null, null, "decimal=0", styleSalary));
     fields.add(createPivotSetupField(pivotSetup, "salary@average/managedOu.ouId", null, null, null, styleSalary));
-    
+
     // update module
     ((ExtendedPivotRefiner<?>)module.getPivotRefiner()).resetCache();
     module.getPivot();
@@ -318,7 +318,7 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
 
     PivotSetupField f = TestDataHelper.createPivotSetupField(pivotSetup, fieldId, fieldLabel, frenchLabel, customStyle, getEntityFactory(), parentStyles);
     saveOrUpdate(f);
-    return f; 
+    return f;
   }
 
   private void createPivotFilter(
@@ -395,10 +395,10 @@ public class HibernateTestDataPersister extends org.jspresso.hrsample.developmen
     furniture.setCreateTimestamp(new Date());
     furniture.setPrice(price);
     furniture.setDiscount(discount);
-    
+
     furniture.setCreateTimestamp(new Date());
     furniture.setLastUpdateTimestamp(new Date());
-    
+
     saveOrUpdate(furniture);
     return furniture;
   }
