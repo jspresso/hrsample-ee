@@ -129,7 +129,7 @@ public class RTERestService extends AbstractService implements IRTERestService {
   }
 
   public String getDownloadUrl(RTEMedia media) {
-    return "/rest/rte/media/" + media.getId();
+    return "/rest/rte/image/" + media.getId();
   }
 
 }
