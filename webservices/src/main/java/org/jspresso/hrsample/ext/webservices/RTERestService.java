@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
@@ -47,6 +49,9 @@ import org.jspresso.hrsample.ext.model.RTEMedia;
  * @author Vincent Vandenschrick
  */
 public class RTERestService extends AbstractService implements IRTERestService {
+
+  @Context
+  private ServletContext context;
 
   @Override
   public TemplateDto[] getTemplates() {
@@ -129,7 +134,8 @@ public class RTERestService extends AbstractService implements IRTERestService {
   }
 
   public String getDownloadUrl(RTEMedia media) {
-    return "/rest/rte/image/" + media.getId();
+    String contextPath = context.getContextPath();
+    return (contextPath.length() > 0 ? "/" + contextPath : "") + "/rest/rte/image/" + media.getId();
   }
 
 }
