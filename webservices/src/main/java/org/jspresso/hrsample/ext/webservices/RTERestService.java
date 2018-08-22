@@ -35,11 +35,14 @@ import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 
+import org.jspresso.framework.application.backend.BackendControllerHolder;
 import org.jspresso.framework.application.backend.IBackendController;
 import org.jspresso.framework.application.backend.persistence.hibernate.HibernateBackendController;
 import org.jspresso.framework.application.backend.session.EMergeMode;
+import org.jspresso.framework.application.backend.session.IApplicationSession;
 import org.jspresso.framework.model.persistence.hibernate.criterion.EnhancedDetachedCriteria;
 import org.jspresso.framework.util.exception.NestedRuntimeException;
+import org.jspresso.framework.util.http.HttpRequestHolder;
 
 import org.jspresso.hrsample.ext.model.RTEMedia;
 
@@ -136,6 +139,17 @@ public class RTERestService extends AbstractService implements IRTERestService {
   public String getDownloadUrl(RTEMedia media) {
     String contextPath = context.getContextPath();
     return (contextPath.length() > 0 ? "/" + contextPath : "") + "/rest/rte/image/" + media.getId();
+  }
+
+  public IApplicationSession getMasterApplicationSession() {
+    if (HttpRequestHolder.isAvailable()) {
+      IBackendController masterController = (IBackendController) HttpRequestHolder.getServletRequest().getSession().getAttribute(
+          BackendControllerHolder.CURRENT_BACKEND_CONTROLLER_KEY);
+      if (masterController != null) {
+        return masterController.getApplicationSession();
+      }
+    }
+    return null;
   }
 
 }

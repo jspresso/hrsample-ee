@@ -215,6 +215,11 @@
    <servlet-name>RESTEasy JSAPI</servlet-name>
    <url-pattern>/rest-js</url-pattern>
   </servlet-mapping>
+
+  <filter-mapping>
+    <filter-name>HttpRequestHolder</filter-name>
+    <servlet-name>ResteasyServlet</servlet-name>
+  </filter-mapping>
   <!-- End Resteasy -->
 
   <!-- SSO support -->
