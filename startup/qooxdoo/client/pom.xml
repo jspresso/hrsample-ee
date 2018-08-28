@@ -43,6 +43,10 @@
       <resource>
         <directory>target/web</directory>
       </resource>
+      <resource>
+        <directory>src/main/resources/RichFilemanager</directory>
+        <targetPath>RichFilemanager</targetPath>
+      </resource>
     </resources>
     <plugins>
       <plugin>

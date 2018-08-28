@@ -1,15 +1,15 @@
 {
-  "info" : 
+  "info" :
   {
     "name" : "Jspresso HR Sample Application - Extension",
 
     "summary" : "",
     "description" : "",
-    
-    "homepage" : "http://www.jspresso.orh",
+
+    "homepage" : "http://www.jspresso.org",
 
     "license" : "",
-    "authors" : 
+    "authors" :
     [
       {
         "name" : "",
@@ -17,8 +17,8 @@
       }
     ]
   },
-  
-  "provides" : 
+
+  "provides" :
   {
     "namespace"   : "org.jspresso.hrsample.ext",
     "encoding"    : "utf-8",
