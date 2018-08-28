@@ -18,18 +18,23 @@
  */
 package org.jspresso.hrsample.ext.webservices;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
-import org.apache.commons.fileupload.FileItem;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 /**
@@ -43,13 +48,13 @@ public interface IRTERestService {
 
   @GET
   @Path("/templates")
-  @Produces({MediaType.APPLICATION_JSON})
+  @Produces(MediaType.APPLICATION_JSON)
   TemplateDto[] getTemplates();
 
   @POST
   @Path("/uploadImage")
-  @Consumes("multipart/form-data")
-  @Produces({MediaType.APPLICATION_JSON})
+  @Consumes(MediaType.MULTIPART_FORM_DATA)
+  @Produces(MediaType.APPLICATION_JSON)
   ImageLocationDto uploadImage(MultipartFormDataInput input);
 
   @GET
@@ -59,8 +64,27 @@ public interface IRTERestService {
 
   @GET
   @Path("/listImages")
-  @Produces({MediaType.APPLICATION_JSON})
+  @Produces(MediaType.APPLICATION_JSON)
   ImageListElementDto[] listImages();
+
+  @GET
+  @Path("/fileManager/api")
+  @Produces(MediaType.APPLICATION_JSON)
+  String fileManagerGetApi(@QueryParam("mode") String mode,
+                           @Context HttpServletRequest request, @Context HttpServletResponse response);
+
+  @POST
+  @Path("/fileManager/api")
+  @Consumes(MediaType.MULTIPART_FORM_DATA)
+  @Produces(MediaType.APPLICATION_JSON)
+  String fileManagerPostMultipartApi(MultipartFormDataInput input, @Context HttpServletRequest request, @Context HttpServletResponse response);
+
+
+  @POST
+  @Path("/fileManager/api")
+  @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+  @Produces(MediaType.APPLICATION_JSON)
+  String fileManagerPostFormUrlEncodedApi(MultivaluedMap<String, String> input, @Context HttpServletRequest request, @Context HttpServletResponse response);
 
   /**
    * The type Template dto.

@@ -25,10 +25,14 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
+import com.fabriceci.fmc.error.FMInitializationException;
+import com.fabriceci.fmc.impl.LocalFileManager;
 import org.apache.commons.io.IOUtils;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
@@ -152,4 +156,33 @@ public class RTERestService extends AbstractService implements IRTERestService {
     return null;
   }
 
+  @Override
+  public String fileManagerGetApi(String mode, HttpServletRequest request, HttpServletResponse response) {
+    try {
+      return new LocalFileManager().handleGetHeadRequest(mode, request, response);
+    } catch (FMInitializationException e) {
+      throw new NestedRuntimeException(e);
+    }
+  }
+
+  @Override
+  public String fileManagerPostMultipartApi(MultipartFormDataInput input, HttpServletRequest request, HttpServletResponse response) {
+    try {
+      String mode = input.getFormDataPart("mode", String.class, null);
+      return new LocalFileManager().handlePostMultipartRequest(mode, input, request, response);
+    } catch (FMInitializationException | IOException e) {
+      throw new NestedRuntimeException(e);
+    }
+  }
+
+  @Override
+  public String fileManagerPostFormUrlEncodedApi(MultivaluedMap<String, String> input, HttpServletRequest request,
+                                                 HttpServletResponse response) {
+    try {
+      String mode = input.getFirst("mode");
+      return new LocalFileManager().handlePostFormUrlEncodedRequest(mode, input, request, response);
+    } catch (FMInitializationException e) {
+      throw new NestedRuntimeException(e);
+    }
+  }
 }
