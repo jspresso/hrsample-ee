@@ -28,6 +28,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
@@ -81,7 +82,7 @@ public class RTERestService extends AbstractService implements IRTERestService {
     InputPart inputPart = inputParts.get(0);
     try {
       MultivaluedMap<String, String> header = inputPart.getHeaders();
-      String[] contentDisposition = header.getFirst("Content-Disposition").split(";");
+      String[] contentDisposition = header.getFirst(HttpHeaders.CONTENT_DISPOSITION).split(";");
       for (String disposition : contentDisposition) {
         if ((disposition.trim().startsWith("filename"))) {
           String[] name = disposition.split("=");
@@ -118,7 +119,7 @@ public class RTERestService extends AbstractService implements IRTERestService {
         RTEMedia.class);
     if (media != null && media.getContent() != null) {
       response = Response.ok(media.getContent());
-      response.header("Content-Disposition", "attachment;filename=" + media.getName());
+      response.header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + media.getName());
     } else {
       response = Response.status(Response.Status.NOT_FOUND);
     }
