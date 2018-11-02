@@ -51,7 +51,7 @@ action ('startupHrsampleExtAction',
 
 action ('manageAnyModuleEnterFrontAction',
     class:'org.jspresso.framework.application.frontend.action.FrontendAction',
-    wrapped:'anyModuleEnterFrontAction',
+    wrapped:'usageAnyModuleEnterFrontAction',
     next:'loadPinnedQueryCriteriasFrontAction')
 
 
