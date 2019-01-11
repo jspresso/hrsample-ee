@@ -44,6 +44,16 @@ tabs('Furniture.detail.view', actionMap:'beanModuleActionMap') {
   }
 }
 
+
+table('Furniture.module.view',
+        parent: 'filterableBeanCollectionModuleView') {
+  actionMap(parents: ['filterableBeanCollectionModuleActionMap']) {
+    actionList(renderingOptions: 'LABEL_ICON') {
+      action ref: 'addModificationTrackerSubscriptionAction'
+    }
+  }
+}
+
 // OVERRIDE HRSample property views
 propertyView('Employee-fullname.property', actionMap:'navigateToModuleActionMap')
 propertyView('OrganizationalUnit-manager.property', actionMap:'navigateToModuleActionMap')

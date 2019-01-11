@@ -102,6 +102,7 @@ workspace('tools.workspace', icon:'tools.png') {
 
   filterModule ('furniture.module',
     startup:'furnitureModuleInitFrontAction',
+    moduleView:'Furniture.module.view',
     detailView:'Furniture.detail.view',
     component:'Furniture') {
   }

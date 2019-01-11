@@ -1,7 +1,6 @@
 // Implement your application backend here using the SJS DSL
-/**
- * Tmar export
- */
+external id:['pivotRefiner']
+
 bean('tmarParametersBean',
   parent:'tmarParametersBaseBean',
   custom:[collectionLimit:1,
@@ -9,14 +8,11 @@ bean('tmarParametersBean',
           excludedFields:['id', 'version', 'photo', 'createTimestamp', 'lastUpdateTimestamp', 'propertyTranslations'],
           tmarIds:['City':'zip',
                    'OrganizationalUnit':'ouId', 'Team':'ouId', 'Department':'ouId']])
- 
-external id:['pivotRefiner'] 
 
 bean('employeePivotRefiner', 
   parent:'pivotRefiner',
   class:'org.jspresso.hrsample.ext.backend.EmployeePivotRefiner',
   custom: ['title': 'employe.pivot.export.title'])
-
 
 bean('userQueriesHelper', 
   parent:'userQueriesHelperBase', 
@@ -25,6 +21,10 @@ bean('userQueriesHelper',
 bean('userQueriesPerOrganisationUnitHelper',
         parent:'userQueriesHelperBase',
         class:'org.jspresso.hrsample.ext.backend.UserQueriesPerOrganisationUnitHelper')
+
+bean('modificationTrackerSubcriptionHelper',
+        parent: 'modificationTrackerSubcriptionHelperBase',
+        class: 'org.jspresso.hrsample.ext.backend.ModificationTrackerSubcriptionHelper')
 
 bean('rememberMePropertyDescriptor',    
   class:'org.jspresso.framework.model.descriptor.basic.BasicBooleanPropertyDescriptor',

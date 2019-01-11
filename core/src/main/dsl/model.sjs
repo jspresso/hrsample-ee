@@ -41,6 +41,12 @@ Entity('Furniture',
   string_256 'nlsOrRawLabel', computed:true, delegateWritable:true, sqlName:"CASE WHEN (SELECT T.LABEL FROM TRANSLATION T WHERE T.TRANSLATED_ID = ID AND T.LANGUAGE = :JspressoSessionGlobals.language  AND T.TRANSLATED_NAME = '{entityName}') IS NULL THEN RAW_LABEL ELSE (SELECT T.LABEL FROM TRANSLATION T WHERE T.TRANSLATED_ID = ID AND T.LANGUAGE = :JspressoSessionGlobals.language AND T.TRANSLATED_NAME = '{entityName}') END"
 }
 
+Entity('UserSubscriber',
+  extend: 'ITrackerSubscriber') {
+
+  string_64 'login'
+}
+
 Entity('RTEMedia') {
   string 'name'
   binary 'content', maxLength:2048000
