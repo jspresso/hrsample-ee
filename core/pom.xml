@@ -278,7 +278,9 @@
 											</params>
 										</component>
 									</components>
-									<includes>**/model/Traceable.java,
+									<includes>
+										**/model/Traceable.java,
+										**/model/subscription/*.java,
 										**/ext/model/*.java,
 										**/contrib/autodoc/model/*.java,
 										**/contrib/usage/model/*.java,
