@@ -373,6 +373,18 @@
 									</fileset>
 								</replaceregexp>
 
+								<!-- trackerId properties must be stored using the same datatype than ID -->
+								<replaceregexp byline="true" flags="mg">
+									<regexp
+											pattern="(.*)&lt;property name=&quot;trackerId&quot;&gt;"/>
+									<substitution
+											expression="\1&lt;property name=&quot;trackerId&quot; type=&quot;string&quot;&gt;"/>
+									<fileset dir="${xdoclet.dest}">
+										<include name="**/*.hbm.xml"/>
+									</fileset>
+								</replaceregexp>
+
+
 								<!-- Replace module entities id definitions to support varbinary
 									<replaceregexp byline="false" flags="mg"> <regexp pattern="(.*)&lt;id name=&quot;id&quot;
 									type=&quot;string&quot;&gt;(\r?\n)(.*)&lt;column name=&quot;([^&quot;]*)&quot;
