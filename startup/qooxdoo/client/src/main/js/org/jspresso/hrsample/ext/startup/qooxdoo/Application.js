@@ -32,10 +32,10 @@ qx.Class.define("org.jspresso.hrsample.ext.startup.qooxdoo.Application",
       var remoteController;
       if (qx.core.Environment.get("qx.debug")) {
         remoteController = new org.jspresso.framework.io.Rpc(
-            "http://localhost:8080/hrsample-ext-webapp/.qxrpc",
+            "http://localhost:9080/hrsample-ext-webapp/.qxrpc",
             "org.jspresso.hrsample.ext.startup.remote.RemoteApplicationStartup"
         );
-        remoteController.setCrossDomain(true);
+        //remoteController.setCrossDomain(true);
       } else {
         remoteController = new org.jspresso.framework.io.Rpc(
             org.jspresso.framework.io.Rpc.makeServerURL(),
