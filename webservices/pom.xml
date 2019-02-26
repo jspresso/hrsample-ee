@@ -52,4 +52,31 @@
       <scope>provided</scope>
     </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>io.swagger.core.v3</groupId>
+        <artifactId>swagger-maven-plugin</artifactId>
+        <configuration>
+          <outputFileName>openapi</outputFileName>
+          <outputPath>${project.build.directory}/generated-resources/openapi</outputPath>
+          <outputFormat>JSONANDYAML</outputFormat>
+          <resourcePackages>
+            <package>org.jspresso.hrsample</package>
+          </resourcePackages>
+          <prettyPrint>TRUE</prettyPrint>
+          <openapiFilePath>${project.basedir}/conf/openapi-template.json</openapiFilePath>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>compile</phase>
+            <goals>
+              <goal>resolve</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>

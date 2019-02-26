@@ -1,0 +1,15 @@
+{
+  "info": {
+    "version": "1.0",
+    "title": "HRSample EE",
+    "description": "This is the Open API specification for the HRSample EE Jspresso api",
+    "termsOfService": "http://jspresso.io",
+    "contact": {
+      "email": "jspresso@jspresso.io"
+    },
+    "license": {
+      "name": "GPL V3",
+      "url": "https://www.gnu.org/licenses/gpl-3.0.en.html"
+    }
+  }
+}
