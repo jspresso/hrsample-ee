@@ -262,7 +262,6 @@ actionMap ('eventsTableActionMap',
   }
 }
 
-
 /**
  * navigate to module
  */
@@ -449,4 +448,18 @@ action('muExportAllDataProcessFrontAction',
                                   'user.employee.name', 'user.employee.firstName',
                                   'workspace.label', 'module.label']])
 
+// Geolocation
+actionMap('cityDetailActionMap',
+        parents: ['beanModuleActionMap']) {
+  actionList {
+    action(parent: 'geolocateFrontAction',
+            class: 'org.jspresso.hrsample.ext.frontend.GeolocateCityFrontAction',
+            custom: ['geolocationEngine_ref': 'geolocationOpenStreetMapEngine']) {
+      custom {
+        action('geolocationFinishedAction',
+          class: 'org.jspresso.hrsample.ext.frontend.GeolocateCityFinishedFrontAction')
+      }
+    }
+  }
+}
 
