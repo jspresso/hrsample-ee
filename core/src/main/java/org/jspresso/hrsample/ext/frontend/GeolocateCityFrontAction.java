@@ -7,13 +7,15 @@ import org.jspresso.hrsample.model.City;
 
 import java.util.Map;
 
+import static org.jspresso.hrsample.ext.frontend.GeolocateCityFinishedFrontAction.CITY_REF;
+
 public class GeolocateCityFrontAction<E, F, G> extends GeolocateFrontAction<E, F, G> {
-
-
+    
     @Override
     protected IGeolocationInput getGeolocationInput(Map<String, Object> context) {
 
         City city = getModel(context);
+        context.put(CITY_REF, city);
 
         GeolocationInput input = new GeolocationInput();
         input.setCountryCode(city.getName());
