@@ -18,7 +18,7 @@ public class GeolocateCityFrontAction<E, F, G> extends GeolocateFrontAction<E, F
         context.put(CITY_REF, city);
 
         GeolocationInput input = new GeolocationInput();
-        input.setCountryCode(city.getName());
+        input.setCity(city.getName());
         input.setZip(city.getZip());
 
         return input;

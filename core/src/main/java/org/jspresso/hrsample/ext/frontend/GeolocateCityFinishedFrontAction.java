@@ -24,6 +24,9 @@ public class GeolocateCityFinishedFrontAction<E, F, G> extends FrontendAction<E,
              City city = (City) context.get(CITY_REF);
              city.setLatitude(geolocation.getLatitude());
              city.setLongitude(geolocation.getLongitude());
+
+             if (geolocation.getZip()!=null)
+                 city.setZip(geolocation.getZip());
          }
         
         return super.execute(actionHandler, context);
