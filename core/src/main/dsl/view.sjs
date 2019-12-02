@@ -454,7 +454,7 @@ actionMap('cityDetailActionMap',
   actionList {
     action(parent: 'geolocateFrontAction',
             class: 'org.jspresso.hrsample.ext.frontend.GeolocateCityFrontAction',
-            custom: ['geolocationEngine_ref': 'geolocationOpenStreetMapEngine']) {
+            custom: ['geolocationEngine_ref': 'geolocationEngine']) {
       custom {
         action('geolocationFinishedAction',
           class: 'org.jspresso.hrsample.ext.frontend.GeolocateCityFinishedFrontAction')
@@ -462,4 +462,8 @@ actionMap('cityDetailActionMap',
     }
   }
 }
+
+bean('geolocationEngine',
+      parent: 'geolocationGoogleMapsEngine',
+      custom: ['key': 'AIzaSyB1WmlmkjNPCrGU7QuxInQ5iFXBpzuap08'])
 
