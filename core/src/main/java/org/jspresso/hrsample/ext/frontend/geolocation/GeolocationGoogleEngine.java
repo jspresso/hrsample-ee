@@ -1,4 +1,4 @@
-package org.jspresso.hrsample.ext.frontend.export;
+package org.jspresso.hrsample.ext.frontend.geolocation;
 
 import com.google.maps.model.GeocodingResult;
 import org.jspresso.contrib.backend.geolocation.googlemaps.GeolocationGoogleMapsEngine;

@@ -1,4 +1,4 @@
-package org.jspresso.hrsample.ext.frontend;
+package org.jspresso.hrsample.ext.frontend.geolocation;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.jspresso.contrib.frontend.geolocation.GeolocateFrontAction;
@@ -12,7 +12,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.jspresso.hrsample.ext.frontend.GeolocateCityFinishedFrontAction.CITY_REF;
+import static org.jspresso.hrsample.ext.frontend.geolocation.GeolocateCityFinishedFrontAction.CITY_REF;
 
 public class GeolocateCityFrontAction<E, F, G> extends GeolocateFrontAction<E, F, G> {
     
@@ -42,7 +42,7 @@ public class GeolocateCityFrontAction<E, F, G> extends GeolocateFrontAction<E, F
     protected List<Geolocation> filterGeolocation(List<Geolocation> geolocalized, Map<String, Object> context) {
 
         if (isReverse()) {
-            
+
             LinkedHashMap<String, Geolocation> map = new LinkedHashMap<>();
             for (Geolocation loc : geolocalized) {
 

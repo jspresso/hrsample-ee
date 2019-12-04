@@ -1,13 +1,13 @@
-package org.jspresso.hrsample.ext.frontend;
+package org.jspresso.hrsample.ext.frontend.geolocation;
+
+import java.util.Map;
 
 import org.jspresso.contrib.model.geolocation.Geolocation;
 import org.jspresso.framework.action.IActionHandler;
 import org.jspresso.framework.application.frontend.action.FrontendAction;
 import org.jspresso.hrsample.model.City;
 
-import java.util.Map;
-
-public class GeolocateReverseCityFinishedFrontAction<E, F, G> extends FrontendAction<E, F, G> {
+public class GeolocateCityFinishedFrontAction<E, F, G> extends FrontendAction<E, F, G> {
 
     public static final String CITY_REF = "CITY";
     
@@ -22,8 +22,8 @@ public class GeolocateReverseCityFinishedFrontAction<E, F, G> extends FrontendAc
         if (geolocation!=null) {
 
              City city = (City) context.get(CITY_REF);
-             city.setName(geolocation.getCity());
-             city.setZip(geolocation.getZip());
+             city.setLatitude(geolocation.getLatitude());
+             city.setLongitude(geolocation.getLongitude());
 
              if (geolocation.getZip()!=null)
                  city.setZip(geolocation.getZip());

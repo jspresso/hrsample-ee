@@ -459,27 +459,27 @@ actionMap('cityDetailActionMap',
 
 action('cityGeolocateFrontAction',
         parent: 'geolocateFrontAction',
-        class: 'org.jspresso.hrsample.ext.frontend.GeolocateCityFrontAction',
+        class: 'org.jspresso.hrsample.ext.frontend.geolocation.GeolocateCityFrontAction',
         custom: ['geolocationEngine_ref': 'geolocationEngine']) {
   custom {
     action('geolocationFinishedAction',
-            class: 'org.jspresso.hrsample.ext.frontend.GeolocateCityFinishedFrontAction')
+            class: 'org.jspresso.hrsample.ext.frontend.geolocation.GeolocateCityFinishedFrontAction')
   }
 }
 
 action('cityReverseGeolocateFrontAction',
         parent: 'reverseGeolocateFrontAction',
-        class: 'org.jspresso.hrsample.ext.frontend.GeolocateCityFrontAction',
+        class: 'org.jspresso.hrsample.ext.frontend.geolocation.GeolocateCityFrontAction',
         custom: ['geolocationEngine_ref': 'geolocationEngine']) {
   custom {
     action('geolocationFinishedAction',
-            class: 'org.jspresso.hrsample.ext.frontend.GeolocateReverseCityFinishedFrontAction')
+            class: 'org.jspresso.hrsample.ext.frontend.geolocation.GeolocateReverseCityFinishedFrontAction')
   }
 }
 
 bean('geolocationEngine',
         parent: 'geolocationGoogleMapsEngine',
-        class: 'org.jspresso.hrsample.ext.frontend.export.GeolocationGoogleEngine',
+        class: 'org.jspresso.hrsample.ext.frontend.geolocation.GeolocationGoogleEngine',
         custom: ['key': 'AIzaSyB1WmlmkjNPCrGU7QuxInQ5iFXBpzuap08'])
 
 //bean('geolocationEngine',
