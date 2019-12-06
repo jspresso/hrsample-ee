@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
+import org.jspresso.contrib.geolocation.model.GeoDistanceParameters;
 import org.jspresso.contrib.model.ExtraManagerModule;
 import org.jspresso.contrib.model.HibernateUtil;
 import org.jspresso.contrib.model.extradata.ExtraManager;
@@ -31,6 +32,7 @@ public class CityDistancesModuleStartupAction<E, F, G> extends FrontendAction<E,
 
         CityDistance cd = controller.getEntityFactory().createComponentInstance(CityDistance.class);
         cd.setCities(new LinkedHashSet<>(cities));
+        cd.setTravelMode(GeoDistanceParameters.TRAVEL_MODE_DRIVING);
 
         BeanModule module = (BeanModule) getModule(context);
         module.setModuleObject(cd);

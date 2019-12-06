@@ -428,10 +428,17 @@ border('CityDistance.view') {
     }
   }
   center {
-    mapView(mapContent: 'mapContent', i18nNameKey: 'CityDistance.title', borderType: 'TITLED') {
-      actionMap {
-        actionList {
-          action ref: 'cityDistancesFrontAction'
+    border (i18nNameKey: 'CityDistance.title', borderType: 'TITLED') {
+      north {
+        form(fields: ['travelMode'])
+      }
+      center {
+        mapView(mapContent: 'mapContent') {
+          actionMap {
+            actionList {
+              action ref: 'cityItineraryFrontAction'
+            }
+          }
         }
       }
     }
@@ -505,11 +512,11 @@ action('cityReverseGeolocateFrontAction',
   }
 }
 
-action('cityDistancesFrontAction',
-        parent: 'geoDirectionsFrontAction',
-        class: 'org.jspresso.hrsample.ext.frontend.geolocation.DistancesBetweenCitiesFrontAction',
+action('cityItineraryFrontAction',
+        parent: 'itineraryFrontAction',
+        class: 'org.jspresso.hrsample.ext.frontend.geolocation.ItineraryBetweenCitiesFrontAction',
         custom: ['geolocationEngine_ref': 'geolocationEngine']) {
-  next class: 'org.jspresso.hrsample.ext.frontend.geolocation.DistancesBetweenCitiesNextFrontAction'
+  next class: 'org.jspresso.hrsample.ext.frontend.geolocation.ItineraryBetweenCitiesNextFrontAction'
 }
 
 action('cityDistancesModuleStartupAction',

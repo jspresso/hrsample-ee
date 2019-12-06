@@ -78,7 +78,8 @@ namespace('userquery') {
 
 namespace('distances') {
 
-  Component('CityDistance') {
+  Component('CityDistance',
+      extend: ['GeoDistanceParameters']) {
 
     set 'cities', ref: 'City'
     set 'selectedCities', ref: 'City', id: 'CityDistance-selectedCities'

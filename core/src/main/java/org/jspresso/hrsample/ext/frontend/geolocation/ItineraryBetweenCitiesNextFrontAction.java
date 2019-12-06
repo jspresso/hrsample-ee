@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.jspresso.contrib.geolocation.model.GeoDistancesOutput;
+import org.jspresso.contrib.geolocation.model.ItineraryOutput;
+import org.jspresso.contrib.geolocation.util.Itinerary;
 import org.jspresso.framework.action.IActionHandler;
 import org.jspresso.framework.application.frontend.action.FrontendAction;
 import org.jspresso.framework.util.gui.Dimension;
 import org.jspresso.framework.util.gui.map.MapHelper;
 import org.jspresso.framework.util.gui.map.Point;
 import org.jspresso.framework.util.gui.map.Route;
-import org.jspresso.framework.util.gui.map.Shape;
 import org.jspresso.hrsample.ext.model.distances.CityDistance;
 import org.jspresso.hrsample.model.City;
 
-public class DistancesBetweenCitiesNextFrontAction<E, F, G> extends FrontendAction<E, F, G> {
+public class ItineraryBetweenCitiesNextFrontAction<E, F, G> extends FrontendAction<E, F, G> {
 
     /**
      * {@inheritDoc}
@@ -36,10 +36,20 @@ public class DistancesBetweenCitiesNextFrontAction<E, F, G> extends FrontendActi
             points.add(p);
         }
 
-        GeoDistancesOutput output = getActionParameter(context);
-        List<Route> routes = output.getRoutes();
+        ItineraryOutput output = getActionParameter(context);
 
-        String map = MapHelper.buildMap(points.toArray(new Point[0]), routes.toArray(new Route[0]));
+        List<Itinerary> itineraries = output.getItineraries();
+        for (Itinerary it : itineraries) {
+
+            Point mid = it.getPoints()[it.getPoints().length / 2];
+            mid.setHtmlDescription(it.getDistanceToSring() + " / " + it.getDurationToString());
+
+            points.add(mid);
+        }
+
+        Itinerary overview = output.getOverview();
+
+        String map = MapHelper.buildMap(points.toArray(new Point[0]), new Route[]{overview});
         cd.setMapContent(map);
 
         return super.execute(actionHandler, context);
