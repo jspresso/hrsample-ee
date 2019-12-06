@@ -69,6 +69,13 @@
 			<artifactId>jspresso-extensions-core</artifactId>
 		</dependency>
 
+		<!-- Jspresso-geolocation dependencies -->
+		<dependency>
+			<groupId>org.jspresso.contrib</groupId>
+			<artifactId>jspresso-geolocation-core</artifactId>
+			<version>${jspresso-extensions.version}</version>
+		</dependency>
+
 		<!-- Jspresso-usage dependencies -->
 		<dependency>
 			<groupId>org.jspresso.contrib</groupId>

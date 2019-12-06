@@ -147,6 +147,12 @@
 
       <dependency>
         <groupId>org.jspresso.contrib</groupId>
+        <artifactId>jspresso-geolocation-core</artifactId>
+        <version>${jspresso-extensions.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.jspresso.contrib</groupId>
         <artifactId>jspresso-extensions-test</artifactId>
         <version>${jspresso-extensions.version}</version>
       </dependency>

@@ -38,6 +38,9 @@
         <value>org/jspresso/contrib/model/dsl-model.xml</value>
         <value>org/jspresso/contrib/model/model.xml</value>
 
+        <value>org/jspresso/contrib/geolocation/model/dsl-model.xml</value>
+        <value>org/jspresso/contrib/geolocation/model/model.xml</value>
+
         <value>org/jspresso/contrib/usage/model/dsl-model.xml</value>
         <value>org/jspresso/contrib/usage/model/model.xml</value>
 
@@ -73,6 +76,11 @@
         <value>org/jspresso/contrib/model/model.xml</value>
         <value>org/jspresso/contrib/view/dsl-view.xml</value>
         <value>org/jspresso/contrib/view/view.xml</value>
+
+        <value>org/jspresso/contrib/geolocation/model/dsl-model.xml</value>
+        <value>org/jspresso/contrib/geolocation/model/model.xml</value>
+        <value>org/jspresso/contrib/geolocation/view/dsl-view.xml</value>
+        <value>org/jspresso/contrib/geolocation/view/view.xml</value>
 
         <value>org/jspresso/contrib/usage/model/dsl-model.xml</value>
         <value>org/jspresso/contrib/usage/model/model.xml</value>
@@ -115,6 +123,11 @@
         <value>org/jspresso/contrib/model/model.xml</value>
         <value>org/jspresso/contrib/backend/dsl-backend.xml</value>
         <value>org/jspresso/contrib/backend/backend.xml</value>
+
+        <value>org/jspresso/contrib/geolocation/model/dsl-model.xml</value>
+        <value>org/jspresso/contrib/geolocation/model/model.xml</value>
+        <value>org/jspresso/contrib/geolocation/backend/dsl-backend.xml</value>
+        <value>org/jspresso/contrib/geolocation/backend/backend.xml</value>
 
         <value>org/jspresso/contrib/usage/model/dsl-model.xml</value>
         <value>org/jspresso/contrib/usage/model/model.xml</value>
@@ -169,6 +182,15 @@
         <value>org/jspresso/contrib/view/view.xml</value>
         <value>org/jspresso/contrib/frontend/dsl-frontend.xml</value>
         <value>org/jspresso/contrib/frontend/frontend.xml</value>
+
+        <value>org/jspresso/contrib/geolocation/model/dsl-model.xml</value>
+        <value>org/jspresso/contrib/geolocation/model/model.xml</value>
+        <value>org/jspresso/contrib/geolocation/backend/dsl-backend.xml</value>
+        <value>org/jspresso/contrib/geolocation/backend/backend.xml</value>
+        <value>org/jspresso/contrib/geolocation/view/dsl-view.xml</value>
+        <value>org/jspresso/contrib/geolocation/view/view.xml</value>
+        <value>org/jspresso/contrib/geolocation/frontend/dsl-frontend.xml</value>
+        <value>org/jspresso/contrib/geolocation/frontend/frontend.xml</value>
 
         <value>org/jspresso/contrib/usage/model/dsl-model.xml</value>
         <value>org/jspresso/contrib/usage/model/model.xml</value>
@@ -240,6 +262,15 @@
         <value>org/jspresso/contrib/view/view.xml</value>
         <value>org/jspresso/contrib/frontend/dsl-frontend.xml</value>
         <value>org/jspresso/contrib/frontend/frontend.xml</value>
+
+        <value>org/jspresso/contrib/geolocation/model/dsl-model.xml</value>
+        <value>org/jspresso/contrib/geolocation/model/model.xml</value>
+        <value>org/jspresso/contrib/geolocation/backend/dsl-backend.xml</value>
+        <value>org/jspresso/contrib/geolocation/backend/backend.xml</value>
+        <value>org/jspresso/contrib/geolocation/view/dsl-view.xml</value>
+        <value>org/jspresso/contrib/geolocation/view/view.xml</value>
+        <value>org/jspresso/contrib/geolocation/frontend/dsl-frontend.xml</value>
+        <value>org/jspresso/contrib/geolocation/frontend/frontend.xml</value>
 
         <value>org/jspresso/contrib/usage/model/dsl-model.xml</value>
         <value>org/jspresso/contrib/usage/model/model.xml</value>
@@ -313,6 +344,15 @@
         <value>org/jspresso/contrib/frontend/dsl-frontend.xml</value>
         <value>org/jspresso/contrib/frontend/frontend.xml</value>
 
+        <value>org/jspresso/contrib/geolocation/model/dsl-model.xml</value>
+        <value>org/jspresso/contrib/geolocation/model/model.xml</value>
+        <value>org/jspresso/contrib/geolocation/backend/dsl-backend.xml</value>
+        <value>org/jspresso/contrib/geolocation/backend/backend.xml</value>
+        <value>org/jspresso/contrib/geolocation/view/dsl-view.xml</value>
+        <value>org/jspresso/contrib/geolocation/view/view.xml</value>
+        <value>org/jspresso/contrib/geolocation/frontend/dsl-frontend.xml</value>
+        <value>org/jspresso/contrib/geolocation/frontend/frontend.xml</value>
+
         <value>org/jspresso/contrib/usage/model/dsl-model.xml</value>
         <value>org/jspresso/contrib/usage/model/model.xml</value>
         <value>org/jspresso/contrib/usage/backend/dsl-backend.xml</value>
@@ -385,6 +425,18 @@
         <value>org/jspresso/contrib/view/view.xml</value>
         <value>org/jspresso/contrib/frontend/dsl-frontend.xml</value>
         <value>org/jspresso/contrib/frontend/frontend.xml</value>
+
+        <value>org/jspresso/contrib/geolocation/model/dsl-model.xml</value>
+        <value>org/jspresso/contrib/geolocation/model/model.xml</value>
+        <value>org/jspresso/contrib/geolocation/backend/dsl-backend.xml</value>
+        <value>org/jspresso/contrib/geolocation/backend/backend.xml</value>
+        <value>org/jspresso/contrib/geolocation/view/dsl-view.xml</value>
+        <value>org/jspresso/contrib/geolocation/view/view.xml</value>
+        <value>org/jspresso/contrib/geolocation/spec/mobile-dsl-view.xml</value>
+        <value>org/jspresso/contrib/geolocation/frontend/dsl-frontend.xml</value>
+        <value>org/jspresso/contrib/geolocation/frontend/frontend.xml</value>
+        <value>org/jspresso/contrib/geolocation/spec/mobile-dsl-frontend.xml</value>
+        <value>org/jspresso/contrib/geolocation/frontend/mobile-frontend.xml</value>
 
         <value>org/jspresso/contrib/usage/model/dsl-model.xml</value>
         <value>org/jspresso/contrib/usage/model/model.xml</value>
@@ -474,6 +526,15 @@
         <value>org/jspresso/contrib/view/view.xml</value>
         <value>org/jspresso/contrib/frontend/dsl-frontend.xml</value>
         <value>org/jspresso/contrib/frontend/frontend.xml</value>
+
+        <value>org/jspresso/contrib/geolocation/model/dsl-model.xml</value>
+        <value>org/jspresso/contrib/geolocation/model/model.xml</value>
+        <value>org/jspresso/contrib/geolocation/backend/dsl-backend.xml</value>
+        <value>org/jspresso/contrib/geolocation/backend/backend.xml</value>
+        <value>org/jspresso/contrib/geolocation/view/dsl-view.xml</value>
+        <value>org/jspresso/contrib/geolocation/view/view.xml</value>
+        <value>org/jspresso/contrib/geolocation/frontend/dsl-frontend.xml</value>
+        <value>org/jspresso/contrib/geolocation/frontend/frontend.xml</value>
 
         <value>org/jspresso/contrib/usage/model/dsl-model.xml</value>
         <value>org/jspresso/contrib/usage/model/model.xml</value>

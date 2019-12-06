@@ -1,10 +1,10 @@
 package org.jspresso.hrsample.ext.frontend.geolocation;
 
 import org.apache.commons.lang3.tuple.Pair;
-import org.jspresso.contrib.frontend.geolocation.GeolocateFrontAction;
-import org.jspresso.contrib.model.geolocation.Geolocation;
-import org.jspresso.contrib.model.geolocation.GeolocationInput;
-import org.jspresso.contrib.model.geolocation.IGeolocationInput;
+import org.jspresso.contrib.geolocation.frontend.action.GeolocateFrontAction;
+import org.jspresso.contrib.geolocation.model.Geolocation;
+import org.jspresso.contrib.geolocation.model.GeolocationInput;
+import org.jspresso.contrib.geolocation.model.IGeolocationInput;
 import org.jspresso.hrsample.model.City;
 
 import java.util.ArrayList;

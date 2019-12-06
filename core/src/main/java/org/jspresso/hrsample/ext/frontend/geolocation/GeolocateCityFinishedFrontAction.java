@@ -2,7 +2,7 @@ package org.jspresso.hrsample.ext.frontend.geolocation;
 
 import java.util.Map;
 
-import org.jspresso.contrib.model.geolocation.Geolocation;
+import org.jspresso.contrib.geolocation.model.Geolocation;
 import org.jspresso.framework.action.IActionHandler;
 import org.jspresso.framework.application.frontend.action.FrontendAction;
 import org.jspresso.hrsample.model.City;

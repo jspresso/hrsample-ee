@@ -1,8 +1,8 @@
 package org.jspresso.hrsample.ext.frontend.geolocation;
 
 import com.google.maps.model.GeocodingResult;
-import org.jspresso.contrib.backend.geolocation.googlemaps.GeolocationGoogleMapsEngine;
-import org.jspresso.contrib.model.geolocation.Geolocation;
+import org.jspresso.contrib.geolocation.backend.googlemaps.GeolocationGoogleMapsEngine;
+import org.jspresso.contrib.geolocation.model.Geolocation;
 import org.jspresso.framework.model.entity.IEntityFactory;
 
 import static org.jboss.security.identity.Attribute.TYPE.POSTAL_CODE;

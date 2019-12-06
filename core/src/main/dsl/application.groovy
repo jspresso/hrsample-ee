@@ -5,6 +5,7 @@ import org.jspresso.contrib.sjs.common.ManageModule;
 ManageModule libraries = new ManageModule()
 libraries.importModuleAsResource('jspresso-usage')
 libraries.importModuleAsResource('jspresso-autodoc')
+libraries.importModuleAsResource('jspresso-geolocation')
 libraries.importModuleAsResource('jspresso-extensions')
 libraries.importModuleAsResource('hrsample')
 
