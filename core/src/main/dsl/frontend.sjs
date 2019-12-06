@@ -113,6 +113,20 @@ workspace('tools.workspace', icon:'tools.png') {
     moduleView:'Employees.module.test.view')
 }
 
+workspace('geography.workspace',
+        icon:'classpath:org/jspresso/contrib/geolocation/images/geo-location-64x64.png') {
+
+  filterModule('masterdata.cities.module',
+          component:'City',
+          moduleView:'City.module.view',
+          startup:'filterModuleStartup')
+
+  beanModule('geography.distances.module',
+          moduleView: 'CityDistance.view',
+          component: 'CityDistance',
+          startup: 'cityDistancesModuleStartupAction')
+}
+
 
 /*
  * login

@@ -417,6 +417,24 @@ border('UserSharingList.view') {
   }
 }
 
+border('CityDistance.view') {
+  west {
+    table(model: 'CityDistance-cities',  permId: 'CityDistance-cities.table',
+            selectionModel: 'CityDistance-selectedCities',
+            columns: ['name'],
+            preferredWidth:200, selectionMode: 'SINGLE_CUMULATIVE_SELECTION', horizontallyScrollable: false)
+  }
+  center {
+    mapView(mapContent: 'mapContent') {
+      actionMap {
+        actionList {
+          action ref: 'cityDistancesFrontAction'
+        }
+      }
+    }
+  }
+}
+
 action('sharingUserQueryFrontAction',
         parent:'lovFindFrontAction') {
   wrapped parent: 'lovFindBackAction', custom: ['queryAction_ref': 'sharingUserQueryBackAction']
@@ -483,6 +501,16 @@ action('cityReverseGeolocateFrontAction',
             class: 'org.jspresso.hrsample.ext.frontend.geolocation.GeolocateReverseCityFinishedFrontAction')
   }
 }
+
+action('cityDistancesFrontAction',
+        parent: 'geoDirectionsFrontAction',
+        class: 'org.jspresso.hrsample.ext.frontend.geolocation.DistancesBetweenCitiesFrontAction',
+        custom: ['geolocationEngine_ref': 'geolocationEngine']) {
+  next class: 'org.jspresso.hrsample.ext.frontend.geolocation.DistancesBetweenCitiesNextFrontAction'
+}
+
+action('cityDistancesModuleStartupAction',
+        class: 'org.jspresso.hrsample.ext.frontend.geolocation.CityDistancesModuleStartupAction')
 
 bean('geolocationEngine',
         parent: 'geolocationGoogleMapsEngine',

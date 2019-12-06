@@ -76,6 +76,18 @@ namespace('userquery') {
 
 }
 
+namespace('distances') {
+
+  Component('CityDistance') {
+
+    set 'cities', ref: 'City'
+    set 'selectedCities', ref: 'City', id: 'CityDistance-selectedCities'
+
+    string 'mapContent', maxLength: 4096
+  }
+
+}
+
 Component('ModuleUsageExt',
         extend: ['IModuleUsage']) {
 
