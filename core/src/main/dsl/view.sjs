@@ -449,8 +449,15 @@ action('muExportAllDataProcessFrontAction',
                                   'workspace.label', 'module.label']])
 
 // Geolocation
-actionMap('cityDetailActionMap',
-        parents: ['beanModuleActionMap']) {
+actionMap('cityDetailActionMap') {
+  actionList ('PERMALINK', collapsable:true) {
+    action parent:'createPermalinkAndCopyToClipboardFrontAction', custom:[tinyURL:false]
+    action parent:'createPermalinkAndMailToFrontAction', custom:[tinyURL:false]
+  }
+  actionList ('DOC') {
+    action ref: 'displayModuleDocumentationAction'
+    action ref: 'displayModuleDocumentationNoneAction'
+  }
   actionList {
     action ref: 'cityGeolocateFrontAction'
     action ref: 'cityReverseGeolocateFrontAction'

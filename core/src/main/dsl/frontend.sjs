@@ -40,7 +40,7 @@ controller ('hrsample-ext.name',
       'statistics.workspace',
       'organization.workspace',
       'employees.workspace',
-      'masterdata.workspace',
+      'geography.workspace',
       'tools.workspace',
       'usage.workspace',
       'administration.workspace'])
@@ -104,7 +104,8 @@ workspace('tools.workspace', icon:'tools.png') {
     startup:'furnitureModuleInitFrontAction',
     moduleView:'Furniture.module.view',
     detailView:'Furniture.detail.view',
-    component:'Furniture') {
+    component:'Furniture',
+    includeDetail: true) {
   }
 
   filterModule ('Employee.test.module',
