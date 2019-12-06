@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.google.maps.DistanceMatrixApi;
+import org.jspresso.contrib.geolocation.model.GeoDistanceParameters;
+import org.jspresso.contrib.geolocation.model.GeoDistanceParameters.ETravelMode;
 import org.jspresso.contrib.geolocation.model.ItineraryOutput;
 import org.jspresso.contrib.geolocation.util.Itinerary;
+import org.jspresso.contrib.geolocation.util.ItineraryUtil;
 import org.jspresso.framework.action.IActionHandler;
 import org.jspresso.framework.application.frontend.action.FrontendAction;
 import org.jspresso.framework.util.gui.Dimension;
@@ -46,15 +50,46 @@ public class ItineraryBetweenCitiesNextFrontAction<E, F, G> extends FrontendActi
             points.add(p);
         }
 
+        String travelType;
+        switch (ETravelMode.valueOf(cd.getTravelMode())) {
+            case DRIVING: travelType="\uD83D\uDE97"; break;
+            case BICYCLING: travelType="\uD83D\uDEB4\uD83C\uDFFC\u200D♂️"; break;
+            case WALKING: travelType="\uD83D\uDEB6\uD83C\uDFFB\u200D♂️"; break;
+            default: travelType="";
+        }
+
         ItineraryOutput output = getActionParameter(context);
 
+        // Find middle
         List<Itinerary> itineraries = output.getItineraries();
         for (Itinerary it : itineraries) {
 
-            Point mid = it.getPoints()[it.getPoints().length / 2];
-            mid.setHtmlDescription(it.getDistanceToSring() + " / " + it.getDurationToString());
+            long distance = it.getDistance();
+            long total = 0;
 
-            points.add(mid);
+
+            Point p1 = null;
+            Point p2 = null;
+            for (Point p : it.getPoints()) {
+
+                p2 = p;
+                if (p1 == null) {
+                    p1 = p2;
+                    continue;
+                }
+
+                total += ItineraryUtil.distance(p1, p2);
+                if (total > distance / 2)
+                    break;
+
+                p1 = p2;
+            }
+            if (p1 != null) {
+
+                Point mid = MapHelper.getCenter(p1, p2);
+                mid.setHtmlDescription(travelType + it.getDistanceToSring() + " / " + it.getDurationToString());
+                points.add(mid);
+            }
         }
 
         Itinerary overview = output.getOverview();
