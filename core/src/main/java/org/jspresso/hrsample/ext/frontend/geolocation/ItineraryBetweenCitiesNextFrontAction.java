@@ -15,6 +15,9 @@ import org.jspresso.framework.util.gui.map.Route;
 import org.jspresso.hrsample.ext.model.distances.CityDistance;
 import org.jspresso.hrsample.model.City;
 
+import static org.jspresso.framework.util.gui.map.MapHelper.GREEN_MARK;
+import static org.jspresso.framework.util.gui.map.MapHelper.RED_MARK;
+
 public class ItineraryBetweenCitiesNextFrontAction<E, F, G> extends FrontendAction<E, F, G> {
 
     /**
@@ -30,7 +33,14 @@ public class ItineraryBetweenCitiesNextFrontAction<E, F, G> extends FrontendActi
 
             Point p = new Point(city.getLongitude(), city.getLatitude());
             p.setHtmlDescription(city.getName());
-            p.setImagePath("/org/jspresso/hrsample/images/city.png");
+
+            if (points.isEmpty())
+                p.setImagePath(GREEN_MARK);
+            else if (points.size() == cd.getSelectedCities().size()-1)
+                p.setImagePath(RED_MARK);
+            else
+                p.setImagePath("/org/jspresso/hrsample/images/city.png");
+
             p.setImageDimension(new Dimension(24, 24));
 
             points.add(p);
@@ -48,6 +58,9 @@ public class ItineraryBetweenCitiesNextFrontAction<E, F, G> extends FrontendActi
         }
 
         Itinerary overview = output.getOverview();
+        overview.setColor("#225586");
+        overview.setWidth(2);
+        overview.addOption("lineDash", new int[]{5, 5});
 
         String map = MapHelper.buildMap(points.toArray(new Point[0]), new Route[]{overview});
         cd.setMapContent(map);
