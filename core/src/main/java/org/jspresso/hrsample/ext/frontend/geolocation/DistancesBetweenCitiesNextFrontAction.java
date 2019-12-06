@@ -7,6 +7,7 @@ import java.util.Map;
 import org.jspresso.contrib.geolocation.model.GeoDistancesOutput;
 import org.jspresso.framework.action.IActionHandler;
 import org.jspresso.framework.application.frontend.action.FrontendAction;
+import org.jspresso.framework.util.gui.Dimension;
 import org.jspresso.framework.util.gui.map.MapHelper;
 import org.jspresso.framework.util.gui.map.Point;
 import org.jspresso.framework.util.gui.map.Route;
@@ -29,6 +30,8 @@ public class DistancesBetweenCitiesNextFrontAction<E, F, G> extends FrontendActi
 
             Point p = new Point(city.getLongitude(), city.getLatitude());
             p.setHtmlDescription(city.getName());
+            p.setImagePath("/org/jspresso/hrsample/images/city.png");
+            p.setImageDimension(new Dimension(24, 24));
 
             points.add(p);
         }

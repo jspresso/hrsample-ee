@@ -421,11 +421,14 @@ border('CityDistance.view') {
   west {
     table(model: 'CityDistance-cities',  permId: 'CityDistance-cities.table',
             selectionModel: 'CityDistance-selectedCities',
-            columns: ['name'],
-            preferredWidth:200, selectionMode: 'SINGLE_CUMULATIVE_SELECTION', horizontallyScrollable: false)
+            preferredWidth: 200, selectionMode: 'MULTIPLE_INTERVAL_CUMULATIVE_SELECTION', horizontallyScrollable: false) {
+      columns {
+        propertyView name: 'name', i18nNameKey: 'city'
+      }
+    }
   }
   center {
-    mapView(mapContent: 'mapContent') {
+    mapView(mapContent: 'mapContent', i18nNameKey: 'CityDistance.title', borderType: 'TITLED') {
       actionMap {
         actionList {
           action ref: 'cityDistancesFrontAction'

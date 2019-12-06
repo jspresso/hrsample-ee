@@ -32,7 +32,7 @@ public class CityDistancesModuleStartupAction<E, F, G> extends FrontendAction<E,
         CityDistance cd = controller.getEntityFactory().createComponentInstance(CityDistance.class);
         cd.setCities(new LinkedHashSet<>(cities));
 
-        BeanModule module = (ExtraManagerModule) getModule(context);
+        BeanModule module = (BeanModule) getModule(context);
         module.setModuleObject(cd);
 
         return super.execute(actionHandler, context);

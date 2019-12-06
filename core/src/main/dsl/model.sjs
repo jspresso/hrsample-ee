@@ -83,7 +83,7 @@ namespace('distances') {
     set 'cities', ref: 'City'
     set 'selectedCities', ref: 'City', id: 'CityDistance-selectedCities'
 
-    string 'mapContent', maxLength: 4096
+    string 'mapContent', maxLength: 20480
   }
 
 }
