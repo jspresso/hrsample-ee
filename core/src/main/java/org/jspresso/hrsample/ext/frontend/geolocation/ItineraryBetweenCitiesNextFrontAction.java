@@ -94,7 +94,7 @@ public class ItineraryBetweenCitiesNextFrontAction<E, F, G> extends FrontendActi
 
         Itinerary overview = output.getOverview();
         overview.setColor("#225586");
-        overview.setWidth(2);
+        overview.setWidth(4);
         overview.addOption("lineDash", new int[]{5, 5});
 
         String map = MapHelper.buildMap(points.toArray(new Point[0]), new Route[]{overview});

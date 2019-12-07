@@ -79,12 +79,16 @@ namespace('userquery') {
 namespace('distances') {
 
   Component('CityDistance',
-      extend: ['GeoDistanceParameters']) {
+      extend: ['GeoDistanceParameters'],
+      extension: 'CityDistanceExtension') {
 
     set 'cities', ref: 'City'
     set 'selectedCities', ref: 'City', id: 'CityDistance-selectedCities'
 
     string 'mapContent', maxLength: 20480
+
+
+    bool 'itineraryCalculationAllowed', computed: true, cacheable: true
   }
 
 }

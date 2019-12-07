@@ -430,16 +430,23 @@ border('CityDistance.view') {
   center {
     border (i18nNameKey: 'CityDistance.title', borderType: 'TITLED') {
       north {
-        form(fields: ['travelMode'])
-      }
-      center {
-        mapView(mapContent: 'mapContent') {
-          actionMap {
-            actionList {
-              action ref: 'cityItineraryFrontAction'
+        border {
+          center {
+            actionView(renderingOptions: 'LABEL_ICON', font: ';BOLD;16') {
+              actionList {
+                action parent:'cityItineraryFrontAction', iconHeight:64, iconWidth:64, booleanActionabilityGates: ['itineraryCalculationAllowed'], name: 'itineray.compute.name'
+              }
             }
           }
+          east {
+              enumerationPropertyView name: 'travelMode', radio: true, orientation: 'HORIZONTAL',
+                      allowedValues: ['DRIVING', 'WALKING', 'BICYCLING'],
+                      action: 'cityItineraryFrontAction'
+          }
         }
+      }
+      center {
+        mapView(mapContent: 'mapContent')
       }
     }
   }
